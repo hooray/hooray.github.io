@@ -1,0 +1,1729 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+  
+  
+    
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css">
+
+
+
+  
+  
+    
+      
+    
+    
+      
+    
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link rel="stylesheet" href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.css">
+
+
+
+
+
+
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=7.2.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"right","display":"always"},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="平时习惯将一些偶尔看到并且感兴趣的技术文章放到收藏夹里，目的是等有空的时候再仔细拜读或学习，但无奈抵不住自己的惰性，于是收藏夹越来越臃肿。近期在整理的时候就发现了好几篇关于 Electron 的文章，但我已经记不起当时为何收藏，大概每个前端开发工程师都有个做软件的梦想吧。 因为收藏了蛮多 Electron 的文章，直接清理掉感觉可惜，于是趁近期工作任务不是很重的前提下，对 Electron 进行">
+<meta name="keywords" content="electron,无边框窗口,窗口拖动,主进程,渲染进程,进程通信">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Electron 初体验">
+<meta property="og:url" content="https://hooray.github.io/posts/20f3f334/index.html">
+<meta property="og:site_name" content="９９３５">
+<meta property="og:description" content="平时习惯将一些偶尔看到并且感兴趣的技术文章放到收藏夹里，目的是等有空的时候再仔细拜读或学习，但无奈抵不住自己的惰性，于是收藏夹越来越臃肿。近期在整理的时候就发现了好几篇关于 Electron 的文章，但我已经记不起当时为何收藏，大概每个前端开发工程师都有个做软件的梦想吧。 因为收藏了蛮多 Electron 的文章，直接清理掉感觉可惜，于是趁近期工作任务不是很重的前提下，对 Electron 进行">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://i.loli.net/2018/08/14/5b724978c354e.png">
+<meta property="og:image" content="https://i.loli.net/2018/08/20/5b7a3b0440561.png">
+<meta property="og:image" content="https://i.loli.net/2018/08/20/5b7a5c74a0dbf.png">
+<meta property="og:updated_time" content="2019-10-08T13:55:25.867Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Electron 初体验">
+<meta name="twitter:description" content="平时习惯将一些偶尔看到并且感兴趣的技术文章放到收藏夹里，目的是等有空的时候再仔细拜读或学习，但无奈抵不住自己的惰性，于是收藏夹越来越臃肿。近期在整理的时候就发现了好几篇关于 Electron 的文章，但我已经记不起当时为何收藏，大概每个前端开发工程师都有个做软件的梦想吧。 因为收藏了蛮多 Electron 的文章，直接清理掉感觉可惜，于是趁近期工作任务不是很重的前提下，对 Electron 进行">
+<meta name="twitter:image" content="https://i.loli.net/2018/08/14/5b724978c354e.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://hooray.github.io/posts/20f3f334/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Electron 初体验 | ９９３５</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">９９３５</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">代码如诗</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/404/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hooray.github.io/posts/20f3f334/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="代码小睿">
+      <meta itemprop="description" content="代码小睿的个人博客">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="９９３５">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Electron 初体验
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-20 11:15:45" itemprop="dateCreated datePublished" datetime="2018-08-20T11:15:45+08:00">2018-08-20</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-10-08 21:55:25" itemprop="dateModified" datetime="2019-10-08T21:55:25+08:00">2019-10-08</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Electron-相关/" itemprop="url" rel="index"><span itemprop="name">Electron 相关</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/posts/20f3f334/" class="post-meta-item leancloud_visitors" data-flag-title="Electron 初体验">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://i.loli.net/2018/08/14/5b724978c354e.png" alt></p>
+<p>平时习惯将一些偶尔看到并且感兴趣的技术文章放到收藏夹里，目的是等有空的时候再仔细拜读或学习，但无奈抵不住自己的惰性，于是收藏夹越来越臃肿。近期在整理的时候就发现了好几篇关于 <a href="https://electronjs.org/" target="_blank" rel="noopener">Electron</a> 的文章，但我已经记不起当时为何收藏，大概每个前端开发工程师都有个做软件的梦想吧。</p>
+<p>因为收藏了蛮多 Electron 的文章，直接清理掉感觉可惜，于是趁近期工作任务不是很重的前提下，对 Electron 进行了简单的入门，并尝试用 Electron 开发一套公司内部 OA 系统，这也是这篇文章的由来（因为开发过 Web APP 版的 OA ，所以桌面版的 OA 开发起来不算太费劲，业务代码基本可以沿用，主要的坑还是在 Electron 上）。</p>
+<a id="more"></a>
+<h2 id="入门"><a class="header-anchor" href="#入门"></a>入门</h2>
+<p>快速入门我使用了官方的 <a href="https://github.com/electron/electron-quick-start" target="_blank" rel="noopener">electron-quick-start</a> 库，下载这个库后直接安装依赖，然后运行，就可以看到如下的效果。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装依赖</span></span><br><span class="line">npm install</span><br><span class="line"><span class="comment"># 运行</span></span><br><span class="line">npm start</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2018/08/20/5b7a3b0440561.png" alt></p>
+<h2 id="主进程和渲染进程"><a class="header-anchor" href="#主进程和渲染进程"></a>主进程和渲染进程</h2>
+<p>主进程就是 package.json 里的 main 脚本，在当前这个库里，主进程就是 main.js 这个文件，在主进程中运行的脚本通过创建 web 页面来展示用户的界面。</p>
+<p>通过上面的图我们可以了解到 Electron 的内核其实是 Chromium ，所以 Chromium 的多进程架构也会被使用到，那么每个 Electron 中的 web 页面都会运行在自己的渲染进程中。</p>
+<p>简单的来说， main.js 就是主进程，在主进程里通过 BrowserWindow 创建页面，每个 BrowserWindow 就是渲染进程，当某个 BrowserWindow 页面被销毁后，对应的想染进程也会被终止。</p>
+<h2 id="优化窗口"><a class="header-anchor" href="#优化窗口"></a>优化窗口</h2>
+<p>因为 Windows 的窗口有够丑的，所以我的计划是不使用 Windows 的界面，用 HTML 和 CSS 自己做一个界面。</p>
+<h3 id="无边框窗口"><a class="header-anchor" href="#无边框窗口"></a>无边框窗口</h3>
+<p>第一步就是隐藏原生的窗口，打开 main.js 可以看到这段创建窗口的代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createWindow</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// Create the browser window.</span></span><br><span class="line">    mainWindow = <span class="keyword">new</span> BrowserWindow(&#123;<span class="attr">width</span>: <span class="number">800</span>, <span class="attr">height</span>: <span class="number">600</span>&#125;);</span><br><span class="line">    <span class="comment">// and load the index.html of the app.</span></span><br><span class="line">    mainWindow.loadFile(<span class="string">'index.html'</span>);</span><br><span class="line">    <span class="comment">// Emitted when the window is closed.</span></span><br><span class="line">    mainWindow.on(<span class="string">'closed'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// Dereference the window object, usually you would store windows</span></span><br><span class="line">        <span class="comment">// in an array if your app supports multi windows, this is the time</span></span><br><span class="line">        <span class="comment">// when you should delete the corresponding element.</span></span><br><span class="line">        mainWindow = <span class="literal">null</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过阅读官方 BrowserWindow 的 <a href="https://electronjs.org/docs/api/frameless-window" target="_blank" rel="noopener">API</a> 文档可以知道，只需要设置 <code>frame: false</code> 就可以创建无边框窗口，当然还可以设置禁止改变尺寸，这时候创建窗口的代码就变成这样了：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Create the browser window.</span></span><br><span class="line">mainWindow = <span class="keyword">new</span> BrowserWindow(&#123;<span class="attr">width</span>: <span class="number">800</span>, <span class="attr">height</span>: <span class="number">600</span>, <span class="attr">frame</span>: <span class="literal">false</span>, <span class="attr">resizable</span>: <span class="literal">false</span>&#125;);</span><br></pre></td></tr></table></figure>
+<p>运行后就会看到这样一个界面：</p>
+<p><img src="https://i.loli.net/2018/08/20/5b7a5c74a0dbf.png" alt></p>
+<h3 id="窗口拖动"><a class="header-anchor" href="#窗口拖动"></a>窗口拖动</h3>
+<p>现在窗口已经没有标题栏和菜单栏了，接着就会发现一个问题，就是窗口没办法拖动了。这不是什么大问题，因为官方也想到这问题了，所以在<a href="https://electronjs.org/docs/api/frameless-window" target="_blank" rel="noopener">无边框窗口文档</a>里给出了解决方案，就是给拖动区域增加 <code>-webkit-app-region: drag</code> 的 CSS 代码。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">style</span>=<span class="string">"-webkit-app-region: drag"</span>&gt;</span><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>需要注意的是，如果在拖动区域里有按钮等需要点击的元素，需要增加 <code>-webkit-app-region: no-drag</code> 设置，否则会无法点击。</p>
+<h3 id="手动实现窗口拖动"><a class="header-anchor" href="#手动实现窗口拖动"></a>手动实现窗口拖动</h3>
+<div class="note warning">
+            <p>2018-08-25 更新：</p><p>不建议在无边框窗口下使用下面的方法实现拖动效果，在特殊环境下，比如系统 DPI 不为 100% 时候，会导致窗口在拖动时，窗口的宽高会无限变大，建议还是使用官方提供的无边框窗口下的拖动方案。</p><p>我的测试环境为 2560*1440 的分辨率， DPI 为 125% 。</p><p>关于这个问题，我也找到两个相关的 Issus ：</p><ul><li><a href="https://github.com/electron/electron/issues/13086" target="_blank" rel="noopener">Windows 10 move browser window will trigger “resize” event</a></li><li><a href="https://github.com/electron/electron/issues/10862" target="_blank" rel="noopener">Per monitor DPI awareness causes issues with window positioning and sizing</a></li></ul>
+          </div>
+<p>虽然官方已经提供了无边框窗口拖动的解决方案，但实际使用上会发现一个问题，就是在拖动区域右键，会弹出系统级别的菜单选项，这问题我查了相关资料也没找到屏蔽的办法，所以我就在考虑用 js 来手动实现窗口拖动的效果。</p>
+<p>解决办法其实和网页上拖动元素一样，只是在获取坐标和设置坐标上，需要通过 electron 来获取窗口坐标和设置窗口坐标，实现代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> currentWindow = <span class="built_in">require</span>(<span class="string">'electron'</span>).remote.getCurrentWindow();</span><br><span class="line">$(<span class="built_in">document</span>).on(<span class="string">'mousedown'</span>, <span class="string">'.app-drag'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    e = e.originalEvent || e;</span><br><span class="line">    <span class="keyword">var</span> $el = $(e.target);</span><br><span class="line">    <span class="keyword">var</span> canDrag = $el.closest(<span class="string">'.app-no-drag'</span>).length &lt;= <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (canDrag) &#123;</span><br><span class="line">        <span class="keyword">var</span> winPos = currentWindow.getPosition();</span><br><span class="line">        <span class="keyword">var</span> dX = e.screenX - winPos[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">var</span> dY = e.screenY - winPos[<span class="number">1</span>];</span><br><span class="line">        $(<span class="built_in">document</span>).on(<span class="string">'mousemove'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">            e = e.originalEvent || e;</span><br><span class="line">            <span class="keyword">var</span> _x = e.screenX - dX;</span><br><span class="line">            <span class="keyword">var</span> _y = e.screenY - dY;</span><br><span class="line">            currentWindow.setPosition(_x, _y);</span><br><span class="line">        &#125;);</span><br><span class="line">        $(<span class="built_in">document</span>).on(<span class="string">'mouseup'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">            $(<span class="keyword">this</span>).off(<span class="string">'mousemove'</span>).off(<span class="string">'mouseup'</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>这样只需要在需要给拖动区域设置 <code>.app-drag</code> ，非拖动区域设置 <code>.app-no-drag</code> 即可。</p>
+<p>这里我是用 jQuery 来实现的，如果在页面上引入 jQuery 会报错：<strong>Uncaught ReferenceError: $ is not defined</strong>，解决办法如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">if</span>(<span class="keyword">typeof</span> <span class="built_in">module</span> === <span class="string">'object'</span>)&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">window</span>.jQuery = <span class="built_in">window</span>.$ = <span class="built_in">module</span>.exports;</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="进程间通信"><a class="header-anchor" href="#进程间通信"></a>进程间通信</h2>
+<p>因为安全限制， web 页面不能直接访问原生 GUI 资源，在 Electron 中也是一样，渲染进程如果想要进行原生的 GUI 操作，就比如和主进程进行通信，请求相应的操作。在 Electron 中提供了几种通信方式</p>
+<h3 id="ipcmain-和-ipcrenderer"><a class="header-anchor" href="#ipcmain-和-ipcrenderer"></a><a href="https://electronjs.org/docs/api/ipc-main" target="_blank" rel="noopener">ipcMain</a> 和 <a href="https://electronjs.org/docs/api/ipc-renderer" target="_blank" rel="noopener">ipcRenderer</a></h3>
+<p>在渲染进程中使用 ipcRenderer 模块向主进程发送消息，主进程中使用 ipcMain 模块接收消息，进行操作，如果还需要反馈，则通知渲染进程，渲染进程根据接收的内容执行相应的操作：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 渲染进程中</span></span><br><span class="line"><span class="keyword">const</span> &#123;ipcRenderer&#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>);</span><br><span class="line">ipcRender.send(<span class="string">'somemsg'</span>, data);</span><br><span class="line">ipcRender.on(<span class="string">'replaymsg'</span>, (evt, otherData) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(otherData);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 主进程中</span></span><br><span class="line"><span class="keyword">const</span> &#123;ipcMain&#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>);</span><br><span class="line">ipcMain.on(<span class="string">'somemsg'</span>, (evt, data) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">    evt.sender.send(<span class="string">'replymsg'</span>, otherData);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="remote"><a class="header-anchor" href="#remote"></a><a href="https://electronjs.org/docs/api/remote" target="_blank" rel="noopener">remote</a></h3>
+<p>remote 模块为渲染进程和主进程通信提供了一种简单方法，可以看到在上面手动实现拖动窗口的效果里，就用到了 remote 模块。</p>
+<h3 id="webcontents"><a class="header-anchor" href="#webcontents"></a><a href="https://electronjs.org/docs/api/web-contents" target="_blank" rel="noopener">webContents</a></h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 主进程中</span></span><br><span class="line">win.webContents.on(<span class="string">'did-finish-load'</span>, () =&gt; &#123;</span><br><span class="line">    win.webContents.send(<span class="string">'ping'</span>, <span class="string">'whoooooooh!'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 渲染进程中</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">'electron'</span>).ipcRenderer.on(<span class="string">'ping'</span>, (event, message) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(message);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="渲染进程之间通信"><a class="header-anchor" href="#渲染进程之间通信"></a>渲染进程之间通信</h3>
+<p>如果对数据的实时性没有要求，只是渲染进程之间数据共享，<a href="https://electronjs.org/docs/faq#%E5%A6%82%E4%BD%95%E5%9C%A8%E4%B8%A4%E4%B8%AA%E7%BD%91%E9%A1%B5%E9%97%B4%E5%85%B1%E4%BA%AB%E6%95%B0%E6%8D%AE%EF%BC%9F" target="_blank" rel="noopener">官方建议</a>是使用浏览器中已经实现的 HTML5 API 。</p>
+<p>但如果对数据实时性要求高，那就要结合上面的方法来实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 主进程中，将两个窗口的 id 分别发送到对方的渲染进程里</span></span><br><span class="line">mainWindow.webContents.on(<span class="string">'did-finish-load'</span>, () =&gt; &#123;</span><br><span class="line">    mainWindow.webContents.send(<span class="string">'getChild'</span>, &#123;</span><br><span class="line">        childId: childWindow.id</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">childWindow.webContents.on(<span class="string">'did-finish-load'</span>, () =&gt; &#123;</span><br><span class="line">    childWindow.webContents.send(<span class="string">'getMain'</span>, &#123;</span><br><span class="line">        mainId: mainWindow.id</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 渲染进程 mainWindow，通过 id 得到 childWindow 并发送一条消息</span></span><br><span class="line">ipcRenderer.on(<span class="string">'getChild'</span>, (event, arg) =&gt; &#123;</span><br><span class="line">    remote.BrowserWindow.fromId(arg.childId).webContents.send(<span class="string">'say'</span>, <span class="string">'Hello World!'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 渲染进程 childWindow，接收 mainWindow 的消息</span></span><br><span class="line">ipcRenderer.on(<span class="string">'say'</span>, (event, arg) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(arg); <span class="comment">// 输出：Hello World!</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 同理 childWindow 也可以通过 id 给 mainWindow 发送消息</span></span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a class="header-anchor" href="#总结"></a>总结</h2>
+<p>不明白的地方优先查看<a href="https://electronjs.org/docs" target="_blank" rel="noopener">官方文档</a>，因为官方文档太完整了，虽然部分还是英文的，没有翻译完整，但并不影响阅读，因为官方文档有很多例子，看代码就能理解，也可以下载官方的 <a href="https://github.com/electron/electron-api-demos" target="_blank" rel="noopener">electron-api-demos</a> 库，整理了部分 API 的实例，当然这个项目本身也是一个很好的 Electron 演示。</p>
+<h2 id="参考"><a class="header-anchor" href="#参考"></a>参考</h2>
+<ul>
+<li><a href="https://juejin.im/entry/58869b3f8d6d810058d46135" target="_blank" rel="noopener">我眼中的 Electron</a></li>
+<li><a href="https://segmentfault.com/a/1190000011507250" target="_blank" rel="noopener">使用 Electron 在两个进程 (主进程和渲染进程) 之间进行通讯</a></li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/electron/" rel="tag"># electron</a>
+          
+            <a href="/tags/无边框窗口/" rel="tag"># 无边框窗口</a>
+          
+            <a href="/tags/窗口拖动/" rel="tag"># 窗口拖动</a>
+          
+            <a href="/tags/主进程/" rel="tag"># 主进程</a>
+          
+            <a href="/tags/渲染进程/" rel="tag"># 渲染进程</a>
+          
+            <a href="/tags/进程通信/" rel="tag"># 进程通信</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+              <div id="needsharebutton-postbottom">
+                <span class="btn">
+                  <i class="fa fa-share-alt" aria-hidden="true"></i>
+                </span>
+              </div>
+            
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/ed9dc49e/" rel="next" title="docsify 全接触">
+                <i class="fa fa-chevron-left"></i> docsify 全接触
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/46704839/" rel="prev" title="浅入浅出 Vue 动态组件">
+                浅入浅出 Vue 动态组件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="gitalk-container">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/avatar.jpg" alt="代码小睿">
+            
+              <p class="site-author-name" itemprop="name">代码小睿</p>
+              <div class="site-description motion-element" itemprop="description">代码小睿的个人博客</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">97</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/hooray" title="GitHub &rarr; https://github.com/hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://weibo.com/hooray0905" title="Weibo &rarr; http://weibo.com/hooray0905" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ &rarr; http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                个人作品
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://hoorayos.com" title="http://hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://github.com/hooray/clicaptcha" title="https://github.com/hooray/clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://github.com/hooray/vue-clicaptcha" title="https://github.com/hooray/vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://gitee.com/eoner/gulp-automation" title="https://gitee.com/eoner/gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://gitee.com/eoner/vue-automation" title="https://gitee.com/eoner/vue-automation" rel="noopener" target="_blank">vue-automation - Vue自动化工作流</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#入门"><span class="nav-number">1.</span> <span class="nav-text">入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主进程和渲染进程"><span class="nav-number">2.</span> <span class="nav-text">主进程和渲染进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化窗口"><span class="nav-number">3.</span> <span class="nav-text">优化窗口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#无边框窗口"><span class="nav-number">3.1.</span> <span class="nav-text">无边框窗口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#窗口拖动"><span class="nav-number">3.2.</span> <span class="nav-text">窗口拖动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#手动实现窗口拖动"><span class="nav-number">3.3.</span> <span class="nav-text">手动实现窗口拖动</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程间通信"><span class="nav-number">4.</span> <span class="nav-text">进程间通信</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ipcmain-和-ipcrenderer"><span class="nav-number">4.1.</span> <span class="nav-text">ipcMain 和 ipcRenderer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#remote"><span class="nav-number">4.2.</span> <span class="nav-text">remote</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#webcontents"><span class="nav-number">4.3.</span> <span class="nav-text">webContents</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#渲染进程之间通信"><span class="nav-number">4.4.</span> <span class="nav-text">渲染进程之间通信</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">代码小睿</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <script id="ribbon" size alpha zindex src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+
+
+
+  
+
+
+
+  
+  <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.ui.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-reading-progress@1/reading_progress.min.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+
+
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '165f4a18451139d1962f',
+    clientSecret: 'd950ed9736a4364215fa554442d01f8e89dd92a8',
+    repo: 'hooray.github.io',
+    owner: 'hooray',
+    admin: ['hooray'],
+    id: location.pathname,
+    
+      language: window.navigator.language || window.navigator.userLanguage,
+    
+    distractionFreeMode: ''
+  });
+  gitalk.render('gitalk-container');
+</script>
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === '') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+              })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1 }))
+                .done(function() {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function() {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'ODqTjpX8O5RTTQ9Ne0PQLrl6-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': 'ODqTjpX8O5RTTQ9Ne0PQLrl6-gzGzoHsz',
+                'X-LC-Key': 'yEmutbTLiTig6Kz3VLiocpgs',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+            if (localhost.test(document.URL)) return;
+            addCount(Counter);
+          
+        });
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+    
+  
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+    
+      pbOptions = {};
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

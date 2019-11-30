@@ -1,0 +1,1769 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+  
+  
+    
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css">
+
+
+
+  
+  
+    
+      
+    
+    
+      
+    
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link rel="stylesheet" href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.css">
+
+
+
+
+
+
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=7.2.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"right","display":"always"},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="一直以来我都习惯直接用 markdown 写一些简单的项目文档，并且通过 git 同步到 Github 或者国内的码云上，以满足备份和查看的需求，但直到我遇到了 docsify ，在初步了解了一天后，我觉得这款工具或许可以代替我之前写文档的方式。">
+<meta name="keywords" content="文档,docsify">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docsify 全接触">
+<meta property="og:url" content="https://hooray.github.io/posts/ed9dc49e/index.html">
+<meta property="og:site_name" content="９９３５">
+<meta property="og:description" content="一直以来我都习惯直接用 markdown 写一些简单的项目文档，并且通过 git 同步到 Github 或者国内的码云上，以满足备份和查看的需求，但直到我遇到了 docsify ，在初步了解了一天后，我觉得这款工具或许可以代替我之前写文档的方式。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://i.loli.net/2018/08/08/5b6a49c8c93fc.png">
+<meta property="og:image" content="https://i.loli.net/2018/08/08/5b6a82e9cf935.png">
+<meta property="og:image" content="https://i.loli.net/2018/08/08/5b6a9ab29079d.png">
+<meta property="og:updated_time" content="2019-10-08T13:55:25.867Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="docsify 全接触">
+<meta name="twitter:description" content="一直以来我都习惯直接用 markdown 写一些简单的项目文档，并且通过 git 同步到 Github 或者国内的码云上，以满足备份和查看的需求，但直到我遇到了 docsify ，在初步了解了一天后，我觉得这款工具或许可以代替我之前写文档的方式。">
+<meta name="twitter:image" content="https://i.loli.net/2018/08/08/5b6a49c8c93fc.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://hooray.github.io/posts/ed9dc49e/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>docsify 全接触 | ９９３５</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">９９３５</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">代码如诗</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/404/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hooray.github.io/posts/ed9dc49e/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="代码小睿">
+      <meta itemprop="description" content="代码小睿的个人博客">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="９９３５">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">docsify 全接触
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-08 09:37:08" itemprop="dateCreated datePublished" datetime="2018-08-08T09:37:08+08:00">2018-08-08</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-10-08 21:55:25" itemprop="dateModified" datetime="2019-10-08T21:55:25+08:00">2019-10-08</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Web-综合/" itemprop="url" rel="index"><span itemprop="name">Web 综合</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/posts/ed9dc49e/" class="post-meta-item leancloud_visitors" data-flag-title="docsify 全接触">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://i.loli.net/2018/08/08/5b6a49c8c93fc.png" alt></p>
+<p>一直以来我都习惯直接用 markdown 写一些简单的项目文档，并且通过 git 同步到 Github 或者国内的码云上，以满足备份和查看的需求，但直到我遇到了 <a href="https://docsify.js.org/" target="_blank" rel="noopener">docsify</a> ，在初步了解了一天后，我觉得这款工具或许可以代替我之前写文档的方式。</p>
+<a id="more"></a>
+<h2 id="什么是-docsify"><a class="header-anchor" href="#什么是-docsify"></a>什么是 docsify</h2>
+<blockquote>
+<p>docsify 是一个动态生成文档网站的工具。不同于 GitBook、Hexo 的地方是它不会生成将 <code>.md</code> 转成 <code>.html</code> 文件，所有转换工作都是在运行时进行。</p>
+</blockquote>
+<p>官方的介绍其实就已经打动我了，因为 GitBook 和 Hexo ，一个有了解过，一个现在正在使用，它们的“特点”就是都需要编译，相对来说就会比较费时，而运行时编译就方便了很多，而且整个文档目录也不会被 <code>.html</code> 文件“污染”，虽然 SEO 会受到影响，但我不在乎！</p>
+<h2 id="开始使用"><a class="header-anchor" href="#开始使用"></a>开始使用</h2>
+<h3 id="安装"><a class="header-anchor" href="#安装"></a>安装</h3>
+<p>官方推荐安装 <a href="https://www.npmjs.com/package/docsify-cli" target="_blank" rel="noopener">docsify-cli</a> 工具，可以方便创建及本地预览文档网站。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i docsify-cli -g</span><br></pre></td></tr></table></figure>
+<h3 id="初始化"><a class="header-anchor" href="#初始化"></a>初始化</h3>
+<p>建议在项目的 <code>./docs</code> 目录里写文档，可以通过下面的方式初始化项目：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docsify init ./docs</span><br></pre></td></tr></table></figure>
+<p>这里我也可以直接创建一个纯文档项目：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docsify init ./</span><br></pre></td></tr></table></figure>
+<h3 id="本地预览"><a class="header-anchor" href="#本地预览"></a>本地预览</h3>
+<p>在上一步初始化完毕后，会看到 <code>Initialization succeeded! Please run docsify serve ./</code> ，那我们接着执行 <code>docsify serve ./</code> 就可以运行起一个支持实时预览的本地网站，通过 <a href="http://localhost:3000" target="_blank" rel="noopener">http://localhost:3000</a> 可以访问。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docsify serve ./</span><br></pre></td></tr></table></figure>
+<h2 id="基本操作"><a class="header-anchor" href="#基本操作"></a>基本操作</h2>
+<p><img src="https://i.loli.net/2018/08/08/5b6a82e9cf935.png" alt></p>
+<p>运行好后看到这样的页面就代表运行成功了，在开始写文档之前，先来了解一下初始化好后的这三个文件分别是做什么的。</p>
+<ul>
+<li><code>.nojekyll</code> 用于阻止 GitHub Pages 会忽略掉下划线开头的文件</li>
+<li><code>index.html</code> 入口文件，也可以理解为项目配置文件</li>
+<li><code>README.md</code> 文档默认主页</li>
+</ul>
+<h3 id="多页文档"><a class="header-anchor" href="#多页文档"></a>多页文档</h3>
+<p>现在文档默认只有一篇，也就是 <code>README.md</code> ，如果要再增加一篇，也很简单，直接在项目根目录创建一个 <code>.md</code> 文件就可以，比如新建一个 <code>guide.md</code> 文件，那么对应的路由就是 <code>/#/guide</code> 。</p>
+<p>假设我们的文件目录结构如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docsify</span><br><span class="line">├ README.md</span><br><span class="line">├ guide.md</span><br><span class="line">├ zh-cn</span><br><span class="line">│　├ README.md</span><br><span class="line">│　└ guide.md</span><br></pre></td></tr></table></figure>
+<p>那么对应访问页面的地址就是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docsify/README.md            ==&gt; http://localhost:3000/#/</span><br><span class="line">docsify/guide.md             ==&gt; http://localhost:3000/#/guide</span><br><span class="line">docsify/zh-cn/README.md      ==&gt; http://localhost:3000/#/zh-cn/</span><br><span class="line">docsify/zh-cn/guide.md       ==&gt; http://localhost:3000/#/zh-cn/guide</span><br></pre></td></tr></table></figure>
+<h3 id="侧边栏"><a class="header-anchor" href="#侧边栏"></a>侧边栏</h3>
+<p>现在项目里已经可以创建多篇文档了，但发现有个问题，因为现在是通过手动在浏览器地址栏里输入文档地址访问，这种方式肯定不够优雅。</p>
+<p>好在 docsify 提供了侧边栏的功能，我们打开 <code>index.html</code> 文件配置 <code>loadSidebar</code> 选项：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.$docsify = &#123;</span><br><span class="line">    loadSidebar: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接着在根目录下创建 <code>_sidebar.md</code> 文件，内容如下：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">* </span>[<span class="string">首页</span>](<span class="link">/</span>)</span><br><span class="line"><span class="bullet">* </span>[<span class="string">指南</span>](<span class="link">guide</span>)</span><br><span class="line"><span class="bullet">* </span>[<span class="string">中文首页</span>](<span class="link">zh-cn/</span>)</span><br><span class="line"><span class="bullet">* </span>[<span class="string">中文指南</span>](<span class="link">zh-cn/guide</span>)</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，<code>_sidebar.md</code> 的加载逻辑是从每层目录下获取文件，如果当前目录不存在该文件则回退到上一级目录。例如当前路径为 <code>/zh-cn/guide</code> 则从 <code>/zh-cn/_sidebar.md</code> 获取文件，如果不存在则从 <code>/_sidebar.md</code> 获取。当然你也可以配置 <code>alias</code> 避免不必要的回退过程。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.$docsify = &#123;</span><br><span class="line">    loadSidebar: <span class="literal">true</span>,</span><br><span class="line">    alias: &#123;</span><br><span class="line">        <span class="string">'/.*/_sidebar.md'</span>: <span class="string">'/_sidebar.md'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="文档目录"><a class="header-anchor" href="#文档目录"></a>文档目录</h3>
+<p>侧边栏开启的同时，通过设置 <code>subMaxLevel</code> 选项也可以开启文档目录功能。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.$docsify = &#123;</span><br><span class="line">    loadSidebar: <span class="literal">true</span>,</span><br><span class="line">    subMaxLevel: <span class="number">2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这会我们打开 <code>README.md</code> 文件，随便写几个标题，保存一下看看效果。</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">## 标题1</span></span><br><span class="line"></span><br><span class="line"><span class="section">### 标题1-1</span></span><br><span class="line"></span><br><span class="line"><span class="section">### 标题1-2</span></span><br><span class="line"></span><br><span class="line"><span class="section">## 标题2</span></span><br><span class="line"></span><br><span class="line"><span class="section">## 标题3</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2018/08/08/5b6a9ab29079d.png" alt></p>
+<p>可以看到<code>标题1</code>下面的<code>标题1-1</code>和<code>标题1-2</code>并没有显示出来，因为我们设置了 <code>subMaxLevel</code> 为 2 ，如果需要显示，则修改为 3 即可。</p>
+<div class="note info">
+            <p>侧边栏一级为页面，从二级开始才是目录，所以 <code>subMaxLevel: 2</code> 只显示了一级目录，如果要显示二级目录，则应该设置为 <code>subMaxLevel: 3</code> 。如果还是不理解，那就动手多试几遍，就明白了。</p>
+          </div>
+<p>如果文档里有特定的标题不想展示到目录中，可以添加 <code>{docsify-ignore}</code> 或 <code>{docsify-ignore-all}</code> 。</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">## 标题1</span></span><br><span class="line"></span><br><span class="line"><span class="section">### 标题1-1 &#123;docsify-ignore&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="section">### 标题1-2</span></span><br><span class="line"></span><br><span class="line"><span class="section">## 标题2 &#123;docsify-ignore-all&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="section">### 标题2-1</span></span><br><span class="line"></span><br><span class="line"><span class="section">## 标题3</span></span><br></pre></td></tr></table></figure>
+<h3 id="导航栏"><a class="header-anchor" href="#导航栏"></a>导航栏</h3>
+<p>打开 <code>index.html</code> 文件配置 <code>loadNavbar</code> 选项：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.$docsify = &#123;</span><br><span class="line">    loadNavbar: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接着在根目录下创建 <code>_navbar.md</code> 文件，内容如下：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">* </span>[<span class="string">En</span>](<span class="link">/</span>)</span><br><span class="line"><span class="bullet">* </span>[<span class="string">中文</span>](<span class="link">/zh-cn/</span>)</span><br></pre></td></tr></table></figure>
+<p>如果导航内容很多，也可以使用嵌套的方式：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">* </span>En</span><br><span class="line"><span class="bullet">  * </span>[<span class="string">Index</span>](<span class="link">/</span>)</span><br><span class="line"><span class="bullet">  * </span>[<span class="string">Guide</span>](<span class="link">guide</span>)</span><br><span class="line"><span class="bullet">* </span>中文</span><br><span class="line"><span class="bullet">  * </span>[<span class="string">首页</span>](<span class="link">/zh-cn/</span>)</span><br><span class="line"><span class="bullet">  * </span>[<span class="string">指南</span>](<span class="link">/zh-cn/guide</span>)</span><br></pre></td></tr></table></figure>
+<div class="note info">
+            <ul><li>导航嵌套支持多层，但官方的样式处理上似乎有点 bug ，多层嵌套展示不理想，所以建议最多就两层嵌套最好。</li><li>导航的加载逻辑与侧边栏一致。</li></ul>
+          </div>
+<h3 id="封面"><a class="header-anchor" href="#封面"></a>封面</h3>
+<p>打开 <code>index.html</code> 文件配置 <code>coverpage</code> 选项：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.$docsify = &#123;</span><br><span class="line">    coverpage: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接着在根目录下创建 <code>_coverpage.md</code> 文件，内容就是标准的 markdown 语法，可以参考一下官方的封面：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">![<span class="string">logo</span>](<span class="link">_media/icon.svg</span>)</span><br><span class="line"></span><br><span class="line"><span class="section"># docsify</span></span><br><span class="line"></span><br><span class="line"><span class="quote">&gt; A magical documentation site generator.</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">* </span>Simple and lightweight (~12kb gzipped)</span><br><span class="line"><span class="bullet">* </span>Multiple themes</span><br><span class="line"><span class="bullet">* </span>Not build static html files</span><br><span class="line"></span><br><span class="line">[<span class="string">GitHub</span>](<span class="link">https://github.com/docsifyjs/docsify/</span>)</span><br><span class="line">[<span class="string">Get Started</span>](<span class="link">#quick-start</span>)</span><br></pre></td></tr></table></figure>
+<p>封面的背景是随机生成的渐变色，我们也可以指定一个背景色或者背景图，只要放在文档末尾就可以，同时设定只生效第一个。</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 自定义背景色 --&gt;</span><br><span class="line">![<span class="string">color</span>](<span class="link">#f0f0f0</span>)</span><br><span class="line"></span><br><span class="line">&lt;!-- 自定义背景图 --&gt;</span><br><span class="line">![](background_image.png)</span><br></pre></td></tr></table></figure>
+<p>如果我们的文档是多语言的，那可不可以设置多个封面？当然也是可以的。首先确定文档目录结构如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docsify</span><br><span class="line">├ README.md</span><br><span class="line">├ guide.md</span><br><span class="line">├ _coverpage.md</span><br><span class="line">├ zh-cn</span><br><span class="line">│　├ README.md</span><br><span class="line">│　├ guide.md</span><br><span class="line">│　└ _coverpage.md</span><br></pre></td></tr></table></figure>
+<p>然后修改 <code>coverpage</code> 选项：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.$docsify = &#123;</span><br><span class="line">    coverpage: [<span class="string">'/'</span>, <span class="string">'/zh-cn/'</span>]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者具体指明文件名</span></span><br><span class="line"><span class="built_in">window</span>.$docsify = &#123;</span><br><span class="line">    coverpage: &#123;</span><br><span class="line">        <span class="string">'/'</span>: <span class="string">'_coverpage.md'</span>,</span><br><span class="line">        <span class="string">'/zh-cn/'</span>: <span class="string">'_coverpage.md'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="个性定制"><a class="header-anchor" href="#个性定制"></a>个性定制</h2>
+<h3 id="配置项"><a class="header-anchor" href="#配置项"></a>配置项</h3>
+<p>在上面已经介绍了一些配置项，比如侧边栏 <code>loadSidebar</code> 、导航栏 <code>loadNavbar</code> 、封面 <code>coverpage</code> ，关于 <code>window.$docsify</code> 完整配置说明，可以查看<a href="https://docsify.js.org/#/zh-cn/configuration" target="_blank" rel="noopener">官方配置项文档</a>参考。</p>
+<h3 id="主题"><a class="header-anchor" href="#主题"></a>主题</h3>
+<p>直接打开 index.html 修改替换 css 地址即可切换主题，官方目前提供了 4 套主题，分别是：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"//unpkg.com/docsify/themes/vue.css"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"//unpkg.com/docsify/themes/buble.css"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"//unpkg.com/docsify/themes/dark.css"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"//unpkg.com/docsify/themes/pure.css"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 压缩文件位于 /lib/themes/ --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"//unpkg.com/docsify/lib/themes/vue.css"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"//unpkg.com/docsify/lib/themes/buble.css"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"//unpkg.com/docsify/lib/themes/dark.css"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"//unpkg.com/docsify/lib/themes/pure.css"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="插件"><a class="header-anchor" href="#插件"></a>插件</h3>
+<p>插件配置很简单，基本大部分插件只要复制对应的 js 引用代码复制到 index.html 页面里就可以。以下介绍几个我在测试中用到感觉还不错的插件，更<a href="https://docsify.js.org/#/zh-cn/plugins" target="_blank" rel="noopener">完整的插件列表</a>还请查看官方文档。</p>
+<h4 id="emoji"><a class="header-anchor" href="#emoji"></a>emoji</h4>
+<p>docsify 默认是支持 emoji 表情的，但它不够精准，因为没有处理非 emoji 的字符串。如果你需要正确解析 emoji 字符串，可以引入这个插件。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"//unpkg.com/docsify/lib/plugins/emoji.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这里我还找到一份 github 的完整 emoji 表情代码：<a href="https://gist.github.com/rxaviers/7360908" target="_blank" rel="noopener">去看看</a></p>
+<h4 id="复制代码"><a class="header-anchor" href="#复制代码"></a>复制代码</h4>
+<p>在用 markdown 展示代码片段的时候，可能需要一键复制代码到本地运行，这时候就可以引入这个插件。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"//unpkg.com/docsify-copy-code"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="分页"><a class="header-anchor" href="#分页"></a>分页</h4>
+<p>在文档底部出现上一页和下一页按钮。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="代码高亮"><a class="header-anchor" href="#代码高亮"></a>代码高亮</h4>
+<p>docsify 内置的代码高亮工具是 Prism ，默认支持 CSS 、JavaScript 和 HTML 。如果需要其它语言，可以手动引入。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 引入 PHP 代码高亮插件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"//unpkg.com/prismjs/components/prism-php.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>其它语言高亮插件可以查看 <a href="https://github.com/PrismJS/prism/tree/gh-pages/components" target="_blank" rel="noopener">Prims</a> 仓库。</p>
+<h2 id="文档助手"><a class="header-anchor" href="#文档助手"></a>文档助手</h2>
+<p>docsify 扩展了一些 markdown 的语法，但由于这篇文章是在 Hexo 里编写，无法通过 Hexo 直接展示出效果，建议查看<a href="https://docsify.js.org/#/zh-cn/helpers" target="_blank" rel="noopener">官方文档</a>了解详情。</p>
+<h2 id="最后"><a class="header-anchor" href="#最后"></a>最后</h2>
+<p>最后把整个项目上传到 GitHub Pages 上，一份在线文档就大功告成了。</p>
+<p>整体使用下来还是挺顺畅的，基本和原来写文档的流程一样，如果不会用到 docsify 提供的 markdown 扩展语法，那就可以继续使用原有的 markdown 编辑器进行编写，加上现在大部分 markdown 编辑器都会提供同步预览，所以也不一定非得使用 docsify 提供的本地预览方案。</p>
+<p>关于离线模式（PWA）和服务端渲染（SSR），因为目前用不上，所以就没有尝试。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/文档/" rel="tag"># 文档</a>
+          
+            <a href="/tags/docsify/" rel="tag"># docsify</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+              <div id="needsharebutton-postbottom">
+                <span class="btn">
+                  <i class="fa fa-share-alt" aria-hidden="true"></i>
+                </span>
+              </div>
+            
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/bb61bbd3/" rel="next" title="浅入浅出 Vue 组件">
+                <i class="fa fa-chevron-left"></i> 浅入浅出 Vue 组件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/20f3f334/" rel="prev" title="Electron 初体验">
+                Electron 初体验 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="gitalk-container">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/avatar.jpg" alt="代码小睿">
+            
+              <p class="site-author-name" itemprop="name">代码小睿</p>
+              <div class="site-description motion-element" itemprop="description">代码小睿的个人博客</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">97</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/hooray" title="GitHub &rarr; https://github.com/hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://weibo.com/hooray0905" title="Weibo &rarr; http://weibo.com/hooray0905" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ &rarr; http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                个人作品
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://hoorayos.com" title="http://hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://github.com/hooray/clicaptcha" title="https://github.com/hooray/clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://github.com/hooray/vue-clicaptcha" title="https://github.com/hooray/vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://gitee.com/eoner/gulp-automation" title="https://gitee.com/eoner/gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://gitee.com/eoner/vue-automation" title="https://gitee.com/eoner/vue-automation" rel="noopener" target="_blank">vue-automation - Vue自动化工作流</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是-docsify"><span class="nav-number">1.</span> <span class="nav-text">什么是 docsify</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始使用"><span class="nav-number">2.</span> <span class="nav-text">开始使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">2.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化"><span class="nav-number">2.2.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本地预览"><span class="nav-number">2.3.</span> <span class="nav-text">本地预览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本操作"><span class="nav-number">3.</span> <span class="nav-text">基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多页文档"><span class="nav-number">3.1.</span> <span class="nav-text">多页文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#侧边栏"><span class="nav-number">3.2.</span> <span class="nav-text">侧边栏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文档目录"><span class="nav-number">3.3.</span> <span class="nav-text">文档目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导航栏"><span class="nav-number">3.4.</span> <span class="nav-text">导航栏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#封面"><span class="nav-number">3.5.</span> <span class="nav-text">封面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#个性定制"><span class="nav-number">4.</span> <span class="nav-text">个性定制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置项"><span class="nav-number">4.1.</span> <span class="nav-text">配置项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主题"><span class="nav-number">4.2.</span> <span class="nav-text">主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插件"><span class="nav-number">4.3.</span> <span class="nav-text">插件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#emoji"><span class="nav-number">4.3.1.</span> <span class="nav-text">emoji</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复制代码"><span class="nav-number">4.3.2.</span> <span class="nav-text">复制代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分页"><span class="nav-number">4.3.3.</span> <span class="nav-text">分页</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码高亮"><span class="nav-number">4.3.4.</span> <span class="nav-text">代码高亮</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文档助手"><span class="nav-number">5.</span> <span class="nav-text">文档助手</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后"><span class="nav-number">6.</span> <span class="nav-text">最后</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">代码小睿</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <script id="ribbon" size alpha zindex src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+
+
+
+  
+
+
+
+  
+  <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.ui.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-reading-progress@1/reading_progress.min.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+
+
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '165f4a18451139d1962f',
+    clientSecret: 'd950ed9736a4364215fa554442d01f8e89dd92a8',
+    repo: 'hooray.github.io',
+    owner: 'hooray',
+    admin: ['hooray'],
+    id: location.pathname,
+    
+      language: window.navigator.language || window.navigator.userLanguage,
+    
+    distractionFreeMode: ''
+  });
+  gitalk.render('gitalk-container');
+</script>
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === '') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+              })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1 }))
+                .done(function() {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function() {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'ODqTjpX8O5RTTQ9Ne0PQLrl6-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': 'ODqTjpX8O5RTTQ9Ne0PQLrl6-gzGzoHsz',
+                'X-LC-Key': 'yEmutbTLiTig6Kz3VLiocpgs',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+            if (localhost.test(document.URL)) return;
+            addCount(Counter);
+          
+        });
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+    
+  
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+    
+      pbOptions = {};
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

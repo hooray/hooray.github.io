@@ -1,0 +1,1787 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+  
+  
+    
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css">
+
+
+
+  
+  
+    
+      
+    
+    
+      
+    
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link rel="stylesheet" href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.css">
+
+
+
+
+
+
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=7.2.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"right","display":"always"},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="精灵图想必对大家来说都不陌生，就是将多个小图整合到一张图上，以此减少浏览器向服务器请求的次数，从而提高网页的加载速度。 而在 Vue 项目中，我通常会使用 webpack-spritesmith 这个 npm 包来制作需要的精灵图，而这篇文章主要是针对 webpack-spritesmith 的一些高阶使用技巧。  如果你没使用过 webpack-spritesmith ，建议熟悉了解后再阅读本">
+<meta name="keywords" content="webpack-spritesmith,sprite,vue-cli,webpack,精灵图,雪碧图">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack-spritesmith 的一些高阶使用技巧">
+<meta property="og:url" content="https://hooray.github.io/posts/2c9d9bf2/index.html">
+<meta property="og:site_name" content="９９３５">
+<meta property="og:description" content="精灵图想必对大家来说都不陌生，就是将多个小图整合到一张图上，以此减少浏览器向服务器请求的次数，从而提高网页的加载速度。 而在 Vue 项目中，我通常会使用 webpack-spritesmith 这个 npm 包来制作需要的精灵图，而这篇文章主要是针对 webpack-spritesmith 的一些高阶使用技巧。  如果你没使用过 webpack-spritesmith ，建议熟悉了解后再阅读本">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://i.loli.net/2019/08/21/OzZ17a3UXh5jMVJ.png">
+<meta property="og:updated_time" content="2019-10-08T13:55:25.870Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="webpack-spritesmith 的一些高阶使用技巧">
+<meta name="twitter:description" content="精灵图想必对大家来说都不陌生，就是将多个小图整合到一张图上，以此减少浏览器向服务器请求的次数，从而提高网页的加载速度。 而在 Vue 项目中，我通常会使用 webpack-spritesmith 这个 npm 包来制作需要的精灵图，而这篇文章主要是针对 webpack-spritesmith 的一些高阶使用技巧。  如果你没使用过 webpack-spritesmith ，建议熟悉了解后再阅读本">
+<meta name="twitter:image" content="https://i.loli.net/2019/08/21/OzZ17a3UXh5jMVJ.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://hooray.github.io/posts/2c9d9bf2/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>webpack-spritesmith 的一些高阶使用技巧 | ９９３５</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">９９３５</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">代码如诗</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/404/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hooray.github.io/posts/2c9d9bf2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="代码小睿">
+      <meta itemprop="description" content="代码小睿的个人博客">
+      <meta itemprop="image" content="/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="９９３５">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">webpack-spritesmith 的一些高阶使用技巧
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-18 17:28:49" itemprop="dateCreated datePublished" datetime="2019-08-18T17:28:49+08:00">2019-08-18</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-10-08 21:55:25" itemprop="dateModified" datetime="2019-10-08T21:55:25+08:00">2019-10-08</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Web-综合/" itemprop="url" rel="index"><span itemprop="name">Web 综合</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/posts/2c9d9bf2/" class="post-meta-item leancloud_visitors" data-flag-title="webpack-spritesmith 的一些高阶使用技巧">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://i.loli.net/2019/08/21/OzZ17a3UXh5jMVJ.png" alt></p>
+<p>精灵图想必对大家来说都不陌生，就是将多个小图整合到一张图上，以此减少浏览器向服务器请求的次数，从而提高网页的加载速度。</p>
+<p>而在 Vue 项目中，我通常会使用 <a href="https://www.npmjs.com/package/webpack-spritesmith" target="_blank" rel="noopener">webpack-spritesmith</a> 这个 npm 包来制作需要的精灵图，而这篇文章主要是针对 <a href="https://www.npmjs.com/package/webpack-spritesmith" target="_blank" rel="noopener">webpack-spritesmith</a> 的一些高阶使用技巧。</p>
+<blockquote>
+<p>如果你没使用过 <a href="https://www.npmjs.com/package/webpack-spritesmith" target="_blank" rel="noopener">webpack-spritesmith</a> ，建议熟悉了解后再阅读本篇文章。</p>
+</blockquote>
+<a id="more"></a>
+<p>虽然 <a href="https://www.npmjs.com/package/webpack-spritesmith" target="_blank" rel="noopener">webpack-spritesmith</a> 已经能帮我减轻很大的工作量了，但在项目中具体使用的时候，还是会遇到一些不大不小的问题，之所以说不大不小，是因为这些问题的解决方案有很多种，而下面我所提供的解决方案，只是单纯从技术角度去思考如何处理。</p>
+<h2 id="痛点一：变量名冲突"><a class="header-anchor" href="#痛点一：变量名冲突"></a>痛点一：变量名冲突</h2>
+<p>在配置好各种参数，并且精灵图和对应的 <code>.scss</code> 文件都能生成好后，第一个痛点就来了。</p>
+<p>我们先观察一下生成好的 <code>.scss</code> 文件，大致如下：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// SCSS variables are information about icon's compiled state, stored under its original file name</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// .icon-home &#123;</span></span><br><span class="line"><span class="comment">//   width: $icon-home-width;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// The large array-like variables contain all information about a single icon</span></span><br><span class="line"><span class="comment">// $icon-home: x y offset_x offset_y width height total_width total_height image_path;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// At the bottom of this section, we provide information about the spritesheet itself</span></span><br><span class="line"><span class="comment">// $spritesheet: width height image $spritesheet-sprites;</span></span><br><span class="line"><span class="variable">$address-name</span>: <span class="string">'address'</span>;</span><br><span class="line"><span class="variable">$address-x</span>: <span class="number">0px</span>;</span><br><span class="line"><span class="variable">$address-y</span>: <span class="number">0px</span>;</span><br><span class="line"><span class="variable">$address-offset-x</span>: <span class="number">0px</span>;</span><br><span class="line"><span class="variable">$address-offset-y</span>: <span class="number">0px</span>;</span><br><span class="line"><span class="variable">$address-width</span>: <span class="number">100px</span>;</span><br><span class="line"><span class="variable">$address-height</span>: <span class="number">100px</span>;</span><br><span class="line"><span class="variable">$address-total-width</span>: <span class="number">200px</span>;</span><br><span class="line"><span class="variable">$address-total-height</span>: <span class="number">200px</span>;</span><br><span class="line"><span class="variable">$address-image</span>: <span class="string">'~sprites.fe6c69f7e7ec270381e68e2dd4a910c1.png'</span>;</span><br><span class="line"><span class="variable">$address</span>: (<span class="number">0px</span>, <span class="number">0px</span>, <span class="number">0px</span>, <span class="number">0px</span>, <span class="number">100px</span>, <span class="number">100px</span>, <span class="number">200px</span>, <span class="number">200px</span>, <span class="string">'~sprites.fe6c69f7e7ec270381e68e2dd4a910c1.png'</span>, <span class="string">'address'</span>, );</span><br><span class="line"><span class="variable">$feedback-name</span>: <span class="string">'feedback'</span>;</span><br><span class="line"><span class="variable">$feedback-x</span>: <span class="number">100px</span>;</span><br><span class="line"><span class="variable">$feedback-y</span>: <span class="number">0px</span>;</span><br><span class="line"><span class="variable">$feedback-offset-x</span>: -<span class="number">100px</span>;</span><br><span class="line"><span class="variable">$feedback-offset-y</span>: <span class="number">0px</span>;</span><br><span class="line"><span class="variable">$feedback-width</span>: <span class="number">100px</span>;</span><br><span class="line"><span class="variable">$feedback-height</span>: <span class="number">100px</span>;</span><br><span class="line"><span class="variable">$feedback-total-width</span>: <span class="number">200px</span>;</span><br><span class="line"><span class="variable">$feedback-total-height</span>: <span class="number">200px</span>;</span><br><span class="line"><span class="variable">$feedback-image</span>: <span class="string">'~sprites.fe6c69f7e7ec270381e68e2dd4a910c1.png'</span>;</span><br><span class="line"><span class="variable">$feedback</span>: (<span class="number">100px</span>, <span class="number">0px</span>, -<span class="number">100px</span>, <span class="number">0px</span>, <span class="number">100px</span>, <span class="number">100px</span>, <span class="number">200px</span>, <span class="number">200px</span>, <span class="string">'~sprites.fe6c69f7e7ec270381e68e2dd4a910c1.png'</span>, <span class="string">'feedback'</span>, );</span><br><span class="line"><span class="variable">$payment-name</span>: <span class="string">'payment'</span>;</span><br><span class="line"><span class="variable">$payment-x</span>: <span class="number">0px</span>;</span><br><span class="line"><span class="variable">$payment-y</span>: <span class="number">100px</span>;</span><br><span class="line"><span class="variable">$payment-offset-x</span>: <span class="number">0px</span>;</span><br><span class="line"><span class="variable">$payment-offset-y</span>: -<span class="number">100px</span>;</span><br><span class="line"><span class="variable">$payment-width</span>: <span class="number">100px</span>;</span><br><span class="line"><span class="variable">$payment-height</span>: <span class="number">100px</span>;</span><br><span class="line"><span class="variable">$payment-total-width</span>: <span class="number">200px</span>;</span><br><span class="line"><span class="variable">$payment-total-height</span>: <span class="number">200px</span>;</span><br><span class="line"><span class="variable">$payment-image</span>: <span class="string">'~sprites.fe6c69f7e7ec270381e68e2dd4a910c1.png'</span>;</span><br><span class="line"><span class="variable">$payment</span>: (<span class="number">0px</span>, <span class="number">100px</span>, <span class="number">0px</span>, -<span class="number">100px</span>, <span class="number">100px</span>, <span class="number">100px</span>, <span class="number">200px</span>, <span class="number">200px</span>, <span class="string">'~sprites.fe6c69f7e7ec270381e68e2dd4a910c1.png'</span>, <span class="string">'payment'</span>, );</span><br><span class="line"><span class="variable">$spritesheet-width</span>: <span class="number">200px</span>;</span><br><span class="line"><span class="variable">$spritesheet-height</span>: <span class="number">200px</span>;</span><br><span class="line"><span class="variable">$spritesheet-image</span>: <span class="string">'~sprites.fe6c69f7e7ec270381e68e2dd4a910c1.png'</span>;</span><br><span class="line"><span class="variable">$spritesheet-sprites</span>: (<span class="variable">$address</span>, <span class="variable">$feedback</span>, <span class="variable">$payment</span>, );</span><br><span class="line"><span class="variable">$spritesheet</span>: (<span class="number">200px</span>, <span class="number">200px</span>, <span class="string">'~sprites.fe6c69f7e7ec270381e68e2dd4a910c1.png'</span>, <span class="variable">$spritesheet-sprites</span>, );</span><br><span class="line"></span><br><span class="line"><span class="comment">// The provided mixins are intended to be used with the array-like variables</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// .icon-home &#123;</span></span><br><span class="line"><span class="comment">//   @include sprite-width($icon-home);</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// .icon-email &#123;</span></span><br><span class="line"><span class="comment">//   @include sprite($icon-email);</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Example usage in HTML:</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// `display: block` sprite:</span></span><br><span class="line"><span class="comment">// &lt;div class="icon-home"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// // CSS</span></span><br><span class="line"><span class="comment">// .icon &#123;</span></span><br><span class="line"><span class="comment">//   display: inline-block;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// // HTML</span></span><br><span class="line"><span class="comment">// &lt;i class="icon icon-home"&gt;&lt;/i&gt;</span></span><br><span class="line">@<span class="keyword">mixin</span> sprite-width(<span class="variable">$sprite</span>) &#123;</span><br><span class="line">    <span class="attribute">width</span>: nth(<span class="variable">$sprite</span>, <span class="number">5</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">mixin</span> sprite-height(<span class="variable">$sprite</span>) &#123;</span><br><span class="line">    <span class="attribute">height</span>: nth(<span class="variable">$sprite</span>, <span class="number">6</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">mixin</span> sprite-position(<span class="variable">$sprite</span>) &#123;</span><br><span class="line">    <span class="variable">$sprite-offset-x</span>: nth(<span class="variable">$sprite</span>, <span class="number">3</span>);</span><br><span class="line">    <span class="variable">$sprite-offset-y</span>: nth(<span class="variable">$sprite</span>, <span class="number">4</span>);</span><br><span class="line">    <span class="attribute">background-position</span>: <span class="variable">$sprite-offset-x</span> <span class="variable">$sprite-offset-y</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">mixin</span> sprite-image(<span class="variable">$sprite</span>) &#123;</span><br><span class="line">    <span class="variable">$sprite-image</span>: nth(<span class="variable">$sprite</span>, <span class="number">9</span>);</span><br><span class="line">    <span class="attribute">background-image</span>: url(#&#123;<span class="variable">$sprite-image</span>&#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">mixin</span> sprite(<span class="variable">$sprite</span>) &#123;</span><br><span class="line">    @<span class="keyword">include</span> sprite-image(<span class="variable">$sprite</span>);</span><br><span class="line">    @<span class="keyword">include</span> sprite-position(<span class="variable">$sprite</span>);</span><br><span class="line">    @<span class="keyword">include</span> sprite-width(<span class="variable">$sprite</span>);</span><br><span class="line">    @<span class="keyword">include</span> sprite-height(<span class="variable">$sprite</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// The `sprites` mixin generates identical output to the CSS template</span></span><br><span class="line"><span class="comment">//   but can be overridden inside of SCSS</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// @include sprites($spritesheet-sprites);</span></span><br><span class="line">@<span class="keyword">mixin</span> sprites(<span class="variable">$sprites</span>) &#123;</span><br><span class="line">    @<span class="keyword">each</span> <span class="variable">$sprite</span> in <span class="variable">$sprites</span> &#123;</span><br><span class="line">        <span class="variable">$sprite-name</span>: nth(<span class="variable">$sprite</span>, <span class="number">10</span>);</span><br><span class="line">        .#&#123;<span class="variable">$sprite-name</span>&#125; &#123;</span><br><span class="line">            @<span class="keyword">include</span> sprite(<span class="variable">$sprite</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其实生成出来的 <code>.scss</code> 文件很简单，就是包含了一些变量和 <code>@mixin</code> ，这样在 <code>@import</code> 这个 <code>.scss</code> 文件之后就可以很方便的进行使用了。</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.example</span> &#123;</span><br><span class="line">	@<span class="keyword">include</span> sprite(<span class="variable">$address</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是也出现了一个问题，就是生成出来的这个变量，在使用的时候如果稍有不注意，可能就会和项目中自定义的一些全局变量重名，导致变量被覆盖。</p>
+<p>这个问题其实可以用很简单办法解决，仔细观察就会发现，变量名是依据文件名定义的，所以在给图片文件命名的时候，定义好一个规则就行了，比如全部以 <code>sprite-</code> 开头，这样就极大程度避免了变量的重名的问题，只是在使用的时候会麻烦一点，就需要改成这样。</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.example</span> &#123;</span><br><span class="line">	@<span class="keyword">include</span> sprite(<span class="variable">$sprite-address</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>有没有更好的方法呢？答案当然是有。在查看 <a href="https://www.npmjs.com/package/webpack-spritesmith" target="_blank" rel="noopener">webpack-spritesmith</a> 介绍的时候看到了这句话：</p>
+<blockquote>
+<p>Webpack plugin that converts set of images into a spritesheet and SASS/LESS/Stylus mixins, using <a href="https://github.com/twolfson/spritesmith" target="_blank" rel="noopener">spritesmith</a> and <a href="https://github.com/twolfson/spritesheet-templates" target="_blank" rel="noopener">spritesheet-templates</a>.</p>
+</blockquote>
+<p>说明 <code>.scss</code> 文件其实是通过模版生成的，那只要对模版修改一下，理论上就可以解决这问题了。</p>
+<p>首先找到原始的模版，在 <a href="https://github.com/twolfson/spritesheet-templates" target="_blank" rel="noopener">spritesheet-templates</a> 这个仓库里搜寻后发现 <code>scss.template.handlebars</code> 这个文件。</p>
+<p>接下来先对模版进行精简，因为生成出来的一系列变量中，只用到了这句：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$address</span>: (<span class="number">0px</span>, <span class="number">0px</span>, <span class="number">0px</span>, <span class="number">0px</span>, <span class="number">100px</span>, <span class="number">100px</span>, <span class="number">200px</span>, <span class="number">200px</span>, <span class="string">'~sprites.fe6c69f7e7ec270381e68e2dd4a910c1.png'</span>, <span class="string">'address'</span>, );</span><br></pre></td></tr></table></figure>
+<p>它将所有的值都存放在了一个数组变量中，在 <code>@mixin</code> 中通过 <code>nth()</code> 这个方法去获取数组中其中所需要的值，所以只需要保留这段模版即可：</p>
+<figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">$</span><span class="template-variable">&#123;&#123;strings.name&#125;&#125;</span><span class="xml">: (</span><span class="template-variable">&#123;&#123;px.x&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.y&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.offset_x&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.offset_y&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.width&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.height&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.total_width&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.total_height&#125;&#125;</span><span class="xml">, '</span><span class="template-variable">&#123;&#123;&#123;escaped_image&#125;&#125;&#125;</span><span class="xml">', '</span><span class="template-variable">&#123;&#123;name&#125;&#125;</span><span class="xml">', );</span></span><br></pre></td></tr></table></figure>
+<p>剩下生成 <code>@mixin</code> 的模版都是需要用到的，那就原封不动的复制过来，这样就初步定制了一个我的模版。</p>
+<figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">&#123;</span></span><br><span class="line"><span class="xml">    // Default options</span></span><br><span class="line"><span class="xml">    'functions': true,</span></span><br><span class="line"><span class="xml">    'variableNameTransforms': ['dasherize']</span></span><br><span class="line"><span class="xml">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="template-tag">&#123;&#123;#<span class="name">block</span> "sprites"&#125;&#125;</span></span><br><span class="line"><span class="template-tag">&#123;&#123;#<span class="name"><span class="builtin-name">each</span></span> sprites&#125;&#125;</span></span><br><span class="line"><span class="xml">$</span><span class="template-variable">&#123;&#123;strings.name&#125;&#125;</span><span class="xml">: (</span><span class="template-variable">&#123;&#123;px.x&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.y&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.offset_x&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.offset_y&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.width&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.height&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.total_width&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.total_height&#125;&#125;</span><span class="xml">, '</span><span class="template-variable">&#123;&#123;&#123;escaped_image&#125;&#125;&#125;</span><span class="xml">', '</span><span class="template-variable">&#123;&#123;name&#125;&#125;</span><span class="xml">');</span></span><br><span class="line"><span class="template-tag">&#123;&#123;/<span class="name"><span class="builtin-name">each</span></span>&#125;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="template-tag">&#123;&#123;#<span class="name">block</span> "sprite-functions"&#125;&#125;</span></span><br><span class="line"><span class="template-tag">&#123;&#123;#<span class="name"><span class="builtin-name">if</span></span> options.functions&#125;&#125;</span></span><br><span class="line"><span class="xml">@mixin sprite-width($sprite) &#123;</span></span><br><span class="line"><span class="xml">    width: nth($sprite, 5);</span></span><br><span class="line"><span class="xml">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="xml">@mixin sprite-height($sprite) &#123;</span></span><br><span class="line"><span class="xml">    height: nth($sprite, 6);</span></span><br><span class="line"><span class="xml">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="xml">@mixin sprite-position($sprite) &#123;</span></span><br><span class="line"><span class="xml">    $sprite-offset-x: nth($sprite, 3);</span></span><br><span class="line"><span class="xml">    $sprite-offset-y: nth($sprite, 4);</span></span><br><span class="line"><span class="xml">    background-position: $sprite-offset-x $sprite-offset-y;</span></span><br><span class="line"><span class="xml">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="xml">@mixin sprite-image($sprite) &#123;</span></span><br><span class="line"><span class="xml">    $sprite-image: nth($sprite, 9);</span></span><br><span class="line"><span class="xml">    background-image: url(#&#123;$sprite-image&#125;);</span></span><br><span class="line"><span class="xml">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="xml">@mixin sprite($sprite) &#123;</span></span><br><span class="line"><span class="xml">    @include sprite-image($sprite);</span></span><br><span class="line"><span class="xml">    @include sprite-position($sprite);</span></span><br><span class="line"><span class="xml">    @include sprite-width($sprite);</span></span><br><span class="line"><span class="xml">    @include sprite-height($sprite);</span></span><br><span class="line"><span class="xml">&#125;</span></span><br><span class="line"><span class="template-tag">&#123;&#123;/<span class="name"><span class="builtin-name">if</span></span>&#125;&#125;</span></span><br><span class="line"><span class="template-tag">&#123;&#123;/<span class="name">block</span>&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+<p>接下来要解决变量名冲突的问题，我在模版里给变量名增加一个前缀，也叫 <code>sprite-</code> 。</p>
+<figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">$sprite-</span><span class="template-variable">&#123;&#123;strings.name&#125;&#125;</span><span class="xml">: (</span><span class="template-variable">&#123;&#123;px.x&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.y&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.offset_x&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.offset_y&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.width&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.height&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.total_width&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.total_height&#125;&#125;</span><span class="xml">, '</span><span class="template-variable">&#123;&#123;&#123;escaped_image&#125;&#125;&#125;</span><span class="xml">', '</span><span class="template-variable">&#123;&#123;name&#125;&#125;</span><span class="xml">');</span></span><br></pre></td></tr></table></figure>
+<p>这样就好了么？还没有。虽然变量名不冲突了，但在使用的时候还是没有变化。</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.example</span> &#123;</span><br><span class="line">    @<span class="keyword">include</span> sprite(<span class="variable">$sprite-address</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>依旧要多写 <code>sprite-</code> 这个前缀，为了偷这个懒，我进行了进一步的定制。</p>
+<p>因为 <code>sprite</code> 这个 <code>@mixin</code> 需要传入指定的变量做为参数，那能不能改成传入一个字符串，动态拼装一个变量呢？比如这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@mixin sprite($name) &#123;</span><br><span class="line">    @include sprite-image($sprite-#&#123;$name&#125;);</span><br><span class="line">    @include sprite-position($sprite-#&#123;$name&#125;);</span><br><span class="line">    @include sprite-width($sprite-#&#123;$name&#125;);</span><br><span class="line">    @include sprite-height($sprite-#&#123;$name&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>很遗憾，并不行，查了资料才知道 SASS 并不支持动态创建引用变量。虽然不支持动态变量，那就换个思路，把所需要的变量放到一个数组变量里总可以吧？这样说可能有点绕，直接看代码吧。</p>
+<figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">$sprites: (</span></span><br><span class="line"><span class="template-tag">&#123;&#123;#<span class="name"><span class="builtin-name">each</span></span> sprites&#125;&#125;</span></span><br><span class="line"><span class="xml">    </span><span class="template-variable">&#123;&#123;strings.name&#125;&#125;</span><span class="xml">: $sprite-</span><span class="template-variable">&#123;&#123;strings.name&#125;&#125;</span><span class="xml">,</span></span><br><span class="line"><span class="template-tag">&#123;&#123;/<span class="name"><span class="builtin-name">each</span></span>&#125;&#125;</span></span><br><span class="line"><span class="xml">);</span></span><br><span class="line"></span><br><span class="line"><span class="xml">@mixin sprite($name) &#123;</span></span><br><span class="line"><span class="xml">    @include sprite-image(map-get($sprite, #&#123;$name&#125;));</span></span><br><span class="line"><span class="xml">    @include sprite-position(map-get($sprite, #&#123;$name&#125;));</span></span><br><span class="line"><span class="xml">    @include sprite-width(map-get($sprite, #&#123;$name&#125;));</span></span><br><span class="line"><span class="xml">    @include sprite-height(map-get($sprite, #&#123;$name&#125;));</span></span><br><span class="line"><span class="xml">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>我单独定义了一个 <code>$sprites</code> 变量，里面是一个键值对的数组，键是文件名，值是通过拼装出来变量。而在 <code>@mixin</code> 中则使用了 <code>map-get()</code> 这个方法去获取到对应的变量，再接下来就是和原先一样了。</p>
+<p>这样处理之后，直接就可以这样使用了，甚至比原有的方式更简单，都不需要写 <code>$</code> 符号了。</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.example</span> &#123;</span><br><span class="line">    @<span class="keyword">include</span> sprite(address);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后就是如何调用我的自定义模版了，这在 <a href="https://www.npmjs.com/package/webpack-spritesmith" target="_blank" rel="noopener">webpack-spritesmith</a> 的文档中详细的介绍，我就不具体细说了，贴一份大致的代码吧。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> SpritesmithPlugin(&#123;</span><br><span class="line">    src: &#123;</span><br><span class="line">        cwd: path.resolve(__dirname, <span class="string">'src/assets/sprites'</span>),</span><br><span class="line">        glob: <span class="string">'*.png'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    target: &#123;</span><br><span class="line">        image: path.resolve(__dirname, <span class="string">'src/assets/images/sprites.[hash].png'</span>),</span><br><span class="line">        css: [</span><br><span class="line">            [path.resolve(__dirname, <span class="string">'src/assets/style/sprites.scss'</span>), &#123;</span><br><span class="line">                format: <span class="string">'handlebars_based_template'</span></span><br><span class="line">            &#125;]</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    customTemplates: &#123;</span><br><span class="line">        <span class="string">'handlebars_based_template'</span>: path.resolve(__dirname, <span class="string">'my.scss.template.handlebars'</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 样式文件中调用雪碧图地址写法</span></span><br><span class="line">    apiOptions: &#123;</span><br><span class="line">        cssImageRef: <span class="string">'~sprites.[hash].png'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="痛点二：文件名冲突"><a class="header-anchor" href="#痛点二：文件名冲突"></a>痛点二：文件名冲突</h2>
+<blockquote>
+<p>在说这个问题之前，先说明一下， <a href="https://www.npmjs.com/package/webpack-spritesmith" target="_blank" rel="noopener">webpack-spritesmith</a> 是可以生成多张精灵图的，虽然办法有点蠢，就是多增加一个 <code>new SpritesmithPlugin()</code> 实例，把里面的路径都替换即可。</p>
+</blockquote>
+<p>如果项目比较大，并且有多个模块，这个时候可能就会需要根据不同模块生成对应的精灵图，也就是小图会归类到不同的文件夹，但也就出现一个情况，不同文件夹里的图片文件名可能会重名，比如这种情况：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sprites</span><br><span class="line">  ├─ order</span><br><span class="line">  │  ├─ success.png</span><br><span class="line">  │  └─ close.png</span><br><span class="line">  └─ payment</span><br><span class="line">     ├─ success.png</span><br><span class="line">     └─ fail.png</span><br></pre></td></tr></table></figure>
+<p>sprites 目录下有两个文件夹，分别是 order 和 payment ，并且里面都有一个 <code>success.png</code> 文件，假设这两个目录生成出的两个 <code>.scss</code> 文件需要在同一个页面上调用，就又出现上面变量名冲突的问题了。</p>
+<blockquote>
+<p>举例的这种情况可能不常见，更多情况可能是有一个存放全局精灵图的目录，里面的文件名可能会和某个模块文件夹下的文件名重名，导致在使用的时候出现变量名冲突。</p>
+</blockquote>
+<p>这个问题也可以用简单的办法解决，不就是改个文件名嘛，但如果项目是多人协作开发，这个问题就会变成一个潜在隐患，不知道什么时候就和别人定义的名字重名了。所以我还是决定用技术手段来解决。</p>
+<h3 id="方案一"><a class="header-anchor" href="#方案一"></a>方案一</h3>
+<p>我最先的思路是，能不能将文件夹的名字做为一个新增变量注入到模版中，这样在模板中就可以通过模版变量 <code>{{...}}</code> 的方式去使用了，但翻遍了 <a href="https://www.npmjs.com/package/webpack-spritesmith" target="_blank" rel="noopener">webpack-spritesmith</a> 文档也没找到相关的 API ，不过倒是在模版选项里看到了 <code>spritesheetName</code> 的设置项，它对应的模版变量是 <code>spritesheet_info.name</code> ，这是一个没被使用到模版变量，正好可以用来解决我的问题。</p>
+<p>使用也很简单，只需要在配置里增加这一项设置，并设置为文件夹的名字即可：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> SpritesmithPlugin(&#123;</span><br><span class="line">    ...</span><br><span class="line">    target: &#123;</span><br><span class="line">        image: path.resolve(__dirname, <span class="string">'src/assets/images/order.[hash].png'</span>),</span><br><span class="line">        css: [</span><br><span class="line">            [path.resolve(__dirname, <span class="string">'src/assets/style/order.scss'</span>), &#123;</span><br><span class="line">                spritesheetName: <span class="string">'order'</span>,</span><br><span class="line">                format: <span class="string">'handlebars_based_template'</span></span><br><span class="line">            &#125;]</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    ...</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>接下来在模版里通过 <code>{{spritesheet_info.strings.name}}</code> 就可以得到刚才设置的值，只需要把对应位置的变量和 <code>@mixin</code> 都加上这个前缀就行了，需要注意的是，在 <code>{{#each}}</code> 里需要通过增加 <code>../</code> 的方式来访问父级属性，下面为部分模版代码。</p>
+<figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">$</span><span class="template-variable">&#123;&#123;spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprites: (</span></span><br><span class="line"><span class="template-tag">&#123;&#123;#<span class="name"><span class="builtin-name">each</span></span> sprites&#125;&#125;</span></span><br><span class="line"><span class="xml">    </span><span class="template-variable">&#123;&#123;strings.name&#125;&#125;</span><span class="xml">: $</span><span class="template-variable">&#123;&#123;../spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprite-</span><span class="template-variable">&#123;&#123;strings.name&#125;&#125;</span><span class="xml">,</span></span><br><span class="line"><span class="template-tag">&#123;&#123;/<span class="name"><span class="builtin-name">each</span></span>&#125;&#125;</span></span><br><span class="line"><span class="xml">);</span></span><br><span class="line"></span><br><span class="line"><span class="xml">@mixin </span><span class="template-variable">&#123;&#123;spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprite($name) &#123;</span></span><br><span class="line"><span class="xml">    @include </span><span class="template-variable">&#123;&#123;spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprite-image(map-get($</span><span class="template-variable">&#123;&#123;spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprites, #&#123;$name&#125;));</span></span><br><span class="line"><span class="xml">    @include </span><span class="template-variable">&#123;&#123;spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprite-position(map-get($</span><span class="template-variable">&#123;&#123;spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprites, #&#123;$name&#125;));</span></span><br><span class="line"><span class="xml">    @include </span><span class="template-variable">&#123;&#123;spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprite-width(map-get($</span><span class="template-variable">&#123;&#123;spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprites, #&#123;$name&#125;));</span></span><br><span class="line"><span class="xml">    @include </span><span class="template-variable">&#123;&#123;spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprite-height(map-get($</span><span class="template-variable">&#123;&#123;spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprites, #&#123;$name&#125;));</span></span><br><span class="line"><span class="xml">    @include </span><span class="template-variable">&#123;&#123;spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprite-size(map-get($</span><span class="template-variable">&#123;&#123;spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprites, #&#123;$name&#125;));</span></span><br><span class="line"><span class="xml">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>这样修改后，生成出来的 <code>.scss</code> 文件中的变量和 <code>@mixin</code> 都加上了文件夹名做为前缀，所以在使用上也稍微有变化。如果有用过 <a href="http://compass-style.org/" target="_blank" rel="noopener">Compass</a> 制作精灵图的，一定不陌生。</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.example</span> &#123;</span><br><span class="line">    @<span class="keyword">include</span> order-sprite(success);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="方案二"><a class="header-anchor" href="#方案二"></a>方案二</h3>
+<p>这个思路是在看 <a href="https://www.npmjs.com/package/webpack-spritesmith" target="_blank" rel="noopener">webpack-spritesmith</a> 文档时想到的，然后结合了上网的一些参考资料最终实现的。首先先看一下文档里对 <code>generateSpriteName()</code> 这个方法的介绍吧。</p>
+<blockquote>
+<p>generateSpriteName - function. Takes full path to source image file and expected to return name by which it will be referenced in API. Return value will be used as <a href="http://sprite.name" target="_blank" rel="noopener">sprite.name</a> for spritesheet-templates. Default behaviour is to use filename (without dirname and extension)</p>
+</blockquote>
+<p>大概意思是说，通过 <code>generateSpriteName()</code> 方法可以获取到源文件的完整路径，并且可以手动返回一个将在 API 中引用的名称，默认返回的是文件名。</p>
+<p>既然能得到完整路径，那在返回的时候，把文件夹的名称和文件名一起返回，这样在模版中不就解决变量冲突的问题了么，毕竟文件夹名加上文件名，这样组出来的名称能重名的就很少了。</p>
+<p>直接看配置代码吧，这些需要用到 Node 里的 <code>path</code> 模块。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> SpritesmithPlugin(&#123;</span><br><span class="line">    ...</span><br><span class="line">    apiOptions: &#123;</span><br><span class="line">        generateSpriteName: <span class="function"><span class="keyword">function</span>(<span class="params">fullPath</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">let</span> parsed = path.parse(fullPath)</span><br><span class="line">            <span class="keyword">let</span> dir = parsed.dir.split(path.sep)</span><br><span class="line">            <span class="keyword">let</span> moduleName = dir[dir.length - <span class="number">1</span>]</span><br><span class="line">            <span class="keyword">return</span> moduleName + <span class="string">'_'</span> + parsed.name</span><br><span class="line">        &#125;,</span><br><span class="line">        cssImageRef: <span class="string">'~order.[hash].png'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    ...</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>打开生成出来的 <code>.scss</code> 文件看看。</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$sprite-order-success</span>: (<span class="number">0px</span>, <span class="number">0px</span>, <span class="number">0px</span>, <span class="number">0px</span>, <span class="number">100px</span>, <span class="number">100px</span>, <span class="number">200px</span>, <span class="number">200px</span>, <span class="string">'~order.fe6c69f7e7ec270381e68e2dd4a910c1.png'</span>, <span class="string">'order_success'</span>);</span><br></pre></td></tr></table></figure>
+<p>那么如何使用呢？</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.example</span> &#123;</span><br><span class="line">	@<span class="keyword">include</span> sprite(order-success);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>是不是觉得和方案一没太大差别，其实在使用上确实没太大差别。两个方案生成的变量名都是唯一的，只不过前者是从 <code>@mixin</code> 命名上做了区分，不同的文件夹会生成多个不同的 <code>@mixin</code> ；而后者会生成多个同名且代码一模一样的 <code>@mixin</code> ，在使用的时候，后面定义的同名 <code>@mixin</code> 会进行重写覆盖，但因为代码是一样的，所以使用上并无影响。</p>
+<p>但从代码优雅上来说，还是<strong>方案一</strong>更好，各自的变量和 <code>@mixin</code> 都相对独立，不受干扰。</p>
+<h2 id="痛点三：响应式布局"><a class="header-anchor" href="#痛点三：响应式布局"></a>痛点三：响应式布局</h2>
+<p>因为生成的 <code>.scss</code> 文件里使用的都是 px 单位，而在响应式布局下会使用 rem 或者 vw/vh 做为长度大小单位，这时候就出现一个问题，如何在响应式布局下更方便的使用生成出来的 <code>.scss</code> 文件呢？</p>
+<p>这里我以 vw/vh 举例，首先先给项目安装 <a href="https://github.com/evrone/postcss-px-to-viewport" target="_blank" rel="noopener">postcss-px-to-viewport</a> 这个 npm 包，它可以很方便的帮我把 px 转成 vw/vh 。</p>
+<p>这个包如何使用这里不做更多介绍，重点是在配置好后， <code>.scss</code> 文件定义的一些 px 单位也能正常转换成 vw 单位了。但是因为 vw 是一个相对长度单位，在不同终端下它计算出来的实际长度并不是一致的，而生成出来的精灵图文件的尺寸是固定的，导致 <code>background-position</code> 定位不能准确的定位到某个图片上。</p>
+<p>要解决这个问题，就需要使用 <code>background-size</code> 这个属性了，但不是使用 cover/contain 这两个预设的值，因为 cover 是拉伸图片使之充满元素，虽然元素被铺满了，但是图片有可能显示不全；而 contain 刚好相反，它是拉伸图片使图片完全显示在元素内，虽然图片显示全了，但是元素可能不会被铺满。所以这里就需要手动设置背景图的宽高来解决。思路确定了，那就看看模版里有没有提供合并后图片宽高的参数。</p>
+<figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">$sprite-</span><span class="template-variable">&#123;&#123;strings.name&#125;&#125;</span><span class="xml">: (</span><span class="template-variable">&#123;&#123;px.x&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.y&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.offset_x&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.offset_y&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.width&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.height&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.total_width&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.total_height&#125;&#125;</span><span class="xml">, '</span><span class="template-variable">&#123;&#123;&#123;escaped_image&#125;&#125;&#125;</span><span class="xml">', '</span><span class="template-variable">&#123;&#123;name&#125;&#125;</span><span class="xml">');</span></span><br></pre></td></tr></table></figure>
+<p>从数组变量中可以看到 <code>{{px.total_width}}</code> 和 <code>{{px.total_height}}</code> 这两个就是精灵图图片的宽高了，有了这两个值，就可以在 <code>@mixin</code> 中增加一句 <code>background-size</code> 的样式代码了，为了代码风格统一，我增加一个 <code>@mixin sprite-size</code> 。</p>
+<figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">@mixin sprite-size($sprite) &#123;</span></span><br><span class="line"><span class="xml">    background-size: nth($sprite, 7) nth($sprite, 8);</span></span><br><span class="line"><span class="xml">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="xml">@mixin sprite($name) &#123;</span></span><br><span class="line"><span class="xml">    @include sprite-image(map-get($sprites, #&#123;$name&#125;));</span></span><br><span class="line"><span class="xml">    @include sprite-position(map-get($sprites, #&#123;$name&#125;));</span></span><br><span class="line"><span class="xml">    @include sprite-size(map-get($sprites, #&#123;$name&#125;));</span></span><br><span class="line"><span class="xml">    @include sprite-width(map-get($sprites, #&#123;$name&#125;));</span></span><br><span class="line"><span class="xml">    @include sprite-height(map-get($sprites, #&#123;$name&#125;));</span></span><br><span class="line"><span class="xml">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>这样 <code>background-size</code> 设置的宽高就和精灵图的实际宽高一致了，再通过 px 转 vw 后，也不会出现任何问题。</p>
+<p>另外需要注意的是，因为 vw 计算出来的实际长度大概率会出现小数，如果精灵图贴合太紧凑，就会出现图片显示不全或超出的情况，解决这个问题只需要在配置中增加 <code>padding</code> 的设置即可。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> SpritesmithPlugin(&#123;</span><br><span class="line">    ...</span><br><span class="line">    spritesmithOptions: &#123;</span><br><span class="line">        padding: <span class="number">10</span></span><br><span class="line">    &#125;,</span><br><span class="line">    ...</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="补充痛点：嫌手动引入麻烦"><a class="header-anchor" href="#补充痛点：嫌手动引入麻烦"></a>补充痛点：嫌手动引入麻烦</h2>
+<p>最后这个痛点是因第二个痛点引发而来的，因为项目模块多，生成的 <code>.scss</code> 文件也很多，在页面上使用的时候，经常会忘记要先引入对应的 <code>.scss</code> 文件后，再去使用 <code>@mixin</code> 。</p>
+<p>因为生成的都是变量和 <code>@mixin</code> ，所以我就在想能不能全局引用，这样就不用在每个页面上使用的时候再去引用了。但是手动一个个在 <code>main.js</code> 里引用还是不够智能，于是网上搜寻了一番，发现了 <a href="https://github.com/shakacode/sass-resources-loader" target="_blank" rel="noopener">sass-resources-loader</a> 这个 npm 包。</p>
+<blockquote>
+<p>This loader will <code>@import</code> your SASS resources into every <code>required</code> SASS module. So you can use your shared variables &amp; mixins across all SASS styles without manually importing them in each file. Made to work with CSS Modules!</p>
+</blockquote>
+<p>官方文档里第一句话就说的很清楚了。因为没啥技术含量，下面接直接贴配置代码了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">chainWebpack: <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> oneOfsMap = config.module.rule(<span class="string">'scss'</span>).oneOfs.store</span><br><span class="line">    oneOfsMap.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">        item.use(<span class="string">'sass-resources-loader'</span>)</span><br><span class="line">            .loader(<span class="string">'sass-resources-loader'</span>)</span><br><span class="line">            .options(&#123;</span><br><span class="line">                resources: [</span><br><span class="line">                    <span class="string">'./src/assets/styles/global/*.scss'</span>,</span><br><span class="line">                    <span class="string">'./src/assets/sprites/*.scss'</span></span><br><span class="line">                ]</span><br><span class="line">            &#125;)</span><br><span class="line">            .end()</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里我还指定一个 global 目录下的所有 <code>.scss</code> 文件，这是我存放整站自定义的一些全局变量、<code>@mixin</code> 等一些资源。</p>
+<blockquote>
+<p>需要注意的是， <a href="https://github.com/shakacode/sass-resources-loader" target="_blank" rel="noopener">sass-resources-loader</a> 只会把变量、<code>@mixin</code> 、<code>@function</code> 这类资源注入到全局，如果文件里包含实际的样式代码，它并不会生效。</p>
+</blockquote>
+<h2 id="总结"><a class="header-anchor" href="#总结"></a>总结</h2>
+<p>也没啥可总结的，该说的在上面都说了，非要总结的话，那就是多看官方文档，很多问题其实插件/包的作者都有考虑到，合理使用就能达到想要的效果。</p>
+<p>最后分享下完整的配置和模版，因为上面都是代码片段，我知道很多人都偷懒，想直接用现成的。</p>
+<p><strong>vue.config.js</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="keyword">const</span> SpritesmithPlugin = <span class="built_in">require</span>(<span class="string">'webpack-spritesmith'</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    publicPath: <span class="string">''</span>,</span><br><span class="line">    configureWebpack: &#123;</span><br><span class="line">        resolve: &#123;</span><br><span class="line">            modules: [<span class="string">'node_modules'</span>, <span class="string">'assets/sprites'</span>]</span><br><span class="line">        &#125;,</span><br><span class="line">        plugins: [</span><br><span class="line">            <span class="keyword">new</span> SpritesmithPlugin(&#123;</span><br><span class="line">                src: &#123;</span><br><span class="line">                    cwd: path.resolve(__dirname, <span class="string">'src/assets/sprites/example'</span>),</span><br><span class="line">                    glob: <span class="string">'*.png'</span></span><br><span class="line">                &#125;,</span><br><span class="line">                target: &#123;</span><br><span class="line">                    image: path.resolve(__dirname, <span class="string">'src/assets/sprites/example.[hash].png'</span>),</span><br><span class="line">                    css: [</span><br><span class="line">                        [path.resolve(__dirname, <span class="string">'src/assets/sprites/example.scss'</span>), &#123;</span><br><span class="line">                            format: <span class="string">'handlebars_based_template'</span>,</span><br><span class="line">                            spritesheetName: <span class="string">'example'</span></span><br><span class="line">                        &#125;]</span><br><span class="line">                    ]</span><br><span class="line">                &#125;,</span><br><span class="line">                customTemplates: &#123;</span><br><span class="line">                    <span class="string">'handlebars_based_template'</span>: path.resolve(__dirname, <span class="string">'my.scss.template.handlebars'</span>)</span><br><span class="line">                &#125;,</span><br><span class="line">                apiOptions: &#123;</span><br><span class="line">                    cssImageRef: <span class="string">'~example.[hash].png'</span></span><br><span class="line">                &#125;,</span><br><span class="line">                spritesmithOptions: &#123;</span><br><span class="line">                    algorithm: <span class="string">'binary-tree'</span>,</span><br><span class="line">                    padding: <span class="number">10</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">        ]</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>my.scss.template.handlebars</strong></p>
+<figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">&#123;</span></span><br><span class="line"><span class="xml">    // Default options</span></span><br><span class="line"><span class="xml">    'functions': true,</span></span><br><span class="line"><span class="xml">    'variableNameTransforms': ['dasherize']</span></span><br><span class="line"><span class="xml">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="template-tag">&#123;&#123;#<span class="name">block</span> "sprites"&#125;&#125;</span></span><br><span class="line"><span class="template-tag">&#123;&#123;#<span class="name"><span class="builtin-name">each</span></span> sprites&#125;&#125;</span></span><br><span class="line"><span class="xml">$</span><span class="template-variable">&#123;&#123;../spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprite-</span><span class="template-variable">&#123;&#123;strings.name&#125;&#125;</span><span class="xml">: (</span><span class="template-variable">&#123;&#123;px.x&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.y&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.offset_x&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.offset_y&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.width&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.height&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.total_width&#125;&#125;</span><span class="xml">, </span><span class="template-variable">&#123;&#123;px.total_height&#125;&#125;</span><span class="xml">, '</span><span class="template-variable">&#123;&#123;&#123;escaped_image&#125;&#125;&#125;</span><span class="xml">', '</span><span class="template-variable">&#123;&#123;name&#125;&#125;</span><span class="xml">');</span></span><br><span class="line"><span class="template-tag">&#123;&#123;/<span class="name"><span class="builtin-name">each</span></span>&#125;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="xml">$</span><span class="template-variable">&#123;&#123;spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprites: (</span></span><br><span class="line"><span class="template-tag">&#123;&#123;#<span class="name"><span class="builtin-name">each</span></span> sprites&#125;&#125;</span></span><br><span class="line"><span class="template-variable">&#123;&#123;strings.name&#125;&#125;</span><span class="xml">: $</span><span class="template-variable">&#123;&#123;../spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprite-</span><span class="template-variable">&#123;&#123;strings.name&#125;&#125;</span><span class="xml">,</span></span><br><span class="line"><span class="template-tag">&#123;&#123;/<span class="name"><span class="builtin-name">each</span></span>&#125;&#125;</span></span><br><span class="line"><span class="xml">);</span></span><br><span class="line"><span class="template-tag">&#123;&#123;/<span class="name">block</span>&#125;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="template-tag">&#123;&#123;#<span class="name">block</span> "sprite-functions"&#125;&#125;</span></span><br><span class="line"><span class="template-tag">&#123;&#123;#<span class="name"><span class="builtin-name">if</span></span> options.functions&#125;&#125;</span></span><br><span class="line"><span class="xml">@mixin </span><span class="template-variable">&#123;&#123;spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprite-width($sprite) &#123;</span></span><br><span class="line"><span class="xml">    width: nth($sprite, 5);</span></span><br><span class="line"><span class="xml">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="xml">@mixin </span><span class="template-variable">&#123;&#123;spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprite-height($sprite) &#123;</span></span><br><span class="line"><span class="xml">    height: nth($sprite, 6);</span></span><br><span class="line"><span class="xml">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="xml">@mixin </span><span class="template-variable">&#123;&#123;spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprite-position($sprite) &#123;</span></span><br><span class="line"><span class="xml">    $sprite-offset-x: nth($sprite, 3);</span></span><br><span class="line"><span class="xml">    $sprite-offset-y: nth($sprite, 4);</span></span><br><span class="line"><span class="xml">    background-position: $sprite-offset-x $sprite-offset-y;</span></span><br><span class="line"><span class="xml">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="xml">@mixin </span><span class="template-variable">&#123;&#123;spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprite-size($sprite) &#123;</span></span><br><span class="line"><span class="xml">    background-size: nth($sprite, 7) nth($sprite, 8);</span></span><br><span class="line"><span class="xml">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="xml">@mixin </span><span class="template-variable">&#123;&#123;spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprite-image($sprite) &#123;</span></span><br><span class="line"><span class="xml">    $sprite-image: nth($sprite, 9);</span></span><br><span class="line"><span class="xml">    background-image: url(#&#123;$sprite-image&#125;);</span></span><br><span class="line"><span class="xml">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="xml">@mixin </span><span class="template-variable">&#123;&#123;spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprite($name) &#123;</span></span><br><span class="line"><span class="xml">    @include </span><span class="template-variable">&#123;&#123;spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprite-image(map-get($</span><span class="template-variable">&#123;&#123;spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprites, #&#123;$name&#125;));</span></span><br><span class="line"><span class="xml">    @include </span><span class="template-variable">&#123;&#123;spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprite-position(map-get($</span><span class="template-variable">&#123;&#123;spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprites, #&#123;$name&#125;));</span></span><br><span class="line"><span class="xml">    @include </span><span class="template-variable">&#123;&#123;spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprite-size(map-get($</span><span class="template-variable">&#123;&#123;spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprites, #&#123;$name&#125;));</span></span><br><span class="line"><span class="xml">    @include </span><span class="template-variable">&#123;&#123;spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprite-width(map-get($</span><span class="template-variable">&#123;&#123;spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprites, #&#123;$name&#125;));</span></span><br><span class="line"><span class="xml">    @include </span><span class="template-variable">&#123;&#123;spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprite-height(map-get($</span><span class="template-variable">&#123;&#123;spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprites, #&#123;$name&#125;));</span></span><br><span class="line"><span class="xml">&#125;</span></span><br><span class="line"><span class="template-tag">&#123;&#123;/<span class="name"><span class="builtin-name">if</span></span>&#125;&#125;</span></span><br><span class="line"><span class="template-tag">&#123;&#123;/<span class="name">block</span>&#125;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="template-tag">&#123;&#123;#<span class="name">block</span> "spritesheet-functions"&#125;&#125;</span></span><br><span class="line"><span class="template-tag">&#123;&#123;#<span class="name"><span class="builtin-name">if</span></span> options.functions&#125;&#125;</span></span><br><span class="line"><span class="xml">@mixin </span><span class="template-variable">&#123;&#123;spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprites($sprites) &#123;</span></span><br><span class="line"><span class="xml">    @each $sprite in $sprites &#123;</span></span><br><span class="line"><span class="xml">        $sprite-name: nth($sprite, 10);</span></span><br><span class="line"><span class="xml">        .sprite-#&#123;$sprite-name&#125; &#123;</span></span><br><span class="line"><span class="xml">            @include </span><span class="template-variable">&#123;&#123;spritesheet_info.strings.name&#125;&#125;</span><span class="xml">-sprite($sprite);</span></span><br><span class="line"><span class="xml">        &#125;</span></span><br><span class="line"><span class="xml">    &#125;</span></span><br><span class="line"><span class="xml">&#125;</span></span><br><span class="line"><span class="template-tag">&#123;&#123;/<span class="name"><span class="builtin-name">if</span></span>&#125;&#125;</span></span><br><span class="line"><span class="template-tag">&#123;&#123;/<span class="name">block</span>&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+<p>最后的最后，本篇文章涉及到的内容也已经同步更新到 vue-autumation 中，这是一个基于 Vue CLI 3 制作的 Vue 脚手架，能方便快速进行业务开发。</p>
+<script src="https://gitee.com/eoner/vue-automation/widget_preview"></script>
+<h2 id="参考"><a class="header-anchor" href="#参考"></a>参考</h2>
+<ul>
+<li><a href="https://blog.csdn.net/u012443286/article/details/90339762" target="_blank" rel="noopener">Vue-cli3.0下的雪碧图插件webpack-spritesmith配置方法</a> 部分参数的中文说明</li>
+<li><a href="http://handlebarsjs.com/" target="_blank" rel="noopener">handlebarsjs</a> 在修改模版的时候特地去学习了 handlebars 的语法</li>
+<li><a href="https://segmentfault.com/q/1010000010829858/a-1020000010831866" target="_blank" rel="noopener">Sass用变量作为变量名的语法</a> 在这个问题里针对sass不支持动态变量做了明确的解答，并且也提供的解决思路</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/webpack-spritesmith/" rel="tag"># webpack-spritesmith</a>
+          
+            <a href="/tags/sprite/" rel="tag"># sprite</a>
+          
+            <a href="/tags/vue-cli/" rel="tag"># vue-cli</a>
+          
+            <a href="/tags/webpack/" rel="tag"># webpack</a>
+          
+            <a href="/tags/精灵图/" rel="tag"># 精灵图</a>
+          
+            <a href="/tags/雪碧图/" rel="tag"># 雪碧图</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+              <div id="needsharebutton-postbottom">
+                <span class="btn">
+                  <i class="fa fa-share-alt" aria-hidden="true"></i>
+                </span>
+              </div>
+            
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/1f86b6e7/" rel="next" title="Vue 全局组件自动注册">
+                <i class="fa fa-chevron-left"></i> Vue 全局组件自动注册
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/cbb1760/" rel="prev" title="将 Git 项目提交到多个不同的仓库">
+                将 Git 项目提交到多个不同的仓库 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="gitalk-container">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/avatar.jpg" alt="代码小睿">
+            
+              <p class="site-author-name" itemprop="name">代码小睿</p>
+              <div class="site-description motion-element" itemprop="description">代码小睿的个人博客</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">97</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/hooray" title="GitHub &rarr; https://github.com/hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://weibo.com/hooray0905" title="Weibo &rarr; http://weibo.com/hooray0905" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ &rarr; http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                个人作品
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://hoorayos.com" title="http://hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://github.com/hooray/clicaptcha" title="https://github.com/hooray/clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://github.com/hooray/vue-clicaptcha" title="https://github.com/hooray/vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://gitee.com/eoner/gulp-automation" title="https://gitee.com/eoner/gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://gitee.com/eoner/vue-automation" title="https://gitee.com/eoner/vue-automation" rel="noopener" target="_blank">vue-automation - Vue自动化工作流</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#痛点一：变量名冲突"><span class="nav-number">1.</span> <span class="nav-text">痛点一：变量名冲突</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#痛点二：文件名冲突"><span class="nav-number">2.</span> <span class="nav-text">痛点二：文件名冲突</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方案一"><span class="nav-number">2.1.</span> <span class="nav-text">方案一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案二"><span class="nav-number">2.2.</span> <span class="nav-text">方案二</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#痛点三：响应式布局"><span class="nav-number">3.</span> <span class="nav-text">痛点三：响应式布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充痛点：嫌手动引入麻烦"><span class="nav-number">4.</span> <span class="nav-text">补充痛点：嫌手动引入麻烦</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">代码小睿</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <script id="ribbon" size alpha zindex src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+
+
+
+  
+
+
+
+  
+  <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.ui.min.js"></script>
+
+  
+  <script src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-reading-progress@1/reading_progress.min.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+
+
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '165f4a18451139d1962f',
+    clientSecret: 'd950ed9736a4364215fa554442d01f8e89dd92a8',
+    repo: 'hooray.github.io',
+    owner: 'hooray',
+    admin: ['hooray'],
+    id: location.pathname,
+    
+      language: window.navigator.language || window.navigator.userLanguage,
+    
+    distractionFreeMode: ''
+  });
+  gitalk.render('gitalk-container');
+</script>
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === '') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+              })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1 }))
+                .done(function() {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function() {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'ODqTjpX8O5RTTQ9Ne0PQLrl6-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': 'ODqTjpX8O5RTTQ9Ne0PQLrl6-gzGzoHsz',
+                'X-LC-Key': 'yEmutbTLiTig6Kz3VLiocpgs',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+            if (localhost.test(document.URL)) return;
+            addCount(Counter);
+          
+        });
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+    
+  
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+    
+      pbOptions = {};
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
