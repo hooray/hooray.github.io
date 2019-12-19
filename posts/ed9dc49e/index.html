@@ -600,7 +600,7 @@
 <p>接着在根目录下创建 <code>_coverpage.md</code> 文件，内容就是标准的 markdown 语法，可以参考一下官方的封面：</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">![<span class="string">logo</span>](<span class="link">_media/icon.svg</span>)</span><br><span class="line"></span><br><span class="line"><span class="section"># docsify</span></span><br><span class="line"></span><br><span class="line"><span class="quote">&gt; A magical documentation site generator.</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">* </span>Simple and lightweight (~12kb gzipped)</span><br><span class="line"><span class="bullet">* </span>Multiple themes</span><br><span class="line"><span class="bullet">* </span>Not build static html files</span><br><span class="line"></span><br><span class="line">[<span class="string">GitHub</span>](<span class="link">https://github.com/docsifyjs/docsify/</span>)</span><br><span class="line">[<span class="string">Get Started</span>](<span class="link">#quick-start</span>)</span><br></pre></td></tr></table></figure>
 <p>封面的背景是随机生成的渐变色，我们也可以指定一个背景色或者背景图，只要放在文档末尾就可以，同时设定只生效第一个。</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 自定义背景色 --&gt;</span><br><span class="line">![<span class="string">color</span>](<span class="link">#f0f0f0</span>)</span><br><span class="line"></span><br><span class="line">&lt;!-- 自定义背景图 --&gt;</span><br><span class="line">![](background_image.png)</span><br></pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="comment">&lt;!-- 自定义背景色 --&gt;</span></span></span><br><span class="line">![<span class="string">color</span>](<span class="link">#f0f0f0</span>)</span><br><span class="line"></span><br><span class="line"><span class="xml"><span class="comment">&lt;!-- 自定义背景图 --&gt;</span></span></span><br><span class="line">![](background_image.png)</span><br></pre></td></tr></table></figure>
 <p>如果我们的文档是多语言的，那可不可以设置多个封面？当然也是可以的。首先确定文档目录结构如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docsify</span><br><span class="line">├ README.md</span><br><span class="line">├ guide.md</span><br><span class="line">├ _coverpage.md</span><br><span class="line">├ zh-cn</span><br><span class="line">│　├ README.md</span><br><span class="line">│　├ guide.md</span><br><span class="line">│　└ _coverpage.md</span><br></pre></td></tr></table></figure>
 <p>然后修改 <code>coverpage</code> 选项：</p>
@@ -782,7 +782,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-count">41</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1024,7 +1024,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">97</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">100</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
