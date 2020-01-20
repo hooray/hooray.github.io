@@ -4,9 +4,11 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -25,7 +27,7 @@
     scheme: 'Muse',
     version: '7.7.0',
     exturl: false,
-    sidebar: {"position":"right","display":"always"},
+    sidebar: {"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -41,24 +43,24 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":true},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
   <meta name="description" content="公司内部不同类型的项目越来越多，有基于 jQuery 的，也有 Vue 的，还有小程序的，虽然已经有各种类型的项目模板，但每次有新项目，都要去手动拉取对应的项目模板，然后修改里面的配置，还得删掉一些演示代码，实在有些烦人，于是开发一个内部项目脚手架的想法孕育而生。 因为之前有了解过 vue-cli 的实现思路，它将项目模板和脚手架分离，模板存放在 git 上，然后在与用户交互的过程中下载不同的模板">
-<meta name="keywords" content="脚手架">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一个项目脚手架开发过程全记录">
 <meta property="og:url" content="https://hooray.github.io/posts/5dfce78f/index.html">
 <meta property="og:site_name" content="９９３５">
 <meta property="og:description" content="公司内部不同类型的项目越来越多，有基于 jQuery 的，也有 Vue 的，还有小程序的，虽然已经有各种类型的项目模板，但每次有新项目，都要去手动拉取对应的项目模板，然后修改里面的配置，还得删掉一些演示代码，实在有些烦人，于是开发一个内部项目脚手架的想法孕育而生。 因为之前有了解过 vue-cli 的实现思路，它将项目模板和脚手架分离，模板存放在 git 上，然后在与用户交互的过程中下载不同的模板">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-08T13:55:25.870Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-09-30T03:22:31.000Z">
+<meta property="article:modified_time" content="2019-10-08T13:55:25.870Z">
+<meta property="article:author" content="代码小睿">
+<meta property="article:tag" content="脚手架">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一个项目脚手架开发过程全记录">
-<meta name="twitter:description" content="公司内部不同类型的项目越来越多，有基于 jQuery 的，也有 Vue 的，还有小程序的，虽然已经有各种类型的项目模板，但每次有新项目，都要去手动拉取对应的项目模板，然后修改里面的配置，还得删掉一些演示代码，实在有些烦人，于是开发一个内部项目脚手架的想法孕育而生。 因为之前有了解过 vue-cli 的实现思路，它将项目模板和脚手架分离，模板存放在 git 上，然后在与用户交互的过程中下载不同的模板">
 
 <link rel="canonical" href="https://hooray.github.io/posts/5dfce78f/">
 
@@ -141,6 +143,11 @@
     <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
         <li class="menu-item menu-item-about">
 
     <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
@@ -154,11 +161,6 @@
         <li class="menu-item menu-item-categories">
 
     <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-top">
@@ -261,7 +263,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/开发工具/" itemprop="url" rel="index">
+                  <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index">
                     <span itemprop="name">开发工具</span>
                   </a>
                 </span>
@@ -349,7 +351,7 @@
 <p>到这步为止，整个脚手架的功能已经齐全并且可以正常使用了，本地做测试的话，可以通过 <code>node index.js init</code> 的方式执行脚本命令。</p>
 <p>确认脚手架使用没问题后，我们最后来优化一下界面。</p>
 <h2 id="视觉美化"><a class="header-anchor" href="#视觉美化"></a>视觉美化</h2>
-<h3 id="loading-美化"><a class="header-anchor" href="#loading-美化"></a>Loading 美化</h3>
+<h3 id="Loading-美化"><a class="header-anchor" href="#Loading-美化"></a>Loading 美化</h3>
 <p>比如在下载、安装依赖都是属于比较耗时，并且时间无法预估的操作，所以增加一个 loading 提示是比较必要的。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ora = <span class="built_in">require</span>(<span class="string">'ora'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 开始下载</span></span><br><span class="line"><span class="keyword">const</span> spinner = ora(<span class="string">'正在下载模板...'</span>);</span><br><span class="line">spinner.start();</span><br><span class="line"><span class="comment">// 下载失败调用</span></span><br><span class="line">spinner.fail();</span><br><span class="line"><span class="comment">// 下载成功调用</span></span><br><span class="line">spinner.succeed();</span><br></pre></td></tr></table></figure>
 <h3 id="文字颜色美化"><a class="header-anchor" href="#文字颜色美化"></a>文字颜色美化</h3>
@@ -363,7 +365,16 @@
 <h2 id="完整代码"><a class="header-anchor" href="#完整代码"></a>完整代码</h2>
 <p>我就知道你们没什么耐心，想直接看完整代码，那就顺便介绍一下我司的脚手架工具。</p>
 <div style="text-align: center">
-  <div class="github-card" data-user="hooray" data-repo="1one-project" data-height="200" data-width="100%" data-theme="default" data-target="undefined" data-client-id data-client-secret></div>
+  <div class="github-card"
+    data-user="hooray"
+    data-repo="1one-project"
+    data-height="200"
+    data-width="100%"
+    data-theme="default"
+    data-target="undefined"
+    data-client-id=""
+    data-client-secret=""
+  ></div>
 </div>
 <script src="/github-card-lib/githubcard.js"></script>
 <p>目前提供了 <a href="https://github.com/hooray/gulp-automation" target="_blank" rel="noopener">gulp-automation</a> 和 <a href="https://github.com/hooray/vue-automation" target="_blank" rel="noopener">vue-automation</a> 两套模板，也是介绍过很多遍的东西了。</p>
@@ -401,7 +412,7 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/脚手架/" rel="tag"><i class="fa fa-tag"></i> 脚手架</a>
+              <a href="/tags/%E8%84%9A%E6%89%8B%E6%9E%B6/" rel="tag"><i class="fa fa-tag"></i> 脚手架</a>
           </div>
 
         
@@ -482,7 +493,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备依赖库"><span class="nav-number">1.</span> <span class="nav-text">准备依赖库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化"><span class="nav-number">2.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理命令行"><span class="nav-number">3.</span> <span class="nav-text">处理命令行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行交互"><span class="nav-number">4.</span> <span class="nav-text">命令行交互</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载项目模板"><span class="nav-number">5.</span> <span class="nav-text">下载项目模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#渲染项目模板"><span class="nav-number">6.</span> <span class="nav-text">渲染项目模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装模板依赖包"><span class="nav-number">7.</span> <span class="nav-text">安装模板依赖包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">8.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视觉美化"><span class="nav-number">9.</span> <span class="nav-text">视觉美化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#loading-美化"><span class="nav-number">9.1.</span> <span class="nav-text">Loading 美化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文字颜色美化"><span class="nav-number">9.2.</span> <span class="nav-text">文字颜色美化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#符号美化"><span class="nav-number">9.3.</span> <span class="nav-text">符号美化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布"><span class="nav-number">10.</span> <span class="nav-text">发布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完整代码"><span class="nav-number">11.</span> <span class="nav-text">完整代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">12.</span> <span class="nav-text">参考</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备依赖库"><span class="nav-number">1.</span> <span class="nav-text">准备依赖库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化"><span class="nav-number">2.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理命令行"><span class="nav-number">3.</span> <span class="nav-text">处理命令行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行交互"><span class="nav-number">4.</span> <span class="nav-text">命令行交互</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载项目模板"><span class="nav-number">5.</span> <span class="nav-text">下载项目模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#渲染项目模板"><span class="nav-number">6.</span> <span class="nav-text">渲染项目模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装模板依赖包"><span class="nav-number">7.</span> <span class="nav-text">安装模板依赖包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">8.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视觉美化"><span class="nav-number">9.</span> <span class="nav-text">视觉美化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Loading-美化"><span class="nav-number">9.1.</span> <span class="nav-text">Loading 美化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文字颜色美化"><span class="nav-number">9.2.</span> <span class="nav-text">文字颜色美化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#符号美化"><span class="nav-number">9.3.</span> <span class="nav-text">符号美化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布"><span class="nav-number">10.</span> <span class="nav-text">发布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完整代码"><span class="nav-number">11.</span> <span class="nav-text">完整代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">12.</span> <span class="nav-text">参考</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -518,13 +529,13 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/hooray" title="GitHub → https://github.com/hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="http://weibo.com/hooray0905" title="Weibo → http://weibo.com/hooray0905" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+        <a href="http://weibo.com/hooray0905" title="Weibo → http:&#x2F;&#x2F;weibo.com&#x2F;hooray0905" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
       </span>
       <span class="links-of-author-item">
-        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
       </span>
   </div>
 
@@ -536,19 +547,19 @@
     </div>
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
-          <a href="http://hoorayos.com" title="http://hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
+          <a href="http://hoorayos.com/" title="http:&#x2F;&#x2F;hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/clicaptcha" title="https://github.com/hooray/clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
+          <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/vue-clicaptcha" title="https://github.com/hooray/vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
+          <a href="https://github.com/hooray/vue-clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/gulp-automation" title="https://gitee.com/eoner/gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
+          <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/vue-automation" title="https://gitee.com/eoner/vue-automation" rel="noopener" target="_blank">vue-automation - Vue自动化工作流</a>
+          <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue自动化工作流</a>
         </li>
     </ul>
   </div>
@@ -588,10 +599,10 @@
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     <span title="站点阅读时长">1:49</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
   </div>
 
         
@@ -722,15 +733,23 @@
   </div>
 
   
-  <script size="" alpha="" zIndex="" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
   <script src="/lib/anime.min.js"></script>
   <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
   <script src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js"></script>
   <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.min.js"></script>
   <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/muse.js"></script>
+
+
 <script src="/js/next-boot.js"></script>
+
 
 
 
@@ -759,7 +778,9 @@
   }
   </script>
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 
@@ -789,7 +810,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       admin: ['hooray'],
       id: '',
         language: 'zh-CN',
-      distractionFreeMode: 
+      distractionFreeMode: true
     });
     gitalk.render('gitalk-container');
   }, window.Gitalk);

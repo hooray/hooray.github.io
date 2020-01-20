@@ -4,9 +4,11 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -25,7 +27,7 @@
     scheme: 'Muse',
     version: '7.7.0',
     exturl: false,
-    sidebar: {"position":"right","display":"always"},
+    sidebar: {"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -41,20 +43,19 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":true},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
   <meta name="description" content="嘘 ~ 安静，开始了。">
-<meta name="keywords" content="Vultr,Shadowsocks,科学上网,翻墙">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vultr 搭建 SS">
 <meta property="og:url" content="https://hooray.github.io/posts/ef443e45/index.html">
 <meta property="og:site_name" content="９９３５">
 <meta property="og:description" content="嘘 ~ 安静，开始了。">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2018/05/26/5b097d1381ea2.png">
 <meta property="og:image" content="https://i.loli.net/2018/05/26/5b097e048ab00.png">
 <meta property="og:image" content="https://i.loli.net/2018/05/26/5b097eca4965d.png">
@@ -63,10 +64,14 @@
 <meta property="og:image" content="https://i.loli.net/2018/05/27/5b0985f882f7a.png">
 <meta property="og:image" content="https://i.loli.net/2018/05/27/5b098652979e2.png">
 <meta property="og:image" content="https://i.loli.net/2018/05/27/5b09870a28252.png">
-<meta property="og:updated_time" content="2019-10-08T13:55:25.866Z">
+<meta property="article:published_time" content="2018-05-26T08:54:05.000Z">
+<meta property="article:modified_time" content="2019-10-08T13:55:25.866Z">
+<meta property="article:author" content="代码小睿">
+<meta property="article:tag" content="Vultr">
+<meta property="article:tag" content="Shadowsocks">
+<meta property="article:tag" content="科学上网">
+<meta property="article:tag" content="翻墙">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Vultr 搭建 SS">
-<meta name="twitter:description" content="嘘 ~ 安静，开始了。">
 <meta name="twitter:image" content="https://i.loli.net/2018/05/26/5b097d1381ea2.png">
 
 <link rel="canonical" href="https://hooray.github.io/posts/ef443e45/">
@@ -150,6 +155,11 @@
     <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
         <li class="menu-item menu-item-about">
 
     <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
@@ -163,11 +173,6 @@
         <li class="menu-item menu-item-categories">
 
     <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-top">
@@ -270,7 +275,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/其它/" itemprop="url" rel="index">
+                  <a href="/categories/%E5%85%B6%E5%AE%83/" itemprop="url" rel="index">
                     <span itemprop="name">其它</span>
                   </a>
                 </span>
@@ -310,36 +315,36 @@
       
         <p>嘘 ~ 安静，开始了。</p>
 <a id="more"></a>
-<h2 id="注册-vultr"><a class="header-anchor" href="#注册-vultr"></a>注册 Vultr</h2>
+<h2 id="注册-Vultr"><a class="header-anchor" href="#注册-Vultr"></a>注册 Vultr</h2>
 <p>进入 <a href="https://www.vultr.com/?ref=7591338" target="_blank" rel="noopener">Vultr</a> 官网正常注册，然后通过邮箱激活账号。</p>
 <p><s>这里特别说明一下，你可以上网上找一些优惠活动，比如下面这个：</s></p>
 <p><s><a href="https://www.vultr.com/promo25b/?service=promo25b" target="_blank" rel="noopener">注册后充值 $10 送 $25 活动（不保证长期有效）</a></s></p>
 <p>充值支持支付宝，所以购买还是很方便的。<s>不过通过上面那活动注册的，必须用 paypal 充值才能享受福利。</s></p>
 <h2 id="购买服务器"><a class="header-anchor" href="#购买服务器"></a>购买服务器</h2>
 <p>首先选择地区，默认是日本东京。</p>
-<p><img src="https://i.loli.net/2018/05/26/5b097d1381ea2.png" alt></p>
+<p><img src="https://i.loli.net/2018/05/26/5b097d1381ea2.png" alt=""></p>
 <p>然后选择服务器的系统，这里就默认不用改动，选择 CentOS 7 x64 即可。</p>
-<p><img src="https://i.loli.net/2018/05/26/5b097e048ab00.png" alt></p>
+<p><img src="https://i.loli.net/2018/05/26/5b097e048ab00.png" alt=""></p>
 <p>接着选择服务器规格，这里会发现日本东京 $2.5 每月的服务器已经售罄了，只能选择 $5 每月的了。如果想省钱的话，可以返回第一步，多切换不同的地区看看，有哪些地区还有 $2.5 每月的服务器。</p>
-<p><img src="https://i.loli.net/2018/05/26/5b097eca4965d.png" alt></p>
+<p><img src="https://i.loli.net/2018/05/26/5b097eca4965d.png" alt=""></p>
 <div class="note info">
             <ul><li>Vultr 是按小时实时扣费的，并不是按月扣费的。</li><li>如果想创建多个服务器，需要提交申请，我的申请理由是：use to set up my server, like blog, bbs, etc.</li></ul>
           </div>
 <p>最后点击“ Deploy Now ”创建服务器吧，创建好稍微等一会，等状态变成 Running 表示服务器已经启动好了。</p>
-<p><img src="https://i.loli.net/2018/05/26/5b09830d2c868.png" alt></p>
+<p><img src="https://i.loli.net/2018/05/26/5b09830d2c868.png" alt=""></p>
 <h2 id="连接服务器"><a class="header-anchor" href="#连接服务器"></a>连接服务器</h2>
 <p>这里我使用的是 <a href="http://www.netsarang.com/products/xsh_overview.html" target="_blank" rel="noopener">XShell</a> 连接服务器。</p>
 <p>首先点开刚才创建好的服务器，看到这个界面：</p>
-<p><img src="https://i.loli.net/2018/05/26/5b09844e89dca.png" alt></p>
+<p><img src="https://i.loli.net/2018/05/26/5b09844e89dca.png" alt=""></p>
 <div class="note info">
             <p>IP Address：服务器IP<br>Username：登录用户名<br>Password：登录密码</p>
           </div>
 <p>接下来打开 XShell ，点击“文件 - 新建”，依次配置好服务器信息。</p>
-<p><img src="https://i.loli.net/2018/05/27/5b0985f882f7a.png" alt></p>
-<p><img src="https://i.loli.net/2018/05/27/5b098652979e2.png" alt></p>
+<p><img src="https://i.loli.net/2018/05/27/5b0985f882f7a.png" alt=""></p>
+<p><img src="https://i.loli.net/2018/05/27/5b098652979e2.png" alt=""></p>
 <p>创建好后并连接，看到如下界面，则表示连接成功了。</p>
-<p><img src="https://i.loli.net/2018/05/27/5b09870a28252.png" alt></p>
-<h2 id="安装ss"><a class="header-anchor" href="#安装ss"></a>安装SS</h2>
+<p><img src="https://i.loli.net/2018/05/27/5b09870a28252.png" alt=""></p>
+<h2 id="安装SS"><a class="header-anchor" href="#安装SS"></a>安装SS</h2>
 <p>执行 <a href="https://teddysun.com/486.html" target="_blank" rel="noopener">shadowsocks 一键安装脚本</a></p>
 <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget --<span class="keyword">no</span>-check-certificate -O shadowsocks-<span class="keyword">all</span>.<span class="keyword">sh</span> http<span class="variable">s:</span>//raw.githubusercontent.<span class="keyword">com</span>/teddysun/shadowsocks_install/master/shadowsocks-<span class="keyword">all</span>.<span class="keyword">sh</span></span><br><span class="line">chmod +<span class="keyword">x</span> shadowsocks-<span class="keyword">all</span>.<span class="keyword">sh</span></span><br><span class="line">./shadowsocks-<span class="keyword">all</span>.<span class="keyword">sh</span> <span class="number">2</span>&gt;&amp;<span class="number">1</span> | tee shadowsocks-<span class="keyword">all</span>.<span class="built_in">log</span></span><br></pre></td></tr></table></figure>
 <p>可以一路默认安装，当然建议是安装的时候就把密码、端口，以及加密方式选择好，省得之后还得修改。</p>
@@ -367,7 +372,7 @@
 <div class="note info">
             <p>执行对应命令进入配置文件后，按 <code>i</code> 键进入编辑模式，左下角出现 <code>-- INSERT --</code> 字样后，表示可以开始编辑。<br>编辑完成后按 <code>ESC</code> 键退出编辑模式，左下角 <code>-- INSERT --</code> 字样消失，输入 <code>:wq</code> ，回车执行，这时候文件会保存并返回。</p>
           </div>
-<h2 id="安装-tcp-加速软件"><a class="header-anchor" href="#安装-tcp-加速软件"></a>安装 TCP 加速软件</h2>
+<h2 id="安装-TCP-加速软件"><a class="header-anchor" href="#安装-TCP-加速软件"></a>安装 TCP 加速软件</h2>
 <p>因为服务器在国外，可能会不太稳定，这时候就很有必要安装 TCP 加速软件来提速，一般有锐速和 Google BBR 。</p>
 <p>具体就不多介绍了，安装教程如下：</p>
 <ul>
@@ -419,8 +424,8 @@
           <div class="post-tags">
               <a href="/tags/Vultr/" rel="tag"><i class="fa fa-tag"></i> Vultr</a>
               <a href="/tags/Shadowsocks/" rel="tag"><i class="fa fa-tag"></i> Shadowsocks</a>
-              <a href="/tags/科学上网/" rel="tag"><i class="fa fa-tag"></i> 科学上网</a>
-              <a href="/tags/翻墙/" rel="tag"><i class="fa fa-tag"></i> 翻墙</a>
+              <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" rel="tag"><i class="fa fa-tag"></i> 科学上网</a>
+              <a href="/tags/%E7%BF%BB%E5%A2%99/" rel="tag"><i class="fa fa-tag"></i> 翻墙</a>
           </div>
 
         
@@ -501,7 +506,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#注册-vultr"><span class="nav-number">1.</span> <span class="nav-text">注册 Vultr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#购买服务器"><span class="nav-number">2.</span> <span class="nav-text">购买服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连接服务器"><span class="nav-number">3.</span> <span class="nav-text">连接服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装ss"><span class="nav-number">4.</span> <span class="nav-text">安装SS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-tcp-加速软件"><span class="nav-number">5.</span> <span class="nav-text">安装 TCP 加速软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后"><span class="nav-number">6.</span> <span class="nav-text">最后</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#注册-Vultr"><span class="nav-number">1.</span> <span class="nav-text">注册 Vultr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#购买服务器"><span class="nav-number">2.</span> <span class="nav-text">购买服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连接服务器"><span class="nav-number">3.</span> <span class="nav-text">连接服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装SS"><span class="nav-number">4.</span> <span class="nav-text">安装SS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-TCP-加速软件"><span class="nav-number">5.</span> <span class="nav-text">安装 TCP 加速软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后"><span class="nav-number">6.</span> <span class="nav-text">最后</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -537,13 +542,13 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/hooray" title="GitHub → https://github.com/hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="http://weibo.com/hooray0905" title="Weibo → http://weibo.com/hooray0905" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+        <a href="http://weibo.com/hooray0905" title="Weibo → http:&#x2F;&#x2F;weibo.com&#x2F;hooray0905" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
       </span>
       <span class="links-of-author-item">
-        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
       </span>
   </div>
 
@@ -555,19 +560,19 @@
     </div>
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
-          <a href="http://hoorayos.com" title="http://hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
+          <a href="http://hoorayos.com/" title="http:&#x2F;&#x2F;hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/clicaptcha" title="https://github.com/hooray/clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
+          <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/vue-clicaptcha" title="https://github.com/hooray/vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
+          <a href="https://github.com/hooray/vue-clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/gulp-automation" title="https://gitee.com/eoner/gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
+          <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/vue-automation" title="https://gitee.com/eoner/vue-automation" rel="noopener" target="_blank">vue-automation - Vue自动化工作流</a>
+          <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue自动化工作流</a>
         </li>
     </ul>
   </div>
@@ -607,10 +612,10 @@
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     <span title="站点阅读时长">1:49</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
   </div>
 
         
@@ -741,15 +746,23 @@
   </div>
 
   
-  <script size="" alpha="" zIndex="" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
   <script src="/lib/anime.min.js"></script>
   <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
   <script src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js"></script>
   <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.min.js"></script>
   <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/muse.js"></script>
+
+
 <script src="/js/next-boot.js"></script>
+
 
 
 
@@ -778,7 +791,9 @@
   }
   </script>
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 
@@ -808,7 +823,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       admin: ['hooray'],
       id: '',
         language: 'zh-CN',
-      distractionFreeMode: 
+      distractionFreeMode: true
     });
     gitalk.render('gitalk-container');
   }, window.Gitalk);

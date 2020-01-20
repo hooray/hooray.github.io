@@ -4,9 +4,11 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -25,7 +27,7 @@
     scheme: 'Muse',
     version: '7.7.0',
     exturl: false,
-    sidebar: {"position":"right","display":"always"},
+    sidebar: {"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -41,20 +43,19 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":true},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
   <meta name="description" content="虽然学习 Vue 没多久，但按捺不住我这颗想为社区贡献的心，一直就想着有机会能发布一个自己的组件，但搜遍各种教程，发现起步操作几乎都是 vue init webpack-simple ，这是 Vue CLI 2.x 的语法，而我本地已经早已安装了 Vue CLI 3，难道要降级才能发布组件？不存在的，这辈子不可能降级的，那只能硬着头皮慢慢摸索了……">
-<meta name="keywords" content="vue cli,vue组件,npm,发布">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vue 组件发布到 NPM 全记录">
 <meta property="og:url" content="https://hooray.github.io/posts/6606c443/index.html">
 <meta property="og:site_name" content="９９３５">
 <meta property="og:description" content="虽然学习 Vue 没多久，但按捺不住我这颗想为社区贡献的心，一直就想着有机会能发布一个自己的组件，但搜遍各种教程，发现起步操作几乎都是 vue init webpack-simple ，这是 Vue CLI 2.x 的语法，而我本地已经早已安装了 Vue CLI 3，难道要降级才能发布组件？不存在的，这辈子不可能降级的，那只能硬着头皮慢慢摸索了……">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2018/10/11/5bbebfa1f0029.png">
 <meta property="og:image" content="https://i.loli.net/2018/10/11/5bbebfdeb62fb.png">
 <meta property="og:image" content="https://i.loli.net/2018/10/11/5bbec10f722ea.png">
@@ -63,10 +64,14 @@
 <meta property="og:image" content="https://i.loli.net/2018/10/11/5bbef1401d257.png">
 <meta property="og:image" content="https://i.loli.net/2018/10/12/5bbffb8880317.png">
 <meta property="og:image" content="https://i.loli.net/2018/10/12/5bc0059be1511.png">
-<meta property="og:updated_time" content="2019-10-08T13:55:25.866Z">
+<meta property="article:published_time" content="2018-10-11T02:14:12.000Z">
+<meta property="article:modified_time" content="2019-10-08T13:55:25.866Z">
+<meta property="article:author" content="代码小睿">
+<meta property="article:tag" content="vue cli">
+<meta property="article:tag" content="vue组件">
+<meta property="article:tag" content="npm">
+<meta property="article:tag" content="发布">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Vue 组件发布到 NPM 全记录">
-<meta name="twitter:description" content="虽然学习 Vue 没多久，但按捺不住我这颗想为社区贡献的心，一直就想着有机会能发布一个自己的组件，但搜遍各种教程，发现起步操作几乎都是 vue init webpack-simple ，这是 Vue CLI 2.x 的语法，而我本地已经早已安装了 Vue CLI 3，难道要降级才能发布组件？不存在的，这辈子不可能降级的，那只能硬着头皮慢慢摸索了……">
 <meta name="twitter:image" content="https://i.loli.net/2018/10/11/5bbebfa1f0029.png">
 
 <link rel="canonical" href="https://hooray.github.io/posts/6606c443/">
@@ -150,6 +155,11 @@
     <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
         <li class="menu-item menu-item-about">
 
     <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
@@ -163,11 +173,6 @@
         <li class="menu-item menu-item-categories">
 
     <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-top">
@@ -270,7 +275,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue-相关/" itemprop="url" rel="index">
+                  <a href="/categories/Vue-%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index">
                     <span itemprop="name">Vue 相关</span>
                   </a>
                 </span>
@@ -312,12 +317,12 @@
 <a id="more"></a>
 <h1>初始化项目</h1>
 <p>我们先执行 <code>vue ui</code> 启动 Vue CLI 的图形化界面，然后再创建一个新项目，就先取名叫 my-first-component ，预设选择默认。</p>
-<p><img src="https://i.loli.net/2018/10/11/5bbebfa1f0029.png" alt></p>
-<p><img src="https://i.loli.net/2018/10/11/5bbebfdeb62fb.png" alt></p>
+<p><img src="https://i.loli.net/2018/10/11/5bbebfa1f0029.png" alt=""></p>
+<p><img src="https://i.loli.net/2018/10/11/5bbebfdeb62fb.png" alt=""></p>
 <p>初始化完毕后就可以看到刚创建的项目了，我们先什么都不做，到“任务”里先把项目运行起来。</p>
-<p><img src="https://i.loli.net/2018/10/11/5bbec10f722ea.png" alt></p>
+<p><img src="https://i.loli.net/2018/10/11/5bbec10f722ea.png" alt=""></p>
 <p>如果一切正常，运行成功后访问 <a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a> 会看到以下界面：</p>
-<p><img src="https://i.loli.net/2018/10/11/5bbec169b092d.png" alt></p>
+<p><img src="https://i.loli.net/2018/10/11/5bbec169b092d.png" alt=""></p>
 <h1>编写组件</h1>
 <p>这一步就是我们熟悉的 Vue 开发了，这里我就简单写一个展示数组的组件用于演示。</p>
 <p>首先删除 component 目录下默认生成的 HelloWorld.vue 文件，并创建 MyFirstComponent.vue 文件，然后写入下面代码：</p>
@@ -327,7 +332,7 @@
 <p>最后修改 App.vue 文件，看看组件是否可以调用成功。</p>
 <figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span></span><br><span class="line"><span class="xml">    </span><span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span></span><br><span class="line"><span class="xml">        </span><span class="xml"><span class="tag">&lt;<span class="name">MyFirstComponent</span> <span class="attr">:items</span>=<span class="string">"cityList"</span>&gt;</span><span class="tag">&lt;/<span class="name">MyFirstComponent</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="xml">import MyFirstComponent from './components/index.js'</span></span><br><span class="line"></span><br><span class="line"><span class="xml">export default </span><span class="xquery">&#123;</span></span><br><span class="line"><span class="xquery">   <span class="built_in"> name</span>: <span class="string">'app'</span>,</span></span><br><span class="line"><span class="xquery">    components: &#123;</span></span><br><span class="line"><span class="xquery">        MyFirstComponent</span></span><br><span class="line"><span class="xquery">    &#125;</span><span class="xml">,</span></span><br><span class="line"><span class="xml">    data() </span><span class="xquery">&#123;</span></span><br><span class="line"><span class="xquery">        <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="xquery">            cityList: [</span></span><br><span class="line"><span class="xquery">                <span class="string">'北京'</span>, <span class="string">'上海'</span>, <span class="string">'广州'</span>, <span class="string">'深圳'</span></span></span><br><span class="line"><span class="xquery">            ]</span></span><br><span class="line"><span class="xquery">        &#125;</span></span><br><span class="line"><span class="xml">    &#125;</span></span><br><span class="line"><span class="xml">&#125;</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
 <p>能正常运行，那这个组件就编写完成了。</p>
-<p><img src="https://i.loli.net/2018/10/11/5bbee894dfa10.png" alt></p>
+<p><img src="https://i.loli.net/2018/10/11/5bbee894dfa10.png" alt=""></p>
 <h2 id="打包组件"><a class="header-anchor" href="#打包组件"></a>打包组件</h2>
 <p>因为 Vue CLI 图形界面里的 build 任务是打包整个应用，而我们希望打包出是库的形式，所以先打开 package.json ，修改 script 里的内容为：</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"serve"</span>: <span class="string">"vue-cli-service serve"</span>,</span><br><span class="line">    <span class="attr">"build"</span>: <span class="string">"vue-cli-service build"</span>,</span><br><span class="line">    <span class="attr">"lint"</span>: <span class="string">"vue-cli-service lint"</span>,</span><br><span class="line">    <span class="attr">"build-lib"</span>: <span class="string">"vue-cli-service build --target lib --name MyFirstComponent ./src/components/index.js"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -335,8 +340,8 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    css: &#123;</span><br><span class="line">        extract: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>因为打包出来的库会将 css 单独提取到 css 文件里，设置 extract 为 false 则会强制内联。</p>
 <p>现在我们回到 Vue CLI 图形界面里，就会看到这一条刚才新增的任务，点击运行，最终会在根目录生成好打包出来的文件。</p>
-<p><img src="https://i.loli.net/2018/10/11/5bbef1401d257.png" alt></p>
-<p><img src="https://i.loli.net/2018/10/12/5bbffb8880317.png" alt></p>
+<p><img src="https://i.loli.net/2018/10/11/5bbef1401d257.png" alt=""></p>
+<p><img src="https://i.loli.net/2018/10/12/5bbffb8880317.png" alt=""></p>
 <h2 id="发布组件"><a class="header-anchor" href="#发布组件"></a>发布组件</h2>
 <h3 id="准备工作"><a class="header-anchor" href="#准备工作"></a>准备工作</h3>
 <p>发布前需要做一些准备工作，首先要配置我们的 package.json 文件。</p>
@@ -372,7 +377,7 @@
 <p>最后我们访问 <a href="https://www.npmjs.com/" target="_blank" rel="noopener">NPM</a> 并注册好自己的账号，接下来就可以开始发布了。</p>
 <h3 id="发布"><a class="header-anchor" href="#发布"></a>发布</h3>
 <p>在项目根目录下运行 <code>npm login</code> 进行登录，登录成功后再执行 <code>npm publish</code> 就会开始发布操作。</p>
-<p><img src="https://i.loli.net/2018/10/12/5bc0059be1511.png" alt></p>
+<p><img src="https://i.loli.net/2018/10/12/5bc0059be1511.png" alt=""></p>
 <p>如果 NPM 全局已经替换成淘宝的镜像源后，登录和发布会失败，这时候可以在命令后面加上 <code>--registry http://registry.npmjs.org</code> 即可。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm login --registry http://registry.npmjs.org</span><br><span class="line">npm publish --registry http://registry.npmjs.org</span><br></pre></td></tr></table></figure>
 <div class="note info">
@@ -382,7 +387,7 @@
 <p>虽然在本地测试过没问题，但最好还是实际安装测试一下。我们在项目根目录下执行 <code>npm install my-first-vue-component -S</code> ，安装成功后，打开我们的 App.vue 文件，将组件引入修改为 <code>import MyFirstComponent from 'my-first-vue-component'</code> ，访问一下页面，大功告成！</p>
 <h2 id="最后"><a class="header-anchor" href="#最后"></a>最后</h2>
 <p>其实安装了 Vue CLI 3 也可以使用旧版 <code>vue init</code> 功能，需要全局安装一个桥接工具，这是我在开发完组件后才发现的资料，果然还是文档没看仔细。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">npm</span> <span class="selector-tag">install</span> <span class="selector-tag">-g</span> @<span class="keyword">vue</span>/<span class="keyword">cli</span>-<span class="keyword">init</span></span><br><span class="line"><span class="keyword">vue</span> init webpack my-project</span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install -g <span class="meta">@vue</span>/cli-<span class="keyword">init</span></span><br><span class="line">vue <span class="keyword">init</span> webpack my-project</span><br></pre></td></tr></table></figure>
 <p>最后，以上的整个从开发到发布，都是一次练习操作，而真正意义上由我开发的一个 Vue 组件是这个： <a href="https://www.npmjs.com/package/vue-clicaptcha" target="_blank" rel="noopener">vue-clicaptcha</a> ，它是由原先 jQuery 版本移植过来的，搭配 PHP 后端一起使用，欢迎大家体验。</p>
 <h2 id="参考"><a class="header-anchor" href="#参考"></a>参考</h2>
 <ul>
@@ -423,9 +428,9 @@
           
           <div class="post-tags">
               <a href="/tags/vue-cli/" rel="tag"><i class="fa fa-tag"></i> vue cli</a>
-              <a href="/tags/vue组件/" rel="tag"><i class="fa fa-tag"></i> vue组件</a>
+              <a href="/tags/vue%E7%BB%84%E4%BB%B6/" rel="tag"><i class="fa fa-tag"></i> vue组件</a>
               <a href="/tags/npm/" rel="tag"><i class="fa fa-tag"></i> npm</a>
-              <a href="/tags/发布/" rel="tag"><i class="fa fa-tag"></i> 发布</a>
+              <a href="/tags/%E5%8F%91%E5%B8%83/" rel="tag"><i class="fa fa-tag"></i> 发布</a>
           </div>
 
         
@@ -542,13 +547,13 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/hooray" title="GitHub → https://github.com/hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="http://weibo.com/hooray0905" title="Weibo → http://weibo.com/hooray0905" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+        <a href="http://weibo.com/hooray0905" title="Weibo → http:&#x2F;&#x2F;weibo.com&#x2F;hooray0905" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
       </span>
       <span class="links-of-author-item">
-        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
       </span>
   </div>
 
@@ -560,19 +565,19 @@
     </div>
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
-          <a href="http://hoorayos.com" title="http://hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
+          <a href="http://hoorayos.com/" title="http:&#x2F;&#x2F;hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/clicaptcha" title="https://github.com/hooray/clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
+          <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/vue-clicaptcha" title="https://github.com/hooray/vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
+          <a href="https://github.com/hooray/vue-clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/gulp-automation" title="https://gitee.com/eoner/gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
+          <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/vue-automation" title="https://gitee.com/eoner/vue-automation" rel="noopener" target="_blank">vue-automation - Vue自动化工作流</a>
+          <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue自动化工作流</a>
         </li>
     </ul>
   </div>
@@ -612,10 +617,10 @@
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     <span title="站点阅读时长">1:49</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
   </div>
 
         
@@ -746,15 +751,23 @@
   </div>
 
   
-  <script size="" alpha="" zIndex="" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
   <script src="/lib/anime.min.js"></script>
   <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
   <script src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js"></script>
   <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.min.js"></script>
   <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/muse.js"></script>
+
+
 <script src="/js/next-boot.js"></script>
+
 
 
 
@@ -783,7 +796,9 @@
   }
   </script>
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 
@@ -813,7 +828,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       admin: ['hooray'],
       id: '',
         language: 'zh-CN',
-      distractionFreeMode: 
+      distractionFreeMode: true
     });
     gitalk.render('gitalk-container');
   }, window.Gitalk);

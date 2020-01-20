@@ -4,9 +4,11 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -25,7 +27,7 @@
     scheme: 'Muse',
     version: '7.7.0',
     exturl: false,
-    sidebar: {"position":"right","display":"always"},
+    sidebar: {"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -41,24 +43,24 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":true},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
   <meta name="description" content="上个月写过一篇《响应式设计通过 padding 实现固定比例展示图片》的文章，使用占位图解决了当图片尺寸不同情况下，如何在响应式设计下做统一展示。 今天看到有网友在那篇文章下面留言说，通过 padding 也可以解决这问题，其实之前前同事也在朋友圈和我说过，我突然意识到我可能错过了什么，于是连忙查了相关资料，发现确实是个不错的思路，所以这篇文章就记录一下这个解决方法。">
-<meta name="keywords" content="响应式设计">
 <meta property="og:type" content="article">
 <meta property="og:title" content="响应式设计通过 padding 实现固定比例展示图片">
 <meta property="og:url" content="https://hooray.github.io/posts/72a9e44f/index.html">
 <meta property="og:site_name" content="９９３５">
 <meta property="og:description" content="上个月写过一篇《响应式设计通过 padding 实现固定比例展示图片》的文章，使用占位图解决了当图片尺寸不同情况下，如何在响应式设计下做统一展示。 今天看到有网友在那篇文章下面留言说，通过 padding 也可以解决这问题，其实之前前同事也在朋友圈和我说过，我突然意识到我可能错过了什么，于是连忙查了相关资料，发现确实是个不错的思路，所以这篇文章就记录一下这个解决方法。">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-08T13:55:25.871Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-07-13T02:08:05.000Z">
+<meta property="article:modified_time" content="2019-10-08T13:55:25.871Z">
+<meta property="article:author" content="代码小睿">
+<meta property="article:tag" content="响应式设计">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="响应式设计通过 padding 实现固定比例展示图片">
-<meta name="twitter:description" content="上个月写过一篇《响应式设计通过 padding 实现固定比例展示图片》的文章，使用占位图解决了当图片尺寸不同情况下，如何在响应式设计下做统一展示。 今天看到有网友在那篇文章下面留言说，通过 padding 也可以解决这问题，其实之前前同事也在朋友圈和我说过，我突然意识到我可能错过了什么，于是连忙查了相关资料，发现确实是个不错的思路，所以这篇文章就记录一下这个解决方法。">
 
 <link rel="canonical" href="https://hooray.github.io/posts/72a9e44f/">
 
@@ -141,6 +143,11 @@
     <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
         <li class="menu-item menu-item-about">
 
     <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
@@ -154,11 +161,6 @@
         <li class="menu-item menu-item-categories">
 
     <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-top">
@@ -261,7 +263,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web-综合/" itemprop="url" rel="index">
+                  <a href="/categories/Web-%E7%BB%BC%E5%90%88/" itemprop="url" rel="index">
                     <span itemprop="name">Web 综合</span>
                   </a>
                 </span>
@@ -305,17 +307,17 @@
 <h2 id="解决思路"><a class="header-anchor" href="#解决思路"></a>解决思路</h2>
 <p>首先我们要了解一个知识点，就是<strong>当任意方向的 <code>padding</code> 设为百分比时，都是相对于宽度计算的</strong>。</p>
 <p>明白了这点，我们就可以通过设置 <code>padding-top</code> 或者 <code>padding-bottom</code> 来实现一个我们想要的高宽比，举个例子，比如我们想要一个 1:1 的正方形：</p>
-<iframe height="400" scrolling="no" title="1.响应式设计通过padding实现固定比例展示图片" src="//codepen.io/hooray/embed/GBpKgN/?height=400&theme-id=0&default-tab=css,result&embed-version=2" frameborder="no" allowtransparency="true" allowfullscreen="true" style="width: 100%;">See the Pen <a href="https://codepen.io/hooray/pen/GBpKgN/" target="_blank" rel="noopener">1.响应式设计通过padding实现固定比例展示图片</a> by 代码小睿 (<a href="https://codepen.io/hooray" target="_blank" rel="noopener">@hooray</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.
+<iframe height='400' scrolling='no' title='1.响应式设计通过padding实现固定比例展示图片' src='//codepen.io/hooray/embed/GBpKgN/?height=400&theme-id=0&default-tab=css,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/hooray/pen/GBpKgN/' target="_blank" rel="noopener">1.响应式设计通过padding实现固定比例展示图片</a> by 代码小睿 (<a href='https://codepen.io/hooray' target="_blank" rel="noopener">@hooray</a>) on <a href='https://codepen.io' target="_blank" rel="noopener">CodePen</a>.
 </iframe>
 <p>或者是高宽比为 1:2 的长方形：</p>
-<iframe height="300" scrolling="no" title="2.响应式设计通过padding实现固定比例展示图片" src="//codepen.io/hooray/embed/PBPowB/?height=300&theme-id=0&default-tab=css,result&embed-version=2" frameborder="no" allowtransparency="true" allowfullscreen="true" style="width: 100%;">See the Pen <a href="https://codepen.io/hooray/pen/PBPowB/" target="_blank" rel="noopener">2.响应式设计通过padding实现固定比例展示图片</a> by 代码小睿 (<a href="https://codepen.io/hooray" target="_blank" rel="noopener">@hooray</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.
+<iframe height='300' scrolling='no' title='2.响应式设计通过padding实现固定比例展示图片' src='//codepen.io/hooray/embed/PBPowB/?height=300&theme-id=0&default-tab=css,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/hooray/pen/PBPowB/' target="_blank" rel="noopener">2.响应式设计通过padding实现固定比例展示图片</a> by 代码小睿 (<a href='https://codepen.io/hooray' target="_blank" rel="noopener">@hooray</a>) on <a href='https://codepen.io' target="_blank" rel="noopener">CodePen</a>.
 </iframe>
 <p>可以看出，上面两个案例里的 <code>padding-top</code> 刚好为<strong>高/宽</strong>的值，那么接下来要做的就简单了，既然容器的宽高比能够定死，那么容器里面的图片，只要拉伸到和容器一样的宽和高就可以了，就像这样：</p>
-<iframe height="300" scrolling="no" title="3.响应式设计通过padding实现固定比例展示图片" src="//codepen.io/hooray/embed/zLvYLz/?height=300&theme-id=0&default-tab=css,result&embed-version=2" frameborder="no" allowtransparency="true" allowfullscreen="true" style="width: 100%;">See the Pen <a href="https://codepen.io/hooray/pen/zLvYLz/" target="_blank" rel="noopener">3.响应式设计通过padding实现固定比例展示图片</a> by 代码小睿 (<a href="https://codepen.io/hooray" target="_blank" rel="noopener">@hooray</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.
+<iframe height='300' scrolling='no' title='3.响应式设计通过padding实现固定比例展示图片' src='//codepen.io/hooray/embed/zLvYLz/?height=300&theme-id=0&default-tab=css,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/hooray/pen/zLvYLz/' target="_blank" rel="noopener">3.响应式设计通过padding实现固定比例展示图片</a> by 代码小睿 (<a href='https://codepen.io/hooray' target="_blank" rel="noopener">@hooray</a>) on <a href='https://codepen.io' target="_blank" rel="noopener">CodePen</a>.
 </iframe>
 <p>这里我将容器设为相对定位，图片设为决定定位，并且高度和宽度均为 100% ，这样图片和容器的高宽就一样了。</p>
 <p>最后来看下在实际页面中的应用，这里我分别用三种尺寸的图片（200*200、200*220、180*200）来模拟图片尺寸比例不同时，如何在响应式设计下实现统一比例的展示效果：</p>
-<iframe height="300" scrolling="no" title="4.响应式设计通过padding实现固定比例展示图片" src="//codepen.io/hooray/embed/YjXmXg/?height=300&theme-id=0&default-tab=css,result&embed-version=2" frameborder="no" allowtransparency="true" allowfullscreen="true" style="width: 100%;">See the Pen <a href="https://codepen.io/hooray/pen/YjXmXg/" target="_blank" rel="noopener">4.响应式设计通过padding实现固定比例展示图片</a> by 代码小睿 (<a href="https://codepen.io/hooray" target="_blank" rel="noopener">@hooray</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.
+<iframe height='300' scrolling='no' title='4.响应式设计通过padding实现固定比例展示图片' src='//codepen.io/hooray/embed/YjXmXg/?height=300&theme-id=0&default-tab=css,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/hooray/pen/YjXmXg/' target="_blank" rel="noopener">4.响应式设计通过padding实现固定比例展示图片</a> by 代码小睿 (<a href='https://codepen.io/hooray' target="_blank" rel="noopener">@hooray</a>) on <a href='https://codepen.io' target="_blank" rel="noopener">CodePen</a>.
 </iframe>
 <h2 id="总结"><a class="header-anchor" href="#总结"></a>总结</h2>
 <p>这个方法比起占位图的方法好处自然不用说，省去了制作/修改占位图的时间。但也有一定缺陷，就是这方法实际会强制拉伸图片为我们设置的高宽比，假设我们设置的高宽比是 1:2，但如果实际数据源提供的图片是正方形的话，强制拉伸后，图片就变形了。比起 <code>占位图</code> + <code>background-image:cover;</code> 的方法，对图片进行裁切，牺牲了部分内容的展现，保证了图片不会变形。</p>
@@ -354,7 +356,7 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/响应式设计/" rel="tag"><i class="fa fa-tag"></i> 响应式设计</a>
+              <a href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F%E8%AE%BE%E8%AE%A1/" rel="tag"><i class="fa fa-tag"></i> 响应式设计</a>
           </div>
 
         
@@ -471,13 +473,13 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/hooray" title="GitHub → https://github.com/hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="http://weibo.com/hooray0905" title="Weibo → http://weibo.com/hooray0905" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+        <a href="http://weibo.com/hooray0905" title="Weibo → http:&#x2F;&#x2F;weibo.com&#x2F;hooray0905" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
       </span>
       <span class="links-of-author-item">
-        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
       </span>
   </div>
 
@@ -489,19 +491,19 @@
     </div>
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
-          <a href="http://hoorayos.com" title="http://hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
+          <a href="http://hoorayos.com/" title="http:&#x2F;&#x2F;hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/clicaptcha" title="https://github.com/hooray/clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
+          <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/vue-clicaptcha" title="https://github.com/hooray/vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
+          <a href="https://github.com/hooray/vue-clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/gulp-automation" title="https://gitee.com/eoner/gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
+          <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/vue-automation" title="https://gitee.com/eoner/vue-automation" rel="noopener" target="_blank">vue-automation - Vue自动化工作流</a>
+          <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue自动化工作流</a>
         </li>
     </ul>
   </div>
@@ -541,10 +543,10 @@
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     <span title="站点阅读时长">1:49</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
   </div>
 
         
@@ -675,15 +677,23 @@
   </div>
 
   
-  <script size="" alpha="" zIndex="" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
   <script src="/lib/anime.min.js"></script>
   <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
   <script src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js"></script>
   <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.min.js"></script>
   <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/muse.js"></script>
+
+
 <script src="/js/next-boot.js"></script>
+
 
 
 
@@ -712,7 +722,9 @@
   }
   </script>
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 
@@ -742,7 +754,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       admin: ['hooray'],
       id: '',
         language: 'zh-CN',
-      distractionFreeMode: 
+      distractionFreeMode: true
     });
     gitalk.render('gitalk-container');
   }, window.Gitalk);

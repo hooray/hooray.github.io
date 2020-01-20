@@ -4,9 +4,11 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -25,7 +27,7 @@
     scheme: 'Muse',
     version: '7.7.0',
     exturl: false,
-    sidebar: {"position":"right","display":"always"},
+    sidebar: {"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -41,20 +43,19 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":true},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
   <meta name="description" content="还记得上次桌面大升级是因为搬了新住处，租了个大房间，所以就买了新桌子，新椅子，给显示器也弄了个支架。 但这一次桌面升级并不是一开始就计划好的，最初的想法只是想在公司里给笔记本外接台显示器，方便开发和调试，但结果这个淘宝一打开啊，人就不受控制了，什么都想更新，再加上一直被「遇见喜欢的人已经很难了，遇见喜欢的东西就买吧」「早买早享受，晚买享折扣」这样的鸡汤洗脑，不买真的有点对不起自己，于是一场无预谋">
-<meta name="keywords" content="显示器,键盘,鼠标,音箱,电脑桌">
 <meta property="og:type" content="article">
 <meta property="og:title" content="桌面大升级">
 <meta property="og:url" content="https://hooray.github.io/posts/23a4d1d5/index.html">
 <meta property="og:site_name" content="９９３５">
 <meta property="og:description" content="还记得上次桌面大升级是因为搬了新住处，租了个大房间，所以就买了新桌子，新椅子，给显示器也弄了个支架。 但这一次桌面升级并不是一开始就计划好的，最初的想法只是想在公司里给笔记本外接台显示器，方便开发和调试，但结果这个淘宝一打开啊，人就不受控制了，什么都想更新，再加上一直被「遇见喜欢的人已经很难了，遇见喜欢的东西就买吧」「早买早享受，晚买享折扣」这样的鸡汤洗脑，不买真的有点对不起自己，于是一场无预谋">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2018/03/18/5aad3ee8cbeb1.png">
 <meta property="og:image" content="https://i.loli.net/2018/03/18/5aad5a3baed90.png">
 <meta property="og:image" content="https://i.loli.net/2018/03/15/5aa963e0dff31.png">
@@ -105,10 +106,15 @@
 <meta property="og:image" content="https://i.loli.net/2018/03/15/5aa94f28eeca8.png">
 <meta property="og:image" content="https://i.loli.net/2018/03/18/5aad4222a5552.png">
 <meta property="og:image" content="https://i.loli.net/2018/03/18/5aad42b63ca20.png">
-<meta property="og:updated_time" content="2019-10-08T13:55:25.873Z">
+<meta property="article:published_time" content="2018-03-17T17:11:01.000Z">
+<meta property="article:modified_time" content="2019-10-08T13:55:25.873Z">
+<meta property="article:author" content="代码小睿">
+<meta property="article:tag" content="显示器">
+<meta property="article:tag" content="键盘">
+<meta property="article:tag" content="鼠标">
+<meta property="article:tag" content="音箱">
+<meta property="article:tag" content="电脑桌">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="桌面大升级">
-<meta name="twitter:description" content="还记得上次桌面大升级是因为搬了新住处，租了个大房间，所以就买了新桌子，新椅子，给显示器也弄了个支架。 但这一次桌面升级并不是一开始就计划好的，最初的想法只是想在公司里给笔记本外接台显示器，方便开发和调试，但结果这个淘宝一打开啊，人就不受控制了，什么都想更新，再加上一直被「遇见喜欢的人已经很难了，遇见喜欢的东西就买吧」「早买早享受，晚买享折扣」这样的鸡汤洗脑，不买真的有点对不起自己，于是一场无预谋">
 <meta name="twitter:image" content="https://i.loli.net/2018/03/18/5aad3ee8cbeb1.png">
 
 <link rel="canonical" href="https://hooray.github.io/posts/23a4d1d5/">
@@ -192,6 +198,11 @@
     <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
         <li class="menu-item menu-item-about">
 
     <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
@@ -205,11 +216,6 @@
         <li class="menu-item menu-item-categories">
 
     <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-top">
@@ -312,7 +318,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/其它/" itemprop="url" rel="index">
+                  <a href="/categories/%E5%85%B6%E5%AE%83/" itemprop="url" rel="index">
                     <span itemprop="name">其它</span>
                   </a>
                 </span>
@@ -350,7 +356,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><img src="https://i.loli.net/2018/03/18/5aad3ee8cbeb1.png" alt></p>
+        <p><img src="https://i.loli.net/2018/03/18/5aad3ee8cbeb1.png" alt=""></p>
 <p>还记得上次桌面大升级是因为搬了新住处，租了个大房间，所以就买了新桌子，新椅子，给显示器也弄了个支架。</p>
 <p>但这一次桌面升级并不是一开始就计划好的，最初的想法只是想在公司里给笔记本外接台显示器，方便开发和调试，但结果这个淘宝一打开啊，人就不受控制了，什么都想更新，再加上一直被「遇见喜欢的人已经很难了，遇见喜欢的东西就买吧」「早买早享受，晚买享折扣」这样的鸡汤洗脑，不买真的有点对不起自己，于是一场无预谋无计划的买买买一触即发。</p>
 <a id="more"></a>
@@ -362,7 +368,7 @@
 <p><strong>Surface Book 增强版</strong><br>
 购买链接：<a href="https://www.microsoftstore.com.cn/" target="_blank" rel="noopener">https://www.microsoftstore.com.cn/</a> <code>微软官网</code><br>
 消费金额：18799.00</p>
-<p><img src="https://i.loli.net/2018/03/18/5aad5a3baed90.png" alt></p>
+<p><img src="https://i.loli.net/2018/03/18/5aad5a3baed90.png" alt=""></p>
 <p>笔记本严格来说不算外设，但既然是分享自己的桌面，那电脑才是最主要的。</p>
 <p>我的上一台电脑是戴尔的 XPS 15 2012款，在服役了 5 年后，做开发依旧坚挺，当然主要得益于那块三星的 SSD 硬盘，记得 12 年那会，同款三星 512G 的 SSD 硬盘，淘宝上卖到 5k+ ，那时候我这台笔记本的价格也就 2w 不到。</p>
 <p>那为什么会换成现在的 Surface Book 呢？腻了嘛，那会的轻薄本，过了 5 年再看，也不轻薄了，加上中间送修了几次，D 面的后盖都已经被拆得严重破损了，再加上好巧不巧，那会微软发布了 Surface Book 增强版，之前就很好奇微软所谓的<strong>笔记本的终极形态</strong>是什么样的，既然发布新款了，干脆趁此机会，把电脑就换了。</p>
@@ -374,11 +380,11 @@
 <p><strong>戴尔 U2718Q</strong><br>
 购买链接：<a href="https://s.click.taobao.com/yfNk7Tw" target="_blank" rel="noopener">https://s.click.taobao.com/yfNk7Tw</a> <code>可领30元优惠券</code><br>
 消费金额：4369.00</p>
-<p><img src="https://i.loli.net/2018/03/15/5aa963e0dff31.png" alt></p>
+<p><img src="https://i.loli.net/2018/03/15/5aa963e0dff31.png" alt=""></p>
 <p>显示器一开始想的是，公司里放一台 24 寸，显示效果一般般就可以了， TN 屏都行。但转念一想，这消费体验太不痛快，档次越来越低了。于是开始思考，不如给家里的显示器进行升级，然后把现在用的拿到公司去用，一举两得。</p>
 <p>显示器选择第一步就是确定屏幕的分辨率，因为 Surface Book 最高支持 4K 显示器，所以这次更新也就从 4K 入手了。</p>
 <p>于是打开京东，进入显示器分类，先把分辨率选项下的 <code>3840*2160（4K）</code> 勾选上，然后依次勾选一些硬性指标，比如面板 <code>IPS</code> （毕竟在家还是要看电影享受的， TN 屏是肯定不考虑的），接口 <code>DP</code> （想上 4K 必须用 DP 口），尺寸 <code>27英寸</code> （为什么没有选更高的 30-32英寸选项？因为选了发现价格承受不了啊），特征 <code>可壁挂</code> （用过支架就知道好处了，能节省一部分桌面空间）</p>
-<p><img src="https://i.loli.net/2018/03/12/5aa5713c0b6ff.png" alt></p>
+<p><img src="https://i.loli.net/2018/03/12/5aa5713c0b6ff.png" alt=""></p>
 <p>到这一步以后，可选的型号已经屈指可数了，我大概看了下，基本上就是 LG 和戴尔的天下了，我初步选了 4 款，分别是：</p>
 <table>
 <thead>
@@ -390,27 +396,27 @@
 <tbody>
 <tr>
 <td>戴尔 U2718Q</td>
-<td><img src="https://i.loli.net/2018/03/12/5aa572953eb53.png" alt></td>
+<td><img src="https://i.loli.net/2018/03/12/5aa572953eb53.png" alt=""></td>
 </tr>
 <tr>
 <td>戴尔 P2715Q</td>
-<td><img src="https://i.loli.net/2018/03/12/5aa5736a76a43.png" alt></td>
+<td><img src="https://i.loli.net/2018/03/12/5aa5736a76a43.png" alt=""></td>
 </tr>
 <tr>
 <td>LG 27UD69-W</td>
-<td><img src="https://i.loli.net/2018/03/12/5aa5738af107a.png" alt></td>
+<td><img src="https://i.loli.net/2018/03/12/5aa5738af107a.png" alt=""></td>
 </tr>
 <tr>
 <td>AOC LV273HUPX</td>
-<td><img src="https://i.loli.net/2018/03/12/5aa573a026d86.png" alt></td>
+<td><img src="https://i.loli.net/2018/03/12/5aa573a026d86.png" alt=""></td>
 </tr>
 </tbody>
 </table>
 <p>优先淘汰的是 LG ，因为背部的接口实在太少了，其次淘汰的是 AOC ，虽然我现在用的就是 AOC ，但 AOC 的正面观感很奇怪，三边窄边框，底部大边框，哎呀，其实我就是想选戴尔啦。</p>
 <p>不过在这两款戴尔显示器里，我还是纠结了很久，两款型号可以说是一模一样， U 款的边框比 P 款细，但 P 款可以买一个戴尔的音箱棒挂在显示器底部，就像这样：</p>
-<p><img src="https://i.loli.net/2018/03/12/5aa579922889f.png" alt></p>
+<p><img src="https://i.loli.net/2018/03/12/5aa579922889f.png" alt=""></p>
 <p>可以省去我再买一个音箱的钱，但查了很多资料，也问了一些人的建议，最后还是选择了 U2718Q 这款，毕竟还是颜值高，价格也相差不多。</p>
-<p><img src="https://i.loli.net/2018/03/15/5aa9641f86361.png" alt></p>
+<p><img src="https://i.loli.net/2018/03/15/5aa9641f86361.png" alt=""></p>
 <div class="note info">
             <p>如果你想买一款外设，有明确的硬性参数指标的情况下，我强烈推荐上京东进行选款，虽然京东有着「二手东」的名号，但它的商品属性分类还是极其清晰准确的，淘宝虽然也有，但准确度不高。当然，最后选好买哪款显示器，我还是选择回淘宝上买，因为比价比下来，淘宝还是比京东便宜一些。</p>
           </div>
@@ -418,7 +424,7 @@
 <p><strong>普拉姆 84 蓝牙双模 静电容键盘</strong><br>
 购买链接：<a href="https://s.click.taobao.com/pMGkETw" target="_blank" rel="noopener">https://s.click.taobao.com/pMGkETw</a> <code>可领20元优惠券</code><br>
 消费金额：625.00</p>
-<p><img src="https://i.loli.net/2018/03/18/5aae1b22ad241.png" alt></p>
+<p><img src="https://i.loli.net/2018/03/18/5aae1b22ad241.png" alt=""></p>
 <p>几年前入过机械键盘的坑，加上清楚自己的需求，所以在买键盘上并没有费太大力。</p>
 <p>我的几条刚需：</p>
 <ul>
@@ -438,11 +444,11 @@
 <tbody>
 <tr>
 <td>Filco Minila AIR 67</td>
-<td><img src="https://i.loli.net/2018/03/12/5aa57e0bc178f.png" alt></td>
+<td><img src="https://i.loli.net/2018/03/12/5aa57e0bc178f.png" alt=""></td>
 </tr>
 <tr>
 <td>普拉姆 84 蓝牙双模 静电容键盘</td>
-<td><img src="https://i.loli.net/2018/03/12/5aa57e8f387e4.png" alt></td>
+<td><img src="https://i.loli.net/2018/03/12/5aa57e8f387e4.png" alt=""></td>
 </tr>
 </tbody>
 </table>
@@ -457,7 +463,7 @@
 <p><strong>罗技 MX Master 2s</strong><br>
 购买链接：<a href="https://s.click.taobao.com/b0mgETw" target="_blank" rel="noopener">https://s.click.taobao.com/b0mgETw</a> <code>可领30元优惠券</code><br>
 消费金额：569.00</p>
-<p><img src="https://i.loli.net/2018/03/15/5aa974292e81c.png" alt></p>
+<p><img src="https://i.loli.net/2018/03/15/5aa974292e81c.png" alt=""></p>
 <p>我之前很长一段时间，不管家里还是公司，都在使用雷蛇的炼狱蝰蛇鼠标，因为大小刚好贴合手，而且侧边有 2 个按键，网页浏览的时候方便快速前进和后退，这次升级也是优先去看了雷蛇的蓝牙鼠标。</p>
 <p>寻找之后，发现也就曼巴眼镜蛇最适合了，因为整体造型和我之前用的炼狱蝰蛇几乎是同一个模具做出来的，当然雷蛇也还有其它的蓝牙鼠标，可都是左右对称的。</p>
 <p>说起来也奇怪，我这个人对左右对称的东西应该是有好感的，比如键盘，我就喜欢相对左右对称的键盘，买笔记本电脑也是从来不考虑带小键盘的，可偏偏鼠标这块，我就不乐意用左右对称的鼠标。</p>
@@ -479,27 +485,27 @@
 <tbody>
 <tr>
 <td>声擎 A2+</td>
-<td><img src="https://i.loli.net/2018/03/14/5aa938ad663e7.png" alt></td>
+<td><img src="https://i.loli.net/2018/03/14/5aa938ad663e7.png" alt=""></td>
 </tr>
 <tr>
 <td>Bose Soundlink Mini II</td>
-<td><img src="https://i.loli.net/2018/03/14/5aa9390e4ac35.png" alt></td>
+<td><img src="https://i.loli.net/2018/03/14/5aa9390e4ac35.png" alt=""></td>
 </tr>
 <tr>
 <td>Beats pill 2.0</td>
-<td><img src="https://i.loli.net/2018/03/14/5aa9394ce4d76.png" alt></td>
+<td><img src="https://i.loli.net/2018/03/14/5aa9394ce4d76.png" alt=""></td>
 </tr>
 <tr>
 <td>Beats pill+</td>
-<td><img src="https://i.loli.net/2018/03/14/5aa939d29ee51.png" alt></td>
+<td><img src="https://i.loli.net/2018/03/14/5aa939d29ee51.png" alt=""></td>
 </tr>
 <tr>
 <td>JBL Pulse 3</td>
-<td><img src="https://i.loli.net/2018/03/14/5aa93a13165fc.png" alt></td>
+<td><img src="https://i.loli.net/2018/03/14/5aa93a13165fc.png" alt=""></td>
 </tr>
 <tr>
 <td>JBL Charge 3</td>
-<td><img src="https://i.loli.net/2018/03/14/5aa93a4935edc.png" alt></td>
+<td><img src="https://i.loli.net/2018/03/14/5aa93a4935edc.png" alt=""></td>
 </tr>
 </tbody>
 </table>
@@ -536,47 +542,47 @@
 </tbody>
 </table>
 <p>最终选择 JBL Charge 3 的原因是一瞬间我突然冒出一个干脆都买的念头，于是，趁在天猫国际海淘买了一个最便宜的，知道买来才发现有一个因素没关注，就是大小，稍微比我想象中大了点。</p>
-<p><img src="https://i.loli.net/2018/03/15/5aaa75fdc5599.png" alt></p>
+<p><img src="https://i.loli.net/2018/03/15/5aaa75fdc5599.png" alt=""></p>
 <h2 id="笔记本支架"><a class="header-anchor" href="#笔记本支架"></a>笔记本支架</h2>
 <p><strong>苹果笔记本支架</strong><br>
 购买链接：<a href="https://s.click.taobao.com/NyD10Tw" target="_blank" rel="noopener">https://s.click.taobao.com/NyD10Tw</a><br>
 消费金额：119.00</p>
-<p><img src="https://i.loli.net/2018/03/18/5aad457a4ccc3.png" alt></p>
+<p><img src="https://i.loli.net/2018/03/18/5aad457a4ccc3.png" alt=""></p>
 <p>在选购笔记本支架上，我可以说是最舍得“花钱”的了，因为别的都是网上看，网上对比，而这个我直接买了三款相对入眼的产品，实际上手体验了一番。</p>
 <p>最初购买的是两款贴地的，实际使用发现比较占空间，而且有时候在电脑前吃饭，那键盘就没地方放了。</p>
 <p>所以最终选了一款把笔记本电脑架高的支架，下面留空就可以在吃饭的时候把键盘放到下面，桌面就有一块很大的位置了，并且还能保证了笔记本电脑和外接显示器视觉上相对平行。</p>
-<p><img src="https://i.loli.net/2018/03/18/5aad4a3d9016f.png" alt></p>
+<p><img src="https://i.loli.net/2018/03/18/5aad4a3d9016f.png" alt=""></p>
 <h2 id="显示器支架"><a class="header-anchor" href="#显示器支架"></a>显示器支架</h2>
 <p><strong>乐歌 D5 显示器支架</strong><br>
 购买链接：<a href="https://s.click.taobao.com/hpqx7Tw" target="_blank" rel="noopener">https://s.click.taobao.com/hpqx7Tw</a> <code>可领5元优惠券</code><br>
 消费金额：194.00</p>
-<p><img src="https://i.loli.net/2018/03/18/5aad5b8e46073.png" alt></p>
+<p><img src="https://i.loli.net/2018/03/18/5aad5b8e46073.png" alt=""></p>
 <p>显示器支架绝对是个好东西，如果你有两台甚至更多显示器，简直是大幅减轻桌面空间的压力，让桌面可以摆放下更多的东西。</p>
-<p><img src="https://i.loli.net/2018/03/15/5aa94f28eeca8.png" alt></p>
+<p><img src="https://i.loli.net/2018/03/15/5aa94f28eeca8.png" alt=""></p>
 <p>这是一张我桌面升级前的老图，当时是因为想能把显示器放置在电脑上方，靠显示器自带的臂架显然不行，所以就只能买一个支架来实现，买了之后觉得买值了。</p>
 <h2 id="手机支架"><a class="header-anchor" href="#手机支架"></a>手机支架</h2>
 <p>iQunix Hima 铝合金手机充电底座支架<br>
 购买链接：<a href="https://s.click.taobao.com/XsD18Tw" target="_blank" rel="noopener">https://s.click.taobao.com/XsD18Tw</a> <code>可领5元优惠券</code><br>
 消费金额：163.00</p>
 <p>这个宝贝无需介绍太多，第一眼看到的时候，我就喜欢上了，我希望你们第一眼看到也能喜欢上，如果不能，那就多看几眼吧。它有两种颜色，银色和黑色，为了和手机更搭，我买的是黑色的。</p>
-<p><img src="https://i.loli.net/2018/03/14/5aa9457a03b63.png" alt></p>
-<p><img src="https://i.loli.net/2018/03/15/5aa9743d7eb70.png" alt></p>
+<p><img src="https://i.loli.net/2018/03/14/5aa9457a03b63.png" alt=""></p>
+<p><img src="https://i.loli.net/2018/03/15/5aa9743d7eb70.png" alt=""></p>
 <h2 id="电脑桌"><a class="header-anchor" href="#电脑桌"></a>电脑桌</h2>
 <p><strong>宜家贝肯特底架</strong><br>
 购买链接：<a href="https://s.click.taobao.com/M9a08Tw" target="_blank" rel="noopener">https://s.click.taobao.com/M9a08Tw</a><br>
 消费金额：430.00</p>
 <p><strong>老榆木桌板定制</strong><br>
 消费金额：580.00</p>
-<p><img src="https://i.loli.net/2018/03/15/5aa96f76c7db1.png" alt></p>
+<p><img src="https://i.loli.net/2018/03/15/5aa96f76c7db1.png" alt=""></p>
 <p>为什么电脑桌没有买贝肯特一整套呢，下面我会细说。这里我只买了贝肯特的底架，然后在淘宝上找了个老榆木桌板定制的店铺，定制了一块和买贝肯桌板尺寸一样（140cm * 60cm），且厚度为 3cm 的桌板。</p>
-<p><img src="https://i.loli.net/2018/03/15/5aa95a034ff74.png" alt></p>
+<p><img src="https://i.loli.net/2018/03/15/5aa95a034ff74.png" alt=""></p>
 <p>贝肯特底架会附赠固定桌板的插销，如上图（因为长的都用完了，只能拍短的做参考），但由于我的桌板是定制的，桌板上没有那几个插销孔，所以我在淘宝上买了电钻，开孔钻头，还买了一些木块做练习，但尝试后发现效果并不理想，最终我还是麻烦了老爸出手来解决了底架和桌板固定的问题。</p>
 <p>其实一开始是想买升降桌的，感觉很酷，而且可以站立办公，不过考虑到使用环境还是在家里，没事也不会经常折腾桌子，而且感觉升降桌会很重，万一搬家将会是个麻烦事。最终事实也证明我的顾虑是正确的，光这老榆木的桌板从一楼背上四楼我都累成狗了，升降桌，呵呵，还好没买。</p>
 <h2 id="电脑椅"><a class="header-anchor" href="#电脑椅"></a>电脑椅</h2>
 <p><strong>AutoFull傲风 电竞椅</strong><br>
 购买链接：<a href="https://s.click.taobao.com/8YbxzSw" target="_blank" rel="noopener">https://s.click.taobao.com/8YbxzSw</a> <code>可领50元优惠券</code><br>
 消费金额：799.00</p>
-<p><img src="https://i.loli.net/2018/03/18/5aad5e351bba6.jpg" alt></p>
+<p><img src="https://i.loli.net/2018/03/18/5aad5e351bba6.jpg" alt=""></p>
 <p>买椅子的时候其实就只有一个要求，就是底部带滑轮，颜值尚可就行就（因为颜值心仪的价格上 5 位数了），所以这款椅子差不多就是在淘宝按销量排序随便搜的一款，整体感受只能说一般。</p>
 <h2 id="其它"><a class="header-anchor" href="#其它"></a>其它</h2>
 <p><strong>公牛机柜插座 PDU 专用电源</strong><br>
@@ -586,54 +592,54 @@
 购买链接：<a href="https://s.click.taobao.com/VEav7Tw" target="_blank" rel="noopener">https://s.click.taobao.com/VEav7Tw</a><br>
 消费金额：40.00</p>
 <p>想要桌面看上去清爽干净，除了更换蓝牙设备外，理线/埋线也是一门学问，而我之所以在购买桌子的时候选择定制一块木板，目的就是准备把电源和大部分数据/电源线都隐藏在桌底，桌面上看不到，自然就显得干净了。</p>
-<p><img src="https://i.loli.net/2018/03/15/5aa95383521cf.png" alt></p>
+<p><img src="https://i.loli.net/2018/03/15/5aa95383521cf.png" alt=""></p>
 <p>机柜电源原本是用于固定在机房机柜上的，我买它的原因就是因为它能轻松固定在我桌板底部，就像这样：</p>
-<p><img src="https://i.loli.net/2018/03/15/5aa9580fb1838.png" alt></p>
+<p><img src="https://i.loli.net/2018/03/15/5aa9580fb1838.png" alt=""></p>
 <p>另外左右两边各固定了一个理线架，这样长出来的线，都可以塞进去，不会影响桌下的空间。</p>
-<p><img src="https://i.loli.net/2018/03/15/5aa957a87e7dd.png" alt></p>
-<p><img src="https://i.loli.net/2018/03/15/5aa957be5f474.png" alt></p>
+<p><img src="https://i.loli.net/2018/03/15/5aa957a87e7dd.png" alt=""></p>
+<p><img src="https://i.loli.net/2018/03/15/5aa957be5f474.png" alt=""></p>
 <p>整体效果如下：</p>
-<p><img src="https://i.loli.net/2018/03/15/5aa9587b308e5.png" alt></p>
+<p><img src="https://i.loli.net/2018/03/15/5aa9587b308e5.png" alt=""></p>
 <p><strong>扎带</strong><br>
 消费金额：10.00</p>
-<p><img src="https://i.loli.net/2018/03/15/5aa95c55d3113.png" alt></p>
+<p><img src="https://i.loli.net/2018/03/15/5aa95c55d3113.png" alt=""></p>
 <p>为什么没有买专用的束线管或者理线带这类东西？因为便宜啊，我买的了 200 条才 10 块钱，当然扎带也有弊端，就是一次性，拆不了，只能剪断。但是，那又怎样！便宜啊！随便剪！</p>
 <p>来看看效果如何：</p>
-<p><img src="https://i.loli.net/2018/03/15/5aa95ecbb5803.jpg" alt></p>
-<p><img src="https://i.loli.net/2018/03/15/5aa95eccb7e10.jpg" alt></p>
+<p><img src="https://i.loli.net/2018/03/15/5aa95ecbb5803.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2018/03/15/5aa95eccb7e10.jpg" alt=""></p>
 <p><strong>几度灰 清水混凝土笔筒</strong><br>
 购买链接：<a href="https://s.click.taobao.com/2xnq7Tw" target="_blank" rel="noopener">https://s.click.taobao.com/2xnq7Tw</a><br>
 消费金额：75.00</p>
-<p><img src="https://i.loli.net/2018/03/15/5aa9607f931dc.png" alt></p>
+<p><img src="https://i.loli.net/2018/03/15/5aa9607f931dc.png" alt=""></p>
 <p>因为 Surface Pen 的使用率极低，所以专门买了个笔筒放它。</p>
 <p><strong>桌面收纳盒</strong><br>
 购买链接：<a href="https://s.click.taobao.com/ULOq7Tw" target="_blank" rel="noopener">https://s.click.taobao.com/ULOq7Tw</a><br>
 消费金额：47.00</p>
-<p><img src="https://i.loli.net/2018/03/15/5aa9616b95a90.png" alt></p>
+<p><img src="https://i.loli.net/2018/03/15/5aa9616b95a90.png" alt=""></p>
 <p>没有找到特别心仪的，这款也只是在淘宝众多丑陋的收纳盒里相对颜值勉强在线的，先买来用着起，毕竟桌面乱七八糟的东西太多了，急需一个收纳盒进行统一管理。</p>
 <h2 id="总结"><a class="header-anchor" href="#总结"></a>总结</h2>
 <p>改造升级的过程让我感到愉悦，尤其是自己脑海中的想法一步步搭建出来，颇有成就感。当然也有遗憾，就是钱不够多，很多更好的外设，看到价格就过滤掉了，所以，努力赚钱吧，为了有一天能努力的花。</p>
 <hr>
 <p>最后放几张以前的老图，仅作留念。</p>
 <p>2012年10月，买了第一把机械键盘</p>
-<p><img src="https://i.loli.net/2018/03/15/5aa968009f30e.png" alt></p>
+<p><img src="https://i.loli.net/2018/03/15/5aa968009f30e.png" alt=""></p>
 <p>2013年1月，买了第二把机械键盘</p>
-<p><img src="https://i.loli.net/2018/03/15/5aa96882bee47.png" alt></p>
+<p><img src="https://i.loli.net/2018/03/15/5aa96882bee47.png" alt=""></p>
 <p>2013年2月，买了一个笔记本支架</p>
-<p><img src="https://i.loli.net/2018/03/15/5aa968ef1bafe.png" alt></p>
+<p><img src="https://i.loli.net/2018/03/15/5aa968ef1bafe.png" alt=""></p>
 <p>2013年5月，买了第三把机械键盘</p>
-<p><img src="https://i.loli.net/2018/03/15/5aa9693bc5267.png" alt></p>
+<p><img src="https://i.loli.net/2018/03/15/5aa9693bc5267.png" alt=""></p>
 <p>2013年8月，买了张电脑桌</p>
-<p><img src="https://i.loli.net/2018/03/15/5aa969c351155.png" alt></p>
+<p><img src="https://i.loli.net/2018/03/15/5aa969c351155.png" alt=""></p>
 <p>2013年10月，买了第一台显示器</p>
-<p><img src="https://i.loli.net/2018/03/15/5aa969fea44de.png" alt></p>
+<p><img src="https://i.loli.net/2018/03/15/5aa969fea44de.png" alt=""></p>
 <p>2015年?月，二手出掉了第一台 24 寸的显示器，另外买了台 27 寸的</p>
-<p><img src="https://i.loli.net/2018/03/15/5aa96af9e4144.png" alt></p>
+<p><img src="https://i.loli.net/2018/03/15/5aa96af9e4144.png" alt=""></p>
 <p>2017年8月，搬家后买的第二张电脑桌</p>
-<p><img src="https://i.loli.net/2018/03/15/5aa94f28eeca8.png" alt></p>
+<p><img src="https://i.loli.net/2018/03/15/5aa94f28eeca8.png" alt=""></p>
 <p>2017年3月，败完显示器、鼠标、键盘、音箱……后，写下这篇博客。</p>
-<p><img src="https://i.loli.net/2018/03/18/5aad4222a5552.png" alt></p>
-<p><img src="https://i.loli.net/2018/03/18/5aad42b63ca20.png" alt></p>
+<p><img src="https://i.loli.net/2018/03/18/5aad4222a5552.png" alt=""></p>
+<p><img src="https://i.loli.net/2018/03/18/5aad42b63ca20.png" alt=""></p>
 <h2 id="参考"><a class="header-anchor" href="#参考"></a>参考</h2>
 <ul>
 <li><a href="https://www.bilibili.com/video/av7883199/" target="_blank" rel="noopener">Type-C 主题桌面:「小辛的未来桌面」</a></li>
@@ -671,11 +677,11 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/显示器/" rel="tag"><i class="fa fa-tag"></i> 显示器</a>
-              <a href="/tags/键盘/" rel="tag"><i class="fa fa-tag"></i> 键盘</a>
-              <a href="/tags/鼠标/" rel="tag"><i class="fa fa-tag"></i> 鼠标</a>
-              <a href="/tags/音箱/" rel="tag"><i class="fa fa-tag"></i> 音箱</a>
-              <a href="/tags/电脑桌/" rel="tag"><i class="fa fa-tag"></i> 电脑桌</a>
+              <a href="/tags/%E6%98%BE%E7%A4%BA%E5%99%A8/" rel="tag"><i class="fa fa-tag"></i> 显示器</a>
+              <a href="/tags/%E9%94%AE%E7%9B%98/" rel="tag"><i class="fa fa-tag"></i> 键盘</a>
+              <a href="/tags/%E9%BC%A0%E6%A0%87/" rel="tag"><i class="fa fa-tag"></i> 鼠标</a>
+              <a href="/tags/%E9%9F%B3%E7%AE%B1/" rel="tag"><i class="fa fa-tag"></i> 音箱</a>
+              <a href="/tags/%E7%94%B5%E8%84%91%E6%A1%8C/" rel="tag"><i class="fa fa-tag"></i> 电脑桌</a>
           </div>
 
         
@@ -792,13 +798,13 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/hooray" title="GitHub → https://github.com/hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="http://weibo.com/hooray0905" title="Weibo → http://weibo.com/hooray0905" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+        <a href="http://weibo.com/hooray0905" title="Weibo → http:&#x2F;&#x2F;weibo.com&#x2F;hooray0905" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
       </span>
       <span class="links-of-author-item">
-        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
       </span>
   </div>
 
@@ -810,19 +816,19 @@
     </div>
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
-          <a href="http://hoorayos.com" title="http://hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
+          <a href="http://hoorayos.com/" title="http:&#x2F;&#x2F;hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/clicaptcha" title="https://github.com/hooray/clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
+          <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/vue-clicaptcha" title="https://github.com/hooray/vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
+          <a href="https://github.com/hooray/vue-clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/gulp-automation" title="https://gitee.com/eoner/gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
+          <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/vue-automation" title="https://gitee.com/eoner/vue-automation" rel="noopener" target="_blank">vue-automation - Vue自动化工作流</a>
+          <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue自动化工作流</a>
         </li>
     </ul>
   </div>
@@ -862,10 +868,10 @@
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     <span title="站点阅读时长">1:49</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
   </div>
 
         
@@ -996,15 +1002,23 @@
   </div>
 
   
-  <script size="" alpha="" zIndex="" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
   <script src="/lib/anime.min.js"></script>
   <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
   <script src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js"></script>
   <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.min.js"></script>
   <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/muse.js"></script>
+
+
 <script src="/js/next-boot.js"></script>
+
 
 
 
@@ -1033,7 +1047,9 @@
   }
   </script>
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 
@@ -1063,7 +1079,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       admin: ['hooray'],
       id: '',
         language: 'zh-CN',
-      distractionFreeMode: 
+      distractionFreeMode: true
     });
     gitalk.render('gitalk-container');
   }, window.Gitalk);

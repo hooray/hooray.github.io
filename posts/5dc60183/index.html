@@ -4,9 +4,11 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -25,7 +27,7 @@
     scheme: 'Muse',
     version: '7.7.0',
     exturl: false,
-    sidebar: {"position":"right","display":"always"},
+    sidebar: {"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -41,25 +43,27 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":true},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
-  <meta name="description" content="总所周知，Vue 中的 keep-alive 可以对组件进行缓存，搭配上 vue-router 的 &amp;lt;router-view&amp;gt; 则可以实现页面缓存。 但网上大多数的方案都是采用在 router 的 meta 属性里增加一个 keepAlive 字段，然后在父组件或者根组件中，根据 keepAlive 字段的状态使用 &amp;lt;keep-alive&amp;gt; 标签，实现对 &amp;lt;route">
-<meta name="keywords" content="Vue,页面缓存,keep-alive">
+  <meta name="description" content="总所周知，Vue 中的 keep-alive 可以对组件进行缓存，搭配上 vue-router 的 &lt;router-view&gt; 则可以实现页面缓存。 但网上大多数的方案都是采用在 router 的 meta 属性里增加一个 keepAlive 字段，然后在父组件或者根组件中，根据 keepAlive 字段的状态使用 &lt;keep-alive&gt; 标签，实现对 &lt;route">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用 keep-alive 的 include 属性实现 Vue 页面缓存">
 <meta property="og:url" content="https://hooray.github.io/posts/5dc60183/index.html">
 <meta property="og:site_name" content="９９３５">
-<meta property="og:description" content="总所周知，Vue 中的 keep-alive 可以对组件进行缓存，搭配上 vue-router 的 &amp;lt;router-view&amp;gt; 则可以实现页面缓存。 但网上大多数的方案都是采用在 router 的 meta 属性里增加一个 keepAlive 字段，然后在父组件或者根组件中，根据 keepAlive 字段的状态使用 &amp;lt;keep-alive&amp;gt; 标签，实现对 &amp;lt;route">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:description" content="总所周知，Vue 中的 keep-alive 可以对组件进行缓存，搭配上 vue-router 的 &lt;router-view&gt; 则可以实现页面缓存。 但网上大多数的方案都是采用在 router 的 meta 属性里增加一个 keepAlive 字段，然后在父组件或者根组件中，根据 keepAlive 字段的状态使用 &lt;keep-alive&gt; 标签，实现对 &lt;route">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2019/12/19/N8etrgJU756nykd.gif">
-<meta property="og:updated_time" content="2019-12-19T18:31:13.621Z">
+<meta property="article:published_time" content="2019-12-18T18:05:01.000Z">
+<meta property="article:modified_time" content="2019-12-19T18:31:13.621Z">
+<meta property="article:author" content="代码小睿">
+<meta property="article:tag" content="Vue">
+<meta property="article:tag" content="页面缓存">
+<meta property="article:tag" content="keep-alive">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用 keep-alive 的 include 属性实现 Vue 页面缓存">
-<meta name="twitter:description" content="总所周知，Vue 中的 keep-alive 可以对组件进行缓存，搭配上 vue-router 的 &amp;lt;router-view&amp;gt; 则可以实现页面缓存。 但网上大多数的方案都是采用在 router 的 meta 属性里增加一个 keepAlive 字段，然后在父组件或者根组件中，根据 keepAlive 字段的状态使用 &amp;lt;keep-alive&amp;gt; 标签，实现对 &amp;lt;route">
 <meta name="twitter:image" content="https://i.loli.net/2019/12/19/N8etrgJU756nykd.gif">
 
 <link rel="canonical" href="https://hooray.github.io/posts/5dc60183/">
@@ -143,6 +147,11 @@
     <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
         <li class="menu-item menu-item-about">
 
     <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
@@ -156,11 +165,6 @@
         <li class="menu-item menu-item-categories">
 
     <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-top">
@@ -263,7 +267,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue-相关/" itemprop="url" rel="index">
+                  <a href="/categories/Vue-%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index">
                     <span itemprop="name">Vue 相关</span>
                   </a>
                 </span>
@@ -342,7 +346,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 订单详情页</span></span><br><span class="line">beforeRouteLeave(to, <span class="keyword">from</span>, next) &#123;</span><br><span class="line">    <span class="keyword">if</span> ([<span class="string">'orderList'</span>].indexOf(to.name) &gt;= <span class="number">0</span> &amp;&amp; <span class="keyword">this</span>.dataChange) &#123;</span><br><span class="line">        to.meta.returnRefresh = <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    next()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 订单列表页</span></span><br><span class="line">activated() &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.$route.meta.returnRefresh) &#123;</span><br><span class="line">        <span class="comment">// 业务代码</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>我的这个方案没什么大问题，就是在体验上有点欠缺。因为 A 页面的更新，是当 A 页面被激活后才会进行，能明显看到返回 A 页面后，数据才进行更新，整个过程用户是有感的。</p>
 <p>于是我开始在网上搜寻相关解决方案，同时在用 Vue 开发者工具操作的时候发现一个细节：</p>
-<p><img src="https://i.loli.net/2019/12/19/N8etrgJU756nykd.gif" alt></p>
+<p><img src="https://i.loli.net/2019/12/19/N8etrgJU756nykd.gif" alt=""></p>
 <p>因为 A 页面被缓存了，所以实际上 A 页面和 B 页面这两个 <code>&lt;router-view&gt;</code> 是并存的，只是其中一个被隐藏了。既然这两个组件是并存的，我开始有方向了，搜索一圈之后，找到了解决方案。</p>
 <p>简单来说，就是兄弟组件之间的通信，父子组件的通信我们比较了解，但兄弟平级组件之间的通信，和父子组件不一样，他们需要借助事件总线，因为 <code>$on()</code> 和 <code>$emit()</code> 的事件必须是在一个公共的实例上才能触发，那我们可以新建一个 Vue 实例当作事件总线，达到可以不管组件之间的父子关系，都能通过这个实例通信的目的。</p>
 <p>这里我偷懒了，直接把现有 Vue 实例当做事件总线，并将它绑定到 Vue 原型链上，方便后续使用。</p>
@@ -393,7 +397,7 @@
           
           <div class="post-tags">
               <a href="/tags/Vue/" rel="tag"><i class="fa fa-tag"></i> Vue</a>
-              <a href="/tags/页面缓存/" rel="tag"><i class="fa fa-tag"></i> 页面缓存</a>
+              <a href="/tags/%E9%A1%B5%E9%9D%A2%E7%BC%93%E5%AD%98/" rel="tag"><i class="fa fa-tag"></i> 页面缓存</a>
               <a href="/tags/keep-alive/" rel="tag"><i class="fa fa-tag"></i> keep-alive</a>
           </div>
 
@@ -508,13 +512,13 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/hooray" title="GitHub → https://github.com/hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="http://weibo.com/hooray0905" title="Weibo → http://weibo.com/hooray0905" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+        <a href="http://weibo.com/hooray0905" title="Weibo → http:&#x2F;&#x2F;weibo.com&#x2F;hooray0905" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
       </span>
       <span class="links-of-author-item">
-        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
       </span>
   </div>
 
@@ -526,19 +530,19 @@
     </div>
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
-          <a href="http://hoorayos.com" title="http://hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
+          <a href="http://hoorayos.com/" title="http:&#x2F;&#x2F;hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/clicaptcha" title="https://github.com/hooray/clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
+          <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/vue-clicaptcha" title="https://github.com/hooray/vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
+          <a href="https://github.com/hooray/vue-clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/gulp-automation" title="https://gitee.com/eoner/gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
+          <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/vue-automation" title="https://gitee.com/eoner/vue-automation" rel="noopener" target="_blank">vue-automation - Vue自动化工作流</a>
+          <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue自动化工作流</a>
         </li>
     </ul>
   </div>
@@ -578,10 +582,10 @@
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     <span title="站点阅读时长">1:49</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
   </div>
 
         
@@ -712,15 +716,23 @@
   </div>
 
   
-  <script size="" alpha="" zIndex="" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
   <script src="/lib/anime.min.js"></script>
   <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
   <script src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js"></script>
   <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.min.js"></script>
   <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/muse.js"></script>
+
+
 <script src="/js/next-boot.js"></script>
+
 
 
 
@@ -749,7 +761,9 @@
   }
   </script>
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 
@@ -779,7 +793,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       admin: ['hooray'],
       id: '',
         language: 'zh-CN',
-      distractionFreeMode: 
+      distractionFreeMode: true
     });
     gitalk.render('gitalk-container');
   }, window.Gitalk);

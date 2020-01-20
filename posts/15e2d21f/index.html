@@ -4,9 +4,11 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -25,7 +27,7 @@
     scheme: 'Muse',
     version: '7.7.0',
     exturl: false,
-    sidebar: {"position":"right","display":"always"},
+    sidebar: {"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -41,29 +43,30 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":true},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
   <meta name="description" content="网上类似的教程一搜一大把，写得其实很详细。但对于初次接触的我来说，这是一次全新的体验。所以在经历了多次「安装——配置——部署——删除——再安装——」之后，大概弄懂了整个流程。正好也是博客的开篇文章，记录一下整个搭建流程，加深印象。">
-<meta name="keywords" content="Hexo,NexT">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用 Hexo 和 Github 快速搭建个人博客">
 <meta property="og:url" content="https://hooray.github.io/posts/15e2d21f/index.html">
 <meta property="og:site_name" content="９９３５">
 <meta property="og:description" content="网上类似的教程一搜一大把，写得其实很详细。但对于初次接触的我来说，这是一次全新的体验。所以在经历了多次「安装——配置——部署——删除——再安装——」之后，大概弄懂了整个流程。正好也是博客的开篇文章，记录一下整个搭建流程，加深印象。">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2018/01/31/5a71327d1830b.png">
 <meta property="og:image" content="https://i.loli.net/2018/02/01/5a72b7bf324c9.png">
 <meta property="og:image" content="https://i.loli.net/2018/01/31/5a712b5a2e28b.png">
 <meta property="og:image" content="https://i.loli.net/2018/01/31/5a712cef6dc85.png">
 <meta property="og:image" content="https://i.loli.net/2018/01/31/5a716e1494f32.png">
-<meta property="og:updated_time" content="2020-01-11T13:12:00.097Z">
+<meta property="article:published_time" content="2018-01-30T17:31:59.000Z">
+<meta property="article:modified_time" content="2020-01-11T13:12:00.097Z">
+<meta property="article:author" content="代码小睿">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="NexT">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用 Hexo 和 Github 快速搭建个人博客">
-<meta name="twitter:description" content="网上类似的教程一搜一大把，写得其实很详细。但对于初次接触的我来说，这是一次全新的体验。所以在经历了多次「安装——配置——部署——删除——再安装——」之后，大概弄懂了整个流程。正好也是博客的开篇文章，记录一下整个搭建流程，加深印象。">
 <meta name="twitter:image" content="https://i.loli.net/2018/01/31/5a71327d1830b.png">
 
 <link rel="canonical" href="https://hooray.github.io/posts/15e2d21f/">
@@ -147,6 +150,11 @@
     <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
         <li class="menu-item menu-item-about">
 
     <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
@@ -160,11 +168,6 @@
         <li class="menu-item menu-item-categories">
 
     <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-top">
@@ -267,7 +270,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web-综合/" itemprop="url" rel="index">
+                  <a href="/categories/Web-%E7%BB%BC%E5%90%88/" itemprop="url" rel="index">
                     <span itemprop="name">Web 综合</span>
                   </a>
                 </span>
@@ -305,13 +308,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><img src="https://i.loli.net/2018/01/31/5a71327d1830b.png" alt></p>
+        <p><img src="https://i.loli.net/2018/01/31/5a71327d1830b.png" alt=""></p>
 <p>网上类似的教程一搜一大把，写得其实很详细。但对于初次接触的我来说，这是一次全新的体验。所以在经历了多次「安装——配置——部署——删除——再安装——」之后，大概弄懂了整个流程。正好也是博客的开篇文章，记录一下整个搭建流程，加深印象。</p>
 <a id="more"></a>
 <h2 id="安装"><a class="header-anchor" href="#安装"></a>安装</h2>
 <h3 id="安装前提"><a class="header-anchor" href="#安装前提"></a>安装前提</h3>
 <p>在安装前，先确保电脑上已经安装了 <a href="http://nodejs.org/" target="_blank" rel="noopener">Node.js</a> 和 <a href="https://git-scm.com/" target="_blank" rel="noopener">Git</a> 环境。</p>
-<h3 id="安装-hexo"><a class="header-anchor" href="#安装-hexo"></a>安装 <a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">Hexo</a></h3>
+<h3 id="安装-Hexo"><a class="header-anchor" href="#安装-Hexo"></a>安装 <a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">Hexo</a></h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn global add hexo-cli</span><br></pre></td></tr></table></figure>
 <div class="note info">
             <p>官方是使用 npm 进行安装，个人推荐使用 <a href="https://yarnpkg.com/zh-Hans/" target="_blank" rel="noopener">yarn</a> 进行安装，关于 yarn 和 npm 优劣分析，可以参考这篇文章《<a href="http://web.jobbole.com/88459/" target="_blank" rel="noopener">Yarn vs npm: 你需要知道的一切</a>》</p>
@@ -321,7 +324,7 @@
 <p>先新建一个 <code>blog</code> 文件夹，然后进入该文件夹运行：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init</span><br></pre></td></tr></table></figure>
 <p>初始化完成后， <code>blog</code> 文件夹的目录如下：</p>
-<p><img src="https://i.loli.net/2018/02/01/5a72b7bf324c9.png" alt></p>
+<p><img src="https://i.loli.net/2018/02/01/5a72b7bf324c9.png" alt=""></p>
 <h3 id="本地访问"><a class="header-anchor" href="#本地访问"></a>本地访问</h3>
 <p>继续运行：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g &amp;&amp; hexo s</span><br></pre></td></tr></table></figure>
@@ -345,7 +348,7 @@
 <p>清除缓存文件（<code>db.json</code>）和已生成的静态文件（<code>public</code>）</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br></pre></td></tr></table></figure>
 <p>更多命令和参数请看 <a href="https://hexo.io/zh-cn/docs/commands.html" target="_blank" rel="noopener">这里</a> ！</p>
-<h3 id="部署到-github"><a class="header-anchor" href="#部署到-github"></a>部署到 Github</h3>
+<h3 id="部署到-Github"><a class="header-anchor" href="#部署到-Github"></a>部署到 Github</h3>
 <p>首先先到 Github 上新建一个仓库，仓库名的格式为：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-tag">username</span>&gt;<span class="selector-class">.github</span><span class="selector-class">.io</span></span><br></pre></td></tr></table></figure>
 <p>例如我的就是 <code>hooray.github.io</code> ，创建好后，复制仓库的 <code>HTTPS</code> 地址，打开 <code>blog</code> 根目录下的 <code>_config.yml</code> 文件，拖动到底部找到 <code>deploy</code> 配置，按照以下格式修改并保存：</p>
@@ -355,16 +358,16 @@
 <p>安装完成后，就可以去发布了</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
 <p>第一次发布会提示输入 Github 账号和密码：</p>
-<p><img src="https://i.loli.net/2018/01/31/5a712b5a2e28b.png" alt></p>
+<p><img src="https://i.loli.net/2018/01/31/5a712b5a2e28b.png" alt=""></p>
 <p>稍微等待一会，会提示发布成功，然后在浏览器里测试访问 <a href="https://hooray.github.io">https://hooray.github.io</a> ，大功告成！</p>
-<p><img src="https://i.loli.net/2018/01/31/5a712cef6dc85.png" alt></p>
+<p><img src="https://i.loli.net/2018/01/31/5a712cef6dc85.png" alt=""></p>
 <p>这时候打开仓库会发现 Hexo 其实是把 <code>public</code> 目录下生成好的静态页面和相关资源上传到了 <code>master</code> 分支下，但是本地博客的开发环境是没有上传到仓库里的，如果换一台电脑想继续写博客更新，这就没办法了。</p>
 <p>要解决这个问题其实也很简单，可以单独再创建一个仓库，专门用于上传开发环境。但我的做法是创建一个分支，比如 <code>hexo</code> 分支，这个分支专门用来上传开发环境。</p>
 <div class="note warning">
             <p>需要注意，通过 git clone 下来的 NexT 主题，需要手动删除隐藏的 .git 文件夹，不然 NexT 主题整个文件夹都不会被提交。</p>
           </div>
 <h2 id="主题"><a class="header-anchor" href="#主题"></a>主题</h2>
-<h3 id="安装-next"><a class="header-anchor" href="#安装-next"></a>安装 <a href="http://theme-next.iissnan.com/" target="_blank" rel="noopener">NexT</a></h3>
+<h3 id="安装-NexT"><a class="header-anchor" href="#安装-NexT"></a>安装 <a href="http://theme-next.iissnan.com/" target="_blank" rel="noopener">NexT</a></h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
 <div class="note info">
             <p>我安装的是 <code>6.0.x</code> 的 NexT ，但在 NexT 官网上提供的还是 <code>5.1.x</code> 的安装命令和文档，因为 <code>6.0.x</code> 和 <code>5.1.x</code> 的配置有所不同，建议第一次练习搭建还是使用 <code>5.1.x</code> ，熟悉配置文档后，再用 <code>6.0.x</code> 。</p>
@@ -392,7 +395,7 @@
 <p>在 NexT 官网上可以查到第三方评论系统的配置方法，我最终选择的是 <a href="https://github.com/imsun/gitment" target="_blank" rel="noopener">Gitment</a> 做为博客的评论系统，因为 Gitment 是一款基于 GitHub Issues 的评论系统，这样对于评论的管理完全可以在一个仓库里实现。</p>
 <p>步骤如下：</p>
 <p>首先点击 <a href="https://github.com/settings/applications/new" target="_blank" rel="noopener">这里</a> 注册一个新的 OAuth Application 。<code>Homepage URL</code> 和 <code>Authorization callback URL</code> 均填写博客地址就行</p>
-<p><img src="https://i.loli.net/2018/01/31/5a716e1494f32.png" alt></p>
+<p><img src="https://i.loli.net/2018/01/31/5a716e1494f32.png" alt=""></p>
 <p>接着注册好后会得到 <code>Client ID</code> 和 <code>Client Secret</code> ，打开 <code>主题配置</code> 找到 <code>gitment</code> 对照着修改</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">gitment:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">mint:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">count:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">lazy:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">cleanly:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">language:</span></span><br><span class="line">  <span class="attr">github_user:</span> <span class="string">hooray</span></span><br><span class="line">  <span class="attr">github_repo:</span> <span class="string">hooray.github.io</span></span><br><span class="line">  <span class="attr">client_id:</span> <span class="string">xxxxxxxxxx</span></span><br><span class="line">  <span class="attr">client_secret:</span> <span class="string">xxxxxxxxxx</span></span><br><span class="line">  <span class="attr">redirect_protocol:</span></span><br></pre></td></tr></table></figure>
 <p>最后就是发布页面，发布好后，访问页面并使用你的 GitHub 账号登录（请确保账号是上面 repo 的拥有者），点击初始化按钮。之后其他用户就可以在该页面发表评论了。</p>
@@ -540,7 +543,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装前提"><span class="nav-number">1.1.</span> <span class="nav-text">安装前提</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-hexo"><span class="nav-number">1.2.</span> <span class="nav-text">安装 Hexo</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建站"><span class="nav-number">2.</span> <span class="nav-text">建站</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化"><span class="nav-number">2.1.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本地访问"><span class="nav-number">2.2.</span> <span class="nav-text">本地访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用命令"><span class="nav-number">2.3.</span> <span class="nav-text">常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署到-github"><span class="nav-number">2.4.</span> <span class="nav-text">部署到 Github</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主题"><span class="nav-number">3.</span> <span class="nav-text">主题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-next"><span class="nav-number">3.1.</span> <span class="nav-text">安装 NexT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">3.2.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#设置网站语言"><span class="nav-number">3.2.1.</span> <span class="nav-text">设置网站语言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开启导航"><span class="nav-number">3.2.2.</span> <span class="nav-text">开启导航</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#增加评论模块"><span class="nav-number">3.2.3.</span> <span class="nav-text">增加评论模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文章链接唯一化"><span class="nav-number">3.2.4.</span> <span class="nav-text">文章链接唯一化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#支持-emoji-表情"><span class="nav-number">3.2.5.</span> <span class="nav-text">支持 emoji 表情</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装前提"><span class="nav-number">1.1.</span> <span class="nav-text">安装前提</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-Hexo"><span class="nav-number">1.2.</span> <span class="nav-text">安装 Hexo</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建站"><span class="nav-number">2.</span> <span class="nav-text">建站</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化"><span class="nav-number">2.1.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本地访问"><span class="nav-number">2.2.</span> <span class="nav-text">本地访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用命令"><span class="nav-number">2.3.</span> <span class="nav-text">常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署到-Github"><span class="nav-number">2.4.</span> <span class="nav-text">部署到 Github</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主题"><span class="nav-number">3.</span> <span class="nav-text">主题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-NexT"><span class="nav-number">3.1.</span> <span class="nav-text">安装 NexT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">3.2.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#设置网站语言"><span class="nav-number">3.2.1.</span> <span class="nav-text">设置网站语言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开启导航"><span class="nav-number">3.2.2.</span> <span class="nav-text">开启导航</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#增加评论模块"><span class="nav-number">3.2.3.</span> <span class="nav-text">增加评论模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文章链接唯一化"><span class="nav-number">3.2.4.</span> <span class="nav-text">文章链接唯一化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#支持-emoji-表情"><span class="nav-number">3.2.5.</span> <span class="nav-text">支持 emoji 表情</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -576,13 +579,13 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/hooray" title="GitHub → https://github.com/hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="http://weibo.com/hooray0905" title="Weibo → http://weibo.com/hooray0905" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+        <a href="http://weibo.com/hooray0905" title="Weibo → http:&#x2F;&#x2F;weibo.com&#x2F;hooray0905" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
       </span>
       <span class="links-of-author-item">
-        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
       </span>
   </div>
 
@@ -594,19 +597,19 @@
     </div>
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
-          <a href="http://hoorayos.com" title="http://hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
+          <a href="http://hoorayos.com/" title="http:&#x2F;&#x2F;hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/clicaptcha" title="https://github.com/hooray/clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
+          <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/vue-clicaptcha" title="https://github.com/hooray/vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
+          <a href="https://github.com/hooray/vue-clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/gulp-automation" title="https://gitee.com/eoner/gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
+          <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/vue-automation" title="https://gitee.com/eoner/vue-automation" rel="noopener" target="_blank">vue-automation - Vue自动化工作流</a>
+          <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue自动化工作流</a>
         </li>
     </ul>
   </div>
@@ -646,10 +649,10 @@
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     <span title="站点阅读时长">1:49</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
   </div>
 
         
@@ -780,15 +783,23 @@
   </div>
 
   
-  <script size="" alpha="" zIndex="" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
   <script src="/lib/anime.min.js"></script>
   <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
   <script src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js"></script>
   <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.min.js"></script>
   <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/muse.js"></script>
+
+
 <script src="/js/next-boot.js"></script>
+
 
 
 
@@ -817,7 +828,9 @@
   }
   </script>
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 
@@ -847,7 +860,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       admin: ['hooray'],
       id: '',
         language: 'zh-CN',
-      distractionFreeMode: 
+      distractionFreeMode: true
     });
     gitalk.render('gitalk-container');
   }, window.Gitalk);

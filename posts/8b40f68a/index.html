@@ -4,9 +4,11 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -25,7 +27,7 @@
     scheme: 'Muse',
     version: '7.7.0',
     exturl: false,
-    sidebar: {"position":"right","display":"always"},
+    sidebar: {"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -41,24 +43,37 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":true},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
   <meta name="description" content="首先申明，我是极其反对那种“牛逼的大神用记事本也能写代码”的论调。我们写代码是为了创造有价值的东西，而不是单纯为了炫技。 那在开发的过程中，如何提高我们的编码效率和能力才是最主要的，我经常会看到一些新人即便用了很好的工具，但效率还是很慢，不会装插件，不熟悉快捷键。 俗话说 工欲善其事，必先利其器 ，今天就趁春节假期最后一天，整理了一下我的开发工具以及一些使用心得，希望能对大家有所帮助。">
-<meta name="keywords" content="web, 前端, web前端, html, html5, css, css3, js, javascript, 技术, 程序员, hooray, 代码小睿, 胡尐睿丶">
 <meta property="og:type" content="article">
 <meta property="og:title" content="我的个人前端开发工具整理">
 <meta property="og:url" content="https://hooray.github.io/posts/8b40f68a/index.html">
 <meta property="og:site_name" content="９９３５">
 <meta property="og:description" content="首先申明，我是极其反对那种“牛逼的大神用记事本也能写代码”的论调。我们写代码是为了创造有价值的东西，而不是单纯为了炫技。 那在开发的过程中，如何提高我们的编码效率和能力才是最主要的，我经常会看到一些新人即便用了很好的工具，但效率还是很慢，不会装插件，不熟悉快捷键。 俗话说 工欲善其事，必先利其器 ，今天就趁春节假期最后一天，整理了一下我的开发工具以及一些使用心得，希望能对大家有所帮助。">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-08T13:55:25.872Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-02-21T16:24:40.000Z">
+<meta property="article:modified_time" content="2019-10-08T13:55:25.872Z">
+<meta property="article:author" content="代码小睿">
+<meta property="article:tag" content="web">
+<meta property="article:tag" content=" 前端">
+<meta property="article:tag" content=" web前端">
+<meta property="article:tag" content=" html">
+<meta property="article:tag" content=" html5">
+<meta property="article:tag" content=" css">
+<meta property="article:tag" content=" css3">
+<meta property="article:tag" content=" js">
+<meta property="article:tag" content=" javascript">
+<meta property="article:tag" content=" 技术">
+<meta property="article:tag" content=" 程序员">
+<meta property="article:tag" content=" hooray">
+<meta property="article:tag" content=" 代码小睿">
+<meta property="article:tag" content=" 胡尐睿丶">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我的个人前端开发工具整理">
-<meta name="twitter:description" content="首先申明，我是极其反对那种“牛逼的大神用记事本也能写代码”的论调。我们写代码是为了创造有价值的东西，而不是单纯为了炫技。 那在开发的过程中，如何提高我们的编码效率和能力才是最主要的，我经常会看到一些新人即便用了很好的工具，但效率还是很慢，不会装插件，不熟悉快捷键。 俗话说 工欲善其事，必先利其器 ，今天就趁春节假期最后一天，整理了一下我的开发工具以及一些使用心得，希望能对大家有所帮助。">
 
 <link rel="canonical" href="https://hooray.github.io/posts/8b40f68a/">
 
@@ -141,6 +156,11 @@
     <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
         <li class="menu-item menu-item-about">
 
     <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
@@ -154,11 +174,6 @@
         <li class="menu-item menu-item-categories">
 
     <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-top">
@@ -261,7 +276,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/开发工具/" itemprop="url" rel="index">
+                  <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index">
                     <span itemprop="name">开发工具</span>
                   </a>
                 </span>
@@ -304,7 +319,7 @@
 <p>俗话说 <em>工欲善其事，必先利其器</em> ，今天就趁春节假期最后一天，整理了一下我的开发工具以及一些使用心得，希望能对大家有所帮助。</p>
 <a id="more"></a>
 <h2 id="编辑器"><a class="header-anchor" href="#编辑器"></a>编辑器</h2>
-<h3 id="atom"><a class="header-anchor" href="#atom"></a><a href="https://atom.io/" target="_blank" rel="noopener">Atom</a></h3>
+<h3 id="Atom"><a class="header-anchor" href="#Atom"></a><a href="https://atom.io/" target="_blank" rel="noopener">Atom</a></h3>
 <p>我的最爱，我最早是使用 DreamWeaver 的，后来脱离 PHP 专职做前端开发后，也就告别了 DW ，中途使用过 <a href="http://www.sublimetext.com/" target="_blank" rel="noopener">Sublime Text</a> ，但其安装扩展的方式太不友好，就放弃了，后面也用过 <a href="https://code.visualstudio.com/" target="_blank" rel="noopener">VS code</a> ，感觉和 Atom 不相上下，优势在于打开大文件极快，但插件感觉没 Atom 完善，所以目前还是以 Atom 为主。</p>
 <p>既然用了 Atom ，一定要了解两方面：<strong>快捷键</strong>和<strong>扩展</strong>。</p>
 <p>前者不用说了，任何工具我认为都应该去了解它的快捷键，关于 Atom 的快捷键可以看这篇文章《<a href="https://www.iplaysoft.com/item/atom-shortcuts" target="_blank" rel="noopener">Atom 编辑器快捷键列表汇总整理</a>》，并不用牢记所有快捷键，我会先大致浏览并实际操作一遍，然后回忆下开发中可能会遇到的情况，争对性的记住部分快捷键。</p>
@@ -374,12 +389,12 @@
 </ul>
 </li>
 </ul>
-<h3 id="hbuilder"><a class="header-anchor" href="#hbuilder"></a><a href="http://www.dcloud.io/" target="_blank" rel="noopener">HBuilder</a></h3>
+<h3 id="HBuilder"><a class="header-anchor" href="#HBuilder"></a><a href="http://www.dcloud.io/" target="_blank" rel="noopener">HBuilder</a></h3>
 <p>我并不用 HBuilder 写代码，主要还是用它来打包 H5 APP 用，因为对这块研究不深，加上 HBuilder 傻瓜式的操作，所以目前还保留在电脑上。</p>
-<h2 id="git-管理"><a class="header-anchor" href="#git-管理"></a>GIT 管理</h2>
-<h3 id="sourcetree"><a class="header-anchor" href="#sourcetree"></a><a href="https://www.sourcetreeapp.com/" target="_blank" rel="noopener">Sourcetree</a></h3>
+<h2 id="GIT-管理"><a class="header-anchor" href="#GIT-管理"></a>GIT 管理</h2>
+<h3 id="Sourcetree"><a class="header-anchor" href="#Sourcetree"></a><a href="https://www.sourcetreeapp.com/" target="_blank" rel="noopener">Sourcetree</a></h3>
 <p>我基本很少在终端里敲 git 命令，一直以来都是用可视化界面的软件，早期是使用 TortoiseGit ，后来是因为 Sourcetree 界面更直观，并且内置了 git-flow 工作流，所以就义无反顾的丢弃了 TortoiseGit 了。</p>
-<h2 id="chrome"><a class="header-anchor" href="#chrome"></a>Chrome</h2>
+<h2 id="Chrome"><a class="header-anchor" href="#Chrome"></a>Chrome</h2>
 <p>前端开发用 Chrome 可以说是必须的，不要和我提 Firefox ，我只在测试兼容性的时候才会想起它。</p>
 <p>用 Chrome 有一部分原因是因为它的扩展，不过在介绍我的常用扩展前，先介绍一款 Chrome 的增强插件：<a href="https://shuax.com/portfolio/greenchrome/" target="_blank" rel="noopener">GreenChrome</a> ，我主要是看中它实现了双击关闭标签页的功能。</p>
 <p>以下是我的常用扩展：</p>
@@ -402,15 +417,15 @@
 <li><a href="https://chrome.google.com/webstore/detail/recover-closed-tab/kmnmkpgmneeokldcmfcgjppgpcfecoed" target="_blank" rel="noopener">恢复关闭的标签页</a></li>
 </ul>
 <h2 id="其它"><a class="header-anchor" href="#其它"></a>其它</h2>
-<h3 id="postman"><a class="header-anchor" href="#postman"></a><a href="https://www.getpostman.com/" target="_blank" rel="noopener">Postman</a></h3>
+<h3 id="Postman"><a class="header-anchor" href="#Postman"></a><a href="https://www.getpostman.com/" target="_blank" rel="noopener">Postman</a></h3>
 <p>接口调试工具。</p>
-<h3 id="snipaste"><a class="header-anchor" href="#snipaste"></a><a href="https://zh.snipaste.com/" target="_blank" rel="noopener">Snipaste</a></h3>
+<h3 id="Snipaste"><a class="header-anchor" href="#Snipaste"></a><a href="https://zh.snipaste.com/" target="_blank" rel="noopener">Snipaste</a></h3>
 <p>一款很出色的截图软件，而且是国人开发的，我用了之后就把 QQ 、微信自带的截图快捷键给屏蔽掉了。</p>
-<h3 id="bootcdn"><a class="header-anchor" href="#bootcdn"></a><a href="http://www.bootcdn.cn/" target="_blank" rel="noopener">BootCDN</a></h3>
+<h3 id="BootCDN"><a class="header-anchor" href="#BootCDN"></a><a href="http://www.bootcdn.cn/" target="_blank" rel="noopener">BootCDN</a></h3>
 <p>稳定、快速、免费的前端开源项目 CDN 加速服务。</p>
-<h3 id="iconfont-阿里巴巴矢量图标库"><a class="header-anchor" href="#iconfont-阿里巴巴矢量图标库"></a><a href="http://www.iconfont.cn/" target="_blank" rel="noopener">Iconfont - 阿里巴巴矢量图标库</a></h3>
+<h3 id="Iconfont-阿里巴巴矢量图标库"><a class="header-anchor" href="#Iconfont-阿里巴巴矢量图标库"></a><a href="http://www.iconfont.cn/" target="_blank" rel="noopener">Iconfont - 阿里巴巴矢量图标库</a></h3>
 <p>据我了解，我司设计师找图标也是在 Iconfont 上找的，所以干脆就和设计师商量，设计师找的图标都添加到一个仓库里，前端开发直接生成 css 就行，减轻切图的工作。</p>
-<h3 id="slides"><a class="header-anchor" href="#slides"></a><a href="https://slides.com/" target="_blank" rel="noopener">Slides</a></h3>
+<h3 id="Slides"><a class="header-anchor" href="#Slides"></a><a href="https://slides.com/" target="_blank" rel="noopener">Slides</a></h3>
 <p>适合技术人员做分享的在线幻灯片，够简单，没有太多复杂的功能。</p>
 <h2 id="最后"><a class="header-anchor" href="#最后"></a>最后</h2>
 <p>因为总有新工具出来，所以此文会不定期更新，当然文章里推荐的工具都很主观，都是我的个人使用感受，如果有更好的也欢迎交流。</p>
@@ -521,7 +536,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#编辑器"><span class="nav-number">1.</span> <span class="nav-text">编辑器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#atom"><span class="nav-number">1.1.</span> <span class="nav-text">Atom</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hbuilder"><span class="nav-number">1.2.</span> <span class="nav-text">HBuilder</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-管理"><span class="nav-number">2.</span> <span class="nav-text">GIT 管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sourcetree"><span class="nav-number">2.1.</span> <span class="nav-text">Sourcetree</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome"><span class="nav-number">3.</span> <span class="nav-text">Chrome</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其它"><span class="nav-number">4.</span> <span class="nav-text">其它</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#postman"><span class="nav-number">4.1.</span> <span class="nav-text">Postman</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#snipaste"><span class="nav-number">4.2.</span> <span class="nav-text">Snipaste</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bootcdn"><span class="nav-number">4.3.</span> <span class="nav-text">BootCDN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iconfont-阿里巴巴矢量图标库"><span class="nav-number">4.4.</span> <span class="nav-text">Iconfont - 阿里巴巴矢量图标库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#slides"><span class="nav-number">4.5.</span> <span class="nav-text">Slides</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后"><span class="nav-number">5.</span> <span class="nav-text">最后</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#编辑器"><span class="nav-number">1.</span> <span class="nav-text">编辑器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Atom"><span class="nav-number">1.1.</span> <span class="nav-text">Atom</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HBuilder"><span class="nav-number">1.2.</span> <span class="nav-text">HBuilder</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GIT-管理"><span class="nav-number">2.</span> <span class="nav-text">GIT 管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sourcetree"><span class="nav-number">2.1.</span> <span class="nav-text">Sourcetree</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chrome"><span class="nav-number">3.</span> <span class="nav-text">Chrome</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其它"><span class="nav-number">4.</span> <span class="nav-text">其它</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Postman"><span class="nav-number">4.1.</span> <span class="nav-text">Postman</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Snipaste"><span class="nav-number">4.2.</span> <span class="nav-text">Snipaste</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BootCDN"><span class="nav-number">4.3.</span> <span class="nav-text">BootCDN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Iconfont-阿里巴巴矢量图标库"><span class="nav-number">4.4.</span> <span class="nav-text">Iconfont - 阿里巴巴矢量图标库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Slides"><span class="nav-number">4.5.</span> <span class="nav-text">Slides</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后"><span class="nav-number">5.</span> <span class="nav-text">最后</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -557,13 +572,13 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/hooray" title="GitHub → https://github.com/hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="http://weibo.com/hooray0905" title="Weibo → http://weibo.com/hooray0905" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+        <a href="http://weibo.com/hooray0905" title="Weibo → http:&#x2F;&#x2F;weibo.com&#x2F;hooray0905" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
       </span>
       <span class="links-of-author-item">
-        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
       </span>
   </div>
 
@@ -575,19 +590,19 @@
     </div>
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
-          <a href="http://hoorayos.com" title="http://hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
+          <a href="http://hoorayos.com/" title="http:&#x2F;&#x2F;hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/clicaptcha" title="https://github.com/hooray/clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
+          <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/vue-clicaptcha" title="https://github.com/hooray/vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
+          <a href="https://github.com/hooray/vue-clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/gulp-automation" title="https://gitee.com/eoner/gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
+          <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/vue-automation" title="https://gitee.com/eoner/vue-automation" rel="noopener" target="_blank">vue-automation - Vue自动化工作流</a>
+          <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue自动化工作流</a>
         </li>
     </ul>
   </div>
@@ -627,10 +642,10 @@
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     <span title="站点阅读时长">1:49</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
   </div>
 
         
@@ -761,15 +776,23 @@
   </div>
 
   
-  <script size="" alpha="" zIndex="" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
   <script src="/lib/anime.min.js"></script>
   <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
   <script src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js"></script>
   <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.min.js"></script>
   <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/muse.js"></script>
+
+
 <script src="/js/next-boot.js"></script>
+
 
 
 
@@ -798,7 +821,9 @@
   }
   </script>
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 
@@ -828,7 +853,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       admin: ['hooray'],
       id: '',
         language: 'zh-CN',
-      distractionFreeMode: 
+      distractionFreeMode: true
     });
     gitalk.render('gitalk-container');
   }, window.Gitalk);

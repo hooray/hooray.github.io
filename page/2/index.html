@@ -4,9 +4,11 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -25,7 +27,7 @@
     scheme: 'Muse',
     version: '7.7.0',
     exturl: false,
-    sidebar: {"position":"right","display":"always"},
+    sidebar: {"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -41,23 +43,35 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":true},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
   <meta name="description" content="代码小睿的个人博客">
-<meta name="keywords" content="web, 前端, web前端, html, html5, css, css3, js, javascript, 技术, 程序员, hooray, 代码小睿, 胡尐睿丶">
 <meta property="og:type" content="website">
 <meta property="og:title" content="９９３５">
 <meta property="og:url" content="https://hooray.github.io/page/2/index.html">
 <meta property="og:site_name" content="９９３５">
 <meta property="og:description" content="代码小睿的个人博客">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="代码小睿">
+<meta property="article:tag" content="web">
+<meta property="article:tag" content=" 前端">
+<meta property="article:tag" content=" web前端">
+<meta property="article:tag" content=" html">
+<meta property="article:tag" content=" html5">
+<meta property="article:tag" content=" css">
+<meta property="article:tag" content=" css3">
+<meta property="article:tag" content=" js">
+<meta property="article:tag" content=" javascript">
+<meta property="article:tag" content=" 技术">
+<meta property="article:tag" content=" 程序员">
+<meta property="article:tag" content=" hooray">
+<meta property="article:tag" content=" 代码小睿">
+<meta property="article:tag" content=" 胡尐睿丶">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="９９３５">
-<meta name="twitter:description" content="代码小睿的个人博客">
 
 <link rel="canonical" href="https://hooray.github.io/page/2/">
 
@@ -140,6 +154,11 @@
     <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
         <li class="menu-item menu-item-about">
 
     <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
@@ -153,11 +172,6 @@
         <li class="menu-item menu-item-categories">
 
     <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-top">
@@ -261,7 +275,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/小程序相关/" itemprop="url" rel="index">
+                  <a href="/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index">
                     <span itemprop="name">小程序相关</span>
                   </a>
                 </span>
@@ -368,7 +382,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web-综合/" itemprop="url" rel="index">
+                  <a href="/categories/Web-%E7%BB%BC%E5%90%88/" itemprop="url" rel="index">
                     <span itemprop="name">Web 综合</span>
                   </a>
                 </span>
@@ -472,7 +486,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/其它/" itemprop="url" rel="index">
+                  <a href="/categories/%E5%85%B6%E5%AE%83/" itemprop="url" rel="index">
                     <span itemprop="name">其它</span>
                   </a>
                 </span>
@@ -577,7 +591,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue-相关/" itemprop="url" rel="index">
+                  <a href="/categories/Vue-%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index">
                     <span itemprop="name">Vue 相关</span>
                   </a>
                 </span>
@@ -618,9 +632,9 @@
           <div class="note info">
             <p>官方已经把 HBuilder 正式升级为 HBuilder X 了，在测试途中发现 HBuilder X 打包 IOS 应用失败，也没有提示任何失败原因，但用 HBuilder 打包则可以成功打包，所以本文还是基于 HBuilder 进行演示，如果你是使用 HBuilder X ，部分设置操作可对照参考。</p>
           </div>
-<h2 id="准备一个-vue-项目"><a class="header-anchor" href="#准备一个-vue-项目"></a>准备一个 Vue 项目</h2>
+<h2 id="准备一个-Vue-项目"><a class="header-anchor" href="#准备一个-Vue-项目"></a>准备一个 Vue 项目</h2>
 <p>依托 Vue CLI ，我们先快速初始化一个 Vue 的项目，这里我已经创建好并成功运行了。</p>
-<p><img src="https://i.loli.net/2018/12/26/5c22e9e6a72e6.png" alt></p>
+<p><img src="https://i.loli.net/2018/12/26/5c22e9e6a72e6.png" alt=""></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/32753007/#more" rel="contents">
@@ -686,7 +700,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web-综合/" itemprop="url" rel="index">
+                  <a href="/categories/Web-%E7%BB%BC%E5%90%88/" itemprop="url" rel="index">
                     <span itemprop="name">Web 综合</span>
                   </a>
                 </span>
@@ -724,7 +738,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><img src="https://i.loli.net/2018/12/12/5c10704ee5e4d.png" alt></p>
+          <p><img src="https://i.loli.net/2018/12/12/5c10704ee5e4d.png" alt=""></p>
 <p>昨天在学习 <a href="https://github.com/PanJiaChen/vue-element-admin" target="_blank" rel="noopener">vue-element-admin</a> 的时候发现一个神奇的现象，因为我的编码习惯是使用 4 个空格做为缩进，但在 VS Code 里编辑 vue-element-admin 项目的时候，发现一保存，编辑器就会对代码进行格式化（我以 4 个空格缩进写的代码会被格式化成 2 个空格缩进），这个“黑科技”突然就引起了我的<s>性趣</s>兴趣，于是一路顺藤摸瓜，发现了今天的主角 —— <a href="http://eslint.cn/" target="_blank" rel="noopener">ESLint</a></p>
           <!--noindex-->
             <div class="post-button">
@@ -791,7 +805,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web-综合/" itemprop="url" rel="index">
+                  <a href="/categories/Web-%E7%BB%BC%E5%90%88/" itemprop="url" rel="index">
                     <span itemprop="name">Web 综合</span>
                   </a>
                 </span>
@@ -899,7 +913,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue-相关/" itemprop="url" rel="index">
+                  <a href="/categories/Vue-%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index">
                     <span itemprop="name">Vue 相关</span>
                   </a>
                 </span>
@@ -1003,7 +1017,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue-相关/" itemprop="url" rel="index">
+                  <a href="/categories/Vue-%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index">
                     <span itemprop="name">Vue 相关</span>
                   </a>
                 </span>
@@ -1108,7 +1122,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue-相关/" itemprop="url" rel="index">
+                  <a href="/categories/Vue-%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index">
                     <span itemprop="name">Vue 相关</span>
                   </a>
                 </span>
@@ -1212,7 +1226,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Electron-相关/" itemprop="url" rel="index">
+                  <a href="/categories/Electron-%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index">
                     <span itemprop="name">Electron 相关</span>
                   </a>
                 </span>
@@ -1250,7 +1264,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><img src="https://i.loli.net/2018/08/14/5b724978c354e.png" alt></p>
+          <p><img src="https://i.loli.net/2018/08/14/5b724978c354e.png" alt=""></p>
 <p>在《<a href="/posts/20f3f334/" title="Electron 初体验">Electron 初体验</a>》里我初步入门并上手了 Electron ，在这篇文章里，我会进一步熟悉 Electron 中菜单以及系统托盘的 API ，并实现对应的功能。</p>
           <!--noindex-->
             <div class="post-button">
@@ -1366,13 +1380,13 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/hooray" title="GitHub → https://github.com/hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="http://weibo.com/hooray0905" title="Weibo → http://weibo.com/hooray0905" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+        <a href="http://weibo.com/hooray0905" title="Weibo → http:&#x2F;&#x2F;weibo.com&#x2F;hooray0905" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
       </span>
       <span class="links-of-author-item">
-        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
       </span>
   </div>
 
@@ -1384,19 +1398,19 @@
     </div>
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
-          <a href="http://hoorayos.com" title="http://hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
+          <a href="http://hoorayos.com/" title="http:&#x2F;&#x2F;hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/clicaptcha" title="https://github.com/hooray/clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
+          <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/vue-clicaptcha" title="https://github.com/hooray/vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
+          <a href="https://github.com/hooray/vue-clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/gulp-automation" title="https://gitee.com/eoner/gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
+          <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/vue-automation" title="https://gitee.com/eoner/vue-automation" rel="noopener" target="_blank">vue-automation - Vue自动化工作流</a>
+          <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue自动化工作流</a>
         </li>
     </ul>
   </div>
@@ -1436,10 +1450,10 @@
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     <span title="站点阅读时长">1:49</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
   </div>
 
         
@@ -1570,15 +1584,23 @@
   </div>
 
   
-  <script size="" alpha="" zIndex="" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
   <script src="/lib/anime.min.js"></script>
   <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
   <script src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js"></script>
   <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.min.js"></script>
   <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/muse.js"></script>
+
+
 <script src="/js/next-boot.js"></script>
+
 
 
 
@@ -1607,7 +1629,9 @@
   }
   </script>
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 

@@ -4,9 +4,11 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -25,7 +27,7 @@
     scheme: 'Muse',
     version: '7.7.0',
     exturl: false,
-    sidebar: {"position":"right","display":"always"},
+    sidebar: {"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -41,27 +43,28 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":true},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
   <meta name="description" content="一直以来我都习惯直接用 markdown 写一些简单的项目文档，并且通过 git 同步到 Github 或者国内的码云上，以满足备份和查看的需求，但直到我遇到了 docsify ，在初步了解了一天后，我觉得这款工具或许可以代替我之前写文档的方式。">
-<meta name="keywords" content="文档,docsify">
 <meta property="og:type" content="article">
 <meta property="og:title" content="docsify 全接触">
 <meta property="og:url" content="https://hooray.github.io/posts/ed9dc49e/index.html">
 <meta property="og:site_name" content="９９３５">
 <meta property="og:description" content="一直以来我都习惯直接用 markdown 写一些简单的项目文档，并且通过 git 同步到 Github 或者国内的码云上，以满足备份和查看的需求，但直到我遇到了 docsify ，在初步了解了一天后，我觉得这款工具或许可以代替我之前写文档的方式。">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2018/08/08/5b6a49c8c93fc.png">
 <meta property="og:image" content="https://i.loli.net/2018/08/08/5b6a82e9cf935.png">
 <meta property="og:image" content="https://i.loli.net/2018/08/08/5b6a9ab29079d.png">
-<meta property="og:updated_time" content="2019-10-08T13:55:25.867Z">
+<meta property="article:published_time" content="2018-08-08T01:37:08.000Z">
+<meta property="article:modified_time" content="2019-10-08T13:55:25.867Z">
+<meta property="article:author" content="代码小睿">
+<meta property="article:tag" content="文档">
+<meta property="article:tag" content="docsify">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="docsify 全接触">
-<meta name="twitter:description" content="一直以来我都习惯直接用 markdown 写一些简单的项目文档，并且通过 git 同步到 Github 或者国内的码云上，以满足备份和查看的需求，但直到我遇到了 docsify ，在初步了解了一天后，我觉得这款工具或许可以代替我之前写文档的方式。">
 <meta name="twitter:image" content="https://i.loli.net/2018/08/08/5b6a49c8c93fc.png">
 
 <link rel="canonical" href="https://hooray.github.io/posts/ed9dc49e/">
@@ -145,6 +148,11 @@
     <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
         <li class="menu-item menu-item-about">
 
     <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
@@ -158,11 +166,6 @@
         <li class="menu-item menu-item-categories">
 
     <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-top">
@@ -265,7 +268,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web-综合/" itemprop="url" rel="index">
+                  <a href="/categories/Web-%E7%BB%BC%E5%90%88/" itemprop="url" rel="index">
                     <span itemprop="name">Web 综合</span>
                   </a>
                 </span>
@@ -303,7 +306,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><img src="https://i.loli.net/2018/08/08/5b6a49c8c93fc.png" alt></p>
+        <p><img src="https://i.loli.net/2018/08/08/5b6a49c8c93fc.png" alt=""></p>
 <p>一直以来我都习惯直接用 markdown 写一些简单的项目文档，并且通过 git 同步到 Github 或者国内的码云上，以满足备份和查看的需求，但直到我遇到了 <a href="https://docsify.js.org/" target="_blank" rel="noopener">docsify</a> ，在初步了解了一天后，我觉得这款工具或许可以代替我之前写文档的方式。</p>
 <a id="more"></a>
 <h2 id="什么是-docsify"><a class="header-anchor" href="#什么是-docsify"></a>什么是 docsify</h2>
@@ -324,7 +327,7 @@
 <p>在上一步初始化完毕后，会看到 <code>Initialization succeeded! Please run docsify serve ./</code> ，那我们接着执行 <code>docsify serve ./</code> 就可以运行起一个支持实时预览的本地网站，通过 <a href="http://localhost:3000" target="_blank" rel="noopener">http://localhost:3000</a> 可以访问。</p>
 <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docsify serve <span class="string">./</span></span><br></pre></td></tr></table></figure>
 <h2 id="基本操作"><a class="header-anchor" href="#基本操作"></a>基本操作</h2>
-<p><img src="https://i.loli.net/2018/08/08/5b6a82e9cf935.png" alt></p>
+<p><img src="https://i.loli.net/2018/08/08/5b6a82e9cf935.png" alt=""></p>
 <p>运行好后看到这样的页面就代表运行成功了，在开始写文档之前，先来了解一下初始化好后的这三个文件分别是做什么的。</p>
 <ul>
 <li><code>.nojekyll</code> 用于阻止 GitHub Pages 会忽略掉下划线开头的文件</li>
@@ -350,7 +353,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.$docsify = &#123;</span><br><span class="line">    loadSidebar: <span class="literal">true</span>,</span><br><span class="line">    subMaxLevel: <span class="number">2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这会我们打开 <code>README.md</code> 文件，随便写几个标题，保存一下看看效果。</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">## 标题1</span></span><br><span class="line"></span><br><span class="line"><span class="section">### 标题1-1</span></span><br><span class="line"></span><br><span class="line"><span class="section">### 标题1-2</span></span><br><span class="line"></span><br><span class="line"><span class="section">## 标题2</span></span><br><span class="line"></span><br><span class="line"><span class="section">## 标题3</span></span><br></pre></td></tr></table></figure>
-<p><img src="https://i.loli.net/2018/08/08/5b6a9ab29079d.png" alt></p>
+<p><img src="https://i.loli.net/2018/08/08/5b6a9ab29079d.png" alt=""></p>
 <p>可以看到<code>标题1</code>下面的<code>标题1-1</code>和<code>标题1-2</code>并没有显示出来，因为我们设置了 <code>subMaxLevel</code> 为 2 ，如果需要显示，则修改为 3 即可。</p>
 <div class="note info">
             <p>侧边栏一级为页面，从二级开始才是目录，所以 <code>subMaxLevel: 2</code> 只显示了一级目录，如果要显示二级目录，则应该设置为 <code>subMaxLevel: 3</code> 。如果还是不理解，那就动手多试几遍，就明白了。</p>
@@ -375,7 +378,7 @@
 <p>封面的背景是随机生成的渐变色，我们也可以指定一个背景色或者背景图，只要放在文档末尾就可以，同时设定只生效第一个。</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="comment">&lt;!-- 自定义背景色 --&gt;</span></span></span><br><span class="line">![<span class="string">color</span>](<span class="link">#f0f0f0</span>)</span><br><span class="line"></span><br><span class="line"><span class="xml"><span class="comment">&lt;!-- 自定义背景图 --&gt;</span></span></span><br><span class="line">![](background_image.png)</span><br></pre></td></tr></table></figure>
 <p>如果我们的文档是多语言的，那可不可以设置多个封面？当然也是可以的。首先确定文档目录结构如下：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">docsify</span></span><br><span class="line">├ <span class="selector-tag">README</span><span class="selector-class">.md</span></span><br><span class="line">├ <span class="selector-tag">guide</span><span class="selector-class">.md</span></span><br><span class="line">├ _<span class="selector-tag">coverpage</span><span class="selector-class">.md</span></span><br><span class="line">├ <span class="selector-tag">zh-cn</span></span><br><span class="line">│　├ <span class="selector-tag">README</span><span class="selector-class">.md</span></span><br><span class="line">│　├ <span class="selector-tag">guide</span><span class="selector-class">.md</span></span><br><span class="line">│　└ _<span class="selector-tag">coverpage</span><span class="selector-class">.md</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docsify</span><br><span class="line">├ <span class="module-access"><span class="module"><span class="identifier">README</span>.</span></span>md</span><br><span class="line">├ guide.md</span><br><span class="line">├ <span class="module-access"><span class="module"><span class="identifier">_coverpage</span>.</span></span>md</span><br><span class="line">├ zh-cn</span><br><span class="line">│　├ <span class="module-access"><span class="module"><span class="identifier">README</span>.</span></span>md</span><br><span class="line">│　├ guide.md</span><br><span class="line">│　└ <span class="module-access"><span class="module"><span class="identifier">_coverpage</span>.</span></span>md</span><br></pre></td></tr></table></figure>
 <p>然后修改 <code>coverpage</code> 选项：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.$docsify = &#123;</span><br><span class="line">    coverpage: [<span class="string">'/'</span>, <span class="string">'/zh-cn/'</span>]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者具体指明文件名</span></span><br><span class="line"><span class="built_in">window</span>.$docsify = &#123;</span><br><span class="line">    coverpage: &#123;</span><br><span class="line">        <span class="string">'/'</span>: <span class="string">'_coverpage.md'</span>,</span><br><span class="line">        <span class="string">'/zh-cn/'</span>: <span class="string">'_coverpage.md'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="个性定制"><a class="header-anchor" href="#个性定制"></a>个性定制</h2>
@@ -436,7 +439,7 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/文档/" rel="tag"><i class="fa fa-tag"></i> 文档</a>
+              <a href="/tags/%E6%96%87%E6%A1%A3/" rel="tag"><i class="fa fa-tag"></i> 文档</a>
               <a href="/tags/docsify/" rel="tag"><i class="fa fa-tag"></i> docsify</a>
           </div>
 
@@ -554,13 +557,13 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/hooray" title="GitHub → https://github.com/hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="http://weibo.com/hooray0905" title="Weibo → http://weibo.com/hooray0905" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+        <a href="http://weibo.com/hooray0905" title="Weibo → http:&#x2F;&#x2F;weibo.com&#x2F;hooray0905" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
       </span>
       <span class="links-of-author-item">
-        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
       </span>
   </div>
 
@@ -572,19 +575,19 @@
     </div>
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
-          <a href="http://hoorayos.com" title="http://hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
+          <a href="http://hoorayos.com/" title="http:&#x2F;&#x2F;hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/clicaptcha" title="https://github.com/hooray/clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
+          <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/vue-clicaptcha" title="https://github.com/hooray/vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
+          <a href="https://github.com/hooray/vue-clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/gulp-automation" title="https://gitee.com/eoner/gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
+          <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/vue-automation" title="https://gitee.com/eoner/vue-automation" rel="noopener" target="_blank">vue-automation - Vue自动化工作流</a>
+          <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue自动化工作流</a>
         </li>
     </ul>
   </div>
@@ -624,10 +627,10 @@
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     <span title="站点阅读时长">1:49</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
   </div>
 
         
@@ -758,15 +761,23 @@
   </div>
 
   
-  <script size="" alpha="" zIndex="" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
   <script src="/lib/anime.min.js"></script>
   <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
   <script src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js"></script>
   <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.min.js"></script>
   <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/muse.js"></script>
+
+
 <script src="/js/next-boot.js"></script>
+
 
 
 
@@ -795,7 +806,9 @@
   }
   </script>
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 
@@ -825,7 +838,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       admin: ['hooray'],
       id: '',
         language: 'zh-CN',
-      distractionFreeMode: 
+      distractionFreeMode: true
     });
     gitalk.render('gitalk-container');
   }, window.Gitalk);

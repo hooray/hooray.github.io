@@ -4,9 +4,11 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -25,7 +27,7 @@
     scheme: 'Muse',
     version: '7.7.0',
     exturl: false,
-    sidebar: {"position":"right","display":"always"},
+    sidebar: {"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -41,23 +43,35 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":true},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
   <meta name="description" content="代码小睿的个人博客">
-<meta name="keywords" content="web, 前端, web前端, html, html5, css, css3, js, javascript, 技术, 程序员, hooray, 代码小睿, 胡尐睿丶">
 <meta property="og:type" content="website">
 <meta property="og:title" content="９９３５">
 <meta property="og:url" content="https://hooray.github.io/page/3/index.html">
 <meta property="og:site_name" content="９９３５">
 <meta property="og:description" content="代码小睿的个人博客">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="代码小睿">
+<meta property="article:tag" content="web">
+<meta property="article:tag" content=" 前端">
+<meta property="article:tag" content=" web前端">
+<meta property="article:tag" content=" html">
+<meta property="article:tag" content=" html5">
+<meta property="article:tag" content=" css">
+<meta property="article:tag" content=" css3">
+<meta property="article:tag" content=" js">
+<meta property="article:tag" content=" javascript">
+<meta property="article:tag" content=" 技术">
+<meta property="article:tag" content=" 程序员">
+<meta property="article:tag" content=" hooray">
+<meta property="article:tag" content=" 代码小睿">
+<meta property="article:tag" content=" 胡尐睿丶">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="９９３５">
-<meta name="twitter:description" content="代码小睿的个人博客">
 
 <link rel="canonical" href="https://hooray.github.io/page/3/">
 
@@ -140,6 +154,11 @@
     <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
         <li class="menu-item menu-item-about">
 
     <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
@@ -153,11 +172,6 @@
         <li class="menu-item menu-item-categories">
 
     <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-top">
@@ -261,7 +275,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue-相关/" itemprop="url" rel="index">
+                  <a href="/categories/Vue-%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index">
                     <span itemprop="name">Vue 相关</span>
                   </a>
                 </span>
@@ -299,7 +313,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><img src="https://i.loli.net/2018/07/30/5b5e7a54ebe8d.png" alt></p>
+          <p><img src="https://i.loli.net/2018/07/30/5b5e7a54ebe8d.png" alt=""></p>
 <p>浅入浅出居然出第二篇了，之前整理了一篇《<a href="/posts/bb61bbd3/" title="浅入浅出 Vue 组件">浅入浅出 Vue 组件</a>》，这次就再深入一点，学习一下动态组件。</p>
           <!--noindex-->
             <div class="post-button">
@@ -366,7 +380,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Electron-相关/" itemprop="url" rel="index">
+                  <a href="/categories/Electron-%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index">
                     <span itemprop="name">Electron 相关</span>
                   </a>
                 </span>
@@ -404,7 +418,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><img src="https://i.loli.net/2018/08/14/5b724978c354e.png" alt></p>
+          <p><img src="https://i.loli.net/2018/08/14/5b724978c354e.png" alt=""></p>
 <p>平时习惯将一些偶尔看到并且感兴趣的技术文章放到收藏夹里，目的是等有空的时候再仔细拜读或学习，但无奈抵不住自己的惰性，于是收藏夹越来越臃肿。近期在整理的时候就发现了好几篇关于 <a href="https://electronjs.org/" target="_blank" rel="noopener">Electron</a> 的文章，但我已经记不起当时为何收藏，大概每个前端开发工程师都有个做软件的梦想吧。</p>
 <p>因为收藏了蛮多 Electron 的文章，直接清理掉感觉可惜，于是趁近期工作任务不是很重的前提下，对 Electron 进行了简单的入门，并尝试用 Electron 开发一套公司内部 OA 系统，这也是这篇文章的由来（因为开发过 Web APP 版的 OA ，所以桌面版的 OA 开发起来不算太费劲，业务代码基本可以沿用，主要的坑还是在 Electron 上）。</p>
           <!--noindex-->
@@ -472,7 +486,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web-综合/" itemprop="url" rel="index">
+                  <a href="/categories/Web-%E7%BB%BC%E5%90%88/" itemprop="url" rel="index">
                     <span itemprop="name">Web 综合</span>
                   </a>
                 </span>
@@ -510,7 +524,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><img src="https://i.loli.net/2018/08/08/5b6a49c8c93fc.png" alt></p>
+          <p><img src="https://i.loli.net/2018/08/08/5b6a49c8c93fc.png" alt=""></p>
 <p>一直以来我都习惯直接用 markdown 写一些简单的项目文档，并且通过 git 同步到 Github 或者国内的码云上，以满足备份和查看的需求，但直到我遇到了 <a href="https://docsify.js.org/" target="_blank" rel="noopener">docsify</a> ，在初步了解了一天后，我觉得这款工具或许可以代替我之前写文档的方式。</p>
           <!--noindex-->
             <div class="post-button">
@@ -577,7 +591,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue-相关/" itemprop="url" rel="index">
+                  <a href="/categories/Vue-%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index">
                     <span itemprop="name">Vue 相关</span>
                   </a>
                 </span>
@@ -615,7 +629,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><img src="https://i.loli.net/2018/07/30/5b5e7a54ebe8d.png" alt></p>
+          <p><img src="https://i.loli.net/2018/07/30/5b5e7a54ebe8d.png" alt=""></p>
 <p>为什么标题要叫“浅入浅出”呢？因为是刚开始学 Vue.js（以下简称 Vue ），没有做很深入的研究，只是跟着官方<a href="https://cn.vuejs.org/v2/guide/" target="_blank" rel="noopener">教程</a>和 <a href="https://cn.vuejs.org/v2/api/" target="_blank" rel="noopener">API</a> 一点点熟悉语法，所以标题就叫了个“浅入浅出”，而这篇博文也更像一篇学习笔记。</p>
 <p>在学习官方<a href="https://cn.vuejs.org/v2/guide/" target="_blank" rel="noopener">教程</a>的时候，我发现模板语法、计算属性、条件和列表渲染，还有事件处理，基本看一遍教程，上手熟悉下就基本都能掌握。唯独组件这块花了很多时间，并且在写一个 todolist 的 demo 时候踩了很多坑，又是看教程，又是查资料，才感觉初步掌握。</p>
 <div class="note info">
@@ -686,7 +700,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web-综合/" itemprop="url" rel="index">
+                  <a href="/categories/Web-%E7%BB%BC%E5%90%88/" itemprop="url" rel="index">
                     <span itemprop="name">Web 综合</span>
                   </a>
                 </span>
@@ -791,7 +805,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web-综合/" itemprop="url" rel="index">
+                  <a href="/categories/Web-%E7%BB%BC%E5%90%88/" itemprop="url" rel="index">
                     <span itemprop="name">Web 综合</span>
                   </a>
                 </span>
@@ -895,7 +909,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web-综合/" itemprop="url" rel="index">
+                  <a href="/categories/Web-%E7%BB%BC%E5%90%88/" itemprop="url" rel="index">
                     <span itemprop="name">Web 综合</span>
                   </a>
                 </span>
@@ -999,7 +1013,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/开发工具/" itemprop="url" rel="index">
+                  <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index">
                     <span itemprop="name">开发工具</span>
                   </a>
                 </span>
@@ -1104,7 +1118,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/其它/" itemprop="url" rel="index">
+                  <a href="/categories/%E5%85%B6%E5%AE%83/" itemprop="url" rel="index">
                     <span itemprop="name">其它</span>
                   </a>
                 </span>
@@ -1208,7 +1222,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/其它/" itemprop="url" rel="index">
+                  <a href="/categories/%E5%85%B6%E5%AE%83/" itemprop="url" rel="index">
                     <span itemprop="name">其它</span>
                   </a>
                 </span>
@@ -1246,7 +1260,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><img src="https://i.loli.net/2018/05/20/5b0098fb5979d.png" alt></p>
+          <p><img src="https://i.loli.net/2018/05/20/5b0098fb5979d.png" alt=""></p>
 <p>为了充分享受到 100M 带宽的效果，准备给家里换台路由器，在做了充足的功课后，决定购买网件的 R7000 ，而且也是看中了可以刷梅林改版固件，可以让路由器的可玩性更高。那是怎么样的可玩呢？今天我就通过 R7000 成功开启了科学上网(翻墙)。</p>
 <p>因为网上的教程和我实际操作中有一点点差异，所以下面的内容主要是记录下我个人的配置流程。</p>
           <!--noindex-->
@@ -1363,13 +1377,13 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/hooray" title="GitHub → https://github.com/hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="http://weibo.com/hooray0905" title="Weibo → http://weibo.com/hooray0905" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+        <a href="http://weibo.com/hooray0905" title="Weibo → http:&#x2F;&#x2F;weibo.com&#x2F;hooray0905" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
       </span>
       <span class="links-of-author-item">
-        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
       </span>
   </div>
 
@@ -1381,19 +1395,19 @@
     </div>
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
-          <a href="http://hoorayos.com" title="http://hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
+          <a href="http://hoorayos.com/" title="http:&#x2F;&#x2F;hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/clicaptcha" title="https://github.com/hooray/clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
+          <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/vue-clicaptcha" title="https://github.com/hooray/vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
+          <a href="https://github.com/hooray/vue-clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/gulp-automation" title="https://gitee.com/eoner/gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
+          <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/vue-automation" title="https://gitee.com/eoner/vue-automation" rel="noopener" target="_blank">vue-automation - Vue自动化工作流</a>
+          <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue自动化工作流</a>
         </li>
     </ul>
   </div>
@@ -1433,10 +1447,10 @@
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     <span title="站点阅读时长">1:49</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
   </div>
 
         
@@ -1567,15 +1581,23 @@
   </div>
 
   
-  <script size="" alpha="" zIndex="" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
   <script src="/lib/anime.min.js"></script>
   <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
   <script src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js"></script>
   <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.min.js"></script>
   <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/muse.js"></script>
+
+
 <script src="/js/next-boot.js"></script>
+
 
 
 
@@ -1604,7 +1626,9 @@
   }
   </script>
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 

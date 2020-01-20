@@ -4,9 +4,11 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -25,7 +27,7 @@
     scheme: 'Muse',
     version: '7.7.0',
     exturl: false,
-    sidebar: {"position":"right","display":"always"},
+    sidebar: {"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -41,29 +43,34 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":true},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
   <meta name="description" content="在《Electron 初体验》里我初步入门并上手了 Electron ，在这篇文章里，我会进一步熟悉 Electron 中菜单以及系统托盘的 API ，并实现对应的功能。">
-<meta name="keywords" content="electron,menu,menuitem,tray,菜单,系统托盘">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Electron 进阶——菜单和系统托盘">
 <meta property="og:url" content="https://hooray.github.io/posts/20beb467/index.html">
 <meta property="og:site_name" content="９９３５">
 <meta property="og:description" content="在《Electron 初体验》里我初步入门并上手了 Electron ，在这篇文章里，我会进一步熟悉 Electron 中菜单以及系统托盘的 API ，并实现对应的功能。">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2018/08/14/5b724978c354e.png">
 <meta property="og:image" content="https://i.loli.net/2018/08/30/5b87555268b98.png">
 <meta property="og:image" content="https://i.loli.net/2018/08/30/5b87664e0dd32.png">
 <meta property="og:image" content="https://i.loli.net/2018/08/30/5b8764a89f2d9.png">
 <meta property="og:image" content="https://i.loli.net/2018/08/30/5b878a9853883.png">
-<meta property="og:updated_time" content="2019-10-08T13:55:25.867Z">
+<meta property="article:published_time" content="2018-08-30T05:19:12.000Z">
+<meta property="article:modified_time" content="2019-10-08T13:55:25.867Z">
+<meta property="article:author" content="代码小睿">
+<meta property="article:tag" content="electron">
+<meta property="article:tag" content="menu">
+<meta property="article:tag" content="menuitem">
+<meta property="article:tag" content="tray">
+<meta property="article:tag" content="菜单">
+<meta property="article:tag" content="系统托盘">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Electron 进阶——菜单和系统托盘">
-<meta name="twitter:description" content="在《Electron 初体验》里我初步入门并上手了 Electron ，在这篇文章里，我会进一步熟悉 Electron 中菜单以及系统托盘的 API ，并实现对应的功能。">
 <meta name="twitter:image" content="https://i.loli.net/2018/08/14/5b724978c354e.png">
 
 <link rel="canonical" href="https://hooray.github.io/posts/20beb467/">
@@ -147,6 +154,11 @@
     <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
         <li class="menu-item menu-item-about">
 
     <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
@@ -160,11 +172,6 @@
         <li class="menu-item menu-item-categories">
 
     <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-top">
@@ -267,7 +274,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Electron-相关/" itemprop="url" rel="index">
+                  <a href="/categories/Electron-%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index">
                     <span itemprop="name">Electron 相关</span>
                   </a>
                 </span>
@@ -305,14 +312,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><img src="https://i.loli.net/2018/08/14/5b724978c354e.png" alt></p>
+        <p><img src="https://i.loli.net/2018/08/14/5b724978c354e.png" alt=""></p>
 <p>在《<a href="/posts/20f3f334/" title="Electron 初体验">Electron 初体验</a>》里我初步入门并上手了 Electron ，在这篇文章里，我会进一步熟悉 Electron 中菜单以及系统托盘的 API ，并实现对应的功能。</p>
 <a id="more"></a>
 <h2 id="菜单"><a class="header-anchor" href="#菜单"></a><a href="https://electronjs.org/docs/api/menu" target="_blank" rel="noopener">菜单</a></h2>
 <p>有两种菜单类型：原生应用菜单和上下文菜单</p>
 <h3 id="原生应用菜单"><a class="header-anchor" href="#原生应用菜单"></a>原生应用菜单</h3>
 <p>原生应用菜单可以理解为应用窗口菜单，当我们成功运行官方 <a href="https://github.com/electron/electron-quick-start" target="_blank" rel="noopener">electron-quick-start</a> 库的时候，下图红框区域就是原生应用菜单，因为我们没有自定义设置菜单，所以 Electron 会展示一个默认的菜单。</p>
-<p><img src="https://i.loli.net/2018/08/30/5b87555268b98.png" alt></p>
+<p><img src="https://i.loli.net/2018/08/30/5b87555268b98.png" alt=""></p>
 <h3 id="上下文菜单"><a class="header-anchor" href="#上下文菜单"></a>上下文菜单</h3>
 <p>上下文菜单可以理解为就是页面上的菜单，最常见的应用就是鼠标右键菜单，当然触发条件不一定是鼠标右键，也可以是左键或者键盘事件。</p>
 <h2 id="菜单项"><a class="header-anchor" href="#菜单项"></a><a href="https://electronjs.org/docs/api/menu-item" target="_blank" rel="noopener">菜单项</a></h2>
@@ -327,11 +334,11 @@
 <p>下面我用一个实际的例子来演示这 5 种类型的菜单项。</p>
 <h3 id="原生应用菜单演示"><a class="header-anchor" href="#原生应用菜单演示"></a>原生应用菜单演示</h3>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 主进程</span></span><br><span class="line"><span class="keyword">const</span> &#123;Menu&#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> menu = Menu.buildFromTemplate([</span><br><span class="line">    &#123;</span><br><span class="line">        label: <span class="string">'原生应用菜单演示'</span>,</span><br><span class="line">        submenu: [</span><br><span class="line">            &#123;</span><br><span class="line">                label: <span class="string">'个人信息'</span>,</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                type: <span class="string">'separator'</span></span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                label: <span class="string">'开机启动'</span>,</span><br><span class="line">                type: <span class="string">'checkbox'</span>,</span><br><span class="line">                checked: <span class="literal">true</span></span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                type: <span class="string">'separator'</span></span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                label: <span class="string">'性别'</span>,</span><br><span class="line">                submenu: [</span><br><span class="line">                    &#123;</span><br><span class="line">                        label: <span class="string">'男'</span>,</span><br><span class="line">                        type: <span class="string">'radio'</span></span><br><span class="line">                    &#125;,</span><br><span class="line">                    &#123;</span><br><span class="line">                        label: <span class="string">'女'</span>,</span><br><span class="line">                        type: <span class="string">'radio'</span></span><br><span class="line">                    &#125;,</span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">]);</span><br><span class="line">Menu.setApplicationMenu(menu);</span><br></pre></td></tr></table></figure>
-<p><img src="https://i.loli.net/2018/08/30/5b87664e0dd32.png" alt></p>
+<p><img src="https://i.loli.net/2018/08/30/5b87664e0dd32.png" alt=""></p>
 <p>可以看到， type 默认是 normal ，所以可以忽略，并且如果设置了 submenu 参数， type 也可以忽略。</p>
 <h3 id="上下文菜单演示"><a class="header-anchor" href="#上下文菜单演示"></a>上下文菜单演示</h3>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 渲染进程</span></span><br><span class="line"><span class="keyword">const</span> &#123;remote&#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>);</span><br><span class="line"><span class="keyword">const</span> &#123;Menu&#125; = remote;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> menu = Menu.buildFromTemplate([</span><br><span class="line">    &#123;</span><br><span class="line">        label: <span class="string">'个人信息'</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        type: <span class="string">'separator'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        label: <span class="string">'开机启动'</span>,</span><br><span class="line">        type: <span class="string">'checkbox'</span>,</span><br><span class="line">        checked: <span class="literal">true</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        type: <span class="string">'separator'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        label: <span class="string">'性别'</span>,</span><br><span class="line">        submenu: [</span><br><span class="line">            &#123;</span><br><span class="line">                label: <span class="string">'男'</span>,</span><br><span class="line">                type: <span class="string">'radio'</span></span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                label: <span class="string">'女'</span>,</span><br><span class="line">                type: <span class="string">'radio'</span></span><br><span class="line">            &#125;,</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">]);</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'contextmenu'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    menu.popup(&#123;</span><br><span class="line">        <span class="built_in">window</span>: remote.getCurrentWindow()</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
-<p><img src="https://i.loli.net/2018/08/30/5b8764a89f2d9.png" alt></p>
+<p><img src="https://i.loli.net/2018/08/30/5b8764a89f2d9.png" alt=""></p>
 <p>我们也可以换一种写法，通过 <code>menu.append()</code> 追加菜单项，比如下面这段代码，就实现了动态增加菜单项的功能。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;remote&#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>);</span><br><span class="line"><span class="keyword">const</span> &#123;Menu, MenuItem&#125; = remote;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> menu = <span class="keyword">new</span> Menu();</span><br><span class="line">menu.append(<span class="keyword">new</span> MenuItem(&#123;</span><br><span class="line">    label: <span class="string">'点我会增加一个菜单项'</span>,</span><br><span class="line">    click: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        menu.append(<span class="keyword">new</span> MenuItem(&#123;</span><br><span class="line">            label: <span class="string">'测试项'</span></span><br><span class="line">        &#125;));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;));</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'contextmenu'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    menu.popup(&#123;</span><br><span class="line">        <span class="built_in">window</span>: remote.getCurrentWindow()</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
 <h2 id="系统托盘"><a class="header-anchor" href="#系统托盘"></a><a href="https://electronjs.org/docs/api/tray" target="_blank" rel="noopener">系统托盘</a></h2>
@@ -339,7 +346,7 @@
 <p>下面我们就创建一个系统托盘，注意，系统托盘创建的时候，必须指定一个图标路径，因为在系统托盘区域，都是用图标展示的。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 主进程</span></span><br><span class="line"><span class="keyword">const</span> &#123;app, Menu, Tray&#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> tray = <span class="keyword">new</span> Tray(<span class="string">'build/icon.ico'</span>);</span><br><span class="line"><span class="keyword">const</span> contextMenu = Menu.buildFromTemplate([</span><br><span class="line">    &#123;</span><br><span class="line">        label: <span class="string">'退出'</span>,</span><br><span class="line">        click: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            app.quit();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">]);</span><br><span class="line">tray.setToolTip(<span class="string">'应用标题'</span>);</span><br><span class="line">tray.setContextMenu(contextMenu);</span><br></pre></td></tr></table></figure>
 <p>这时候我们运行一下，发现没问题，达到我们想要的要求了，并且点击退出后，整个应用都退出了。</p>
-<p><img src="https://i.loli.net/2018/08/30/5b878a9853883.png" alt></p>
+<p><img src="https://i.loli.net/2018/08/30/5b878a9853883.png" alt=""></p>
 
     </div>
 
@@ -374,8 +381,8 @@
               <a href="/tags/menu/" rel="tag"><i class="fa fa-tag"></i> menu</a>
               <a href="/tags/menuitem/" rel="tag"><i class="fa fa-tag"></i> menuitem</a>
               <a href="/tags/tray/" rel="tag"><i class="fa fa-tag"></i> tray</a>
-              <a href="/tags/菜单/" rel="tag"><i class="fa fa-tag"></i> 菜单</a>
-              <a href="/tags/系统托盘/" rel="tag"><i class="fa fa-tag"></i> 系统托盘</a>
+              <a href="/tags/%E8%8F%9C%E5%8D%95/" rel="tag"><i class="fa fa-tag"></i> 菜单</a>
+              <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%89%98%E7%9B%98/" rel="tag"><i class="fa fa-tag"></i> 系统托盘</a>
           </div>
 
         
@@ -492,13 +499,13 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/hooray" title="GitHub → https://github.com/hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="http://weibo.com/hooray0905" title="Weibo → http://weibo.com/hooray0905" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+        <a href="http://weibo.com/hooray0905" title="Weibo → http:&#x2F;&#x2F;weibo.com&#x2F;hooray0905" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
       </span>
       <span class="links-of-author-item">
-        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
       </span>
   </div>
 
@@ -510,19 +517,19 @@
     </div>
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
-          <a href="http://hoorayos.com" title="http://hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
+          <a href="http://hoorayos.com/" title="http:&#x2F;&#x2F;hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/clicaptcha" title="https://github.com/hooray/clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
+          <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/vue-clicaptcha" title="https://github.com/hooray/vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
+          <a href="https://github.com/hooray/vue-clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/gulp-automation" title="https://gitee.com/eoner/gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
+          <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/vue-automation" title="https://gitee.com/eoner/vue-automation" rel="noopener" target="_blank">vue-automation - Vue自动化工作流</a>
+          <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue自动化工作流</a>
         </li>
     </ul>
   </div>
@@ -562,10 +569,10 @@
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     <span title="站点阅读时长">1:49</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
   </div>
 
         
@@ -696,15 +703,23 @@
   </div>
 
   
-  <script size="" alpha="" zIndex="" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
   <script src="/lib/anime.min.js"></script>
   <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
   <script src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js"></script>
   <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.min.js"></script>
   <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/muse.js"></script>
+
+
 <script src="/js/next-boot.js"></script>
+
 
 
 
@@ -733,7 +748,9 @@
   }
   </script>
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 
@@ -763,7 +780,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       admin: ['hooray'],
       id: '',
         language: 'zh-CN',
-      distractionFreeMode: 
+      distractionFreeMode: true
     });
     gitalk.render('gitalk-container');
   }, window.Gitalk);

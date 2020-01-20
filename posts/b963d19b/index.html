@@ -4,9 +4,11 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -25,7 +27,7 @@
     scheme: 'Muse',
     version: '7.7.0',
     exturl: false,
-    sidebar: {"position":"right","display":"always"},
+    sidebar: {"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -41,20 +43,19 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":true},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
   <meta name="description" content="为了充分享受到 100M 带宽的效果，准备给家里换台路由器，在做了充足的功课后，决定购买网件的 R7000 ，而且也是看中了可以刷梅林改版固件，可以让路由器的可玩性更高。那是怎么样的可玩呢？今天我就通过 R7000 成功开启了科学上网(翻墙)。 因为网上的教程和我实际操作中有一点点差异，所以下面的内容主要是记录下我个人的配置流程。">
-<meta name="keywords" content="Shadowsocks,科学上网,翻墙,路由器,网件,多态">
 <meta property="og:type" content="article">
 <meta property="og:title" content="网件 R7000 开启科学上网">
 <meta property="og:url" content="https://hooray.github.io/posts/b963d19b/index.html">
 <meta property="og:site_name" content="９９３５">
 <meta property="og:description" content="为了充分享受到 100M 带宽的效果，准备给家里换台路由器，在做了充足的功课后，决定购买网件的 R7000 ，而且也是看中了可以刷梅林改版固件，可以让路由器的可玩性更高。那是怎么样的可玩呢？今天我就通过 R7000 成功开启了科学上网(翻墙)。 因为网上的教程和我实际操作中有一点点差异，所以下面的内容主要是记录下我个人的配置流程。">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2018/05/20/5b0098fb5979d.png">
 <meta property="og:image" content="https://i.loli.net/2018/05/20/5b008d34553c9.png">
 <meta property="og:image" content="https://i.loli.net/2018/05/20/5b008f6e6d3cc.png">
@@ -66,10 +67,16 @@
 <meta property="og:image" content="https://i.loli.net/2018/05/20/5b0096308f567.png">
 <meta property="og:image" content="https://i.loli.net/2018/05/20/5b00964bd0e2a.png">
 <meta property="og:image" content="https://i.loli.net/2018/05/20/5b009684b24e3.png">
-<meta property="og:updated_time" content="2019-10-08T13:55:25.875Z">
+<meta property="article:published_time" content="2018-05-19T20:25:09.000Z">
+<meta property="article:modified_time" content="2019-10-08T13:55:25.875Z">
+<meta property="article:author" content="代码小睿">
+<meta property="article:tag" content="Shadowsocks">
+<meta property="article:tag" content="科学上网">
+<meta property="article:tag" content="翻墙">
+<meta property="article:tag" content="路由器">
+<meta property="article:tag" content="网件">
+<meta property="article:tag" content="多态">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="网件 R7000 开启科学上网">
-<meta name="twitter:description" content="为了充分享受到 100M 带宽的效果，准备给家里换台路由器，在做了充足的功课后，决定购买网件的 R7000 ，而且也是看中了可以刷梅林改版固件，可以让路由器的可玩性更高。那是怎么样的可玩呢？今天我就通过 R7000 成功开启了科学上网(翻墙)。 因为网上的教程和我实际操作中有一点点差异，所以下面的内容主要是记录下我个人的配置流程。">
 <meta name="twitter:image" content="https://i.loli.net/2018/05/20/5b0098fb5979d.png">
 
 <link rel="canonical" href="https://hooray.github.io/posts/b963d19b/">
@@ -153,6 +160,11 @@
     <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
         <li class="menu-item menu-item-about">
 
     <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
@@ -166,11 +178,6 @@
         <li class="menu-item menu-item-categories">
 
     <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-top">
@@ -273,7 +280,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/其它/" itemprop="url" rel="index">
+                  <a href="/categories/%E5%85%B6%E5%AE%83/" itemprop="url" rel="index">
                     <span itemprop="name">其它</span>
                   </a>
                 </span>
@@ -311,7 +318,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><img src="https://i.loli.net/2018/05/20/5b0098fb5979d.png" alt></p>
+        <p><img src="https://i.loli.net/2018/05/20/5b0098fb5979d.png" alt=""></p>
 <p>为了充分享受到 100M 带宽的效果，准备给家里换台路由器，在做了充足的功课后，决定购买网件的 R7000 ，而且也是看中了可以刷梅林改版固件，可以让路由器的可玩性更高。那是怎么样的可玩呢？今天我就通过 R7000 成功开启了科学上网(翻墙)。</p>
 <p>因为网上的教程和我实际操作中有一点点差异，所以下面的内容主要是记录下我个人的配置流程。</p>
 <a id="more"></a>
@@ -320,40 +327,40 @@
 <p>实际上路由器并不是重点，梅林改版固件才是重点，有很多路由器都可以刷梅林固件，即便是网件的路由器，其它型号的也可以。</p>
 <p>至于怎么刷梅林改版固件，我就不单独介绍了，网上有很多教程已经写得很详细了。像我比较偷懒，我买路由器的时候，就直接找了家可以帮忙刷固件的店铺，让店家帮我刷好。</p>
 <p>固件下载地址： <a href="http://koolshare.cn/forum-96-1.html" target="_blank" rel="noopener">Koolshare 论坛</a></p>
-<h2 id="安装-shadowsocks"><a class="header-anchor" href="#安装-shadowsocks"></a>安装 Shadowsocks</h2>
+<h2 id="安装-Shadowsocks"><a class="header-anchor" href="#安装-Shadowsocks"></a>安装 Shadowsocks</h2>
 <p>Shadowsocks 也就是我们科学上网的工具，在安装 Shadowsocks 之前，我们需要先去“系统管理 - 系统设置”里设置一下，如下图所示：</p>
-<p><img src="https://i.loli.net/2018/05/20/5b008d34553c9.png" alt></p>
+<p><img src="https://i.loli.net/2018/05/20/5b008d34553c9.png" alt=""></p>
 <p>分别将：</p>
 <p><code>Format JFFS partition at next boot</code> 设置为<strong>否</strong></p>
 <p><code>Enable JFFS custom scrips and configs</code> 设置为<strong>是</strong></p>
 <p>然后我们去“软件中心”安装“科学上网”，如果你能在“未安装”里找到“科学上网”，那就直接安装，如果找不到，那说明<s>有一股神秘的力量将</s>“科学上网”下架了，这个时候就需要进行离线安装了。</p>
 <p>找到“<a href="https://github.com/koolshare/koolshare.github.io" target="_blank" rel="noopener">软件中心GitHub项目</a>”按钮，点击它。</p>
-<p><img src="https://i.loli.net/2018/05/20/5b008f6e6d3cc.png" alt></p>
+<p><img src="https://i.loli.net/2018/05/20/5b008f6e6d3cc.png" alt=""></p>
 <p>在打开的 Github 页面里进入“shadowsocks”目录下，下载“shadowsocks.tar.gz”文件到本地。</p>
-<p><img src="https://i.loli.net/2018/05/20/5b00900a8a504.png" alt></p>
+<p><img src="https://i.loli.net/2018/05/20/5b00900a8a504.png" alt=""></p>
 <p>然后回到路由器界面，进入“离线安装”，选择并上传安装刚才下载的“shadowsocks.tar.gz”文件，等到提示安装完成，再回到“软件中心”界面，就能看到“科学上网”的图标了。</p>
-<p><img src="https://i.loli.net/2018/05/20/5b0091316cd97.png" alt></p>
+<p><img src="https://i.loli.net/2018/05/20/5b0091316cd97.png" alt=""></p>
 <blockquote>
 <p>2019/2/20 更新<br>
 软件中心GitHub项目也没有了，到<a href="https://github.com/hq450/fancyss_history_package/tree/master/fancyss_arm" target="_blank" rel="noopener">这里</a>下载离线安装包</p>
 </blockquote>
-<h2 id="配置-shadowsocks"><a class="header-anchor" href="#配置-shadowsocks"></a>配置 Shadowsocks</h2>
+<h2 id="配置-Shadowsocks"><a class="header-anchor" href="#配置-Shadowsocks"></a>配置 Shadowsocks</h2>
 <p>安装好后，点击“科学上网”，首次进入会提示你去配置节点，如果没有提示，那就手动点击“节点管理 - 添加节点”。</p>
-<p><img src="https://i.loli.net/2018/05/20/5b0092a2cf5fe.png" alt></p>
+<p><img src="https://i.loli.net/2018/05/20/5b0092a2cf5fe.png" alt=""></p>
 <p>然后就是在“编辑ss账号”里写入账号信息，因为我用的是<a href="https://duotai.love/" target="_blank" rel="noopener">多态</a>，它直接有提供 Shadow Suite 的配置信息，一模一样填入进去即可。</p>
-<p><img src="https://i.loli.net/2018/05/20/5b0093c02d80f.png" alt></p>
+<p><img src="https://i.loli.net/2018/05/20/5b0093c02d80f.png" alt=""></p>
 <div class="note info">
             <p>使用模式：【1】gfwlist模式<br>节点别名：任意填写<br>服务器地址：域名<br>服务器端口：端口<br>密码：密码<br>加密方式：加密方式</p>
           </div>
 <p>添加好后点击“应用”即可。</p>
 <p>最后我们打开“科学上网开关”，接着软件会开始检测运行状态，出现两个 <strong>✓</strong> 则表示能科学上网啦~</p>
-<p><img src="https://i.loli.net/2018/05/20/5b00958f16cfc.png" alt></p>
+<p><img src="https://i.loli.net/2018/05/20/5b00958f16cfc.png" alt=""></p>
 <h2 id="最后"><a class="header-anchor" href="#最后"></a>最后</h2>
 <p>最后当然是先测试一下，先用浏览器打开看看是否正常：</p>
-<p><img src="https://i.loli.net/2018/05/20/5b0096308f567.png" alt></p>
-<p><img src="https://i.loli.net/2018/05/20/5b00964bd0e2a.png" alt></p>
+<p><img src="https://i.loli.net/2018/05/20/5b0096308f567.png" alt=""></p>
+<p><img src="https://i.loli.net/2018/05/20/5b00964bd0e2a.png" alt=""></p>
 <p>然后再用手机看看是否正常：</p>
-<p><img src="https://i.loli.net/2018/05/20/5b009684b24e3.png" alt></p>
+<p><img src="https://i.loli.net/2018/05/20/5b009684b24e3.png" alt=""></p>
 <p>可以看到，我手机并没有开启 VPN 也可以正常科学上网，这就是路由器配置 Shadowsocks 的好处，只要连到路由器，任何终端都无需配置，默认开启科学上网。</p>
 
     </div>
@@ -386,11 +393,11 @@
           
           <div class="post-tags">
               <a href="/tags/Shadowsocks/" rel="tag"><i class="fa fa-tag"></i> Shadowsocks</a>
-              <a href="/tags/科学上网/" rel="tag"><i class="fa fa-tag"></i> 科学上网</a>
-              <a href="/tags/翻墙/" rel="tag"><i class="fa fa-tag"></i> 翻墙</a>
-              <a href="/tags/路由器/" rel="tag"><i class="fa fa-tag"></i> 路由器</a>
-              <a href="/tags/网件/" rel="tag"><i class="fa fa-tag"></i> 网件</a>
-              <a href="/tags/多态/" rel="tag"><i class="fa fa-tag"></i> 多态</a>
+              <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" rel="tag"><i class="fa fa-tag"></i> 科学上网</a>
+              <a href="/tags/%E7%BF%BB%E5%A2%99/" rel="tag"><i class="fa fa-tag"></i> 翻墙</a>
+              <a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="tag"><i class="fa fa-tag"></i> 路由器</a>
+              <a href="/tags/%E7%BD%91%E4%BB%B6/" rel="tag"><i class="fa fa-tag"></i> 网件</a>
+              <a href="/tags/%E5%A4%9A%E6%80%81/" rel="tag"><i class="fa fa-tag"></i> 多态</a>
           </div>
 
         
@@ -471,7 +478,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-shadowsocks"><span class="nav-number">2.</span> <span class="nav-text">安装 Shadowsocks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-shadowsocks"><span class="nav-number">3.</span> <span class="nav-text">配置 Shadowsocks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后"><span class="nav-number">4.</span> <span class="nav-text">最后</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Shadowsocks"><span class="nav-number">2.</span> <span class="nav-text">安装 Shadowsocks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-Shadowsocks"><span class="nav-number">3.</span> <span class="nav-text">配置 Shadowsocks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后"><span class="nav-number">4.</span> <span class="nav-text">最后</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -507,13 +514,13 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/hooray" title="GitHub → https://github.com/hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="http://weibo.com/hooray0905" title="Weibo → http://weibo.com/hooray0905" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+        <a href="http://weibo.com/hooray0905" title="Weibo → http:&#x2F;&#x2F;weibo.com&#x2F;hooray0905" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
       </span>
       <span class="links-of-author-item">
-        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
       </span>
   </div>
 
@@ -525,19 +532,19 @@
     </div>
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
-          <a href="http://hoorayos.com" title="http://hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
+          <a href="http://hoorayos.com/" title="http:&#x2F;&#x2F;hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/clicaptcha" title="https://github.com/hooray/clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
+          <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/vue-clicaptcha" title="https://github.com/hooray/vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
+          <a href="https://github.com/hooray/vue-clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/gulp-automation" title="https://gitee.com/eoner/gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
+          <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/vue-automation" title="https://gitee.com/eoner/vue-automation" rel="noopener" target="_blank">vue-automation - Vue自动化工作流</a>
+          <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue自动化工作流</a>
         </li>
     </ul>
   </div>
@@ -577,10 +584,10 @@
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     <span title="站点阅读时长">1:49</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
   </div>
 
         
@@ -711,15 +718,23 @@
   </div>
 
   
-  <script size="" alpha="" zIndex="" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
   <script src="/lib/anime.min.js"></script>
   <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
   <script src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js"></script>
   <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.min.js"></script>
   <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/muse.js"></script>
+
+
 <script src="/js/next-boot.js"></script>
+
 
 
 
@@ -748,7 +763,9 @@
   }
   </script>
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 
@@ -778,7 +795,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       admin: ['hooray'],
       id: '',
         language: 'zh-CN',
-      distractionFreeMode: 
+      distractionFreeMode: true
     });
     gitalk.render('gitalk-container');
   }, window.Gitalk);

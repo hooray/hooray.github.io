@@ -4,9 +4,11 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -25,7 +27,7 @@
     scheme: 'Muse',
     version: '7.7.0',
     exturl: false,
-    sidebar: {"position":"right","display":"always"},
+    sidebar: {"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -41,28 +43,31 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":true},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
   <meta name="description" content="导航一直是后台系统里不可缺少的一块，在 jQuery 时代，我通常会将导航的信息以数组的形式存放在某个 js 文件里，然后通过遍历数组动态渲染到页面上。 到了 Vue 后，这一方式似乎没什么变化，但工作量却变多了，因为 Vue 多了一步路由配置，不配置路由则不能跳转到需要的页面，也就是我要维护两份数据，一份是路由，一份是导航数组，而且这两份数据的相似度极高。 这一痛点其实在 vue-element">
-<meta name="keywords" content="vue,router,路由,导航">
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用嵌套路由动态生成后台导航">
 <meta property="og:url" content="https://hooray.github.io/posts/a2b0b91e/index.html">
 <meta property="og:site_name" content="９９３５">
 <meta property="og:description" content="导航一直是后台系统里不可缺少的一块，在 jQuery 时代，我通常会将导航的信息以数组的形式存放在某个 js 文件里，然后通过遍历数组动态渲染到页面上。 到了 Vue 后，这一方式似乎没什么变化，但工作量却变多了，因为 Vue 多了一步路由配置，不配置路由则不能跳转到需要的页面，也就是我要维护两份数据，一份是路由，一份是导航数组，而且这两份数据的相似度极高。 这一痛点其实在 vue-element">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2019/07/08/5d2308288030e97462.png">
 <meta property="og:image" content="https://i.loli.net/2019/07/08/5d2315923082e24310.png">
 <meta property="og:image" content="https://i.loli.net/2019/07/08/5d231f07de11824793.png">
 <meta property="og:image" content="https://i.loli.net/2019/07/08/5d230dfe979db64371.gif">
-<meta property="og:updated_time" content="2019-10-08T13:55:25.871Z">
+<meta property="article:published_time" content="2019-07-08T09:03:27.000Z">
+<meta property="article:modified_time" content="2019-10-08T13:55:25.871Z">
+<meta property="article:author" content="代码小睿">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="router">
+<meta property="article:tag" content="路由">
+<meta property="article:tag" content="导航">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="利用嵌套路由动态生成后台导航">
-<meta name="twitter:description" content="导航一直是后台系统里不可缺少的一块，在 jQuery 时代，我通常会将导航的信息以数组的形式存放在某个 js 文件里，然后通过遍历数组动态渲染到页面上。 到了 Vue 后，这一方式似乎没什么变化，但工作量却变多了，因为 Vue 多了一步路由配置，不配置路由则不能跳转到需要的页面，也就是我要维护两份数据，一份是路由，一份是导航数组，而且这两份数据的相似度极高。 这一痛点其实在 vue-element">
 <meta name="twitter:image" content="https://i.loli.net/2019/07/08/5d2308288030e97462.png">
 
 <link rel="canonical" href="https://hooray.github.io/posts/a2b0b91e/">
@@ -146,6 +151,11 @@
     <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
         <li class="menu-item menu-item-about">
 
     <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
@@ -159,11 +169,6 @@
         <li class="menu-item menu-item-categories">
 
     <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-top">
@@ -266,7 +271,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue-相关/" itemprop="url" rel="index">
+                  <a href="/categories/Vue-%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index">
                     <span itemprop="name">Vue 相关</span>
                   </a>
                 </span>
@@ -310,7 +315,7 @@
 <a id="more"></a>
 <h2 id="实现目标"><a class="header-anchor" href="#实现目标"></a>实现目标</h2>
 <p>先来看看导航的结构吧：</p>
-<p><img src="https://i.loli.net/2019/07/08/5d2308288030e97462.png" alt></p>
+<p><img src="https://i.loli.net/2019/07/08/5d2308288030e97462.png" alt=""></p>
 <p>首先在页面头部有顶部导航，其次还有侧边栏导航，当切换顶部导航的时候，侧边栏导航会改变。也就是一个三级导航，一级在顶部，二级三级在侧边栏。</p>
 <p>需求清楚了，接下来就正式开始编码了。</p>
 <h2 id="配置路由"><a class="header-anchor" href="#配置路由"></a>配置路由</h2>
@@ -320,14 +325,14 @@
 <h2 id="展示导航"><a class="header-anchor" href="#展示导航"></a>展示导航</h2>
 <p>路由配置好后，接着就是要在页面上展示出来。怎么输出呢？通过 Router 实例可以获取到路由的完整数据，数据获取到，基本上就没难度了，根据界面要求输出即可。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="keyword">this</span>.$router.options.routes)</span><br></pre></td></tr></table></figure>
-<p><img src="https://i.loli.net/2019/07/08/5d2315923082e24310.png" alt></p>
+<p><img src="https://i.loli.net/2019/07/08/5d2315923082e24310.png" alt=""></p>
 <p>这里有几点需要注意下：</p>
 <p><strong>第一点</strong>，需要使用 <code>&lt;router-link&gt;&lt;/router-link&gt;</code> 输出，这样就可以通过设置 <code>.router-link-active</code> 样式来实现导航高亮的效果，就像这样：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">v-for</span>=<span class="string">"item in nav"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">:key</span>=<span class="string">"item.path"</span> <span class="attr">:to</span>=<span class="string">"item.path"</span>&gt;</span>&#123;&#123; item.meta.title &#125;&#125;<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p><strong>第二点</strong>，由于侧边栏导航是根据当前是哪个顶部导航而展示其下面对应的导航，所以在遍历侧边栏的时候，需要加一个条件判断，也就是判断当前路由属于哪个头部导航，然后再遍历该头部导航下面的侧边栏导航。</p>
 <p>这里可以通过 <code>this.$route.matched</code> 得到当前路由的整个层级数组，其中数组第一个就是头部导航的。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="keyword">this</span>.$route.matched)</span><br></pre></td></tr></table></figure>
-<p><img src="https://i.loli.net/2019/07/08/5d231f07de11824793.png" alt></p>
+<p><img src="https://i.loli.net/2019/07/08/5d231f07de11824793.png" alt=""></p>
 <p>通过这个 <code>path</code> 就可以去判断了。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">v-for</span>=<span class="string">"sidebar in nav"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-if</span>=<span class="string">"sidebar.path == basePath"</span> <span class="attr">:key</span>=<span class="string">"sidebar.path"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">"item in sidebar.children"</span> <span class="attr">:key</span>=<span class="string">"item.path"</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 循环侧边栏导航 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line">    computed: &#123;</span><br><span class="line">        basePath() &#123;</span><br><span class="line"><span class="actionscript">            <span class="keyword">return</span> <span class="keyword">this</span>.$route.matched[<span class="number">0</span>].path</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p><strong>第三点</strong>，侧边栏实际是个二级导航，而使用 <code>&lt;router-link&gt;&lt;/router-link&gt;</code> 输出的实际是 <code>&lt;a&gt;&lt;/a&gt;</code> 标签，因为 <code>&lt;a&gt;&lt;/a&gt;</code> 标签不支持嵌套 <code>&lt;a&gt;&lt;/a&gt;</code> ，所以在输出侧边栏一级导航的时候，我们需要用其它标签代替，比如 <code>&lt;div&gt;&lt;/div&gt;</code> 。</p>
@@ -338,10 +343,10 @@
 <p>以上就能实现基础的后台框架了，在此基础上，扩展功能就可以自行发挥了。</p>
 <p>比如顶部导航要增加 icon 图标，我的做法就是在路由 <code>meta</code> 参数里增加一个 <code>icon</code> 的设置，然后页面上获取到这个 <code>icon</code> 值并做对应处理。</p>
 <p>再比如侧边栏的手风琴效果，以及面包屑导航，这里就不具体讲解如何实现了，本次的完整示例已经提交到 Gitee 上，感兴趣的可以关注这个仓库：</p>
-<script src="https://gitee.com/hooray/example-backstage-template/widget_preview"></script>
+<script src='https://gitee.com/hooray/example-backstage-template/widget_preview'></script>
 <h2 id="最终效果"><a class="header-anchor" href="#最终效果"></a>最终效果</h2>
 <p>最后来看下完整的效果吧！</p>
-<p><img src="https://i.loli.net/2019/07/08/5d230dfe979db64371.gif" alt></p>
+<p><img src="https://i.loli.net/2019/07/08/5d230dfe979db64371.gif" alt=""></p>
 
     </div>
 
@@ -374,8 +379,8 @@
           <div class="post-tags">
               <a href="/tags/vue/" rel="tag"><i class="fa fa-tag"></i> vue</a>
               <a href="/tags/router/" rel="tag"><i class="fa fa-tag"></i> router</a>
-              <a href="/tags/路由/" rel="tag"><i class="fa fa-tag"></i> 路由</a>
-              <a href="/tags/导航/" rel="tag"><i class="fa fa-tag"></i> 导航</a>
+              <a href="/tags/%E8%B7%AF%E7%94%B1/" rel="tag"><i class="fa fa-tag"></i> 路由</a>
+              <a href="/tags/%E5%AF%BC%E8%88%AA/" rel="tag"><i class="fa fa-tag"></i> 导航</a>
           </div>
 
         
@@ -492,13 +497,13 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/hooray" title="GitHub → https://github.com/hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="http://weibo.com/hooray0905" title="Weibo → http://weibo.com/hooray0905" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+        <a href="http://weibo.com/hooray0905" title="Weibo → http:&#x2F;&#x2F;weibo.com&#x2F;hooray0905" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
       </span>
       <span class="links-of-author-item">
-        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
       </span>
   </div>
 
@@ -510,19 +515,19 @@
     </div>
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
-          <a href="http://hoorayos.com" title="http://hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
+          <a href="http://hoorayos.com/" title="http:&#x2F;&#x2F;hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/clicaptcha" title="https://github.com/hooray/clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
+          <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/vue-clicaptcha" title="https://github.com/hooray/vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
+          <a href="https://github.com/hooray/vue-clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/gulp-automation" title="https://gitee.com/eoner/gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
+          <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/vue-automation" title="https://gitee.com/eoner/vue-automation" rel="noopener" target="_blank">vue-automation - Vue自动化工作流</a>
+          <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue自动化工作流</a>
         </li>
     </ul>
   </div>
@@ -562,10 +567,10 @@
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     <span title="站点阅读时长">1:49</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.0
   </div>
 
         
@@ -696,15 +701,23 @@
   </div>
 
   
-  <script size="" alpha="" zIndex="" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
   <script src="/lib/anime.min.js"></script>
   <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
   <script src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js"></script>
   <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.min.js"></script>
   <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/muse.js"></script>
+
+
 <script src="/js/next-boot.js"></script>
+
 
 
 
@@ -733,7 +746,9 @@
   }
   </script>
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 
@@ -763,7 +778,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       admin: ['hooray'],
       id: '',
         language: 'zh-CN',
-      distractionFreeMode: 
+      distractionFreeMode: true
     });
     gitalk.render('gitalk-container');
   }, window.Gitalk);
