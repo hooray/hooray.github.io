@@ -3,7 +3,7 @@
   <entry>
     <title>使用 keep-alive 的 include 属性实现 Vue 页面缓存</title>
     <url>/posts/5dc60183/</url>
-    <content><![CDATA[<p>总所周知，Vue 中的 keep-alive 可以对组件进行缓存，搭配上 vue-router 的 <code>&lt;router-view&gt;</code> 则可以实现页面缓存。</p>
+    <content><![CDATA[<p>众所周知，Vue 中的 keep-alive 可以对组件进行缓存，搭配上 vue-router 的 <code>&lt;router-view&gt;</code> 则可以实现页面缓存。</p>
 <p>但网上大多数的方案都是采用在 router 的 meta 属性里增加一个 keepAlive 字段，然后在父组件或者根组件中，根据 keepAlive 字段的状态使用 <code>&lt;keep-alive&gt;</code> 标签，实现对 <code>&lt;router-view&gt;</code> 的缓存，如下：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">keep-alive</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">router-view</span> <span class="attr">v-if</span>=<span class="string">"$route.meta.keepAlive"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">keep-alive</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">router-view</span> <span class="attr">v-if</span>=<span class="string">"!$route.meta.keepAlive"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
 <p>如果要对页面动态控制是否需要缓存，则是在 <code>beforeRouteLeave()</code> 里去控制 keepAlive 的状态。</p>
@@ -185,12 +185,13 @@
     data-height="200"
     data-width="100%"
     data-theme="default"
-    data-target="undefined"
+    data-target=""
     data-client-id=""
     data-client-secret=""
   ></div>
 </div>
 <script src="/github-card-lib/githubcard.js"></script>
+
 <p>目前提供了 <a href="https://github.com/hooray/gulp-automation" target="_blank" rel="noopener">gulp-automation</a> 和 <a href="https://github.com/hooray/vue-automation" target="_blank" rel="noopener">vue-automation</a> 两套模板，也是介绍过很多遍的东西了。</p>
 <h2 id="参考"><a class="header-anchor" href="#参考"></a>参考</h2>
 <ul>
@@ -1867,12 +1868,13 @@
     data-height="200"
     data-width="100%"
     data-theme="default"
-    data-target="undefined"
+    data-target=""
     data-client-id=""
     data-client-secret=""
   ></div>
 </div>
 <script src="/github-card-lib/githubcard.js"></script>
+
 <h2 id="难点"><a class="header-anchor" href="#难点"></a>难点</h2>
 <p>实现思路清晰后，核心部分反而没有什么难点，倒是在配合 <a href="http://www.mescroll.com" target="_blank" rel="noopener">MeScroll</a> 使用上，发现了几个需要注意的地方。</p>
 <div class="note info">
@@ -1942,8 +1944,8 @@
         <category>Web 综合</category>
       </categories>
       <tags>
-        <tag>hbuilder</tag>
         <tag>webapp</tag>
+        <tag>hbuilder</tag>
       </tags>
   </entry>
   <entry>
@@ -2783,12 +2785,13 @@
     data-height="200"
     data-width="100%"
     data-theme="default"
-    data-target="undefined"
+    data-target=""
     data-client-id=""
     data-client-secret=""
   ></div>
 </div>
 <script src="/github-card-lib/githubcard.js"></script>
+
 <p><strong>2018/12/18 更新</strong></p>
 <p>用 Vue 也实现了一遍：</p>
 <iframe height='500' scrolling='no' title='通讯录快速定位（Vue）' src='//codepen.io/hooray/embed/YRbdry/?height=500&theme-id=0&default-tab=js' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/hooray/pen/YRbdry/' target="_blank" rel="noopener">通讯录快速定位（Vue）</a> by 代码小睿 (<a href='https://codepen.io/hooray' target="_blank" rel="noopener">@hooray</a>) on <a href='https://codepen.io' target="_blank" rel="noopener">CodePen</a>.
