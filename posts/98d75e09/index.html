@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css">
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hooray.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="每个互联网开发公司，内部都少不了前端和接口的开发人员，而在开发过程中，最不可缺少的就是接口文档。 我司当然也不例外，自从几年前将前后端分离，拆分出前端组和接口组时，我就写了一份给接口组用的接口文档模版的静态页面。   其实就是简单的两个页面，一个列表页，一个详情页，接口人员直接在 PHP 里将拼装好数据的 HTML 代码输出到页面上，就有了接口文档。 而这份文档的界面风格，一用就是这么多年，经历了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="内部接口开发文档的技术点汇总">
+<meta property="og:url" content="https://hooray.github.io/posts/98d75e09/index.html">
+<meta property="og:site_name" content="９９３５">
+<meta property="og:description" content="每个互联网开发公司，内部都少不了前端和接口的开发人员，而在开发过程中，最不可缺少的就是接口文档。 我司当然也不例外，自从几年前将前后端分离，拆分出前端组和接口组时，我就写了一份给接口组用的接口文档模版的静态页面。   其实就是简单的两个页面，一个列表页，一个详情页，接口人员直接在 PHP 里将拼装好数据的 HTML 代码输出到页面上，就有了接口文档。 而这份文档的界面风格，一用就是这么多年，经历了">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2020/05/17/qYDI7umJwTLjaCV.png">
+<meta property="og:image" content="https://i.loli.net/2020/05/17/Hbjf2P4BptJzUTG.png">
+<meta property="og:image" content="https://i.loli.net/2020/05/17/IFmEc4qpZnGfWd5.png">
+<meta property="og:image" content="https://i.loli.net/2020/05/17/x8ogPw2Yf4V1WNJ.gif">
+<meta property="og:image" content="https://i.loli.net/2020/05/17/GlNpo8O2Hkc9fYu.png">
+<meta property="og:image" content="https://i.loli.net/2020/05/17/I3VQar6zKd7GpRT.gif">
+<meta property="og:image" content="https://i.loli.net/2020/05/17/fmg64DkAB59sjav.png">
+<meta property="og:image" content="https://i.loli.net/2020/05/17/OhEWL3KoeYySwnq.gif">
+<meta property="og:image" content="https://i.loli.net/2020/05/17/He3EJftF6y5LukS.png">
+<meta property="og:image" content="https://i.loli.net/2020/05/17/wuisz5jQIyNlBpD.png">
+<meta property="og:image" content="https://i.loli.net/2020/05/17/C2l31Iyzg8rSf7k.png">
+<meta property="og:image" content="https://i.loli.net/2020/05/17/7OtzSjVWv9BDcNr.png">
+<meta property="og:image" content="https://i.loli.net/2020/05/17/m6WPrgLJMiT1fBt.png">
+<meta property="og:image" content="https://i.loli.net/2020/05/17/htN43sLrqF1QjHg.gif">
+<meta property="og:image" content="https://i.loli.net/2020/05/17/vzbifmUduS1e4po.gif">
+<meta property="og:image" content="https://i.loli.net/2020/05/17/oIrEvGxhB5yAPkK.png">
+<meta property="og:image" content="https://i.loli.net/2020/05/17/p4jiOezUsAWaMkF.png">
+<meta property="og:image" content="https://gitee.com/eoner/vue-automation/widgets/widget_card.svg?colors=4183c4,ffffff,ffffff,e3e9ed,666666,9b9b9b">
+<meta property="article:published_time" content="2020-05-16T15:41:11.000Z">
+<meta property="article:modified_time" content="2020-05-16T20:22:03.843Z">
+<meta property="article:author" content="代码小睿">
+<meta property="article:tag" content="Vue">
+<meta property="article:tag" content="ElementUI">
+<meta property="article:tag" content="代码高亮">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/05/17/qYDI7umJwTLjaCV.png">
+
+<link rel="canonical" href="https://hooray.github.io/posts/98d75e09/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>内部接口开发文档的技术点汇总 | ９９３５</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">９９３５</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">代码如诗</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-top">
+
+    <a href="/top/" rel="section"><i class="fa fa-fw fa-signal"></i>热门</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hooray.github.io/posts/98d75e09/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/avatar.jpg">
+      <meta itemprop="name" content="代码小睿">
+      <meta itemprop="description" content="代码小睿的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="９９３５">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          内部接口开发文档的技术点汇总
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-16 23:41:11" itemprop="dateCreated datePublished" datetime="2020-05-16T23:41:11+08:00">2020-05-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-17 04:22:03" itemprop="dateModified" datetime="2020-05-17T04:22:03+08:00">2020-05-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web-%E7%BB%BC%E5%90%88/" itemprop="url" rel="index"><span itemprop="name">Web 综合</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/posts/98d75e09/" class="post-meta-item leancloud_visitors" data-flag-title="内部接口开发文档的技术点汇总" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>每个互联网开发公司，内部都少不了前端和接口的开发人员，而在开发过程中，最不可缺少的就是接口文档。</p>
+<p>我司当然也不例外，自从几年前将前后端分离，拆分出前端组和接口组时，我就写了一份给接口组用的接口文档模版的静态页面。</p>
+<p><img src="https://i.loli.net/2020/05/17/qYDI7umJwTLjaCV.png" alt=""></p>
+<p><img src="https://i.loli.net/2020/05/17/Hbjf2P4BptJzUTG.png" alt=""></p>
+<p>其实就是简单的两个页面，一个列表页，一个详情页，接口人员直接在 PHP 里将拼装好数据的 HTML 代码输出到页面上，就有了接口文档。</p>
+<p>而这份文档的界面风格，一用就是这么多年，经历了上百个项目，终于在前几天，实在有点看不过去了，借着手头没什么工作任务，用了3-4天时间，和一位接口小伙伴配合，整了一份全新的接口文档模版出来。</p>
+<p>因为这个属于技术部内部自产自销的产品，一切目标就是「<strong>为了让内部开发小伙伴用得爽</strong>」为前提，所以在UI、交互方面，都是自己说得算，开发过程极度愉悦。</p>
+<p>而这篇文章就是要回顾一下，我在这3-4天的时间里，到底做了些什么，有什么小亮点、小技巧。</p>
+<a id="more"></a>
+<h2 id="文档与接口分离"><a class="header-anchor" href="#文档与接口分离"></a>文档与接口分离</h2>
+<p>其实就是前后端分离，接口的小伙伴把原先在 PHP 里拼装 HTML 的那部分代码，转为接口的形式提供给我，让我可以更自由的去实现我想要的界面效果。</p>
+<p>拆分后其实就两个接口，一个列表页的接口，和一个详情页的接口。</p>
+<h2 id="技术框架选型"><a class="header-anchor" href="#技术框架选型"></a>技术框架选型</h2>
+<p>原先的文档由于没有使用任何技术框架，整体使用起来特别繁琐。例如为了解决进入从列表页进入详情页后，再返回列表页，还能回到原先位置，当时用了一个最硬核的办法：打开新页面。直接就导致看了几个接口详情页后，浏览器上面就开了一排整整齐齐的选项卡。</p>
+<p><img src="https://i.loli.net/2020/05/17/IFmEc4qpZnGfWd5.png" alt=""></p>
+<p>所以在框架的选择上，打算是做成 SPA（单页面应用）的形式，就直接使用 Vue 了，同时为了美化并统一界面风格，还使用饿了么的 <a href="https://element.eleme.cn/" target="_blank" rel="noopener">Element</a> 做为基础组件库。</p>
+<h2 id="页面缓存"><a class="header-anchor" href="#页面缓存"></a>页面缓存</h2>
+<p>既然做成了 SPA，那就必须要面对页面缓存的痛点，如何从列表页进入详情页后，再返回列表页，还能回到原先位置，就需要使用到 <code>&lt;keep-alive&gt;&lt;/keep-alive&gt;</code> 这个标签了。</p>
+<p>这部分的知识点我之前单独整理过一篇文章：《》</p>
+<h2 id="页面布局"><a class="header-anchor" href="#页面布局"></a>页面布局</h2>
+<p>布局并没有太多亮点，中规中矩的一个顶部导航外加左右分栏的布局，同时右侧主内容区支持宽度自适应。</p>
+<p><img src="https://i.loli.net/2020/05/17/x8ogPw2Yf4V1WNJ.gif" alt=""></p>
+<p>这里有个不大不小的技术难点，因为我使用了 Flex 左侧固定右侧自适应布局，导致 Element 的表格组件无法自适应宽度，以一个固定宽度展示，也导致了右侧布局无法自适应。</p>
+<p>解决办法就是给自适应的容易增加 <code>overflow: hidden;</code> 样式。</p>
+<h2 id="CSS3-计数器"><a class="header-anchor" href="#CSS3-计数器"></a>CSS3 计数器</h2>
+<p><img src="https://i.loli.net/2020/05/17/GlNpo8O2Hkc9fYu.png" alt=""></p>
+<p>结合伪类一起使用，方便实现了栏目序号的展示。</p>
+<h2 id="滚动嵌套"><a class="header-anchor" href="#滚动嵌套"></a>滚动嵌套</h2>
+<p><img src="https://i.loli.net/2020/05/17/I3VQar6zKd7GpRT.gif" alt=""></p>
+<p>由于左侧导航如果栏目过多，会出现滚动条，同时页面本身也有滚动条，就会导致如上图的效果：鼠标在左侧导航区域内滚动，滚到底部如果继续滚动鼠标，会触发页面的滚动。</p>
+<p>解决办法就是给左侧导航增加 <code>overscroll-behavior: contain;</code> 样式。</p>
+<h2 id="本地搜索"><a class="header-anchor" href="#本地搜索"></a>本地搜索</h2>
+<p><img src="https://i.loli.net/2020/05/17/fmg64DkAB59sjav.png" alt=""></p>
+<p>因为列表接口已经返回了所有接口路径和名称的信息，所以搭配上 Element 的 <code>&lt;el-autocomplete&gt;&lt;/el-autocomplete&gt;</code> 组件就可以实现本地搜索。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">search(queryString, cb) &#123;</span><br><span class="line">    <span class="keyword">let</span> results = []</span><br><span class="line">    <span class="keyword">this</span>.$store.state.global.interface.map(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">        item.kind.map(<span class="function"><span class="params">item2</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (item2.req.indexOf(queryString.toLowerCase()) &gt;= <span class="number">0</span> || item2.summary.toLowerCase().indexOf(queryString.toLowerCase()) &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">                results.push(&#123;</span><br><span class="line">                    value: item2.req,</span><br><span class="line">                    info: item2.summary</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">    cb(results)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过 <code>indexOf()</code> 模拟模糊查询，同时也别忘了 <code>toLowerCase()</code> 方法，避免因为大小写不同导致查询不到结果。</p>
+<h2 id="波浪线动画"><a class="header-anchor" href="#波浪线动画"></a>波浪线动画</h2>
+<p><img src="https://i.loli.net/2020/05/17/OhEWL3KoeYySwnq.gif" alt=""></p>
+<p>不是原创技术，感兴趣的看结尾部分的文章链接吧。</p>
+<h2 id="面包屑导航"><a class="header-anchor" href="#面包屑导航"></a>面包屑导航</h2>
+<p><img src="https://i.loli.net/2020/05/17/He3EJftF6y5LukS.png" alt=""></p>
+<p>按照一般开发流程，大家都是一个模块一个模块进行接口集成，在查阅文档的时候，也是先进入一个接口的详情页，当这个接口集成完毕后，会需要立马查看该模块下的其它接口。</p>
+<p>所以我在面包屑导航上做了一点处理，就是增加模块的下拉列表，方便快速预览并切换至其它接口。因为列表接口的数据存放在全局，所以这块数据上的处理，也是在本地进行过滤筛选的。</p>
+<p>关于这个功能，我还做过一系列的思考，一开始我会觉得这功能会不会有点累赘，因为进入详情页后，左侧会切换为有两级结构的导航，完全可以在左侧导航直接切换，甚至也可以立马切换到其它模块下的接口。</p>
+<p>但在自己实际使用的过程中发现这两个功能并不冲突，左侧导航更多的使用场景还是在“切换其它模块接口”上，因为它的两级结构，所以展示形式就做成了折叠菜单的效果。而折叠菜单就会有个问题，如上图所示，我所在的页面是“验证码”模块下的，而左侧导航因为我人为点击操作过，展开的是“客户”模块，这时候我如果想看“验证码”模块下的其它接口，我必须先找到“验证码”模块在左侧导航的什么位置，如果模块很多，找起来就会比较花时间了。</p>
+<h2 id="复制到剪贴板"><a class="header-anchor" href="#复制到剪贴板"></a>复制到剪贴板</h2>
+<p><img src="https://i.loli.net/2020/05/17/wuisz5jQIyNlBpD.png" alt=""></p>
+<p>我一度觉得复制功能才是接口文档的核心需求，因为不管是手动选取按 <code>Ctrl+C</code> 进行复制，还是在开发的时候直接手打，都有可能会出现复制不全或者敲错的情况，而复制功能就能大幅减少这个情况的出现。所以我在详情页里大量使用到了复制，例如路径、完整链接、参数名、默认值、可选值等等，都支持一键复制到剪贴板。</p>
+<h2 id="可选值预览"><a class="header-anchor" href="#可选值预览"></a>可选值预览</h2>
+<p><img src="https://i.loli.net/2020/05/17/C2l31Iyzg8rSf7k.png" alt=""></p>
+<p>老的接口文档里可选值查看是直接放在说明里展示，如果可选值比较多的情况下，看起来会不够直观。所以在新版本里，可选值的预览会更加一目了然。</p>
+<p><img src="https://i.loli.net/2020/05/17/7OtzSjVWv9BDcNr.png" alt=""></p>
+<h2 id="接口测试"><a class="header-anchor" href="#接口测试"></a>接口测试</h2>
+<p>因为详情接口里已经把接口请求参数的信息都提供给我了，所以完完全全可以做一个简单的接口测试页面。</p>
+<p><img src="https://i.loli.net/2020/05/17/m6WPrgLJMiT1fBt.png" alt=""></p>
+<p>这个接口测试的功能一来方便接口开发小伙伴的自测，因为接口开发有套固定的标准，接口文档是自动生成的，所以原先写完一个接口，自测就需要借助 Postman 等工具，将地址和参数一个个填进去才能进行，现在只需要配置几个参数的值就可以进行测试了。</p>
+<p>二来对前端也方便了一些，如果接口入参比较多，例如一个复杂的表单，前端在接口集成前可以先进行测试，看下预期效果是怎么样的，方便在接口集成过程中可以进行比对。</p>
+<p>三来方便了测试人员进行测试，例如一些复杂的业务场景需要进行一些边界值测试，通过这个功能可以提高测试效率。</p>
+<p><img src="https://i.loli.net/2020/05/17/htN43sLrqF1QjHg.gif" alt=""></p>
+<p>当然了，如果接口报错，我说的不是业务逻辑层面的报错，而是代码层面的报错，也可以很清晰的展示出来。</p>
+<p><img src="https://i.loli.net/2020/05/17/vzbifmUduS1e4po.gif" alt=""></p>
+<h2 id="Axios-GET-请求如何带数组"><a class="header-anchor" href="#Axios-GET-请求如何带数组"></a>Axios GET 请求如何带数组</h2>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">axios.get(api_url, &#123;</span><br><span class="line">    params: &#123;</span><br><span class="line">        token: <span class="string">'123'</span>,</span><br><span class="line">        type: <span class="string">'COMPANY_BANK'</span>,</span><br><span class="line">        list: [</span><br><span class="line">            &#123;</span><br><span class="line">                token: <span class="string">'123'</span>,</span><br><span class="line">                type: <span class="string">'COMPANY_BANK'</span></span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上面的这段 GET 请求，在实际请求里，是这个样子的：</p>
+<p><img src="https://i.loli.net/2020/05/17/oIrEvGxhB5yAPkK.png" alt=""></p>
+<p>这显然不是我想要的结构，搜寻一番后，解决方案如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> qs <span class="keyword">from</span> <span class="string">'qs'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> params = &#123;</span><br><span class="line">    token: <span class="string">'123'</span>,</span><br><span class="line">    type: <span class="string">'COMPANY_BANK'</span>,</span><br><span class="line">    list: [</span><br><span class="line">        &#123;</span><br><span class="line">            token: <span class="string">'123'</span>,</span><br><span class="line">            type: <span class="string">'COMPANY_BANK'</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">axios.get(api_url, &#123;</span><br><span class="line">    params: params,</span><br><span class="line">    paramsSerializer: <span class="function"><span class="keyword">function</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> qs.stringify(params, &#123;<span class="attr">arrayFormat</span>: <span class="string">'indices'</span>&#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2020/05/17/p4jiOezUsAWaMkF.png" alt=""></p>
+<h2 id="CDN-支持"><a class="header-anchor" href="#CDN-支持"></a>CDN 支持</h2>
+<p>因为使用了 Vue 三件套和 Element 组件，并且还用到了蛮多第三方的依赖包，例如复制（vue-clipboard2）、代码高亮（codemirror）、接口请求（axios）等等，导致项目打包出来后的体积比较大。</p>
+<p>考虑到最终打包出来的代码会部署到每个项目的目录下，所以这些第三方的依赖包完全可以通过 CDN 的方式引入进来，减小项目体积的同时，还能得到 CDN 加速的优势。</p>
+<p>关于在 Vue 项目中如何实现 CDN 支持，我之前也写过一篇文章《<a href="/posts/c25b8237/" title="给 Vue 项目中的 vendor.js 文件瘦身">给 Vue 项目中的 vendor.js 文件瘦身</a>》，当然我还是更推荐使用我司开发的 Vue 项目模版，通过简单的配置就可以一键开启 CDN 支持，除了 CDN 支持，还有其它很多不错的特性。</p>
+<p><a href="https://gitee.com/eoner/vue-automation" target="_blank" rel="noopener"><img src="https://gitee.com/eoner/vue-automation/widgets/widget_card.svg?colors=4183c4,ffffff,ffffff,e3e9ed,666666,9b9b9b" alt="浙江易网科技股份有限公司/vue-automation"></a></p>
+<h2 id="总结"><a class="header-anchor" href="#总结"></a>总结</h2>
+<p>做完这个产品，我突然能感受到什么叫「厚积而薄发」，文章中很多技术点看似一两句话就带过了，但这些都是我在曾经项目开发中踩过的坑，熬了几个夜晚（想了想还是不夸大其词写“无数个夜晚”了，因为通宵解决bug的次数两只手都能数得过来）才总结出的经验，所以才能在3-4天的时间里完成从构思到开发，再到交互优化，最终拿出一个至少能让自己看得过去的成品。</p>
+<h2 id="参考"><a class="header-anchor" href="#参考"></a>参考</h2>
+<ul>
+<li><a href="https://www.dazhuanlan.com/2019/10/18/5da8cfc526ce6" target="_blank" rel="noopener">flex 布局左侧固定，右侧内容不超过容器解决方案</a></li>
+<li><a href="https://www.cnblogs.com/embrace-ly/p/11290514.html" target="_blank" rel="noopener">CSS3 counter计数器</a></li>
+<li><a href="https://www.zhangxinxu.com/wordpress/2020/01/css-overscroll-behavior/" target="_blank" rel="noopener">CSS overscroll-behavior让滚动嵌套时父滚动不触发</a></li>
+<li><a href="https://www.zhangxinxu.com/wordpress/2019/04/css-wave-wavy-animation/" target="_blank" rel="noopener">CSS实现文字下面波浪线动画效果</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/reward-wechat.jpg" alt="代码小睿 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/reward-alipay.jpg" alt="代码小睿 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Vue/" rel="tag"><i class="fa fa-tag"></i> Vue</a>
+              <a href="/tags/ElementUI/" rel="tag"><i class="fa fa-tag"></i> ElementUI</a>
+              <a href="/tags/%E4%BB%A3%E7%A0%81%E9%AB%98%E4%BA%AE/" rel="tag"><i class="fa fa-tag"></i> 代码高亮</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/5dc60183/" rel="prev" title="使用 keep-alive 的 include 属性实现 Vue 页面缓存">
+      <i class="fa fa-chevron-left"></i> 使用 keep-alive 的 include 属性实现 Vue 页面缓存
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#文档与接口分离"><span class="nav-number">1.</span> <span class="nav-text">文档与接口分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#技术框架选型"><span class="nav-number">2.</span> <span class="nav-text">技术框架选型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#页面缓存"><span class="nav-number">3.</span> <span class="nav-text">页面缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#页面布局"><span class="nav-number">4.</span> <span class="nav-text">页面布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS3-计数器"><span class="nav-number">5.</span> <span class="nav-text">CSS3 计数器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#滚动嵌套"><span class="nav-number">6.</span> <span class="nav-text">滚动嵌套</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地搜索"><span class="nav-number">7.</span> <span class="nav-text">本地搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#波浪线动画"><span class="nav-number">8.</span> <span class="nav-text">波浪线动画</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面包屑导航"><span class="nav-number">9.</span> <span class="nav-text">面包屑导航</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复制到剪贴板"><span class="nav-number">10.</span> <span class="nav-text">复制到剪贴板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可选值预览"><span class="nav-number">11.</span> <span class="nav-text">可选值预览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接口测试"><span class="nav-number">12.</span> <span class="nav-text">接口测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Axios-GET-请求如何带数组"><span class="nav-number">13.</span> <span class="nav-text">Axios GET 请求如何带数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CDN-支持"><span class="nav-number">14.</span> <span class="nav-text">CDN 支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">15.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">16.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="代码小睿"
+      src="/avatar.jpg">
+  <p class="site-author-name" itemprop="name">代码小睿</p>
+  <div class="site-description" itemprop="description">代码小睿的个人博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">102</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://hoorayos.com/" title="http:&#x2F;&#x2F;hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue项目模版</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/hooray/vue-clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">代码小睿</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">124k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:53</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              Counter('post', '/classes/Counter', { title, url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"ODqTjpX8O5RTTQ9Ne0PQLrl6-gzGzoHsz","app_key":"yEmutbTLiTig6Kz3VLiocpgs","server_url":null,"security":false};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js"></script>
+  <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.min.js"></script>
+  <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 22619,
+      el    : 'wpac-rating',
+      color : 'ff9800'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '165f4a18451139d1962f',
+      clientSecret: 'd950ed9736a4364215fa554442d01f8e89dd92a8',
+      repo        : 'hooray.github.io',
+      owner       : 'hooray',
+      admin       : ['hooray'],
+      id          : location.pathname,
+        language: 'zh-CN',
+      distractionFreeMode: false
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
