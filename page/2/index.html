@@ -218,6 +218,110 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hooray.github.io/posts/1f86b6e7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/avatar.jpg">
+      <meta itemprop="name" content="Hooray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="９９３５">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/1f86b6e7/" class="post-title-link" itemprop="url">Vue 全局组件自动注册</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-07-19 09:15:39" itemprop="dateCreated datePublished" datetime="2019-07-19T09:15:39+08:00">2019-07-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-18 02:28:33" itemprop="dateModified" datetime="2020-10-18T02:28:33+08:00">2020-10-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue-%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index"><span itemprop="name">Vue 相关</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/posts/1f86b6e7/" class="post-meta-item leancloud_visitors" data-flag-title="Vue 全局组件自动注册" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在 Vue 中，我们通过 <code>Vue.component('MyComponentName', { /* ... */ })</code> 的方式来进行全局组件注册，但如果需要全局注册的组件很多，这时代码就会变得比较臃肿，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 注册 5 个全局组件</span></span><br><span class="line"><span class="keyword">import</span> ExampleComponent1 <span class="keyword">from</span> <span class="string">'./components/exampleComponent1/index'</span></span><br><span class="line"><span class="keyword">import</span> ExampleComponent2 <span class="keyword">from</span> <span class="string">'./components/exampleComponent2/index'</span></span><br><span class="line"><span class="keyword">import</span> ExampleComponent3 <span class="keyword">from</span> <span class="string">'./components/exampleComponent3/index'</span></span><br><span class="line"><span class="keyword">import</span> ExampleComponent4 <span class="keyword">from</span> <span class="string">'./components/exampleComponent4/index'</span></span><br><span class="line"><span class="keyword">import</span> ExampleComponent5 <span class="keyword">from</span> <span class="string">'./components/exampleComponent5/index'</span></span><br><span class="line"></span><br><span class="line">Vue.component(<span class="string">'ExampleComponent1'</span>, ExampleComponent1)</span><br><span class="line">Vue.component(<span class="string">'ExampleComponent2'</span>, ExampleComponent2)</span><br><span class="line">Vue.component(<span class="string">'ExampleComponent3'</span>, ExampleComponent3)</span><br><span class="line">Vue.component(<span class="string">'ExampleComponent4'</span>, ExampleComponent4)</span><br><span class="line">Vue.component(<span class="string">'ExampleComponent5'</span>, ExampleComponent5)</span><br></pre></td></tr></table></figure>
+<p>下面我们就针对这块痛点，做些优化。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/1f86b6e7/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://hooray.github.io/posts/a2b0b91e/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1153,108 +1257,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hooray.github.io/posts/e65fe6c/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/avatar.jpg">
-      <meta itemprop="name" content="Hooray">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="９９３５">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/e65fe6c/" class="post-title-link" itemprop="url">Vue 组件传递对象的坑</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-10-31 14:06:32" itemprop="dateCreated datePublished" datetime="2018-10-31T14:06:32+08:00">2018-10-31</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-08 21:55:25" itemprop="dateModified" datetime="2019-10-08T21:55:25+08:00">2019-10-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue-%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index"><span itemprop="name">Vue 相关</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/posts/e65fe6c/" class="post-meta-item leancloud_visitors" data-flag-title="Vue 组件传递对象的坑" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>958</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>近期做的一个项目，涉及到一个类似于 dialog 的组件，由于传递的数据比较多，为了偷懒，把部分可选数据统一放到一个对象变量里，打算用对象直接传递，于是，坑就来了。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/e65fe6c/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1326,7 +1328,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-count">45</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1339,7 +1341,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">106</span>
+        <span class="site-state-item-count">108</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1367,10 +1369,13 @@
           <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue项目模版</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/vue-automation-admin" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation-admin" rel="noopener" target="_blank">vue-automation-admin - 中后台管理系统模版</a>
+          <a href="https://gitee.com/hooray/fantastic-admin" title="https:&#x2F;&#x2F;gitee.com&#x2F;hooray&#x2F;fantastic-admin" rel="noopener" target="_blank">Fantastic-admin - 中后台管理系统模版</a>
         </li>
         <li class="links-of-blogroll-item">
           <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hooray.github.io/vue-sku-form" title="https:&#x2F;&#x2F;hooray.github.io&#x2F;vue-sku-form">vue-sku-form - 电商 SKU 表单配置组件</a>
         </li>
         <li class="links-of-blogroll-item">
           <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
@@ -1410,13 +1415,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">134k</span>
+    <span title="站点总字数">137k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:02</span>
+    <span title="站点阅读时长">2:04</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
