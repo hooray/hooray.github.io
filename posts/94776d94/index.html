@@ -40,7 +40,7 @@
 <meta property="og:image" content="https://i.loli.net/2020/11/05/N5ouRD63cTIXyst.gif">
 <meta property="og:image" content="https://hooray.gitee.io/fantastic-admin/logo.png">
 <meta property="article:published_time" content="2020-11-05T08:05:41.000Z">
-<meta property="article:modified_time" content="2020-11-05T16:46:41.399Z">
+<meta property="article:modified_time" content="2020-11-05T17:21:19.745Z">
 <meta property="article:author" content="Hooray">
 <meta property="article:tag" content="css3">
 <meta property="article:tag" content="后台">
@@ -255,7 +255,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-06 00:46:41" itemprop="dateModified" datetime="2020-11-06T00:46:41+08:00">2020-11-06</time>
+                <time title="修改时间：2020-11-06 01:21:19" itemprop="dateModified" datetime="2020-11-06T01:21:19+08:00">2020-11-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -280,7 +280,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.5k</span>
+              <span>2.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -307,23 +307,25 @@
 <a id="more"></a>
 <h2 id="准备工作"><a class="header-anchor" href="#准备工作"></a>准备工作</h2>
 <p>首先动效是属于设计的活，对于开发来说，其实是不擅长的，包括我也一样。那怎么办呢？一种就是请教设计大佬，但这种机会比较少，我的办法就是参考大厂出的一些设计规范，而我这次参考的就是几年前的 Material Design 。</p>
-<p>其次参考同类产品，确定哪些地方需要增加动效，优化用户体验。</p>
-<p>最后关于动效执行时间，在通读了 Material Design 后我大概可以简单理解为，移动端长动画大约在 300ms 到 400ms ，短动画大约在 150ms 到 200ms ，而桌面端动画大约在 150ms 到 200ms ，可以看到所有动画执行时长都不会超过 400ms ，设置大部分都会控制在 300ms 以内，因为过长的动画会让人感觉迟钝，相反，过短的动画也会让人觉得难以看明白。</p>
-<p>所以我最终确定的思路就是，页面中尽量避免突然出现元素，也就是说动态载入的元素尽量通过动效进行缓进及缓出，然后页面上的元素如何需要位移、变更尺寸则必须使用动效进行过渡。而动画执行时长则控制在 150ms 到 300ms 之间，因为有些大面积的动画使用 200ms 会显得太短。</p>
+<p>然后就是参考同类产品，看看他们在那些地方都加了动效，并以使用者的角度去感受动效是否合理，是否会破坏用户的操作体验。</p>
+<p>最后关于动效执行时间，在简单阅读了 Material Design 后，我大致理解为，移动端长动画大约在 300ms 到 400ms ，短动画大约在 150ms 到 200ms ，而桌面端动画大约在 150ms 到 200ms ，可以看到所有动画执行时长都不会超过 400ms ，设置大部分都会控制在 300ms 以内，因为过长的动画会让人感觉迟钝，相反，过短的动画也会让人觉得难以看明白。</p>
+<p>所以我最终确定的整体思路就是，<strong>页面中尽量避免元素突然出现或消失</strong>，也就是说动态载入和动态删除的元素尽量通过动效进行缓进和缓出，然后页面上的固定元素如果需要位移或者变更尺寸等操作，则必须使用动效进行过渡。而<strong>动画执行时长控制在 150ms 到 300ms 之间</strong>，因为有些大区域的动画使用 200ms 会显得太短，甚至看不出有动画效果。</p>
 <p>接下来就是依次改造了。</p>
 <h2 id="吸顶层"><a class="header-anchor" href="#吸顶层"></a>吸顶层</h2>
 <p><img src="https://s1.ax1x.com/2020/11/05/BRNU5d.gif" alt=""></p>
-<p>这是一个很常见的场景，通过 <code>position: fixed;</code> 固定在顶部的模块不会随着页面滚动而移动，因为固定在内容页的上方，所以使用 <code>box-shadow</code> 模拟出悬浮的效果，然后再配合 js 动态计算页面 scrollTop 的距离，从而动态增加阴影效果。</p>
+<p>这是一个很常见的场景，通过 <code>position: fixed;</code> 固定在顶部的模块不会随着页面滚动而移动，因为固定在内容区的上方，所以使用 <code>box-shadow</code> 模拟出悬浮的效果，然后再配合 js 动态计算页面 scrollTop 的距离，从而动态增加阴影效果。</p>
 <p>部分代码：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.breadcrumb-container</span> &#123;</span><br><span class="line">    <span class="attribute">transition</span>: box-shadow <span class="number">0.2s</span>;</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">10px</span> <span class="number">10px</span> -<span class="number">10px</span> <span class="number">#ccc</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="面包屑导航"><a class="header-anchor" href="#面包屑导航"></a>面包屑导航</h2>
 <p><img src="https://s1.ax1x.com/2020/11/05/BRaTN4.gif" alt=""></p>
-<p>面包屑导航用来展示当前页面所在的层级，所以当页面跳转时，面包屑导航也会随之变化。这里我没有使用淡入淡出的效果，而是从右侧做了一个位移的效果，同时配合文字的倾斜，给用户传递“进入页面”的意思。</p>
+<p>面包屑导航用来展示当前页面所在的层级，所以当路由切换时，面包屑导航也会随之变化。这里我没有使用淡入淡出的效果，而是从右侧做了一个位移的效果，同时配合文字的倾斜，给用户传递“进入页面”的意思。</p>
+<p>你会发现，这里其实是没有移出动画的，只做了进入的效果。因为用户操作的时候视觉是跟随鼠标的，而面包屑导航的变化一般是在点击侧边栏导航进行路由切换时才会变化，用户并不太会注意到面包屑导航，加上本身又是个短动画，要控制好执行时长，一出一进显得有点拖沓，所以就把移出动画去掉了，当然最终效果还是可以接受的。</p>
 <p>部分代码：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.breadcrumb-enter-active</span> &#123;</span><br><span class="line">    <span class="attribute">transition</span>: all <span class="number">0.25s</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.breadcrumb-enter</span>,</span><br><span class="line"><span class="selector-class">.breadcrumb-leave-active</span> &#123;</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateX</span>(<span class="number">30px</span>) <span class="built_in">skewX</span>(-<span class="number">50deg</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.breadcrumb-leave-active</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.breadcrumb-enter-active</span> &#123;</span><br><span class="line">    <span class="attribute">transition</span>: all <span class="number">0.2s</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.breadcrumb-enter</span>,</span><br><span class="line"><span class="selector-class">.breadcrumb-leave-active</span> &#123;</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateX</span>(<span class="number">30px</span>) <span class="built_in">skewX</span>(-<span class="number">50deg</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="标签栏"><a class="header-anchor" href="#标签栏"></a>标签栏</h2>
 <p><img src="https://s1.ax1x.com/2020/11/05/BRwwTS.gif" alt=""></p>
 <p>标签栏是参考了 chrome 浏览器的界面，新增和关闭的动画从原本横向展开的形式，改成了上下升降的形式。</p>
+<p>有人会问，这里为什么又有移出的动画了，还是上面说的那个思路，用户操作的时候视觉是跟随鼠标的，而标签栏上操作的相对比较频繁的，会在多个标签页面之间切换，所以这块移出动画不可少，而升降的形式也避免了标签元素在执行各自动画时的重叠。</p>
 <p>部分代码：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.tab-animate</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">    <span class="attribute">transition</span>: transform <span class="number">0.2s</span> ease, opacity <span class="number">0.2s</span> ease;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tabbar-enter</span>,</span><br><span class="line"><span class="selector-class">.tabbar-leave-to</span> &#123;</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateY</span>(<span class="number">30px</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.tabbar-leave-active</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="主题"><a class="header-anchor" href="#主题"></a>主题</h2>
@@ -338,6 +340,7 @@
 <p>内容区也就是业务页面，过渡没用使用 <code>transform</code> 处理，因为考虑到内容区里的元素不可控，而 <code>transform</code> 会导致 <code>position: fixed;</code> 定位失效。</p>
 <p>同时将 <code>&lt;transition&gt;</code> 组件的 mode 设置为 <code>mode=&quot;out-in&quot;</code> ，因为不设置的话，进来的元素和出去的元素动画是同时执行的，就会出现动画执行时它俩是一上一下的位置，知道上面的元素完全移出后，下面的元素突然被顶了上来，效果不理想，除非进入的元素设置成 <code>position: absolute;</code> ，将其覆盖在移出元素上方，但脱离文档里就会有太多不可控的因素。</p>
 <p>所以最终内容区的动效我采用 <code>margin-left</code> 进行处理，并且模式是先出后进，为了避免两个动效执行总时长过长，移出的动画为 200ms ，进入的动画为 150ms ，总时长控制在 400ms 以内，因为不能使用 <code>transform</code> 所以也就不能进行 GPU 加速，过短的时长偶尔会出现掉帧的情况。</p>
+<p>部分代码：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.main-enter-active</span> &#123;</span><br><span class="line">    <span class="attribute">transition</span>: all <span class="number">0.2s</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.main-leave-active</span> &#123;</span><br><span class="line">    <span class="attribute">transition</span>: all <span class="number">0.15s</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.main-enter</span> &#123;</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">margin-left</span>: -<span class="number">20px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.main-leave-to</span> &#123;</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">margin-left</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="最后"><a class="header-anchor" href="#最后"></a>最后</h2>
 <p><img src="https://i.loli.net/2020/11/05/N5ouRD63cTIXyst.gif" alt=""></p>
@@ -572,7 +575,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:06</span>
+    <span title="站点阅读时长">2:07</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
