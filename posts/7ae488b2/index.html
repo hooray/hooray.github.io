@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hooray.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.1.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="用过 vue-element-admin 的同学一定很清楚，路由的配置直接关系侧边栏导航菜单的展示，也得益于这种设计思路，几乎大部分后台框架都采用这个方案，当然也包括了我写的 Fantastic-admin 这个中后台框架。 但这个方案有个明显的问题，就是为了实现多级侧边栏导航菜单，则需要将路由配置成多级嵌套的形式，一旦超过两级，达到三级甚至更多级，就需要增加一个空布局页面（Empty.vue）用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一劳永逸，解决基于 keep-alive 的多级路由缓存问题">
+<meta property="og:url" content="https://hooray.github.io/posts/7ae488b2/index.html">
+<meta property="og:site_name" content="９９３５">
+<meta property="og:description" content="用过 vue-element-admin 的同学一定很清楚，路由的配置直接关系侧边栏导航菜单的展示，也得益于这种设计思路，几乎大部分后台框架都采用这个方案，当然也包括了我写的 Fantastic-admin 这个中后台框架。 但这个方案有个明显的问题，就是为了实现多级侧边栏导航菜单，则需要将路由配置成多级嵌套的形式，一旦超过两级，达到三级甚至更多级，就需要增加一个空布局页面（Empty.vue）用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s3.ax1x.com/2020/12/22/rrQkyn.gif">
+<meta property="og:image" content="https://s3.ax1x.com/2020/12/22/rrQ6Tf.gif">
+<meta property="article:published_time" content="2020-12-19T07:53:14.000Z">
+<meta property="article:modified_time" content="2020-12-23T15:15:12.233Z">
+<meta property="article:author" content="Hooray">
+<meta property="article:tag" content="Vue">
+<meta property="article:tag" content="vue-router">
+<meta property="article:tag" content="路由">
+<meta property="article:tag" content="缓存">
+<meta property="article:tag" content="多级路由缓存">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s3.ax1x.com/2020/12/22/rrQkyn.gif">
+
+
+<link rel="canonical" href="https://hooray.github.io/posts/7ae488b2/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>一劳永逸，解决基于 keep-alive 的多级路由缓存问题 | ９９３５</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">９９３５</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">代码如诗</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-top">
+
+    <a href="/top/" rel="section"><i class="fa fa-signal fa-fw"></i>热门</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%80%9D%E8%B7%AF"><span class="nav-number">1.</span> <span class="nav-text">解决思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E4%BB%A3%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">实例代码</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hooray"
+      src="/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Hooray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">115</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-qq fa-fw"></i>QQ</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://gitee.com/hooray/fantastic-admin" title="https:&#x2F;&#x2F;gitee.com&#x2F;hooray&#x2F;fantastic-admin" rel="noopener" target="_blank">Fantastic-admin - 中后台管理系统模版</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue项目模版</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hooray.github.io/vue-sku-form" title="https:&#x2F;&#x2F;hooray.github.io&#x2F;vue-sku-form">vue-sku-form - 电商 SKU 表单配置组件</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/hooray/hoorayos" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;hoorayos" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/hooray/vue-clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
+        </li>
+    </ul>
+  </div>
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hooray.github.io/posts/7ae488b2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/avatar.jpg">
+      <meta itemprop="name" content="Hooray">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="９９３５">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          一劳永逸，解决基于 keep-alive 的多级路由缓存问题
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-12-19 15:53:14" itemprop="dateCreated datePublished" datetime="2020-12-19T15:53:14+08:00">2020-12-19</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="fa fa-calendar-check-o"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-12-23 23:15:12" itemprop="dateModified" datetime="2020-12-23T23:15:12+08:00">2020-12-23</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Vue-%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index"><span itemprop="name">Vue 相关</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/posts/7ae488b2/" class="post-meta-item leancloud_visitors" data-flag-title="一劳永逸，解决基于 keep-alive 的多级路由缓存问题" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-clock-o"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>用过 vue-element-admin 的同学一定很清楚，路由的配置直接关系侧边栏导航菜单的展示，也得益于这种设计思路，几乎大部分后台框架都采用这个方案，当然也包括了我写的 <a target="_blank" rel="noopener" href="https://hooray.gitee.io/fantastic-admin/">Fantastic-admin</a> 这个中后台框架。</p>
+<p>但这个方案有个明显的问题，就是为了实现多级侧边栏导航菜单，则需要将路由配置成多级嵌套的形式，一旦超过两级，达到三级甚至更多级，就需要增加一个空布局页面（Empty.vue）用来给 component 使用，仅仅是为了生成层级菜单。此时就出现了一个问题，因为 keep-alive 是在 Layout 上处理的，所以超过两级以上的路由都会变得难以处理，也没有一个相对完美的解决方案。</p>
+<a id="more"></a>
+<p>在思考并解决这个问题之前，我们先来看下页面大致结构：</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+------------------------------+</span><br><span class="line">|<span class="string"> Layout                       </span>|</span><br><span class="line">|<span class="string">  +------------------------+  </span>|</span><br><span class="line">|<span class="string">  </span>|<span class="string"> Empty                  </span>|<span class="string">  </span>|</span><br><span class="line">|<span class="string">  </span>|<span class="string">  +------------------+  </span>|<span class="string">  </span>|</span><br><span class="line">|<span class="string">  </span>|<span class="string">  </span>|<span class="string"> Page             </span>|<span class="string">  </span>|<span class="string">  </span>|</span><br><span class="line">|<span class="string">  </span>|<span class="string">  +------------------+  </span>|<span class="string">  </span>|</span><br><span class="line">|<span class="string">  +------------------------+  </span>|</span><br><span class="line">+------------------------------+</span><br></pre></td></tr></table></figure>
+<p>首先 keep-alive 是在 Layout 上进行处理，如果不缓存 Empty ，则 Empty 下面的页面将无法被缓存，如果缓存 Empty ，又会导致 Empty 里面的所有页面都被缓存，无法按需清除，相信接触过的同学肯定感同身受其中的大坑。</p>
+<p><img src="https://s3.ax1x.com/2020/12/22/rrQkyn.gif" alt="多级路由导致所有页面被缓存"></p>
+<h2 id="解决思路"><a class="header-anchor" href="#解决思路"></a>解决思路</h2>
+<p>其实有一个相对清晰简单的解决思路，既然缓存二级路由是没问题，而超过二级的中间层级页面也是没太大意义的，那为什么不将路由直接处理成二级，这样页面显示也就是二级的结构。</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+------------------------------+                +------------------------------+</span><br><span class="line">|<span class="string"> Layout                       </span>|<span class="string">                </span>|<span class="string"> Layout.vue                   </span>|</span><br><span class="line">|<span class="string">  +------------------------+  </span>|<span class="string">                </span>|<span class="string">  +------------------------+  </span>|</span><br><span class="line">|<span class="string">  </span>|<span class="string"> Empty                  </span>|<span class="string">  </span>|<span class="string">  +----------&gt;  </span>|<span class="string">  </span>|<span class="string"> Page                   </span>|<span class="string">  </span>|</span><br><span class="line">|<span class="string">  </span>|<span class="string">  +------------------+  </span>|<span class="string">  </span>|<span class="string">                </span>|<span class="string">  </span>|<span class="string">                        </span>|<span class="string">  </span>|</span><br><span class="line">|<span class="string">  </span>|<span class="string">  </span>|<span class="string"> Page             </span>|<span class="string">  </span>|<span class="string">  </span>|<span class="string">                </span>|<span class="string">  </span>|<span class="string">                        </span>|<span class="string">  </span>|</span><br><span class="line">|<span class="string">  </span>|<span class="string">  +------------------+  </span>|<span class="string">  </span>|<span class="string">                </span>|<span class="string">  </span>|<span class="string">                        </span>|<span class="string">  </span>|</span><br><span class="line">|<span class="string">  +------------------------+  </span>|<span class="string">                </span>|<span class="string">  +------------------------+  </span>|</span><br><span class="line">+------------------------------+                +------------------------------+</span><br></pre></td></tr></table></figure>
+<p>这里需要注意，路由配置还是保持多级嵌套的形式，而这个配置并非最终注册使用的路由，仅仅是提供侧边栏导航菜单使用，同时再生成一份用于动态注册路由的数据，图例如果没看明白的话，可以看下面两组数据。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 原始数据（用于侧边栏导航菜单）</span></span><br><span class="line">&#123;</span><br><span class="line">    path: <span class="string">&#x27;/users&#x27;</span>,</span><br><span class="line">    meta: &#123;</span><br><span class="line">        title: <span class="string">&#x27;用户管理&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    children: [</span><br><span class="line">        &#123;</span><br><span class="line">            path: <span class="string">&#x27;clients&#x27;</span>,</span><br><span class="line">            meta: &#123;</span><br><span class="line">                title: <span class="string">&#x27;客户管理&#x27;</span></span><br><span class="line">            &#125;,</span><br><span class="line">            children: [</span><br><span class="line">                &#123;</span><br><span class="line">                    path: <span class="string">&#x27;list&#x27;</span>,</span><br><span class="line">                    meta: &#123;</span><br><span class="line">                        title: <span class="string">&#x27;客户列表&#x27;</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    path: <span class="string">&#x27;detail&#x27;</span>,</span><br><span class="line">                    meta: &#123;</span><br><span class="line">                        title: <span class="string">&#x27;客户详情&#x27;</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 处理后数据（用于动态注册路由）</span></span><br><span class="line">&#123;</span><br><span class="line">    path: <span class="string">&#x27;/users&#x27;</span>,</span><br><span class="line">    meta: &#123;</span><br><span class="line">        title: <span class="string">&#x27;用户管理&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    children: [</span><br><span class="line">        &#123;</span><br><span class="line">            path: <span class="string">&#x27;clients/list&#x27;</span>,</span><br><span class="line">            meta: &#123;</span><br><span class="line">                title: <span class="string">&#x27;客户列表&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            path: <span class="string">&#x27;clients/detail&#x27;</span>,</span><br><span class="line">            meta: &#123;</span><br><span class="line">                title: <span class="string">&#x27;客户详情&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过一个递归函数就可以处理好路由的数据，但这还不够，因为还需要处理面包屑导航。</p>
+<p>原有的面包屑导航是通过 <code>$route.matched</code> 可以获取到嵌套路由每一层级的信息，而当路由被处理成两级后，也就无法通过 <code>$route.matched</code> 进行显示了，所以在处理路由数据的同时，也需要处理面包屑导航的信息。大致最终会处理成这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    path: <span class="string">&#x27;/users&#x27;</span>,</span><br><span class="line">    meta: &#123;</span><br><span class="line">        title: <span class="string">&#x27;用户管理&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    children: [</span><br><span class="line">        &#123;</span><br><span class="line">            path: <span class="string">&#x27;clients/list&#x27;</span>,</span><br><span class="line">            meta: &#123;</span><br><span class="line">                title: <span class="string">&#x27;客户列表&#x27;</span>,</span><br><span class="line">                breadCrumb: [</span><br><span class="line">                    &#123; <span class="attr">path</span>: <span class="string">&#x27;/users&#x27;</span>, <span class="attr">title</span>: <span class="string">&#x27;用户管理&#x27;</span> &#125;,</span><br><span class="line">                    &#123; <span class="attr">path</span>: <span class="string">&#x27;clients&#x27;</span>, <span class="attr">title</span>: <span class="string">&#x27;客户管理&#x27;</span> &#125;,</span><br><span class="line">                    &#123; <span class="attr">path</span>: <span class="string">&#x27;list&#x27;</span>, <span class="attr">title</span>: <span class="string">&#x27;客户列表&#x27;</span> &#125;</span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            path: <span class="string">&#x27;clients/detail&#x27;</span>,</span><br><span class="line">            meta: &#123;</span><br><span class="line">                title: <span class="string">&#x27;客户详情&#x27;</span>,</span><br><span class="line">                breadCrumb: [</span><br><span class="line">                    &#123; <span class="attr">path</span>: <span class="string">&#x27;/users&#x27;</span>, <span class="attr">title</span>: <span class="string">&#x27;用户管理&#x27;</span> &#125;,</span><br><span class="line">                    &#123; <span class="attr">path</span>: <span class="string">&#x27;clients&#x27;</span>, <span class="attr">title</span>: <span class="string">&#x27;客户管理&#x27;</span> &#125;,</span><br><span class="line">                    &#123; <span class="attr">path</span>: <span class="string">&#x27;detail&#x27;</span>, <span class="attr">title</span>: <span class="string">&#x27;客户详情&#x27;</span> &#125;</span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样一来，通过 <code>$route.meta.breadcrumb</code> 就可以获取任意某个路由的完整面包屑导航信息了。最终效果如下：</p>
+<p><img src="https://s3.ax1x.com/2020/12/22/rrQ6Tf.gif" alt=""></p>
+<p>通过图片可以看到，这种方案也还是有一定的限制，就是路由被处理成二级后，多级嵌套关系不存在了，也就是不能在 Empty 里写任何代码，因为都会被忽略掉，只保留顶级和最深层的底级两个路由。</p>
+<p>当然通过实际情况考虑，这种限制并没有大问题，因为在后台系统里，本身模块相对独立，即便侧边栏导航菜单是嵌套层级关系的，在右侧内容展示区域，几乎都是独立模块展示，无需嵌套。</p>
+<h2 id="实例代码"><a class="header-anchor" href="#实例代码"></a>实例代码</h2>
+<p>本文主要是讨论实现思路，相关代码可在 <a target="_blank" rel="noopener" href="https://gitee.com/hooray/fantastic-admin">Fantastic-admin</a> 里查看，核心代码在这，点击<a target="_blank" rel="noopener" href="https://gitee.com/hooray/fantastic-admin/blob/master/src/store/modules/menu.js#L38">查看</a>。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div></div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/reward-wechat.jpg" alt="Hooray 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/reward-alipay.jpg" alt="Hooray 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Vue/" rel="tag"><i class="fa fa-tag"></i> Vue</a>
+              <a href="/tags/vue-router/" rel="tag"><i class="fa fa-tag"></i> vue-router</a>
+              <a href="/tags/%E8%B7%AF%E7%94%B1/" rel="tag"><i class="fa fa-tag"></i> 路由</a>
+              <a href="/tags/%E7%BC%93%E5%AD%98/" rel="tag"><i class="fa fa-tag"></i> 缓存</a>
+              <a href="/tags/%E5%A4%9A%E7%BA%A7%E8%B7%AF%E7%94%B1%E7%BC%93%E5%AD%98/" rel="tag"><i class="fa fa-tag"></i> 多级路由缓存</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/94776d94/" rel="prev" title="我是如何设计后台框架里那些锦上添花的动画效果">
+                  <i class="fa fa-chevron-left"></i> 我是如何设计后台框架里那些锦上添花的动画效果
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hooray</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">152k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:18</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 22619,
+      el    : 'wpac-rating',
+      color : 'ff9800'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      const visitors = document.querySelector('.leancloud_visitors');
+      const url = decodeURI(visitors.id);
+      const title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            const counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              Counter('post', '/classes/Counter', { title, url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      const visitors = document.querySelectorAll('.leancloud_visitors');
+      const entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            const target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    const { app_id, app_key, server_url } = {"enable":true,"app_id":"ODqTjpX8O5RTTQ9Ne0PQLrl6-gzGzoHsz","app_key":"yEmutbTLiTig6Kz3VLiocpgs","server_url":null,"security":false};
+    function fetchData(api_server) {
+      const Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    const api_server = app_id.slice(-9) === '-MdYXbMMI' ? `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com` : server_url;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
+
+<script>
+NexT.utils.loadComments('#gitalk-container', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '165f4a18451139d1962f',
+      clientSecret: 'd950ed9736a4364215fa554442d01f8e89dd92a8',
+      repo        : 'hooray.github.io',
+      owner       : 'hooray',
+      admin       : ['hooray'],
+      id          : location.pathname,
+        language: 'zh-CN',
+      distractionFreeMode: false
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

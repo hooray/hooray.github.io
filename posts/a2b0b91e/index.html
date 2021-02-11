@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 5.3.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -13,17 +15,16 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
+
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
   <link rel="stylesheet" href="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.css">
-  <link rel="stylesheet" href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css">
-  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
 
-<script id="hexo-configurations">
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"hooray.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"hooray.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.1.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-
-  <meta name="description" content="导航一直是后台系统里不可缺少的一块，在 jQuery 时代，我通常会将导航的信息以数组的形式存放在某个 js 文件里，然后通过遍历数组动态渲染到页面上。 到了 Vue 后，这一方式似乎没什么变化，但工作量却变多了，因为 Vue 多了一步路由配置，不配置路由则不能跳转到需要的页面，也就是我要维护两份数据，一份是路由，一份是导航数组，而且这两份数据的相似度极高。 这一痛点其实在 vue-element">
+<meta name="description" content="导航一直是后台系统里不可缺少的一块，在 jQuery 时代，我通常会将导航的信息以数组的形式存放在某个 js 文件里，然后通过遍历数组动态渲染到页面上。 到了 Vue 后，这一方式似乎没什么变化，但工作量却变多了，因为 Vue 多了一步路由配置，不配置路由则不能跳转到需要的页面，也就是我要维护两份数据，一份是路由，一份是导航数组，而且这两份数据的相似度极高。 这一痛点其实在 vue-element">
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用嵌套路由动态生成后台导航">
 <meta property="og:url" content="https://hooray.github.io/posts/a2b0b91e/index.html">
@@ -38,16 +39,17 @@
 <meta property="article:modified_time" content="2019-10-08T13:55:25.871Z">
 <meta property="article:author" content="Hooray">
 <meta property="article:tag" content="vue">
-<meta property="article:tag" content="router">
 <meta property="article:tag" content="路由">
+<meta property="article:tag" content="router">
 <meta property="article:tag" content="导航">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://i.loli.net/2019/07/08/5d2308288030e97462.png">
 
+
 <link rel="canonical" href="https://hooray.github.io/posts/a2b0b91e/">
 
 
-<script id="page-configurations">
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -56,60 +58,68 @@
     lang   : 'zh-CN'
   };
 </script>
-
-  <title>利用嵌套路由动态生成后台导航 | ９９３５</title>
+<title>利用嵌套路由动态生成后台导航 | ９９３５</title>
   
-
-
-
 
 
 
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">９９３５</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">代码如诗</p>
   </div>
@@ -123,42 +133,41 @@
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-top">
 
-    <a href="/top/" rel="section"><i class="fa fa-fw fa-signal"></i>热门</a>
+    <a href="/top/" rel="section"><i class="fa fa-signal fa-fw"></i>热门</a>
 
   </li>
         <li class="menu-item menu-item-commonweal">
 
-    <a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -171,13 +180,12 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
+    <div class="popup search-popup"><div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
            placeholder="搜索..." spellcheck="false"
            type="search" class="search-input">
   </div>
@@ -185,9 +193,9 @@
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
 
@@ -195,6 +203,109 @@
   </div>
 
 </div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E7%9B%AE%E6%A0%87"><span class="nav-number">1.</span> <span class="nav-text">实现目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1"><span class="nav-number">2.</span> <span class="nav-text">配置路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%95%E7%A4%BA%E5%AF%BC%E8%88%AA"><span class="nav-number">3.</span> <span class="nav-text">展示导航</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E6%89%A9%E5%B1%95"><span class="nav-number">4.</span> <span class="nav-text">功能扩展</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E7%BB%88%E6%95%88%E6%9E%9C"><span class="nav-number">5.</span> <span class="nav-text">最终效果</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hooray"
+      src="/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Hooray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">115</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-qq fa-fw"></i>QQ</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://gitee.com/hooray/fantastic-admin" title="https:&#x2F;&#x2F;gitee.com&#x2F;hooray&#x2F;fantastic-admin" rel="noopener" target="_blank">Fantastic-admin - 中后台管理系统模版</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue项目模版</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hooray.github.io/vue-sku-form" title="https:&#x2F;&#x2F;hooray.github.io&#x2F;vue-sku-form">vue-sku-form - 电商 SKU 表单配置组件</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/hooray/hoorayos" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;hoorayos" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/hooray/vue-clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
+        </li>
+    </ul>
+  </div>
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
     </header>
 
     
@@ -204,19 +315,22 @@
   </div>
   <div class="reading-progress-bar"></div>
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content post posts-expand">
-            
+    <div class="main-inner post posts-expand">
 
-    
+
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://hooray.github.io/posts/a2b0b91e/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -233,54 +347,58 @@
           利用嵌套路由动态生成后台导航
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-07-08 17:03:27" itemprop="dateCreated datePublished" datetime="2019-07-08T17:03:27+08:00">2019-07-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-08 21:55:25" itemprop="dateModified" datetime="2019-10-08T21:55:25+08:00">2019-10-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue-%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index"><span itemprop="name">Vue 相关</span></a>
-                </span>
-            </span>
+      <time title="创建时间：2019-07-08 17:03:27" itemprop="dateCreated datePublished" datetime="2019-07-08T17:03:27+08:00">2019-07-08</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="fa fa-calendar-check-o"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2019-10-08 21:55:25" itemprop="dateModified" datetime="2019-10-08T21:55:25+08:00">2019-10-08</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Vue-%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index"><span itemprop="name">Vue 相关</span></a>
+        </span>
+    </span>
 
-          
-            <span id="/posts/a2b0b91e/" class="post-meta-item leancloud_visitors" data-flag-title="利用嵌套路由动态生成后台导航" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>4.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
-            </span>
+  
+    <span id="/posts/a2b0b91e/" class="post-meta-item leancloud_visitors" data-flag-title="利用嵌套路由动态生成后台导航" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-clock-o"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
 
         </div>
       </header>
@@ -289,11 +407,9 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
         <p>导航一直是后台系统里不可缺少的一块，在 jQuery 时代，我通常会将导航的信息以数组的形式存放在某个 js 文件里，然后通过遍历数组动态渲染到页面上。</p>
 <p>到了 Vue 后，这一方式似乎没什么变化，但工作量却变多了，因为 Vue 多了一步路由配置，不配置路由则不能跳转到需要的页面，也就是我要维护两份数据，一份是路由，一份是导航数组，而且这两份数据的相似度极高。</p>
-<p>这一痛点其实在 <a href="https://github.com/PanJiaChen/vue-element-admin" target="_blank" rel="noopener">vue-element-admin</a> 里已经解决了，在通读源码后，我决定自行实现一个通过嵌套路由动态生成后台导航的功能。</p>
+<p>这一痛点其实在 <a target="_blank" rel="noopener" href="https://github.com/PanJiaChen/vue-element-admin">vue-element-admin</a> 里已经解决了，在通读源码后，我决定自行实现一个通过嵌套路由动态生成后台导航的功能。</p>
 <a id="more"></a>
 <h2 id="实现目标"><a class="header-anchor" href="#实现目标"></a>实现目标</h2>
 <p>先来看看导航的结构吧：</p>
@@ -302,25 +418,25 @@
 <p>需求清楚了，接下来就正式开始编码了。</p>
 <h2 id="配置路由"><a class="header-anchor" href="#配置路由"></a>配置路由</h2>
 <p>既然是通过路由生成导航，那首先就是要按导航的结构，配置好我们的路由，这里就需要用到路由的嵌套了，我们来看看代码是怎么样的。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> Router(&#123;</span><br><span class="line">    routes: [</span><br><span class="line">        &#123;</span><br><span class="line">            path: <span class="string">'/nav1'</span>,</span><br><span class="line">            redirect: <span class="string">'/nav1/side1'</span>,</span><br><span class="line">            component: Layout,</span><br><span class="line">            meta: &#123;</span><br><span class="line">                title: <span class="string">'顶部导航1'</span></span><br><span class="line">            &#125;,</span><br><span class="line">            children: [</span><br><span class="line">                &#123;</span><br><span class="line">                    path: <span class="string">'side1'</span>,</span><br><span class="line">                    redirect: <span class="string">'/nav1/side1/item1'</span>,</span><br><span class="line">                    component: Empty,</span><br><span class="line">                    meta: &#123;</span><br><span class="line">                        title: <span class="string">'侧边导航1'</span></span><br><span class="line">                    &#125;,</span><br><span class="line">                    children: [</span><br><span class="line">                        &#123;</span><br><span class="line">                            path: <span class="string">'item1'</span>,</span><br><span class="line">                            component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'@/views/nav1/side1/item1'</span>),</span><br><span class="line">                            meta: &#123;</span><br><span class="line">                                title: <span class="string">'子导航1'</span></span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &#123;</span><br><span class="line">                            path: <span class="string">'item2'</span>,</span><br><span class="line">                            component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'@/views/nav1/side1/item2'</span>),</span><br><span class="line">                            meta: &#123;</span><br><span class="line">                                title: <span class="string">'子导航2'</span></span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    ]</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    path: <span class="string">'side2'</span>,</span><br><span class="line">                    redirect: <span class="string">'/nav1/side2/item1'</span>,</span><br><span class="line">                    component: Empty,</span><br><span class="line">                    meta: &#123;</span><br><span class="line">                        title: <span class="string">'侧边导航2'</span></span><br><span class="line">                    &#125;,</span><br><span class="line">                    children: [</span><br><span class="line">                        &#123;</span><br><span class="line">                            path: <span class="string">'item1'</span>,</span><br><span class="line">                            component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'@/views/nav1/side2/item1'</span>),</span><br><span class="line">                            meta: &#123;</span><br><span class="line">                                title: <span class="string">'子导航1'</span></span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &#123;</span><br><span class="line">                            path: <span class="string">'item2'</span>,</span><br><span class="line">                            component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'@/views/nav1/side2/item2'</span>),</span><br><span class="line">                            meta: &#123;</span><br><span class="line">                                title: <span class="string">'子导航2'</span></span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    ]</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            path: <span class="string">'/nav2'</span>,</span><br><span class="line">            redirect: <span class="string">'/nav2/side1'</span>,</span><br><span class="line">            component: Layout,</span><br><span class="line">            meta: &#123;</span><br><span class="line">                title: <span class="string">'顶部导航2'</span></span><br><span class="line">            &#125;,</span><br><span class="line">            children: [</span><br><span class="line">                &#123;</span><br><span class="line">                    path: <span class="string">'side1'</span>,</span><br><span class="line">                    redirect: <span class="string">'/nav2/side1/item1'</span>,</span><br><span class="line">                    component: Empty,</span><br><span class="line">                    meta: &#123;</span><br><span class="line">                        title: <span class="string">'侧边导航1'</span></span><br><span class="line">                    &#125;,</span><br><span class="line">                    children: [</span><br><span class="line">                        &#123;</span><br><span class="line">                            path: <span class="string">'item1'</span>,</span><br><span class="line">                            component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'@/views/nav2/side1/item1'</span>),</span><br><span class="line">                            meta: &#123;</span><br><span class="line">                                title: <span class="string">'子导航1'</span></span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &#123;</span><br><span class="line">                            path: <span class="string">'item2'</span>,</span><br><span class="line">                            component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'@/views/nav2/side1/item2'</span>),</span><br><span class="line">                            meta: &#123;</span><br><span class="line">                                title: <span class="string">'子导航2'</span></span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    ]</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    path: <span class="string">'side2'</span>,</span><br><span class="line">                    redirect: <span class="string">'/nav2/side2/item1'</span>,</span><br><span class="line">                    component: Empty,</span><br><span class="line">                    meta: &#123;</span><br><span class="line">                        title: <span class="string">'侧边导航2'</span></span><br><span class="line">                    &#125;,</span><br><span class="line">                    children: [</span><br><span class="line">                        &#123;</span><br><span class="line">                            path: <span class="string">'item1'</span>,</span><br><span class="line">                            component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'@/views/nav2/side2/item1'</span>),</span><br><span class="line">                            meta: &#123;</span><br><span class="line">                                title: <span class="string">'子导航1'</span></span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &#123;</span><br><span class="line">                            path: <span class="string">'item2'</span>,</span><br><span class="line">                            component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'@/views/nav2/side2/item2'</span>),</span><br><span class="line">                            meta: &#123;</span><br><span class="line">                                title: <span class="string">'子导航2'</span></span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    ]</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> Router(&#123;</span><br><span class="line">    routes: [</span><br><span class="line">        &#123;</span><br><span class="line">            path: <span class="string">&#x27;/nav1&#x27;</span>,</span><br><span class="line">            redirect: <span class="string">&#x27;/nav1/side1&#x27;</span>,</span><br><span class="line">            component: Layout,</span><br><span class="line">            meta: &#123;</span><br><span class="line">                title: <span class="string">&#x27;顶部导航1&#x27;</span></span><br><span class="line">            &#125;,</span><br><span class="line">            children: [</span><br><span class="line">                &#123;</span><br><span class="line">                    path: <span class="string">&#x27;side1&#x27;</span>,</span><br><span class="line">                    redirect: <span class="string">&#x27;/nav1/side1/item1&#x27;</span>,</span><br><span class="line">                    component: Empty,</span><br><span class="line">                    meta: &#123;</span><br><span class="line">                        title: <span class="string">&#x27;侧边导航1&#x27;</span></span><br><span class="line">                    &#125;,</span><br><span class="line">                    children: [</span><br><span class="line">                        &#123;</span><br><span class="line">                            path: <span class="string">&#x27;item1&#x27;</span>,</span><br><span class="line">                            component: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;@/views/nav1/side1/item1&#x27;</span>),</span><br><span class="line">                            meta: &#123;</span><br><span class="line">                                title: <span class="string">&#x27;子导航1&#x27;</span></span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &#123;</span><br><span class="line">                            path: <span class="string">&#x27;item2&#x27;</span>,</span><br><span class="line">                            component: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;@/views/nav1/side1/item2&#x27;</span>),</span><br><span class="line">                            meta: &#123;</span><br><span class="line">                                title: <span class="string">&#x27;子导航2&#x27;</span></span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    ]</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    path: <span class="string">&#x27;side2&#x27;</span>,</span><br><span class="line">                    redirect: <span class="string">&#x27;/nav1/side2/item1&#x27;</span>,</span><br><span class="line">                    component: Empty,</span><br><span class="line">                    meta: &#123;</span><br><span class="line">                        title: <span class="string">&#x27;侧边导航2&#x27;</span></span><br><span class="line">                    &#125;,</span><br><span class="line">                    children: [</span><br><span class="line">                        &#123;</span><br><span class="line">                            path: <span class="string">&#x27;item1&#x27;</span>,</span><br><span class="line">                            component: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;@/views/nav1/side2/item1&#x27;</span>),</span><br><span class="line">                            meta: &#123;</span><br><span class="line">                                title: <span class="string">&#x27;子导航1&#x27;</span></span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &#123;</span><br><span class="line">                            path: <span class="string">&#x27;item2&#x27;</span>,</span><br><span class="line">                            component: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;@/views/nav1/side2/item2&#x27;</span>),</span><br><span class="line">                            meta: &#123;</span><br><span class="line">                                title: <span class="string">&#x27;子导航2&#x27;</span></span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    ]</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            path: <span class="string">&#x27;/nav2&#x27;</span>,</span><br><span class="line">            redirect: <span class="string">&#x27;/nav2/side1&#x27;</span>,</span><br><span class="line">            component: Layout,</span><br><span class="line">            meta: &#123;</span><br><span class="line">                title: <span class="string">&#x27;顶部导航2&#x27;</span></span><br><span class="line">            &#125;,</span><br><span class="line">            children: [</span><br><span class="line">                &#123;</span><br><span class="line">                    path: <span class="string">&#x27;side1&#x27;</span>,</span><br><span class="line">                    redirect: <span class="string">&#x27;/nav2/side1/item1&#x27;</span>,</span><br><span class="line">                    component: Empty,</span><br><span class="line">                    meta: &#123;</span><br><span class="line">                        title: <span class="string">&#x27;侧边导航1&#x27;</span></span><br><span class="line">                    &#125;,</span><br><span class="line">                    children: [</span><br><span class="line">                        &#123;</span><br><span class="line">                            path: <span class="string">&#x27;item1&#x27;</span>,</span><br><span class="line">                            component: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;@/views/nav2/side1/item1&#x27;</span>),</span><br><span class="line">                            meta: &#123;</span><br><span class="line">                                title: <span class="string">&#x27;子导航1&#x27;</span></span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &#123;</span><br><span class="line">                            path: <span class="string">&#x27;item2&#x27;</span>,</span><br><span class="line">                            component: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;@/views/nav2/side1/item2&#x27;</span>),</span><br><span class="line">                            meta: &#123;</span><br><span class="line">                                title: <span class="string">&#x27;子导航2&#x27;</span></span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    ]</span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    path: <span class="string">&#x27;side2&#x27;</span>,</span><br><span class="line">                    redirect: <span class="string">&#x27;/nav2/side2/item1&#x27;</span>,</span><br><span class="line">                    component: Empty,</span><br><span class="line">                    meta: &#123;</span><br><span class="line">                        title: <span class="string">&#x27;侧边导航2&#x27;</span></span><br><span class="line">                    &#125;,</span><br><span class="line">                    children: [</span><br><span class="line">                        &#123;</span><br><span class="line">                            path: <span class="string">&#x27;item1&#x27;</span>,</span><br><span class="line">                            component: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;@/views/nav2/side2/item1&#x27;</span>),</span><br><span class="line">                            meta: &#123;</span><br><span class="line">                                title: <span class="string">&#x27;子导航1&#x27;</span></span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &#123;</span><br><span class="line">                            path: <span class="string">&#x27;item2&#x27;</span>,</span><br><span class="line">                            component: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;@/views/nav2/side2/item2&#x27;</span>),</span><br><span class="line">                            meta: &#123;</span><br><span class="line">                                title: <span class="string">&#x27;子导航2&#x27;</span></span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    ]</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <p>可以看到，我把页面每一级的标题也配置在了路由中，统一存放在 <code>meta</code> 参数内。</p>
 <h2 id="展示导航"><a class="header-anchor" href="#展示导航"></a>展示导航</h2>
 <p>路由配置好后，接着就是要在页面上展示出来。怎么输出呢？通过 Router 实例可以获取到路由的完整数据，数据获取到，基本上就没难度了，根据界面要求输出即可。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="keyword">this</span>.$router.options.routes)</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">this</span>.$router.options.routes)</span><br></pre></td></tr></table></figure>
 <p><img src="https://i.loli.net/2019/07/08/5d2315923082e24310.png" alt=""></p>
 <p>这里有几点需要注意下：</p>
 <p><strong>第一点</strong>，需要使用 <code>&lt;router-link&gt;&lt;/router-link&gt;</code> 输出，这样就可以通过设置 <code>.router-link-active</code> 样式来实现导航高亮的效果，就像这样：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">v-for</span>=<span class="string">"item in nav"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">:key</span>=<span class="string">"item.path"</span> <span class="attr">:to</span>=<span class="string">"item.path"</span>&gt;</span>&#123;&#123; item.meta.title &#125;&#125;<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">v-for</span>=<span class="string">&quot;item in nav&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">:key</span>=<span class="string">&quot;item.path&quot;</span> <span class="attr">:to</span>=<span class="string">&quot;item.path&quot;</span>&gt;</span>&#123;&#123; item.meta.title &#125;&#125;<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p><strong>第二点</strong>，由于侧边栏导航是根据当前是哪个顶部导航而展示其下面对应的导航，所以在遍历侧边栏的时候，需要加一个条件判断，也就是判断当前路由属于哪个头部导航，然后再遍历该头部导航下面的侧边栏导航。</p>
 <p>这里可以通过 <code>this.$route.matched</code> 得到当前路由的整个层级数组，其中数组第一个就是头部导航的。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="keyword">this</span>.$route.matched)</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">this</span>.$route.matched)</span><br></pre></td></tr></table></figure>
 <p><img src="https://i.loli.net/2019/07/08/5d231f07de11824793.png" alt=""></p>
 <p>通过这个 <code>path</code> 就可以去判断了。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">v-for</span>=<span class="string">"sidebar in nav"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-if</span>=<span class="string">"sidebar.path == basePath"</span> <span class="attr">:key</span>=<span class="string">"sidebar.path"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">"item in sidebar.children"</span> <span class="attr">:key</span>=<span class="string">"item.path"</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 循环侧边栏导航 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line">    computed: &#123;</span><br><span class="line">        basePath() &#123;</span><br><span class="line"><span class="actionscript">            <span class="keyword">return</span> <span class="keyword">this</span>.$route.matched[<span class="number">0</span>].path</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">v-for</span>=<span class="string">&quot;sidebar in nav&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-if</span>=<span class="string">&quot;sidebar.path == basePath&quot;</span> <span class="attr">:key</span>=<span class="string">&quot;sidebar.path&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">&quot;item in sidebar.children&quot;</span> <span class="attr">:key</span>=<span class="string">&quot;item.path&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 循环侧边栏导航 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line">    computed: &#123;</span><br><span class="line"><span class="javascript">        <span class="function"><span class="title">basePath</span>(<span class="params"></span>)</span> &#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">return</span> <span class="built_in">this</span>.$route.matched[<span class="number">0</span>].path</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p><strong>第三点</strong>，侧边栏实际是个二级导航，而使用 <code>&lt;router-link&gt;&lt;/router-link&gt;</code> 输出的实际是 <code>&lt;a&gt;&lt;/a&gt;</code> 标签，因为 <code>&lt;a&gt;&lt;/a&gt;</code> 标签不支持嵌套 <code>&lt;a&gt;&lt;/a&gt;</code> ，所以在输出侧边栏一级导航的时候，我们需要用其它标签代替，比如 <code>&lt;div&gt;&lt;/div&gt;</code> 。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">"item in sidebar.children"</span> <span class="attr">:key</span>=<span class="string">"item.path"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"title"</span>&gt;</span>&#123;&#123; item.meta.title &#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"sidebar-menu"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">v-for</span>=<span class="string">"a in item.children"</span> <span class="attr">:key</span>=<span class="string">"a.path"</span> <span class="attr">:to</span>=<span class="string">"resolvePath(item.path, a.path)"</span> <span class="attr">class</span>=<span class="string">"sidebar-menu-item"</span>&gt;</span>&#123;&#123; a.meta.title &#125;&#125;<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">&quot;item in sidebar.children&quot;</span> <span class="attr">:key</span>=<span class="string">&quot;item.path&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span>&gt;</span>&#123;&#123; item.meta.title &#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;sidebar-menu&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">v-for</span>=<span class="string">&quot;a in item.children&quot;</span> <span class="attr">:key</span>=<span class="string">&quot;a.path&quot;</span> <span class="attr">:to</span>=<span class="string">&quot;resolvePath(item.path, a.path)&quot;</span> <span class="attr">class</span>=<span class="string">&quot;sidebar-menu-item&quot;</span>&gt;</span>&#123;&#123; a.meta.title &#125;&#125;<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p><strong>第四点</strong>，由于路由里存放的 <code>path</code> 是相对路径，而非绝对路径，所以除头部导航外，侧边栏导航的跳转地址是需要手动拼装的，通过上面的代码可以看到有调用 <code>resolvePath()</code> 这个方法，分别传入了二级三级导航的 <code>path</code> ，方法内部其实是用了 <code>path.resolve()</code> 实现跳转地址的拼装。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">resolvePath(...routePath) &#123;</span><br><span class="line">    <span class="keyword">return</span> path.resolve(<span class="keyword">this</span>.basePath, ...routePath)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">resolvePath</span>(<span class="params">...routePath</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> path.resolve(<span class="built_in">this</span>.basePath, ...routePath)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="功能扩展"><a class="header-anchor" href="#功能扩展"></a>功能扩展</h2>
 <p>以上就能实现基础的后台框架了，在此基础上，扩展功能就可以自行发挥了。</p>
 <p>比如顶部导航要增加 icon 图标，我的做法就是在路由 <code>meta</code> 参数里增加一个 <code>icon</code> 的设置，然后页面上获取到这个 <code>icon</code> 值并做对应处理。</p>
@@ -335,33 +451,30 @@
     
     
     
-        <div class="reward-container">
+
+    <footer class="post-footer">
+          <div class="reward-container">
   <div></div>
-  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
-    打赏
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
   </button>
-  <div id="qr" style="display: none;">
-      
-      <div style="display: inline-block;">
-        <img src="/reward-wechat.jpg" alt="Hooray 微信支付">
-        <p>微信支付</p>
+  <div class="post-reward">
+      <div>
+        <img src="/reward-wechat.jpg" alt="Hooray 微信">
+        <span>微信</span>
       </div>
-      
-      <div style="display: inline-block;">
+      <div>
         <img src="/reward-alipay.jpg" alt="Hooray 支付宝">
-        <p>支付宝</p>
+        <span>支付宝</span>
       </div>
 
   </div>
 </div>
 
-
-      <footer class="post-footer">
-          
           <div class="post-tags">
               <a href="/tags/vue/" rel="tag"><i class="fa fa-tag"></i> vue</a>
-              <a href="/tags/router/" rel="tag"><i class="fa fa-tag"></i> router</a>
               <a href="/tags/%E8%B7%AF%E7%94%B1/" rel="tag"><i class="fa fa-tag"></i> 路由</a>
+              <a href="/tags/router/" rel="tag"><i class="fa fa-tag"></i> router</a>
               <a href="/tags/%E5%AF%BC%E8%88%AA/" rel="tag"><i class="fa fa-tag"></i> 导航</a>
           </div>
 
@@ -372,29 +485,27 @@
     </div>
   </div>
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/posts/6237952e/" rel="prev" title="重构 vue-element-admin 权限模块">
-      <i class="fa fa-chevron-left"></i> 重构 vue-element-admin 权限模块
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/1f86b6e7/" rel="next" title="Vue 全局组件自动注册">
-      Vue 全局组件自动注册 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/6237952e/" rel="prev" title="重构 vue-element-admin 权限模块">
+                  <i class="fa fa-chevron-left"></i> 重构 vue-element-admin 权限模块
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/1f86b6e7/" rel="next" title="Vue 全局组件自动注册">
+                  Vue 全局组件自动注册 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
           </div>
-          
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
     <div class="comments" id="gitalk-container"></div>
 
 <script>
@@ -404,7 +515,7 @@
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -413,173 +524,104 @@
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#实现目标"><span class="nav-number">1.</span> <span class="nav-text">实现目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置路由"><span class="nav-number">2.</span> <span class="nav-text">配置路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#展示导航"><span class="nav-number">3.</span> <span class="nav-text">展示导航</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#功能扩展"><span class="nav-number">4.</span> <span class="nav-text">功能扩展</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最终效果"><span class="nav-number">5.</span> <span class="nav-text">最终效果</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Hooray"
-      src="/avatar.jpg">
-  <p class="site-author-name" itemprop="name">Hooray</p>
-  <div class="site-description" itemprop="description"></div>
 </div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">46</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">7</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">113</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
-      </span>
-  </div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
 
-  <div class="links-of-blogroll motion-element">
-    <div class="links-of-blogroll-title">
-      <i class="fa fa-fw fa-link"></i>
-      Links
-    </div>
-    <ul class="links-of-blogroll-list">
-        <li class="links-of-blogroll-item">
-          <a href="http://hoorayos.com/" title="http:&#x2F;&#x2F;hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue项目模版</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/hooray/fantastic-admin" title="https:&#x2F;&#x2F;gitee.com&#x2F;hooray&#x2F;fantastic-admin" rel="noopener" target="_blank">Fantastic-admin - 中后台管理系统模版</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://hooray.github.io/vue-sku-form" title="https:&#x2F;&#x2F;hooray.github.io&#x2F;vue-sku-form">vue-sku-form - 电商 SKU 表单配置组件</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/vue-clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
-        </li>
-    </ul>
-  </div>
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
 
 <div class="copyright">
-  
   &copy; 2017 – 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Hooray</span>
-    <span class="post-meta-divider">|</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
     <span class="post-meta-item-icon">
-      <i class="fa fa-area-chart"></i>
+      <i class="fa fa-chart-line"></i>
     </span>
-      <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">139k</span>
-    <span class="post-meta-divider">|</span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">152k</span>
+  </span>
+  <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:07</span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:18</span>
+  </span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
-  </div>
-
-        
 <div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
       <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
+        <i class="user"></i>
       </span>
       <span class="site-uv" title="总访客量">
         <span id="busuanzi_value_site_uv"></span>
       </span>
     </span>
-    <span class="post-meta-divider">|</span>
     <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
       <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
+        <i class="eye"></i>
       </span>
       <span class="site-pv" title="总访问量">
         <span id="busuanzi_value_site_pv"></span>
       </span>
     </span>
 </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 22619,
+      el    : 'wpac-rating',
+      color : 'ff9800'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+<script src="/js/local-search.js"></script>
 
 
 
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
@@ -591,15 +633,15 @@
     }
 
     function addCount(Counter) {
-      var visitors = document.querySelector('.leancloud_visitors');
-      var url = decodeURI(visitors.id);
-      var title = visitors.dataset.flagTitle;
+      const visitors = document.querySelector('.leancloud_visitors');
+      const url = decodeURI(visitors.id);
+      const title = visitors.dataset.flagTitle;
 
       Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
         .then(response => response.json())
         .then(({ results }) => {
           if (results.length > 0) {
-            var counter = results[0];
+            const counter = results[0];
             leancloudSelector(url).innerText = counter.time + 1;
             Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
               .catch(error => {
@@ -622,8 +664,8 @@
     }
 
     function showTime(Counter) {
-      var visitors = document.querySelectorAll('.leancloud_visitors');
-      var entries = [...visitors].map(element => {
+      const visitors = document.querySelectorAll('.leancloud_visitors');
+      const entries = [...visitors].map(element => {
         return decodeURI(element.id);
       });
 
@@ -631,7 +673,7 @@
         .then(response => response.json())
         .then(({ results }) => {
           for (let url of entries) {
-            let target = results.find(item => item.url === url);
+            const target = results.find(item => item.url === url);
             leancloudSelector(url).innerText = target ? target.time : 0;
           }
         })
@@ -640,9 +682,9 @@
         });
     }
 
-    let { app_id, app_key, server_url } = {"enable":true,"app_id":"ODqTjpX8O5RTTQ9Ne0PQLrl6-gzGzoHsz","app_key":"yEmutbTLiTig6Kz3VLiocpgs","server_url":null,"security":false};
+    const { app_id, app_key, server_url } = {"enable":true,"app_id":"ODqTjpX8O5RTTQ9Ne0PQLrl6-gzGzoHsz","app_key":"yEmutbTLiTig6Kz3VLiocpgs","server_url":null,"security":false};
     function fetchData(api_server) {
-      var Counter = (method, url, data) => {
+      const Counter = (method, url, data) => {
         return fetch(`${api_server}/1.1${url}`, {
           method,
           headers: {
@@ -661,7 +703,7 @@
       }
     }
 
-    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+    const api_server = app_id.slice(-9) === '-MdYXbMMI' ? `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com` : server_url;
 
     if (api_server) {
       fetchData(api_server);
@@ -676,80 +718,12 @@
 </script>
 
 
-      </div>
-    </footer>
-  </div>
 
-  
-  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
-  <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-  <script src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js"></script>
-  <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.min.js"></script>
-  <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-  <script>
-  if (CONFIG.page.isPost) {
-    wpac_init = window.wpac_init || [];
-    wpac_init.push({
-      widget: 'Rating',
-      id    : 22619,
-      el    : 'wpac-rating',
-      color : 'ff9800'
-    });
-    (function() {
-      if ('WIDGETPACK_LOADED' in window) return;
-      WIDGETPACK_LOADED = true;
-      var mc = document.createElement('script');
-      mc.type = 'text/javascript';
-      mc.async = true;
-      mc.src = '//embed.widgetpack.com/widget.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
-    })();
-  }
-  </script>
-
-  
-<script src="/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
 
 <script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+NexT.utils.loadComments('#gitalk-container', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
     var gitalk = new Gitalk({
       clientID    : '165f4a18451139d1962f',
       clientSecret: 'd950ed9736a4364215fa554442d01f8e89dd92a8',

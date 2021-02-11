@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 5.3.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -13,17 +15,16 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
+
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
   <link rel="stylesheet" href="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.css">
-  <link rel="stylesheet" href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css">
-  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
 
-<script id="hexo-configurations">
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"hooray.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"hooray.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.1.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-
-  <meta name="description" content="公司内部不同类型的项目越来越多，有基于 jQuery 的，也有 Vue 的，还有小程序的，虽然已经有各种类型的项目模板，但每次有新项目，都要去手动拉取对应的项目模板，然后修改里面的配置，还得删掉一些演示代码，实在有些烦人，于是开发一个内部项目脚手架的想法孕育而生。 因为之前有了解过 vue-cli 的实现思路，它将项目模板和脚手架分离，模板存放在 git 上，然后在与用户交互的过程中下载不同的模板">
+<meta name="description" content="公司内部不同类型的项目越来越多，有基于 jQuery 的，也有 Vue 的，还有小程序的，虽然已经有各种类型的项目模板，但每次有新项目，都要去手动拉取对应的项目模板，然后修改里面的配置，还得删掉一些演示代码，实在有些烦人，于是开发一个内部项目脚手架的想法孕育而生。 因为之前有了解过 vue-cli 的实现思路，它将项目模板和脚手架分离，模板存放在 git 上，然后在与用户交互的过程中下载不同的模板">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一个项目脚手架开发过程全记录">
 <meta property="og:url" content="https://hooray.github.io/posts/5dfce78f/index.html">
@@ -36,10 +37,11 @@
 <meta property="article:tag" content="脚手架">
 <meta name="twitter:card" content="summary">
 
+
 <link rel="canonical" href="https://hooray.github.io/posts/5dfce78f/">
 
 
-<script id="page-configurations">
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -48,60 +50,68 @@
     lang   : 'zh-CN'
   };
 </script>
-
-  <title>一个项目脚手架开发过程全记录 | ９９３５</title>
+<title>一个项目脚手架开发过程全记录 | ９９３５</title>
   
-
-
-
 
 
 
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">９９３５</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">代码如诗</p>
   </div>
@@ -115,42 +125,41 @@
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-top">
 
-    <a href="/top/" rel="section"><i class="fa fa-fw fa-signal"></i>热门</a>
+    <a href="/top/" rel="section"><i class="fa fa-signal fa-fw"></i>热门</a>
 
   </li>
         <li class="menu-item menu-item-commonweal">
 
-    <a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -163,13 +172,12 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
+    <div class="popup search-popup"><div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
            placeholder="搜索..." spellcheck="false"
            type="search" class="search-input">
   </div>
@@ -177,9 +185,9 @@
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
 
@@ -187,6 +195,109 @@
   </div>
 
 </div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E4%BE%9D%E8%B5%96%E5%BA%93"><span class="nav-number">1.</span> <span class="nav-text">准备依赖库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4%E8%A1%8C"><span class="nav-number">3.</span> <span class="nav-text">处理命令行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BA%A4%E4%BA%92"><span class="nav-number">4.</span> <span class="nav-text">命令行交互</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E9%A1%B9%E7%9B%AE%E6%A8%A1%E6%9D%BF"><span class="nav-number">5.</span> <span class="nav-text">下载项目模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%B2%E6%9F%93%E9%A1%B9%E7%9B%AE%E6%A8%A1%E6%9D%BF"><span class="nav-number">6.</span> <span class="nav-text">渲染项目模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%A8%A1%E6%9D%BF%E4%BE%9D%E8%B5%96%E5%8C%85"><span class="nav-number">7.</span> <span class="nav-text">安装模板依赖包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">8.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E8%A7%89%E7%BE%8E%E5%8C%96"><span class="nav-number">9.</span> <span class="nav-text">视觉美化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Loading-%E7%BE%8E%E5%8C%96"><span class="nav-number">9.1.</span> <span class="nav-text">Loading 美化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E5%AD%97%E9%A2%9C%E8%89%B2%E7%BE%8E%E5%8C%96"><span class="nav-number">9.2.</span> <span class="nav-text">文字颜色美化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%A6%E5%8F%B7%E7%BE%8E%E5%8C%96"><span class="nav-number">9.3.</span> <span class="nav-text">符号美化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E5%B8%83"><span class="nav-number">10.</span> <span class="nav-text">发布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81"><span class="nav-number">11.</span> <span class="nav-text">完整代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">12.</span> <span class="nav-text">参考</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hooray"
+      src="/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Hooray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">115</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-qq fa-fw"></i>QQ</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://gitee.com/hooray/fantastic-admin" title="https:&#x2F;&#x2F;gitee.com&#x2F;hooray&#x2F;fantastic-admin" rel="noopener" target="_blank">Fantastic-admin - 中后台管理系统模版</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue项目模版</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hooray.github.io/vue-sku-form" title="https:&#x2F;&#x2F;hooray.github.io&#x2F;vue-sku-form">vue-sku-form - 电商 SKU 表单配置组件</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/hooray/hoorayos" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;hoorayos" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/hooray/vue-clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
+        </li>
+    </ul>
+  </div>
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
     </header>
 
     
@@ -196,19 +307,22 @@
   </div>
   <div class="reading-progress-bar"></div>
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content post posts-expand">
-            
+    <div class="main-inner post posts-expand">
 
-    
+
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://hooray.github.io/posts/5dfce78f/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -225,54 +339,58 @@
           一个项目脚手架开发过程全记录
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-09-30 11:22:31" itemprop="dateCreated datePublished" datetime="2019-09-30T11:22:31+08:00">2019-09-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-08 21:55:25" itemprop="dateModified" datetime="2019-10-08T21:55:25+08:00">2019-10-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">开发工具</span></a>
-                </span>
-            </span>
+      <time title="创建时间：2019-09-30 11:22:31" itemprop="dateCreated datePublished" datetime="2019-09-30T11:22:31+08:00">2019-09-30</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="fa fa-calendar-check-o"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2019-10-08 21:55:25" itemprop="dateModified" datetime="2019-10-08T21:55:25+08:00">2019-10-08</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">开发工具</span></a>
+        </span>
+    </span>
 
-          
-            <span id="/posts/5dfce78f/" class="post-meta-item leancloud_visitors" data-flag-title="一个项目脚手架开发过程全记录" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
+  
+    <span id="/posts/5dfce78f/" class="post-meta-item leancloud_visitors" data-flag-title="一个项目脚手架开发过程全记录" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-clock-o"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
 
         </div>
       </header>
@@ -281,8 +399,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
         <p>公司内部不同类型的项目越来越多，有基于 jQuery 的，也有 Vue 的，还有小程序的，虽然已经有各种类型的项目模板，但每次有新项目，都要去手动拉取对应的项目模板，然后修改里面的配置，还得删掉一些演示代码，实在有些烦人，于是开发一个内部项目脚手架的想法孕育而生。</p>
 <p>因为之前有了解过 vue-cli 的实现思路，它将项目模板和脚手架分离，模板存放在 git 上，然后在与用户交互的过程中下载不同的模板，这样模板可以单独维护，即便有更新，用户也不需要更新脚手架。</p>
 <p>思路清晰了，下面就该动动手了。</p>
@@ -290,58 +406,58 @@
 <h2 id="准备依赖库"><a class="header-anchor" href="#准备依赖库"></a>准备依赖库</h2>
 <p>核心依赖库：</p>
 <ul>
-<li><a href="https://www.npmjs.com/package/commander" target="_blank" rel="noopener">commander</a> 解析命令行的命令和参数，用于处理用户输入的指令</li>
-<li><a href="https://www.npmjs.com/package/inquirer" target="_blank" rel="noopener">inquirer</a> 通用的命令行用户界面集合，用于和用户进行交互</li>
-<li><a href="https://www.npmjs.com/package/download-git-repo" target="_blank" rel="noopener">download-git-repo</a> 下载 git 仓库，用于下载项目模板</li>
-<li><a href="https://www.npmjs.com/package/handlebars" target="_blank" rel="noopener">handlebars</a> 模板引擎，用于将用户提交的信息填充到文件中</li>
-<li><a href="https://www.npmjs.com/package/shelljs" target="_blank" rel="noopener">shelljs</a> shell 命令执行，用于执行部分特殊指令</li>
+<li><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/commander">commander</a> 解析命令行的命令和参数，用于处理用户输入的指令</li>
+<li><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/inquirer">inquirer</a> 通用的命令行用户界面集合，用于和用户进行交互</li>
+<li><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/download-git-repo">download-git-repo</a> 下载 git 仓库，用于下载项目模板</li>
+<li><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/handlebars">handlebars</a> 模板引擎，用于将用户提交的信息填充到文件中</li>
+<li><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/shelljs">shelljs</a> shell 命令执行，用于执行部分特殊指令</li>
 </ul>
 <p>辅助依赖库：</p>
 <ul>
-<li><a href="https://www.npmjs.com/package/ora" target="_blank" rel="noopener">ora</a> 终端旋转器，用于展示 loading 提示</li>
-<li><a href="https://www.npmjs.com/package/chalk" target="_blank" rel="noopener">chalk</a> 给终端字体加上颜色</li>
-<li><a href="https://www.npmjs.com/package/log-symbols" target="_blank" rel="noopener">log-symbols</a> 给终端加上彩色符号</li>
+<li><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/ora">ora</a> 终端旋转器，用于展示 loading 提示</li>
+<li><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/chalk">chalk</a> 给终端字体加上颜色</li>
+<li><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/log-symbols">log-symbols</a> 给终端加上彩色符号</li>
 </ul>
 <h2 id="初始化"><a class="header-anchor" href="#初始化"></a>初始化</h2>
 <p>首先准备一个空目录，然后依次运行：</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yarn init</span><br><span class="line">yarn <span class="keyword">add</span><span class="bash"> commander inquirer download-git-repo handlebars shelljs ora chalk <span class="built_in">log</span>-symbols</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yarn init</span><br><span class="line">yarn <span class="keyword">add </span>commander inquirer download-git-repo handlebars <span class="keyword">shelljs </span><span class="keyword">ora </span>chalk log-symbols</span><br></pre></td></tr></table></figure>
 <p>此时目录下就会生成好 <code>package.json</code> 文件，并且相关依赖也都安装好了。</p>
 <p>然后打开 <code>package.json</code> 增加 <code>bin</code> 字段，并在里面定义我们的命令名和执行文件：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"1one-project"</span>,</span><br><span class="line">  ...</span><br><span class="line">  "bin": &#123;</span><br><span class="line">    "create-1one-project": "index.js"</span><br><span class="line">  &#125;,</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;1one-project&quot;</span>,</span><br><span class="line">  ...</span><br><span class="line">  &quot;bin&quot;: &#123;</span><br><span class="line">    &quot;create-1one-project&quot;: &quot;index.js&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>最后创建 <code>index.js</code> 文件，并在文件开头写上 <code>#!/usr/bin/env node</code> ，代表这个文件是 node 环境下的脚本文件。</p>
 <h2 id="处理命令行"><a class="header-anchor" href="#处理命令行"></a>处理命令行</h2>
 <p>准备工作做好后，先构思一下最终效果，我们的命令行不需要太多功能，只需要一个 init 即可，即 <code>create-1one-project init</code> 的指令，实现如下：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> program = <span class="built_in">require</span>(<span class="string">'commander'</span>);</span><br><span class="line"></span><br><span class="line">program.command(<span class="string">'init [name]'</span>)</span><br><span class="line">    .action(<span class="function">(<span class="params">name</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(name);</span><br><span class="line">    &#125;);</span><br><span class="line">program.parse(process.argv);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> program = <span class="built_in">require</span>(<span class="string">&#x27;commander&#x27;</span>);</span><br><span class="line"></span><br><span class="line">program.command(<span class="string">&#x27;init [name]&#x27;</span>)</span><br><span class="line">    .action(<span class="function">(<span class="params">name</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(name);</span><br><span class="line">    &#125;);</span><br><span class="line">program.parse(process.argv);</span><br></pre></td></tr></table></figure>
 <p>这里我增加了一个可选的 <code>name</code> 参数，下面会用到它。</p>
 <h2 id="命令行交互"><a class="header-anchor" href="#命令行交互"></a>命令行交互</h2>
-<p>这部分就靠 <a href="https://www.npmjs.com/package/inquirer" target="_blank" rel="noopener">inquirer</a> 实现了，主要就是构建一套问答系统，收集交互过程中用户提交选择的信息。</p>
-<p>因为在 <a href="https://gitee.com/eoner/gulp-automation" target="_blank" rel="noopener">gulp-automation</a> 里有使用过，所以并不陌生，直接看代码。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> inquirer = <span class="built_in">require</span>(<span class="string">'inquirer'</span>);</span><br><span class="line"></span><br><span class="line">inquirer.prompt([</span><br><span class="line">    &#123;</span><br><span class="line">        type: <span class="string">'input'</span>,</span><br><span class="line">        message: <span class="string">'请输入项目名'</span>,</span><br><span class="line">        name: <span class="string">'name'</span>,</span><br><span class="line">        <span class="keyword">default</span>: name,</span><br><span class="line">        validate: <span class="function"><span class="keyword">function</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (val == <span class="string">''</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="string">'项目必须要有名称噢'</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (fs.existsSync(val)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="string">'项目名已存在'</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        type: <span class="string">'list'</span>,</span><br><span class="line">        message: <span class="string">'请选择项目类型'</span>,</span><br><span class="line">        name: <span class="string">'type'</span>,</span><br><span class="line">        choices: [<span class="string">'jQuery'</span>, <span class="string">'vue'</span>]</span><br><span class="line">    &#125;</span><br><span class="line">]).then(<span class="function"><span class="params">answers</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(answers);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>这部分就靠 <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/inquirer">inquirer</a> 实现了，主要就是构建一套问答系统，收集交互过程中用户提交选择的信息。</p>
+<p>因为在 <a target="_blank" rel="noopener" href="https://gitee.com/eoner/gulp-automation">gulp-automation</a> 里有使用过，所以并不陌生，直接看代码。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> inquirer = <span class="built_in">require</span>(<span class="string">&#x27;inquirer&#x27;</span>);</span><br><span class="line"></span><br><span class="line">inquirer.prompt([</span><br><span class="line">    &#123;</span><br><span class="line">        type: <span class="string">&#x27;input&#x27;</span>,</span><br><span class="line">        message: <span class="string">&#x27;请输入项目名&#x27;</span>,</span><br><span class="line">        name: <span class="string">&#x27;name&#x27;</span>,</span><br><span class="line">        <span class="keyword">default</span>: name,</span><br><span class="line">        validate: <span class="function"><span class="keyword">function</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (val == <span class="string">&#x27;&#x27;</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="string">&#x27;项目必须要有名称噢&#x27;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (fs.existsSync(val)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="string">&#x27;项目名已存在&#x27;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        type: <span class="string">&#x27;list&#x27;</span>,</span><br><span class="line">        message: <span class="string">&#x27;请选择项目类型&#x27;</span>,</span><br><span class="line">        name: <span class="string">&#x27;type&#x27;</span>,</span><br><span class="line">        choices: [<span class="string">&#x27;jQuery&#x27;</span>, <span class="string">&#x27;vue&#x27;</span>]</span><br><span class="line">    &#125;</span><br><span class="line">]).then(<span class="function"><span class="params">answers</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(answers);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <h2 id="下载项目模板"><a class="header-anchor" href="#下载项目模板"></a>下载项目模板</h2>
 <p>因为在上一步我做了项目类型的选择，也就代表需要根据用户选择下载不用的项目模板。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> download = <span class="built_in">require</span>(<span class="string">'download-git-repo'</span>);</span><br><span class="line"></span><br><span class="line">download(answers.type == <span class="string">'jQuery'</span> ? <span class="string">'hooray/jquery-project-template'</span> ? <span class="string">'hooray/vue-project-template'</span>, answers.name, err =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'项目创建失败'</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'项目创建成功'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p><a href="https://www.npmjs.com/package/download-git-repo" target="_blank" rel="noopener">download-git-repo</a> 支持从 Github 、Gitlab 和 Bitbucket 去下载，具体用法请查看官方文档。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> download = <span class="built_in">require</span>(<span class="string">&#x27;download-git-repo&#x27;</span>);</span><br><span class="line"></span><br><span class="line">download(answers.type == <span class="string">&#x27;jQuery&#x27;</span> ? <span class="string">&#x27;hooray/jquery-project-template&#x27;</span> ? <span class="string">&#x27;hooray/vue-project-template&#x27;</span>, answers.name, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;项目创建失败&#x27;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;项目创建成功&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/download-git-repo">download-git-repo</a> 支持从 Github 、Gitlab 和 Bitbucket 去下载，具体用法请查看官方文档。</p>
 <h2 id="渲染项目模板"><a class="header-anchor" href="#渲染项目模板"></a>渲染项目模板</h2>
 <p>这里需要使用 handlebars 语法对模板中的 <code>package.json</code> 文件进行修改，当然不限于这个文件，这里只是抛砖引玉。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"&#123;&#123;name&#125;&#125;"</span>,</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"1.0.0"</span>,</span><br><span class="line">  <span class="attr">"description"</span>: <span class="string">""</span>,</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;&#123;&#123;name&#125;&#125;&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;version&quot;</span>: <span class="string">&quot;1.0.0&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;description&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>随后就是在模板下载成功后，将需要的信息渲染到 <code>package.json</code> 中。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> handlebars = <span class="built_in">require</span>(<span class="string">'handlebars'</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> packageFile = <span class="string">`<span class="subst">$&#123;answers.name&#125;</span>/package.json`</span>;</span><br><span class="line"><span class="keyword">if</span> (fs.existsSync(packageFile)) &#123;</span><br><span class="line">    <span class="keyword">const</span> content = fs</span><br><span class="line">        .readFileSync(packageFile)</span><br><span class="line">        .toString();</span><br><span class="line">    <span class="keyword">const</span> result = handlebars.compile(content)(&#123;</span><br><span class="line">        name: answers.name</span><br><span class="line">    &#125;);</span><br><span class="line">    fs.writeFileSync(packageFile, result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> handlebars = <span class="built_in">require</span>(<span class="string">&#x27;handlebars&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> packageFile = <span class="string">`<span class="subst">$&#123;answers.name&#125;</span>/package.json`</span>;</span><br><span class="line"><span class="keyword">if</span> (fs.existsSync(packageFile)) &#123;</span><br><span class="line">    <span class="keyword">const</span> content = fs</span><br><span class="line">        .readFileSync(packageFile)</span><br><span class="line">        .toString();</span><br><span class="line">    <span class="keyword">const</span> result = handlebars.compile(content)(&#123;</span><br><span class="line">        name: answers.name</span><br><span class="line">    &#125;);</span><br><span class="line">    fs.writeFileSync(packageFile, result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="安装模板依赖包"><a class="header-anchor" href="#安装模板依赖包"></a>安装模板依赖包</h2>
 <p>项目模板下载好后，通常我们会手动进入项目目录，然后执行 <code>yarn</code> 或者 <code>npm i</code> 进行依赖包安装，既然一步操作少不了，那就把它也自动化了吧。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> shell = <span class="built_in">require</span>(<span class="string">'shelljs'</span>);</span><br><span class="line"></span><br><span class="line">shell.cd(answers.name)</span><br><span class="line">    .exec(<span class="string">'yarn'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (err) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(err)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'依赖包安装成功'</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> shell = <span class="built_in">require</span>(<span class="string">&#x27;shelljs&#x27;</span>);</span><br><span class="line"></span><br><span class="line">shell.cd(answers.name)</span><br><span class="line">    .exec(<span class="string">&#x27;yarn&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (err) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(err)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">&#x27;依赖包安装成功&#x27;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
 <h2 id="测试"><a class="header-anchor" href="#测试"></a>测试</h2>
 <p>到这步为止，整个脚手架的功能已经齐全并且可以正常使用了，本地做测试的话，可以通过 <code>node index.js init</code> 的方式执行脚本命令。</p>
 <p>确认脚手架使用没问题后，我们最后来优化一下界面。</p>
 <h2 id="视觉美化"><a class="header-anchor" href="#视觉美化"></a>视觉美化</h2>
 <h3 id="Loading-美化"><a class="header-anchor" href="#Loading-美化"></a>Loading 美化</h3>
 <p>比如在下载、安装依赖都是属于比较耗时，并且时间无法预估的操作，所以增加一个 loading 提示是比较必要的。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ora = <span class="built_in">require</span>(<span class="string">'ora'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 开始下载</span></span><br><span class="line"><span class="keyword">const</span> spinner = ora(<span class="string">'正在下载模板...'</span>);</span><br><span class="line">spinner.start();</span><br><span class="line"><span class="comment">// 下载失败调用</span></span><br><span class="line">spinner.fail();</span><br><span class="line"><span class="comment">// 下载成功调用</span></span><br><span class="line">spinner.succeed();</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ora = <span class="built_in">require</span>(<span class="string">&#x27;ora&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 开始下载</span></span><br><span class="line"><span class="keyword">const</span> spinner = ora(<span class="string">&#x27;正在下载模板...&#x27;</span>);</span><br><span class="line">spinner.start();</span><br><span class="line"><span class="comment">// 下载失败调用</span></span><br><span class="line">spinner.fail();</span><br><span class="line"><span class="comment">// 下载成功调用</span></span><br><span class="line">spinner.succeed();</span><br></pre></td></tr></table></figure>
 <h3 id="文字颜色美化"><a class="header-anchor" href="#文字颜色美化"></a>文字颜色美化</h3>
 <p>成功绿色，失败红色。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> chalk = <span class="built_in">require</span>(<span class="string">'chalk'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(chalk.green(<span class="string">'项目创建成功'</span>));</span><br><span class="line"><span class="built_in">console</span>.log(chalk.red(<span class="string">'项目创建失败'</span>));</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> chalk = <span class="built_in">require</span>(<span class="string">&#x27;chalk&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(chalk.green(<span class="string">&#x27;项目创建成功&#x27;</span>));</span><br><span class="line"><span class="built_in">console</span>.log(chalk.red(<span class="string">&#x27;项目创建失败&#x27;</span>));</span><br></pre></td></tr></table></figure>
 <h3 id="符号美化"><a class="header-anchor" href="#符号美化"></a>符号美化</h3>
 <p>在文字颜色的基础上，还可以增加 <code>√</code> 或 <code>×</code> 的符号，会让用户更加具象的清楚提示信息。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> chalk = <span class="built_in">require</span>(<span class="string">'chalk'</span>);</span><br><span class="line"><span class="keyword">const</span> symbols = <span class="built_in">require</span>(<span class="string">'log-symbols'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(symbols.success, chalk.green(<span class="string">'项目创建成功'</span>));</span><br><span class="line"><span class="built_in">console</span>.log(symbols.error, chalk.red(<span class="string">'项目创建失败'</span>));</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> chalk = <span class="built_in">require</span>(<span class="string">&#x27;chalk&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> symbols = <span class="built_in">require</span>(<span class="string">&#x27;log-symbols&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(symbols.success, chalk.green(<span class="string">&#x27;项目创建成功&#x27;</span>));</span><br><span class="line"><span class="built_in">console</span>.log(symbols.error, chalk.red(<span class="string">&#x27;项目创建失败&#x27;</span>));</span><br></pre></td></tr></table></figure>
 <h2 id="发布"><a class="header-anchor" href="#发布"></a>发布</h2>
 <p>通过 <code>yarn publish</code> 把脚手架发布到 NPM 上吧。</p>
 <h2 id="完整代码"><a class="header-anchor" href="#完整代码"></a>完整代码</h2>
@@ -360,10 +476,10 @@
 </div>
 <script src="/github-card-lib/githubcard.js"></script>
 
-<p>目前提供了 <a href="https://github.com/hooray/gulp-automation" target="_blank" rel="noopener">gulp-automation</a> 和 <a href="https://github.com/hooray/vue-automation" target="_blank" rel="noopener">vue-automation</a> 两套模板，也是介绍过很多遍的东西了。</p>
+<p>目前提供了 <a target="_blank" rel="noopener" href="https://github.com/hooray/gulp-automation">gulp-automation</a> 和 <a target="_blank" rel="noopener" href="https://github.com/hooray/vue-automation">vue-automation</a> 两套模板，也是介绍过很多遍的东西了。</p>
 <h2 id="参考"><a class="header-anchor" href="#参考"></a>参考</h2>
 <ul>
-<li><a href="https://segmentfault.com/a/1190000016487610" target="_blank" rel="noopener">开发一个 Parcel-vue 脚手架工具</a></li>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000016487610">开发一个 Parcel-vue 脚手架工具</a></li>
 </ul>
 
     </div>
@@ -371,29 +487,26 @@
     
     
     
-        <div class="reward-container">
+
+    <footer class="post-footer">
+          <div class="reward-container">
   <div></div>
-  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
-    打赏
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
   </button>
-  <div id="qr" style="display: none;">
-      
-      <div style="display: inline-block;">
-        <img src="/reward-wechat.jpg" alt="Hooray 微信支付">
-        <p>微信支付</p>
+  <div class="post-reward">
+      <div>
+        <img src="/reward-wechat.jpg" alt="Hooray 微信">
+        <span>微信</span>
       </div>
-      
-      <div style="display: inline-block;">
+      <div>
         <img src="/reward-alipay.jpg" alt="Hooray 支付宝">
-        <p>支付宝</p>
+        <span>支付宝</span>
       </div>
 
   </div>
 </div>
 
-
-      <footer class="post-footer">
-          
           <div class="post-tags">
               <a href="/tags/%E8%84%9A%E6%89%8B%E6%9E%B6/" rel="tag"><i class="fa fa-tag"></i> 脚手架</a>
           </div>
@@ -405,29 +518,27 @@
     </div>
   </div>
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/posts/c25b8237/" rel="prev" title="给 Vue 项目中的 vendor.js 文件瘦身">
-      <i class="fa fa-chevron-left"></i> 给 Vue 项目中的 vendor.js 文件瘦身
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/de7170ad/" rel="next" title="Vue中刷新当前页的几种方式及优劣分析">
-      Vue中刷新当前页的几种方式及优劣分析 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/c25b8237/" rel="prev" title="给 Vue 项目中的 vendor.js 文件瘦身">
+                  <i class="fa fa-chevron-left"></i> 给 Vue 项目中的 vendor.js 文件瘦身
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/de7170ad/" rel="next" title="Vue中刷新当前页的几种方式及优劣分析">
+                  Vue中刷新当前页的几种方式及优劣分析 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
           </div>
-          
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
     <div class="comments" id="gitalk-container"></div>
 
 <script>
@@ -437,7 +548,7 @@
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -446,173 +557,104 @@
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备依赖库"><span class="nav-number">1.</span> <span class="nav-text">准备依赖库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化"><span class="nav-number">2.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理命令行"><span class="nav-number">3.</span> <span class="nav-text">处理命令行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行交互"><span class="nav-number">4.</span> <span class="nav-text">命令行交互</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载项目模板"><span class="nav-number">5.</span> <span class="nav-text">下载项目模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#渲染项目模板"><span class="nav-number">6.</span> <span class="nav-text">渲染项目模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装模板依赖包"><span class="nav-number">7.</span> <span class="nav-text">安装模板依赖包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">8.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视觉美化"><span class="nav-number">9.</span> <span class="nav-text">视觉美化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Loading-美化"><span class="nav-number">9.1.</span> <span class="nav-text">Loading 美化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文字颜色美化"><span class="nav-number">9.2.</span> <span class="nav-text">文字颜色美化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#符号美化"><span class="nav-number">9.3.</span> <span class="nav-text">符号美化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布"><span class="nav-number">10.</span> <span class="nav-text">发布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完整代码"><span class="nav-number">11.</span> <span class="nav-text">完整代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">12.</span> <span class="nav-text">参考</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Hooray"
-      src="/avatar.jpg">
-  <p class="site-author-name" itemprop="name">Hooray</p>
-  <div class="site-description" itemprop="description"></div>
 </div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">46</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">7</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">113</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
-      </span>
-  </div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
 
-  <div class="links-of-blogroll motion-element">
-    <div class="links-of-blogroll-title">
-      <i class="fa fa-fw fa-link"></i>
-      Links
-    </div>
-    <ul class="links-of-blogroll-list">
-        <li class="links-of-blogroll-item">
-          <a href="http://hoorayos.com/" title="http:&#x2F;&#x2F;hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue项目模版</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/hooray/fantastic-admin" title="https:&#x2F;&#x2F;gitee.com&#x2F;hooray&#x2F;fantastic-admin" rel="noopener" target="_blank">Fantastic-admin - 中后台管理系统模版</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://hooray.github.io/vue-sku-form" title="https:&#x2F;&#x2F;hooray.github.io&#x2F;vue-sku-form">vue-sku-form - 电商 SKU 表单配置组件</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/vue-clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
-        </li>
-    </ul>
-  </div>
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
 
 <div class="copyright">
-  
   &copy; 2017 – 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Hooray</span>
-    <span class="post-meta-divider">|</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
     <span class="post-meta-item-icon">
-      <i class="fa fa-area-chart"></i>
+      <i class="fa fa-chart-line"></i>
     </span>
-      <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">139k</span>
-    <span class="post-meta-divider">|</span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">152k</span>
+  </span>
+  <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:07</span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:18</span>
+  </span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
-  </div>
-
-        
 <div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
       <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
+        <i class="user"></i>
       </span>
       <span class="site-uv" title="总访客量">
         <span id="busuanzi_value_site_uv"></span>
       </span>
     </span>
-    <span class="post-meta-divider">|</span>
     <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
       <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
+        <i class="eye"></i>
       </span>
       <span class="site-pv" title="总访问量">
         <span id="busuanzi_value_site_pv"></span>
       </span>
     </span>
 </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 22619,
+      el    : 'wpac-rating',
+      color : 'ff9800'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+<script src="/js/local-search.js"></script>
 
 
 
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
@@ -624,15 +666,15 @@
     }
 
     function addCount(Counter) {
-      var visitors = document.querySelector('.leancloud_visitors');
-      var url = decodeURI(visitors.id);
-      var title = visitors.dataset.flagTitle;
+      const visitors = document.querySelector('.leancloud_visitors');
+      const url = decodeURI(visitors.id);
+      const title = visitors.dataset.flagTitle;
 
       Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
         .then(response => response.json())
         .then(({ results }) => {
           if (results.length > 0) {
-            var counter = results[0];
+            const counter = results[0];
             leancloudSelector(url).innerText = counter.time + 1;
             Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
               .catch(error => {
@@ -655,8 +697,8 @@
     }
 
     function showTime(Counter) {
-      var visitors = document.querySelectorAll('.leancloud_visitors');
-      var entries = [...visitors].map(element => {
+      const visitors = document.querySelectorAll('.leancloud_visitors');
+      const entries = [...visitors].map(element => {
         return decodeURI(element.id);
       });
 
@@ -664,7 +706,7 @@
         .then(response => response.json())
         .then(({ results }) => {
           for (let url of entries) {
-            let target = results.find(item => item.url === url);
+            const target = results.find(item => item.url === url);
             leancloudSelector(url).innerText = target ? target.time : 0;
           }
         })
@@ -673,9 +715,9 @@
         });
     }
 
-    let { app_id, app_key, server_url } = {"enable":true,"app_id":"ODqTjpX8O5RTTQ9Ne0PQLrl6-gzGzoHsz","app_key":"yEmutbTLiTig6Kz3VLiocpgs","server_url":null,"security":false};
+    const { app_id, app_key, server_url } = {"enable":true,"app_id":"ODqTjpX8O5RTTQ9Ne0PQLrl6-gzGzoHsz","app_key":"yEmutbTLiTig6Kz3VLiocpgs","server_url":null,"security":false};
     function fetchData(api_server) {
-      var Counter = (method, url, data) => {
+      const Counter = (method, url, data) => {
         return fetch(`${api_server}/1.1${url}`, {
           method,
           headers: {
@@ -694,7 +736,7 @@
       }
     }
 
-    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+    const api_server = app_id.slice(-9) === '-MdYXbMMI' ? `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com` : server_url;
 
     if (api_server) {
       fetchData(api_server);
@@ -709,80 +751,12 @@
 </script>
 
 
-      </div>
-    </footer>
-  </div>
 
-  
-  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
-  <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-  <script src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js"></script>
-  <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.min.js"></script>
-  <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-  <script>
-  if (CONFIG.page.isPost) {
-    wpac_init = window.wpac_init || [];
-    wpac_init.push({
-      widget: 'Rating',
-      id    : 22619,
-      el    : 'wpac-rating',
-      color : 'ff9800'
-    });
-    (function() {
-      if ('WIDGETPACK_LOADED' in window) return;
-      WIDGETPACK_LOADED = true;
-      var mc = document.createElement('script');
-      mc.type = 'text/javascript';
-      mc.async = true;
-      mc.src = '//embed.widgetpack.com/widget.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
-    })();
-  }
-  </script>
-
-  
-<script src="/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
 
 <script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+NexT.utils.loadComments('#gitalk-container', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
     var gitalk = new Gitalk({
       clientID    : '165f4a18451139d1962f',
       clientSecret: 'd950ed9736a4364215fa554442d01f8e89dd92a8',

@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 5.3.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -13,17 +15,16 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
+
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
   <link rel="stylesheet" href="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.css">
-  <link rel="stylesheet" href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css">
-  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
 
-<script id="hexo-configurations">
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"hooray.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"hooray.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.1.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-
-  <meta name="description" content="在大部分前端开发同学的日常工作中，很少会遇到算法问题，不得不说是种遗憾。但随着前端能处理的事务越来越多，多多少少也会遇到一些算法问题，就比如今天我打算讨论的这个问题——SKU组合查询。">
+<meta name="description" content="在大部分前端开发同学的日常工作中，很少会遇到算法问题，不得不说是种遗憾。但随着前端能处理的事务越来越多，多多少少也会遇到一些算法问题，就比如今天我打算讨论的这个问题——SKU组合查询。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="电商平台商品 SKU 组合查询算法实现">
 <meta property="og:url" content="https://hooray.github.io/posts/8b2bd6f8/index.html">
@@ -33,7 +34,7 @@
 <meta property="og:image" content="https://i.loli.net/2018/02/07/5a7b22273608b.png">
 <meta property="og:image" content="https://i.loli.net/2018/02/07/5a7b00a15bd42.png">
 <meta property="article:published_time" content="2018-02-08T03:33:11.000Z">
-<meta property="article:modified_time" content="2020-10-22T16:16:59.010Z">
+<meta property="article:modified_time" content="2021-01-23T19:22:13.875Z">
 <meta property="article:author" content="Hooray">
 <meta property="article:tag" content="SKU">
 <meta property="article:tag" content="电商">
@@ -41,10 +42,11 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://i.loli.net/2018/02/07/5a7b22273608b.png">
 
+
 <link rel="canonical" href="https://hooray.github.io/posts/8b2bd6f8/">
 
 
-<script id="page-configurations">
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -53,60 +55,68 @@
     lang   : 'zh-CN'
   };
 </script>
-
-  <title>电商平台商品 SKU 组合查询算法实现 | ９９３５</title>
+<title>电商平台商品 SKU 组合查询算法实现 | ９９３５</title>
   
-
-
-
 
 
 
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">９９３５</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">代码如诗</p>
   </div>
@@ -120,42 +130,41 @@
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-top">
 
-    <a href="/top/" rel="section"><i class="fa fa-fw fa-signal"></i>热门</a>
+    <a href="/top/" rel="section"><i class="fa fa-signal fa-fw"></i>热门</a>
 
   </li>
         <li class="menu-item menu-item-commonweal">
 
-    <a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -168,13 +177,12 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
+    <div class="popup search-popup"><div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
            placeholder="搜索..." spellcheck="false"
            type="search" class="search-input">
   </div>
@@ -182,9 +190,9 @@
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
 
@@ -192,6 +200,109 @@
   </div>
 
 </div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-SKU"><span class="nav-number">1.</span> <span class="nav-text">什么是 SKU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-number">2.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">解决办法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF%E8%BF%98%E5%8E%9F"><span class="nav-number">3.1.</span> <span class="nav-text">场景还原</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%8A%A0%E5%B7%A5"><span class="nav-number">3.2.</span> <span class="nav-text">数据加工</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E8%81%94-SKU-%E9%AA%8C%E8%AF%81"><span class="nav-number">3.3.</span> <span class="nav-text">关联 SKU 验证</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SKU-%E8%A1%A8%E5%8D%95%E9%85%8D%E7%BD%AE%E7%BB%84%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">SKU 表单配置组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hooray"
+      src="/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Hooray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">115</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-qq fa-fw"></i>QQ</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://gitee.com/hooray/fantastic-admin" title="https:&#x2F;&#x2F;gitee.com&#x2F;hooray&#x2F;fantastic-admin" rel="noopener" target="_blank">Fantastic-admin - 中后台管理系统模版</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue项目模版</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hooray.github.io/vue-sku-form" title="https:&#x2F;&#x2F;hooray.github.io&#x2F;vue-sku-form">vue-sku-form - 电商 SKU 表单配置组件</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/hooray/hoorayos" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;hoorayos" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/hooray/vue-clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
+        </li>
+    </ul>
+  </div>
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
     </header>
 
     
@@ -201,19 +312,22 @@
   </div>
   <div class="reading-progress-bar"></div>
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content post posts-expand">
-            
+    <div class="main-inner post posts-expand">
 
-    
+
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://hooray.github.io/posts/8b2bd6f8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -230,54 +344,58 @@
           电商平台商品 SKU 组合查询算法实现
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2018-02-08 11:33:11" itemprop="dateCreated datePublished" datetime="2018-02-08T11:33:11+08:00">2018-02-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-23 00:16:59" itemprop="dateModified" datetime="2020-10-23T00:16:59+08:00">2020-10-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web-%E7%BB%BC%E5%90%88/" itemprop="url" rel="index"><span itemprop="name">Web 综合</span></a>
-                </span>
-            </span>
+      <time title="创建时间：2018-02-08 11:33:11" itemprop="dateCreated datePublished" datetime="2018-02-08T11:33:11+08:00">2018-02-08</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="fa fa-calendar-check-o"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-01-24 03:22:13" itemprop="dateModified" datetime="2021-01-24T03:22:13+08:00">2021-01-24</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Web-%E7%BB%BC%E5%90%88/" itemprop="url" rel="index"><span itemprop="name">Web 综合</span></a>
+        </span>
+    </span>
 
-          
-            <span id="/posts/8b2bd6f8/" class="post-meta-item leancloud_visitors" data-flag-title="电商平台商品 SKU 组合查询算法实现" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>6.3k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
-            </span>
+  
+    <span id="/posts/8b2bd6f8/" class="post-meta-item leancloud_visitors" data-flag-title="电商平台商品 SKU 组合查询算法实现" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>8.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-clock-o"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>8 分钟</span>
+    </span>
+</div>
 
         </div>
       </header>
@@ -286,18 +404,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
         <p><img src="https://i.loli.net/2018/02/07/5a7b22273608b.png" alt=""></p>
 <p>在大部分前端开发同学的日常工作中，很少会遇到算法问题，不得不说是种遗憾。但随着前端能处理的事务越来越多，多多少少也会遇到一些算法问题，就比如今天我打算讨论的这个问题——SKU组合查询。</p>
 <a id="more"></a>
-<div class="note class_name">
-            <p>安利一个我自己开发的 <a href="https://hooray.github.io/vue-sku-form/">vue-sku-form</a> 组件，它主要是应用在电商系统后台里，对 sku 表单配置的组件。</p><p>因为市面上这类组件比较少，即便是有那么几个，功能限制得很死，扩展起来不是改代码就是得重构，所以基于这一痛点，我写的这个组件提供高度定制化的配置，可以集成进各种业务需求的场景中。</p>
-          </div>
+<div class="note info"><p>安利一个我自己开发的 <a href="https://hooray.github.io/vue-sku-form/">vue-sku-form</a> 组件，它主要是应用在电商系统后台里，对 sku 表单配置的组件。</p>
+<p>因为市面上这类组件比较少，即便是有那么几个，功能限制得很死，扩展起来不是改代码就是得重构，所以基于这一痛点，我写的这个组件提供高度定制化的配置，可以集成进各种业务需求的场景中。</p>
+</div>
 <h2 id="什么是-SKU"><a class="header-anchor" href="#什么是-SKU"></a>什么是 SKU</h2>
 <p>我们看下维基百科是怎么解释的：</p>
 <blockquote><p><strong>最小库存管理单元</strong>（Stock Keeping Unit, SKU）是一个会计学名词，定义为库存管理中的最小可用单元，例如纺织品中一个SKU通常表示规格、颜色、款式，而在连锁零售门店中有时称单品为一个 SKU 。</p>
-<footer><strong>维基百科</strong><cite><a href="https://zh.wikipedia.org/wiki/%E6%9C%80%E5%B0%8F%E5%AD%98%E8%B4%A7%E5%8D%95%E4%BD%8D" target="_blank" rel="noopener">最小存货单位</a></cite></footer></blockquote>
+<footer><strong>维基百科</strong><cite><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%9C%80%E5%B0%8F%E5%AD%98%E8%B4%A7%E5%8D%95%E4%BD%8D">最小存货单位</a></cite></footer></blockquote>
 <p> <br>
 官方的解释可能有点晦涩，我举个例子，假设有一个手机，信息如下表格所示：</p>
 <table>
@@ -385,9 +501,9 @@
 <h2 id="解决办法"><a class="header-anchor" href="#解决办法"></a>解决办法</h2>
 <h3 id="场景还原"><a class="header-anchor" href="#场景还原"></a>场景还原</h3>
 <p>要解决这个问题，我们先模拟一个商品购买选择 SKU 的场景。一般情况下，后台会通过接口提供给我们两组数据，分别是 <code>属性集</code> 和 <code>数据集</code> ，这里我就用两组固定数据模拟一下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 属性集</span></span><br><span class="line"><span class="keyword">var</span> key = [</span><br><span class="line">    &#123;<span class="attr">name</span>: <span class="string">'颜色'</span>, <span class="attr">item</span>: [<span class="string">'黑'</span>, <span class="string">'金'</span>, <span class="string">'白'</span>]&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>: <span class="string">'内存'</span>, <span class="attr">item</span>: [<span class="string">'16G'</span>, <span class="string">'32G'</span>]&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>: <span class="string">'运营商'</span>, <span class="attr">item</span>: [<span class="string">'电信'</span>, <span class="string">'移动'</span>, <span class="string">'联通'</span>]&#125;</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 数据集</span></span><br><span class="line"><span class="keyword">var</span> sku = &#123;</span><br><span class="line">    <span class="string">'黑;16G;电信'</span>: &#123;<span class="attr">price</span>: <span class="number">100</span>, <span class="attr">count</span>: <span class="number">10</span>&#125;,</span><br><span class="line">    <span class="string">'黑;16G;移动'</span>: &#123;<span class="attr">price</span>: <span class="number">101</span>, <span class="attr">count</span>: <span class="number">11</span>&#125;,</span><br><span class="line">    <span class="string">'黑;16G;联通'</span>: &#123;<span class="attr">price</span>: <span class="number">102</span>, <span class="attr">count</span>: <span class="number">0</span>&#125;,</span><br><span class="line">    <span class="string">'黑;32G;电信'</span>: &#123;<span class="attr">price</span>: <span class="number">103</span>, <span class="attr">count</span>: <span class="number">13</span>&#125;,</span><br><span class="line">    <span class="string">'黑;32G;移动'</span>: &#123;<span class="attr">price</span>: <span class="number">104</span>, <span class="attr">count</span>: <span class="number">14</span>&#125;,</span><br><span class="line">    <span class="string">'黑;32G;联通'</span>: &#123;<span class="attr">price</span>: <span class="number">105</span>, <span class="attr">count</span>: <span class="number">0</span>&#125;,</span><br><span class="line">    <span class="string">'金;16G;电信'</span>: &#123;<span class="attr">price</span>: <span class="number">106</span>, <span class="attr">count</span>: <span class="number">16</span>&#125;,</span><br><span class="line">    <span class="string">'金;16G;移动'</span>: &#123;<span class="attr">price</span>: <span class="number">107</span>, <span class="attr">count</span>: <span class="number">17</span>&#125;,</span><br><span class="line">    <span class="string">'金;16G;联通'</span>: &#123;<span class="attr">price</span>: <span class="number">108</span>, <span class="attr">count</span>: <span class="number">18</span>&#125;,</span><br><span class="line">    <span class="string">'金;32G;电信'</span>: &#123;<span class="attr">price</span>: <span class="number">109</span>, <span class="attr">count</span>: <span class="number">0</span>&#125;,</span><br><span class="line">    <span class="string">'金;32G;移动'</span>: &#123;<span class="attr">price</span>: <span class="number">110</span>, <span class="attr">count</span>: <span class="number">20</span>&#125;,</span><br><span class="line">    <span class="string">'金;32G;联通'</span>: &#123;<span class="attr">price</span>: <span class="number">111</span>, <span class="attr">count</span>: <span class="number">21</span>&#125;,</span><br><span class="line">    <span class="string">'白;16G;电信'</span>: &#123;<span class="attr">price</span>: <span class="number">112</span>, <span class="attr">count</span>: <span class="number">0</span>&#125;,</span><br><span class="line">    <span class="string">'白;16G;移动'</span>: &#123;<span class="attr">price</span>: <span class="number">113</span>, <span class="attr">count</span>: <span class="number">23</span>&#125;,</span><br><span class="line">    <span class="string">'白;16G;联通'</span>: &#123;<span class="attr">price</span>: <span class="number">114</span>, <span class="attr">count</span>: <span class="number">24</span>&#125;,</span><br><span class="line">    <span class="string">'白;32G;电信'</span>: &#123;<span class="attr">price</span>: <span class="number">115</span>, <span class="attr">count</span>: <span class="number">0</span>&#125;,</span><br><span class="line">    <span class="string">'白;32G;移动'</span>: &#123;<span class="attr">price</span>: <span class="number">116</span>, <span class="attr">count</span>: <span class="number">26</span>&#125;,</span><br><span class="line">    <span class="string">'白;32G;联通'</span>: &#123;<span class="attr">price</span>: <span class="number">117</span>, <span class="attr">count</span>: <span class="number">27</span>&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 属性集</span></span><br><span class="line"><span class="keyword">var</span> key = [</span><br><span class="line">    &#123;<span class="attr">name</span>: <span class="string">&#x27;颜色&#x27;</span>, <span class="attr">item</span>: [<span class="string">&#x27;黑&#x27;</span>, <span class="string">&#x27;金&#x27;</span>, <span class="string">&#x27;白&#x27;</span>]&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>: <span class="string">&#x27;内存&#x27;</span>, <span class="attr">item</span>: [<span class="string">&#x27;16G&#x27;</span>, <span class="string">&#x27;32G&#x27;</span>]&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>: <span class="string">&#x27;运营商&#x27;</span>, <span class="attr">item</span>: [<span class="string">&#x27;电信&#x27;</span>, <span class="string">&#x27;移动&#x27;</span>, <span class="string">&#x27;联通&#x27;</span>]&#125;</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 数据集</span></span><br><span class="line"><span class="keyword">var</span> sku = &#123;</span><br><span class="line">    <span class="string">&#x27;黑;16G;电信&#x27;</span>: &#123;<span class="attr">price</span>: <span class="number">100</span>, <span class="attr">count</span>: <span class="number">10</span>&#125;,</span><br><span class="line">    <span class="string">&#x27;黑;16G;移动&#x27;</span>: &#123;<span class="attr">price</span>: <span class="number">101</span>, <span class="attr">count</span>: <span class="number">11</span>&#125;,</span><br><span class="line">    <span class="string">&#x27;黑;16G;联通&#x27;</span>: &#123;<span class="attr">price</span>: <span class="number">102</span>, <span class="attr">count</span>: <span class="number">0</span>&#125;,</span><br><span class="line">    <span class="string">&#x27;黑;32G;电信&#x27;</span>: &#123;<span class="attr">price</span>: <span class="number">103</span>, <span class="attr">count</span>: <span class="number">13</span>&#125;,</span><br><span class="line">    <span class="string">&#x27;黑;32G;移动&#x27;</span>: &#123;<span class="attr">price</span>: <span class="number">104</span>, <span class="attr">count</span>: <span class="number">14</span>&#125;,</span><br><span class="line">    <span class="string">&#x27;黑;32G;联通&#x27;</span>: &#123;<span class="attr">price</span>: <span class="number">105</span>, <span class="attr">count</span>: <span class="number">0</span>&#125;,</span><br><span class="line">    <span class="string">&#x27;金;16G;电信&#x27;</span>: &#123;<span class="attr">price</span>: <span class="number">106</span>, <span class="attr">count</span>: <span class="number">16</span>&#125;,</span><br><span class="line">    <span class="string">&#x27;金;16G;移动&#x27;</span>: &#123;<span class="attr">price</span>: <span class="number">107</span>, <span class="attr">count</span>: <span class="number">17</span>&#125;,</span><br><span class="line">    <span class="string">&#x27;金;16G;联通&#x27;</span>: &#123;<span class="attr">price</span>: <span class="number">108</span>, <span class="attr">count</span>: <span class="number">18</span>&#125;,</span><br><span class="line">    <span class="string">&#x27;金;32G;电信&#x27;</span>: &#123;<span class="attr">price</span>: <span class="number">109</span>, <span class="attr">count</span>: <span class="number">0</span>&#125;,</span><br><span class="line">    <span class="string">&#x27;金;32G;移动&#x27;</span>: &#123;<span class="attr">price</span>: <span class="number">110</span>, <span class="attr">count</span>: <span class="number">20</span>&#125;,</span><br><span class="line">    <span class="string">&#x27;金;32G;联通&#x27;</span>: &#123;<span class="attr">price</span>: <span class="number">111</span>, <span class="attr">count</span>: <span class="number">21</span>&#125;,</span><br><span class="line">    <span class="string">&#x27;白;16G;电信&#x27;</span>: &#123;<span class="attr">price</span>: <span class="number">112</span>, <span class="attr">count</span>: <span class="number">0</span>&#125;,</span><br><span class="line">    <span class="string">&#x27;白;16G;移动&#x27;</span>: &#123;<span class="attr">price</span>: <span class="number">113</span>, <span class="attr">count</span>: <span class="number">23</span>&#125;,</span><br><span class="line">    <span class="string">&#x27;白;16G;联通&#x27;</span>: &#123;<span class="attr">price</span>: <span class="number">114</span>, <span class="attr">count</span>: <span class="number">24</span>&#125;,</span><br><span class="line">    <span class="string">&#x27;白;32G;电信&#x27;</span>: &#123;<span class="attr">price</span>: <span class="number">115</span>, <span class="attr">count</span>: <span class="number">0</span>&#125;,</span><br><span class="line">    <span class="string">&#x27;白;32G;移动&#x27;</span>: &#123;<span class="attr">price</span>: <span class="number">116</span>, <span class="attr">count</span>: <span class="number">26</span>&#125;,</span><br><span class="line">    <span class="string">&#x27;白;32G;联通&#x27;</span>: &#123;<span class="attr">price</span>: <span class="number">117</span>, <span class="attr">count</span>: <span class="number">27</span>&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>有了这两组数据，就可以实现最基本的 SKU 选择功能了。用 <code>属性集</code> 去渲染 DOM，当用户选择好 SKU 后，程序将用户选择的属性拼接成一个 sku 字符串，比如 <code>金;16G;电信</code> ，再根据这个字符串去 <code>数据集</code> 里获取库存和价格，演示如下：</p>
-<iframe height='265' scrolling='no' title='1-基础功能实现' src='//codepen.io/hooray/embed/RJEwxm/?height=265&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/hooray/pen/RJEwxm/' target="_blank" rel="noopener">1-基础功能实现</a> by 胡睿 (<a href='https://codepen.io/hooray' target="_blank" rel="noopener">@hooray</a>) on <a href='https://codepen.io' target="_blank" rel="noopener">CodePen</a>.
+<iframe height='265' scrolling='no' title='1-基础功能实现' src='//codepen.io/hooray/embed/RJEwxm/?height=265&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a target="_blank" rel="noopener" href='https://codepen.io/hooray/pen/RJEwxm/'>1-基础功能实现</a> by 胡睿 (<a target="_blank" rel="noopener" href='https://codepen.io/hooray'>@hooray</a>) on <a target="_blank" rel="noopener" href='https://codepen.io'>CodePen</a>.
 </iframe>
 <p>上面这个演示有个最大的问题就是，必须把每个属性都选择后，才能获取到对应的库存和价格，如果没有选择完整，就无法获取对应的数据。</p>
 <p>原因也很简单，因为 <code>数据集</code> 里没有提供嘛。比如我只选择了 <code>白</code> ，那么当前拼接出来的 sku 则是 <code>白;;</code> ，自然找不到这条 sku 的相关数据。那要怎么解决呢？那就把 <code>数据集</code> 加工一下嘛。</p>
@@ -404,34 +520,34 @@
 <li><code>黑;16G;电信</code></li>
 </ul>
 <p>这里会涉及到本文中最核心的一个算法，让我们再仔细看下举例的这个 sku ，如果将它转为数组，就是：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">'黑'</span>, <span class="string">'16G'</span>, <span class="string">'电信'</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">&#x27;黑&#x27;</span>, <span class="string">&#x27;16G&#x27;</span>, <span class="string">&#x27;电信&#x27;</span>]</span><br></pre></td></tr></table></figure>
 <p>如果把最终希望得到的结果也转为数组，那就是：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">''</span>, <span class="string">''</span>, <span class="string">''</span>]</span><br><span class="line">[<span class="string">'黑'</span>, <span class="string">''</span>, <span class="string">''</span>]</span><br><span class="line">[<span class="string">''</span>, <span class="string">'16G'</span>, <span class="string">''</span>]</span><br><span class="line">[<span class="string">''</span>, <span class="string">''</span>, <span class="string">'电信'</span>]</span><br><span class="line">[<span class="string">'黑'</span>, <span class="string">'16G'</span>, <span class="string">''</span>]</span><br><span class="line">[<span class="string">'黑'</span>, <span class="string">''</span>, <span class="string">'电信'</span>]</span><br><span class="line">[<span class="string">''</span>, <span class="string">'16G'</span>, <span class="string">'电信'</span>]</span><br><span class="line">[<span class="string">'黑'</span>, <span class="string">'16G'</span>, <span class="string">'电信'</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;黑&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;16G&#x27;</span>, <span class="string">&#x27;&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;电信&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;黑&#x27;</span>, <span class="string">&#x27;16G&#x27;</span>, <span class="string">&#x27;&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;黑&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;电信&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;16G&#x27;</span>, <span class="string">&#x27;电信&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;黑&#x27;</span>, <span class="string">&#x27;16G&#x27;</span>, <span class="string">&#x27;电信&#x27;</span>]</span><br></pre></td></tr></table></figure>
 <p>然后仔细观察一下这组数据，看出些端倪了么？</p>
 <p>没看出来？没关系，我们把这个 sku 再增加一个属性，如果数组是这样子的：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">'黑'</span>, <span class="string">'16G'</span>, <span class="string">'电信'</span>, <span class="string">'2800mAh'</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">&#x27;黑&#x27;</span>, <span class="string">&#x27;16G&#x27;</span>, <span class="string">&#x27;电信&#x27;</span>, <span class="string">&#x27;2800mAh&#x27;</span>]</span><br></pre></td></tr></table></figure>
 <p>那最终希望得到的结果也会有变化</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">''</span>, <span class="string">''</span>, <span class="string">''</span>, <span class="string">''</span>]</span><br><span class="line"></span><br><span class="line">[<span class="string">'黑'</span>, <span class="string">''</span>, <span class="string">''</span>, <span class="string">''</span>]</span><br><span class="line">[<span class="string">''</span>, <span class="string">'16G'</span>, <span class="string">''</span>, <span class="string">''</span>]</span><br><span class="line">[<span class="string">''</span>, <span class="string">''</span>, <span class="string">'电信'</span>, <span class="string">''</span>]</span><br><span class="line">[<span class="string">''</span>, <span class="string">''</span>, <span class="string">''</span>, <span class="string">'2800mAh'</span>]</span><br><span class="line"></span><br><span class="line">[<span class="string">'黑'</span>, <span class="string">'16G'</span>, <span class="string">''</span>, <span class="string">''</span>]</span><br><span class="line">[<span class="string">'黑'</span>, <span class="string">''</span>, <span class="string">'电信'</span>, <span class="string">''</span>]</span><br><span class="line">[<span class="string">'黑'</span>, <span class="string">''</span>, <span class="string">''</span>, <span class="string">'2800mAh'</span>]</span><br><span class="line">[<span class="string">''</span>, <span class="string">'16G'</span>, <span class="string">'电信'</span>, <span class="string">''</span>]</span><br><span class="line">[<span class="string">''</span>, <span class="string">'16G'</span>, <span class="string">''</span>, <span class="string">'2800mAh'</span>]</span><br><span class="line">[<span class="string">''</span>, <span class="string">''</span>, <span class="string">'电信'</span>, <span class="string">'2800mAh'</span>]</span><br><span class="line"></span><br><span class="line">[<span class="string">'黑'</span>, <span class="string">'16G'</span>, <span class="string">'电信'</span>, <span class="string">''</span>]</span><br><span class="line">[<span class="string">'黑'</span>, <span class="string">'16G'</span>, <span class="string">''</span>, <span class="string">'2800mAh'</span>]</span><br><span class="line">[<span class="string">'黑'</span>, <span class="string">''</span>, <span class="string">'电信'</span>, <span class="string">'2800mAh'</span>]</span><br><span class="line">[<span class="string">''</span>, <span class="string">'16G'</span>, <span class="string">'电信'</span>, <span class="string">'2800mAh'</span>]</span><br><span class="line"></span><br><span class="line">[<span class="string">'黑'</span>, <span class="string">'16G'</span>, <span class="string">'电信'</span>, <span class="string">'2800mAh'</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>]</span><br><span class="line"></span><br><span class="line">[<span class="string">&#x27;黑&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;16G&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;电信&#x27;</span>, <span class="string">&#x27;&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;2800mAh&#x27;</span>]</span><br><span class="line"></span><br><span class="line">[<span class="string">&#x27;黑&#x27;</span>, <span class="string">&#x27;16G&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;黑&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;电信&#x27;</span>, <span class="string">&#x27;&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;黑&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;2800mAh&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;16G&#x27;</span>, <span class="string">&#x27;电信&#x27;</span>, <span class="string">&#x27;&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;16G&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;2800mAh&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;电信&#x27;</span>, <span class="string">&#x27;2800mAh&#x27;</span>]</span><br><span class="line"></span><br><span class="line">[<span class="string">&#x27;黑&#x27;</span>, <span class="string">&#x27;16G&#x27;</span>, <span class="string">&#x27;电信&#x27;</span>, <span class="string">&#x27;&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;黑&#x27;</span>, <span class="string">&#x27;16G&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;2800mAh&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;黑&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;电信&#x27;</span>, <span class="string">&#x27;2800mAh&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;16G&#x27;</span>, <span class="string">&#x27;电信&#x27;</span>, <span class="string">&#x27;2800mAh&#x27;</span>]</span><br><span class="line"></span><br><span class="line">[<span class="string">&#x27;黑&#x27;</span>, <span class="string">&#x27;16G&#x27;</span>, <span class="string">&#x27;电信&#x27;</span>, <span class="string">&#x27;2800mAh&#x27;</span>]</span><br></pre></td></tr></table></figure>
 <p>相信有人已经看出来了，这里需要实现的一个算法就是：</p>
 <p><strong>从 m 个不同元素中取出 n 个元素的组合数</strong></p>
 <p>我们可以分别去验证一下</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 源数据 ['黑', '16G', '电信', '2800mAh']</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 从 4 个元素中取 0 个元素的组合</span></span><br><span class="line">[<span class="string">''</span>, <span class="string">''</span>, <span class="string">''</span>, <span class="string">''</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从 4 个元素中取 1 个元素的组合</span></span><br><span class="line">[<span class="string">'黑'</span>, <span class="string">''</span>, <span class="string">''</span>, <span class="string">''</span>]</span><br><span class="line">[<span class="string">''</span>, <span class="string">'16G'</span>, <span class="string">''</span>, <span class="string">''</span>]</span><br><span class="line">[<span class="string">''</span>, <span class="string">''</span>, <span class="string">'电信'</span>, <span class="string">''</span>]</span><br><span class="line">[<span class="string">''</span>, <span class="string">''</span>, <span class="string">''</span>, <span class="string">'2800mAh'</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从 4 个元素中取 2 个元素的组合</span></span><br><span class="line">[<span class="string">'黑'</span>, <span class="string">'16G'</span>, <span class="string">''</span>, <span class="string">''</span>]</span><br><span class="line">[<span class="string">'黑'</span>, <span class="string">''</span>, <span class="string">'电信'</span>, <span class="string">''</span>]</span><br><span class="line">[<span class="string">'黑'</span>, <span class="string">''</span>, <span class="string">''</span>, <span class="string">'2800mAh'</span>]</span><br><span class="line">[<span class="string">''</span>, <span class="string">'16G'</span>, <span class="string">'电信'</span>, <span class="string">''</span>]</span><br><span class="line">[<span class="string">''</span>, <span class="string">'16G'</span>, <span class="string">''</span>, <span class="string">'2800mAh'</span>]</span><br><span class="line">[<span class="string">''</span>, <span class="string">''</span>, <span class="string">'电信'</span>, <span class="string">'2800mAh'</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">//从 4 个元素中取 3 个元素的组合</span></span><br><span class="line">[<span class="string">'黑'</span>, <span class="string">'16G'</span>, <span class="string">'电信'</span>, <span class="string">''</span>]</span><br><span class="line">[<span class="string">'黑'</span>, <span class="string">'16G'</span>, <span class="string">''</span>, <span class="string">'2800mAh'</span>]</span><br><span class="line">[<span class="string">'黑'</span>, <span class="string">''</span>, <span class="string">'电信'</span>, <span class="string">'2800mAh'</span>]</span><br><span class="line">[<span class="string">''</span>, <span class="string">'16G'</span>, <span class="string">'电信'</span>, <span class="string">'2800mAh'</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">//从 4 个元素中取 4 个元素的组合</span></span><br><span class="line">[<span class="string">'黑'</span>, <span class="string">'16G'</span>, <span class="string">'电信'</span>, <span class="string">'2800mAh'</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 源数据 [&#x27;黑&#x27;, &#x27;16G&#x27;, &#x27;电信&#x27;, &#x27;2800mAh&#x27;]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 从 4 个元素中取 0 个元素的组合</span></span><br><span class="line">[<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从 4 个元素中取 1 个元素的组合</span></span><br><span class="line">[<span class="string">&#x27;黑&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;16G&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;电信&#x27;</span>, <span class="string">&#x27;&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;2800mAh&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从 4 个元素中取 2 个元素的组合</span></span><br><span class="line">[<span class="string">&#x27;黑&#x27;</span>, <span class="string">&#x27;16G&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;黑&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;电信&#x27;</span>, <span class="string">&#x27;&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;黑&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;2800mAh&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;16G&#x27;</span>, <span class="string">&#x27;电信&#x27;</span>, <span class="string">&#x27;&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;16G&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;2800mAh&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;电信&#x27;</span>, <span class="string">&#x27;2800mAh&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">//从 4 个元素中取 3 个元素的组合</span></span><br><span class="line">[<span class="string">&#x27;黑&#x27;</span>, <span class="string">&#x27;16G&#x27;</span>, <span class="string">&#x27;电信&#x27;</span>, <span class="string">&#x27;&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;黑&#x27;</span>, <span class="string">&#x27;16G&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;2800mAh&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;黑&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;电信&#x27;</span>, <span class="string">&#x27;2800mAh&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;16G&#x27;</span>, <span class="string">&#x27;电信&#x27;</span>, <span class="string">&#x27;2800mAh&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">//从 4 个元素中取 4 个元素的组合</span></span><br><span class="line">[<span class="string">&#x27;黑&#x27;</span>, <span class="string">&#x27;16G&#x27;</span>, <span class="string">&#x27;电信&#x27;</span>, <span class="string">&#x27;2800mAh&#x27;</span>]</span><br></pre></td></tr></table></figure>
 <p>实现代码如下（非原创）：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 从m中取n的所有组合</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getFlagArrs</span>(<span class="params">m, n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> flagArrs = [],</span><br><span class="line">        flagArr = [],</span><br><span class="line">        isEnd = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">        flagArr[i] = i &lt; n ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    flagArrs.push(flagArr.concat());</span><br><span class="line">    <span class="comment">// 当n不等于0并且m大于n的时候进入</span></span><br><span class="line">    <span class="keyword">if</span>(n &amp;&amp; m &gt; n)&#123;</span><br><span class="line">        <span class="keyword">while</span>(!isEnd)&#123;</span><br><span class="line">            <span class="keyword">var</span> leftCnt = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; m - <span class="number">1</span>; i++)&#123;</span><br><span class="line">                <span class="keyword">if</span> (flagArr[i] == <span class="number">1</span> &amp;&amp; flagArr[i + <span class="number">1</span>] == <span class="number">0</span>)&#123;</span><br><span class="line">                    <span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; i; j++)&#123;</span><br><span class="line">                        flagArr[j] = j &lt; leftCnt ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    flagArr[i] = <span class="number">0</span>;</span><br><span class="line">                    flagArr[i + <span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">                    <span class="keyword">var</span> aTmp = flagArr.concat();</span><br><span class="line">                    flagArrs.push(aTmp);</span><br><span class="line">                    <span class="keyword">if</span>(aTmp.slice(-n).join(<span class="string">''</span>).indexOf(<span class="string">'0'</span>) == <span class="number">-1</span>)&#123;</span><br><span class="line">                        isEnd = <span class="literal">true</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                flagArr[i] == <span class="number">1</span> &amp;&amp; leftCnt++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> flagArrs;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 从m中取n的所有组合</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getFlagArrs</span>(<span class="params">m, n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> flagArrs = [],</span><br><span class="line">        flagArr = [],</span><br><span class="line">        isEnd = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">        flagArr[i] = i &lt; n ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    flagArrs.push(flagArr.concat());</span><br><span class="line">    <span class="comment">// 当n不等于0并且m大于n的时候进入</span></span><br><span class="line">    <span class="keyword">if</span>(n &amp;&amp; m &gt; n)&#123;</span><br><span class="line">        <span class="keyword">while</span>(!isEnd)&#123;</span><br><span class="line">            <span class="keyword">var</span> leftCnt = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; m - <span class="number">1</span>; i++)&#123;</span><br><span class="line">                <span class="keyword">if</span> (flagArr[i] == <span class="number">1</span> &amp;&amp; flagArr[i + <span class="number">1</span>] == <span class="number">0</span>)&#123;</span><br><span class="line">                    <span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; i; j++)&#123;</span><br><span class="line">                        flagArr[j] = j &lt; leftCnt ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    flagArr[i] = <span class="number">0</span>;</span><br><span class="line">                    flagArr[i + <span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">                    <span class="keyword">var</span> aTmp = flagArr.concat();</span><br><span class="line">                    flagArrs.push(aTmp);</span><br><span class="line">                    <span class="keyword">if</span>(aTmp.slice(-n).join(<span class="string">&#x27;&#x27;</span>).indexOf(<span class="string">&#x27;0&#x27;</span>) == -<span class="number">1</span>)&#123;</span><br><span class="line">                        isEnd = <span class="literal">true</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                flagArr[i] == <span class="number">1</span> &amp;&amp; leftCnt++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> flagArrs;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这个方法在调用后返回的 flagArrs 并不是最终所需要的业务数据，而是返回一组这样的数据</p>
 <p><img src="https://i.loli.net/2018/02/07/5a7b00a15bd42.png" alt=""></p>
 <p>这时候需要用源数据，也就是 <code>['黑', '16G', '电信', '2800mAh']</code> 依次循环填坑，将数组中为 <code>1</code> 的部分替换掉，<code>0</code> 的部分则留空，这样就能得到我们需要的数据了。</p>
 <p>解决到这一步后，后面的工作就相对轻松了。</p>
 <p>我们已经能根据 <code>黑;16G;电信</code> 得到这样的一组数据了</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">''</span>, <span class="string">''</span>, <span class="string">''</span>]</span><br><span class="line">[<span class="string">'黑'</span>, <span class="string">''</span>, <span class="string">''</span>]</span><br><span class="line">[<span class="string">''</span>, <span class="string">'16G'</span>, <span class="string">''</span>]</span><br><span class="line">[<span class="string">''</span>, <span class="string">''</span>, <span class="string">'电信'</span>]</span><br><span class="line">[<span class="string">'黑'</span>, <span class="string">'16G'</span>, <span class="string">''</span>]</span><br><span class="line">[<span class="string">'黑'</span>, <span class="string">''</span>, <span class="string">'电信'</span>]</span><br><span class="line">[<span class="string">''</span>, <span class="string">'16G'</span>, <span class="string">'电信'</span>]</span><br><span class="line">[<span class="string">'黑'</span>, <span class="string">'16G'</span>, <span class="string">'电信'</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;黑&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;16G&#x27;</span>, <span class="string">&#x27;&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;电信&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;黑&#x27;</span>, <span class="string">&#x27;16G&#x27;</span>, <span class="string">&#x27;&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;黑&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;电信&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;16G&#x27;</span>, <span class="string">&#x27;电信&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;黑&#x27;</span>, <span class="string">&#x27;16G&#x27;</span>, <span class="string">&#x27;电信&#x27;</span>]</span><br></pre></td></tr></table></figure>
 <p>但这数据里并没有存放库存以及价格信息，这时候我们先观察一下数据，一个 sku 就能得到一组这样的数据，换一个 sku 一样还是能得到一组类似的数据，比如换成 <code>黑;16G;移动</code> 就会得到</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">''</span>, <span class="string">''</span>, <span class="string">''</span>]</span><br><span class="line">[<span class="string">'黑'</span>, <span class="string">''</span>, <span class="string">''</span>]</span><br><span class="line">[<span class="string">''</span>, <span class="string">'16G'</span>, <span class="string">''</span>]</span><br><span class="line">[<span class="string">''</span>, <span class="string">''</span>, <span class="string">'移动'</span>]</span><br><span class="line">[<span class="string">'黑'</span>, <span class="string">'16G'</span>, <span class="string">''</span>]</span><br><span class="line">[<span class="string">'黑'</span>, <span class="string">''</span>, <span class="string">'移动'</span>]</span><br><span class="line">[<span class="string">''</span>, <span class="string">'16G'</span>, <span class="string">'移动'</span>]</span><br><span class="line">[<span class="string">'黑'</span>, <span class="string">'16G'</span>, <span class="string">'移动'</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;黑&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;16G&#x27;</span>, <span class="string">&#x27;&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;移动&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;黑&#x27;</span>, <span class="string">&#x27;16G&#x27;</span>, <span class="string">&#x27;&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;黑&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;移动&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;16G&#x27;</span>, <span class="string">&#x27;移动&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;黑&#x27;</span>, <span class="string">&#x27;16G&#x27;</span>, <span class="string">&#x27;移动&#x27;</span>]</span><br></pre></td></tr></table></figure>
 <p>发现了么？其中有几个数据是一样的，比如都有出现 <code>['黑', '', '']</code> <code>['', '16G', '']</code> <code>['黑', '16G', '']</code> ……</p>
 <p>我只需把数据一样的库存进行累加，同时把价格存到一个数组里。这样把 <code>数据集</code> 里所有的 sku 都循环一遍后，对应的库存数就统计出来了。比如每个 sku 都会出现 <code>['', '', '']</code> ，那累计得出的自然也就是该商品的总库存数量；再比如 sku 里有出现过 <code>['黑', '', '']</code> ，最终累计得出的就是该商品颜色为黑色的库存数量。</p>
 <p>至于价格，因为每次循环，价格都被保存到与 sku 相对应的一个数组里，比如 <code>['', '', '']</code> 就会保存 <code>数据集</code> 所有 sku 的价格， <code>['黑', '', '']</code> 则会保存与黑色相关的所有价格。如果要获取价格，通过 js 的 Math 对象能很轻松的获取数组里的最大值和最小值。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 最大值</span></span><br><span class="line"><span class="built_in">Math</span>.max.apply(<span class="built_in">Math</span>, <span class="built_in">Array</span>);</span><br><span class="line"><span class="comment">// 最小值</span></span><br><span class="line"><span class="built_in">Math</span>.min.apply(<span class="built_in">Math</span>, <span class="built_in">Array</span>);</span><br></pre></td></tr></table></figure>
 <p>至此，我们已经能实现用户选择一个或多个属性时，均能展示当前的库存和价格信息，演示如下：</p>
-<iframe height='265' scrolling='no' title='2-进阶功能实现' src='//codepen.io/hooray/embed/JZwjpa/?height=265&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/hooray/pen/JZwjpa/' target="_blank" rel="noopener">2-进阶功能实现</a> by 胡睿 (<a href='https://codepen.io/hooray' target="_blank" rel="noopener">@hooray</a>) on <a href='https://codepen.io' target="_blank" rel="noopener">CodePen</a>.
+<iframe height='265' scrolling='no' title='2-进阶功能实现' src='//codepen.io/hooray/embed/JZwjpa/?height=265&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a target="_blank" rel="noopener" href='https://codepen.io/hooray/pen/JZwjpa/'>2-进阶功能实现</a> by 胡睿 (<a target="_blank" rel="noopener" href='https://codepen.io/hooray'>@hooray</a>) on <a target="_blank" rel="noopener" href='https://codepen.io'>CodePen</a>.
 </iframe>
 <h3 id="关联-SKU-验证"><a class="header-anchor" href="#关联-SKU-验证"></a>关联 SKU 验证</h3>
 <p>先恭喜你离最终我们所希望达到的效果，只差一步了。</p>
@@ -528,7 +644,7 @@
 </ul>
 <p>如果验证出 <code>黑色;4G;32G</code> 的库存是 0 ，那就把 <code>32G</code> 设为禁止选择。</p>
 <p>按照这个思路，我们最终的演示也出来了</p>
-<iframe height='265' scrolling='no' title='3-完整功能实现' src='//codepen.io/hooray/embed/KebKoW/?height=265&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/hooray/pen/KebKoW/' target="_blank" rel="noopener">3-完整功能实现</a> by 胡睿 (<a href='https://codepen.io/hooray' target="_blank" rel="noopener">@hooray</a>) on <a href='https://codepen.io' target="_blank" rel="noopener">CodePen</a>.
+<iframe height='265' scrolling='no' title='3-完整功能实现' src='//codepen.io/hooray/embed/KebKoW/?height=265&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a target="_blank" rel="noopener" href='https://codepen.io/hooray/pen/KebKoW/'>3-完整功能实现</a> by 胡睿 (<a target="_blank" rel="noopener" href='https://codepen.io/hooray'>@hooray</a>) on <a target="_blank" rel="noopener" href='https://codepen.io'>CodePen</a>.
 </iframe>
 <h2 id="总结"><a class="header-anchor" href="#总结"></a>总结</h2>
 <p>整个功能实现的思路相对还是比较清晰的，比较费时的就是两个算法的实现。</p>
@@ -573,9 +689,9 @@
 <p>同时也提供了一份基于 Vue 的<a href="https://hooray.github.io/vue-sku-form/expand/front-end.html">前台实现</a>。</p>
 <h2 id="参考"><a class="header-anchor" href="#参考"></a>参考</h2>
 <ul>
-<li><a href="https://jingyan.baidu.com/article/63acb44ac60d4e61fcc17e2e.html" target="_blank" rel="noopener">用例子理解排列组合及基本公式如何计算</a></li>
-<li><a href="http://blog.csdn.net/rosanu_blog/article/details/49836575" target="_blank" rel="noopener">淘宝SKU组合查询算法实现</a></li>
-<li><a href="https://keelii.github.io/2016/12/22/sku-multi-dimensional-attributes-state-algorithm/" target="_blank" rel="noopener">Sku 多维属性状态判断算法</a></li>
+<li><a target="_blank" rel="noopener" href="https://jingyan.baidu.com/article/63acb44ac60d4e61fcc17e2e.html">用例子理解排列组合及基本公式如何计算</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/rosanu_blog/article/details/49836575">淘宝SKU组合查询算法实现</a></li>
+<li><a target="_blank" rel="noopener" href="https://keelii.github.io/2016/12/22/sku-multi-dimensional-attributes-state-algorithm/">Sku 多维属性状态判断算法</a></li>
 </ul>
 
     </div>
@@ -583,29 +699,26 @@
     
     
     
-        <div class="reward-container">
+
+    <footer class="post-footer">
+          <div class="reward-container">
   <div></div>
-  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
-    打赏
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
   </button>
-  <div id="qr" style="display: none;">
-      
-      <div style="display: inline-block;">
-        <img src="/reward-wechat.jpg" alt="Hooray 微信支付">
-        <p>微信支付</p>
+  <div class="post-reward">
+      <div>
+        <img src="/reward-wechat.jpg" alt="Hooray 微信">
+        <span>微信</span>
       </div>
-      
-      <div style="display: inline-block;">
+      <div>
         <img src="/reward-alipay.jpg" alt="Hooray 支付宝">
-        <p>支付宝</p>
+        <span>支付宝</span>
       </div>
 
   </div>
 </div>
 
-
-      <footer class="post-footer">
-          
           <div class="post-tags">
               <a href="/tags/SKU/" rel="tag"><i class="fa fa-tag"></i> SKU</a>
               <a href="/tags/%E7%94%B5%E5%95%86/" rel="tag"><i class="fa fa-tag"></i> 电商</a>
@@ -619,29 +732,27 @@
     </div>
   </div>
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/posts/8913e16b/" rel="prev" title="基于 jQuery WeUI 的通讯录模块">
-      <i class="fa fa-chevron-left"></i> 基于 jQuery WeUI 的通讯录模块
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/8b40f68a/" rel="next" title="我的个人前端开发工具整理">
-      我的个人前端开发工具整理 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/8913e16b/" rel="prev" title="基于 jQuery WeUI 的通讯录模块">
+                  <i class="fa fa-chevron-left"></i> 基于 jQuery WeUI 的通讯录模块
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/8b40f68a/" rel="next" title="我的个人前端开发工具整理">
+                  我的个人前端开发工具整理 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
           </div>
-          
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
     <div class="comments" id="gitalk-container"></div>
 
 <script>
@@ -651,7 +762,7 @@
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -660,173 +771,104 @@
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是-SKU"><span class="nav-number">1.</span> <span class="nav-text">什么是 SKU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-number">2.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决办法"><span class="nav-number">3.</span> <span class="nav-text">解决办法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#场景还原"><span class="nav-number">3.1.</span> <span class="nav-text">场景还原</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据加工"><span class="nav-number">3.2.</span> <span class="nav-text">数据加工</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关联-SKU-验证"><span class="nav-number">3.3.</span> <span class="nav-text">关联 SKU 验证</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SKU-表单配置组件"><span class="nav-number">5.</span> <span class="nav-text">SKU 表单配置组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Hooray"
-      src="/avatar.jpg">
-  <p class="site-author-name" itemprop="name">Hooray</p>
-  <div class="site-description" itemprop="description"></div>
 </div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">46</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">7</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">113</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
-      </span>
-  </div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
 
-  <div class="links-of-blogroll motion-element">
-    <div class="links-of-blogroll-title">
-      <i class="fa fa-fw fa-link"></i>
-      Links
-    </div>
-    <ul class="links-of-blogroll-list">
-        <li class="links-of-blogroll-item">
-          <a href="http://hoorayos.com/" title="http:&#x2F;&#x2F;hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue项目模版</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/hooray/fantastic-admin" title="https:&#x2F;&#x2F;gitee.com&#x2F;hooray&#x2F;fantastic-admin" rel="noopener" target="_blank">Fantastic-admin - 中后台管理系统模版</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://hooray.github.io/vue-sku-form" title="https:&#x2F;&#x2F;hooray.github.io&#x2F;vue-sku-form">vue-sku-form - 电商 SKU 表单配置组件</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/vue-clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
-        </li>
-    </ul>
-  </div>
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
 
 <div class="copyright">
-  
   &copy; 2017 – 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Hooray</span>
-    <span class="post-meta-divider">|</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
     <span class="post-meta-item-icon">
-      <i class="fa fa-area-chart"></i>
+      <i class="fa fa-chart-line"></i>
     </span>
-      <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">139k</span>
-    <span class="post-meta-divider">|</span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">152k</span>
+  </span>
+  <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:07</span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:18</span>
+  </span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
-  </div>
-
-        
 <div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
       <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
+        <i class="user"></i>
       </span>
       <span class="site-uv" title="总访客量">
         <span id="busuanzi_value_site_uv"></span>
       </span>
     </span>
-    <span class="post-meta-divider">|</span>
     <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
       <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
+        <i class="eye"></i>
       </span>
       <span class="site-pv" title="总访问量">
         <span id="busuanzi_value_site_pv"></span>
       </span>
     </span>
 </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 22619,
+      el    : 'wpac-rating',
+      color : 'ff9800'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+<script src="/js/local-search.js"></script>
 
 
 
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
@@ -838,15 +880,15 @@
     }
 
     function addCount(Counter) {
-      var visitors = document.querySelector('.leancloud_visitors');
-      var url = decodeURI(visitors.id);
-      var title = visitors.dataset.flagTitle;
+      const visitors = document.querySelector('.leancloud_visitors');
+      const url = decodeURI(visitors.id);
+      const title = visitors.dataset.flagTitle;
 
       Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
         .then(response => response.json())
         .then(({ results }) => {
           if (results.length > 0) {
-            var counter = results[0];
+            const counter = results[0];
             leancloudSelector(url).innerText = counter.time + 1;
             Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
               .catch(error => {
@@ -869,8 +911,8 @@
     }
 
     function showTime(Counter) {
-      var visitors = document.querySelectorAll('.leancloud_visitors');
-      var entries = [...visitors].map(element => {
+      const visitors = document.querySelectorAll('.leancloud_visitors');
+      const entries = [...visitors].map(element => {
         return decodeURI(element.id);
       });
 
@@ -878,7 +920,7 @@
         .then(response => response.json())
         .then(({ results }) => {
           for (let url of entries) {
-            let target = results.find(item => item.url === url);
+            const target = results.find(item => item.url === url);
             leancloudSelector(url).innerText = target ? target.time : 0;
           }
         })
@@ -887,9 +929,9 @@
         });
     }
 
-    let { app_id, app_key, server_url } = {"enable":true,"app_id":"ODqTjpX8O5RTTQ9Ne0PQLrl6-gzGzoHsz","app_key":"yEmutbTLiTig6Kz3VLiocpgs","server_url":null,"security":false};
+    const { app_id, app_key, server_url } = {"enable":true,"app_id":"ODqTjpX8O5RTTQ9Ne0PQLrl6-gzGzoHsz","app_key":"yEmutbTLiTig6Kz3VLiocpgs","server_url":null,"security":false};
     function fetchData(api_server) {
-      var Counter = (method, url, data) => {
+      const Counter = (method, url, data) => {
         return fetch(`${api_server}/1.1${url}`, {
           method,
           headers: {
@@ -908,7 +950,7 @@
       }
     }
 
-    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+    const api_server = app_id.slice(-9) === '-MdYXbMMI' ? `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com` : server_url;
 
     if (api_server) {
       fetchData(api_server);
@@ -923,80 +965,12 @@
 </script>
 
 
-      </div>
-    </footer>
-  </div>
 
-  
-  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
-  <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-  <script src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js"></script>
-  <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.min.js"></script>
-  <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-  <script>
-  if (CONFIG.page.isPost) {
-    wpac_init = window.wpac_init || [];
-    wpac_init.push({
-      widget: 'Rating',
-      id    : 22619,
-      el    : 'wpac-rating',
-      color : 'ff9800'
-    });
-    (function() {
-      if ('WIDGETPACK_LOADED' in window) return;
-      WIDGETPACK_LOADED = true;
-      var mc = document.createElement('script');
-      mc.type = 'text/javascript';
-      mc.async = true;
-      mc.src = '//embed.widgetpack.com/widget.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
-    })();
-  }
-  </script>
-
-  
-<script src="/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
 
 <script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+NexT.utils.loadComments('#gitalk-container', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
     var gitalk = new Gitalk({
       clientID    : '165f4a18451139d1962f',
       clientSecret: 'd950ed9736a4364215fa554442d01f8e89dd92a8',

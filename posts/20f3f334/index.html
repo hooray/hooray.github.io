@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 5.3.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -13,17 +15,16 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
+
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
   <link rel="stylesheet" href="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.css">
-  <link rel="stylesheet" href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css">
-  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
 
-<script id="hexo-configurations">
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"hooray.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"hooray.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.1.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-
-  <meta name="description" content="平时习惯将一些偶尔看到并且感兴趣的技术文章放到收藏夹里，目的是等有空的时候再仔细拜读或学习，但无奈抵不住自己的惰性，于是收藏夹越来越臃肿。近期在整理的时候就发现了好几篇关于 Electron 的文章，但我已经记不起当时为何收藏，大概每个前端开发工程师都有个做软件的梦想吧。 因为收藏了蛮多 Electron 的文章，直接清理掉感觉可惜，于是趁近期工作任务不是很重的前提下，对 Electron 进行">
+<meta name="description" content="平时习惯将一些偶尔看到并且感兴趣的技术文章放到收藏夹里，目的是等有空的时候再仔细拜读或学习，但无奈抵不住自己的惰性，于是收藏夹越来越臃肿。近期在整理的时候就发现了好几篇关于 Electron 的文章，但我已经记不起当时为何收藏，大概每个前端开发工程师都有个做软件的梦想吧。 因为收藏了蛮多 Electron 的文章，直接清理掉感觉可惜，于是趁近期工作任务不是很重的前提下，对 Electron 进行">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Electron 初体验">
 <meta property="og:url" content="https://hooray.github.io/posts/20f3f334/index.html">
@@ -45,10 +46,11 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://i.loli.net/2018/08/14/5b724978c354e.png">
 
+
 <link rel="canonical" href="https://hooray.github.io/posts/20f3f334/">
 
 
-<script id="page-configurations">
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -57,60 +59,68 @@
     lang   : 'zh-CN'
   };
 </script>
-
-  <title>Electron 初体验 | ９９３５</title>
+<title>Electron 初体验 | ９９３５</title>
   
-
-
-
 
 
 
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">９９３５</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">代码如诗</p>
   </div>
@@ -124,42 +134,41 @@
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-top">
 
-    <a href="/top/" rel="section"><i class="fa fa-fw fa-signal"></i>热门</a>
+    <a href="/top/" rel="section"><i class="fa fa-signal fa-fw"></i>热门</a>
 
   </li>
         <li class="menu-item menu-item-commonweal">
 
-    <a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -172,13 +181,12 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
+    <div class="popup search-popup"><div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
            placeholder="搜索..." spellcheck="false"
            type="search" class="search-input">
   </div>
@@ -186,9 +194,9 @@
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
 
@@ -196,6 +204,109 @@
   </div>
 
 </div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A5%E9%97%A8"><span class="nav-number">1.</span> <span class="nav-text">入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E8%BF%9B%E7%A8%8B%E5%92%8C%E6%B8%B2%E6%9F%93%E8%BF%9B%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">主进程和渲染进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E7%AA%97%E5%8F%A3"><span class="nav-number">3.</span> <span class="nav-text">优化窗口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E8%BE%B9%E6%A1%86%E7%AA%97%E5%8F%A3"><span class="nav-number">3.1.</span> <span class="nav-text">无边框窗口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AA%97%E5%8F%A3%E6%8B%96%E5%8A%A8"><span class="nav-number">3.2.</span> <span class="nav-text">窗口拖动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%8B%E5%8A%A8%E5%AE%9E%E7%8E%B0%E7%AA%97%E5%8F%A3%E6%8B%96%E5%8A%A8"><span class="nav-number">3.3.</span> <span class="nav-text">手动实现窗口拖动</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1"><span class="nav-number">4.</span> <span class="nav-text">进程间通信</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ipcMain-%E5%92%8C-ipcRenderer"><span class="nav-number">4.1.</span> <span class="nav-text">ipcMain 和 ipcRenderer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#remote"><span class="nav-number">4.2.</span> <span class="nav-text">remote</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#webContents"><span class="nav-number">4.3.</span> <span class="nav-text">webContents</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%B2%E6%9F%93%E8%BF%9B%E7%A8%8B%E4%B9%8B%E9%97%B4%E9%80%9A%E4%BF%A1"><span class="nav-number">4.4.</span> <span class="nav-text">渲染进程之间通信</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hooray"
+      src="/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Hooray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">115</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-qq fa-fw"></i>QQ</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://gitee.com/hooray/fantastic-admin" title="https:&#x2F;&#x2F;gitee.com&#x2F;hooray&#x2F;fantastic-admin" rel="noopener" target="_blank">Fantastic-admin - 中后台管理系统模版</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue项目模版</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hooray.github.io/vue-sku-form" title="https:&#x2F;&#x2F;hooray.github.io&#x2F;vue-sku-form">vue-sku-form - 电商 SKU 表单配置组件</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/hooray/hoorayos" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;hoorayos" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/hooray/vue-clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
+        </li>
+    </ul>
+  </div>
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
     </header>
 
     
@@ -205,19 +316,22 @@
   </div>
   <div class="reading-progress-bar"></div>
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content post posts-expand">
-            
+    <div class="main-inner post posts-expand">
 
-    
+
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://hooray.github.io/posts/20f3f334/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -234,54 +348,58 @@
           Electron 初体验
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2018-08-20 11:15:45" itemprop="dateCreated datePublished" datetime="2018-08-20T11:15:45+08:00">2018-08-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-08 21:55:25" itemprop="dateModified" datetime="2019-10-08T21:55:25+08:00">2019-10-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Electron-%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index"><span itemprop="name">Electron 相关</span></a>
-                </span>
-            </span>
+      <time title="创建时间：2018-08-20 11:15:45" itemprop="dateCreated datePublished" datetime="2018-08-20T11:15:45+08:00">2018-08-20</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="fa fa-calendar-check-o"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2019-10-08 21:55:25" itemprop="dateModified" datetime="2019-10-08T21:55:25+08:00">2019-10-08</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Electron-%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index"><span itemprop="name">Electron 相关</span></a>
+        </span>
+    </span>
 
-          
-            <span id="/posts/20f3f334/" class="post-meta-item leancloud_visitors" data-flag-title="Electron 初体验" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>4.9k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
-            </span>
+  
+    <span id="/posts/20f3f334/" class="post-meta-item leancloud_visitors" data-flag-title="Electron 初体验" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>5.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-clock-o"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
 
         </div>
       </header>
@@ -290,14 +408,12 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
         <p><img src="https://i.loli.net/2018/08/14/5b724978c354e.png" alt=""></p>
-<p>平时习惯将一些偶尔看到并且感兴趣的技术文章放到收藏夹里，目的是等有空的时候再仔细拜读或学习，但无奈抵不住自己的惰性，于是收藏夹越来越臃肿。近期在整理的时候就发现了好几篇关于 <a href="https://electronjs.org/" target="_blank" rel="noopener">Electron</a> 的文章，但我已经记不起当时为何收藏，大概每个前端开发工程师都有个做软件的梦想吧。</p>
+<p>平时习惯将一些偶尔看到并且感兴趣的技术文章放到收藏夹里，目的是等有空的时候再仔细拜读或学习，但无奈抵不住自己的惰性，于是收藏夹越来越臃肿。近期在整理的时候就发现了好几篇关于 <a target="_blank" rel="noopener" href="https://electronjs.org/">Electron</a> 的文章，但我已经记不起当时为何收藏，大概每个前端开发工程师都有个做软件的梦想吧。</p>
 <p>因为收藏了蛮多 Electron 的文章，直接清理掉感觉可惜，于是趁近期工作任务不是很重的前提下，对 Electron 进行了简单的入门，并尝试用 Electron 开发一套公司内部 OA 系统，这也是这篇文章的由来（因为开发过 Web APP 版的 OA ，所以桌面版的 OA 开发起来不算太费劲，业务代码基本可以沿用，主要的坑还是在 Electron 上）。</p>
 <a id="more"></a>
 <h2 id="入门"><a class="header-anchor" href="#入门"></a>入门</h2>
-<p>快速入门我使用了官方的 <a href="https://github.com/electron/electron-quick-start" target="_blank" rel="noopener">electron-quick-start</a> 库，下载这个库后直接安装依赖，然后运行，就可以看到如下的效果。</p>
+<p>快速入门我使用了官方的 <a target="_blank" rel="noopener" href="https://github.com/electron/electron-quick-start">electron-quick-start</a> 库，下载这个库后直接安装依赖，然后运行，就可以看到如下的效果。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装依赖</span></span><br><span class="line">npm install</span><br><span class="line"><span class="comment"># 运行</span></span><br><span class="line">npm start</span><br></pre></td></tr></table></figure>
 <p><img src="https://i.loli.net/2018/08/20/5b7a3b0440561.png" alt=""></p>
 <h2 id="主进程和渲染进程"><a class="header-anchor" href="#主进程和渲染进程"></a>主进程和渲染进程</h2>
@@ -308,44 +424,50 @@
 <p>因为 Windows 的窗口有够丑的，所以我的计划是不使用 Windows 的界面，用 HTML 和 CSS 自己做一个界面。</p>
 <h3 id="无边框窗口"><a class="header-anchor" href="#无边框窗口"></a>无边框窗口</h3>
 <p>第一步就是隐藏原生的窗口，打开 main.js 可以看到这段创建窗口的代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createWindow</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// Create the browser window.</span></span><br><span class="line">    mainWindow = <span class="keyword">new</span> BrowserWindow(&#123;<span class="attr">width</span>: <span class="number">800</span>, <span class="attr">height</span>: <span class="number">600</span>&#125;);</span><br><span class="line">    <span class="comment">// and load the index.html of the app.</span></span><br><span class="line">    mainWindow.loadFile(<span class="string">'index.html'</span>);</span><br><span class="line">    <span class="comment">// Emitted when the window is closed.</span></span><br><span class="line">    mainWindow.on(<span class="string">'closed'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// Dereference the window object, usually you would store windows</span></span><br><span class="line">        <span class="comment">// in an array if your app supports multi windows, this is the time</span></span><br><span class="line">        <span class="comment">// when you should delete the corresponding element.</span></span><br><span class="line">        mainWindow = <span class="literal">null</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>通过阅读官方 BrowserWindow 的 <a href="https://electronjs.org/docs/api/frameless-window" target="_blank" rel="noopener">API</a> 文档可以知道，只需要设置 <code>frame: false</code> 就可以创建无边框窗口，当然还可以设置禁止改变尺寸，这时候创建窗口的代码就变成这样了：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createWindow</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// Create the browser window.</span></span><br><span class="line">    mainWindow = <span class="keyword">new</span> BrowserWindow(&#123;<span class="attr">width</span>: <span class="number">800</span>, <span class="attr">height</span>: <span class="number">600</span>&#125;);</span><br><span class="line">    <span class="comment">// and load the index.html of the app.</span></span><br><span class="line">    mainWindow.loadFile(<span class="string">&#x27;index.html&#x27;</span>);</span><br><span class="line">    <span class="comment">// Emitted when the window is closed.</span></span><br><span class="line">    mainWindow.on(<span class="string">&#x27;closed&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// Dereference the window object, usually you would store windows</span></span><br><span class="line">        <span class="comment">// in an array if your app supports multi windows, this is the time</span></span><br><span class="line">        <span class="comment">// when you should delete the corresponding element.</span></span><br><span class="line">        mainWindow = <span class="literal">null</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过阅读官方 BrowserWindow 的 <a target="_blank" rel="noopener" href="https://electronjs.org/docs/api/frameless-window">API</a> 文档可以知道，只需要设置 <code>frame: false</code> 就可以创建无边框窗口，当然还可以设置禁止改变尺寸，这时候创建窗口的代码就变成这样了：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Create the browser window.</span></span><br><span class="line">mainWindow = <span class="keyword">new</span> BrowserWindow(&#123;<span class="attr">width</span>: <span class="number">800</span>, <span class="attr">height</span>: <span class="number">600</span>, <span class="attr">frame</span>: <span class="literal">false</span>, <span class="attr">resizable</span>: <span class="literal">false</span>&#125;);</span><br></pre></td></tr></table></figure>
 <p>运行后就会看到这样一个界面：</p>
 <p><img src="https://i.loli.net/2018/08/20/5b7a5c74a0dbf.png" alt=""></p>
 <h3 id="窗口拖动"><a class="header-anchor" href="#窗口拖动"></a>窗口拖动</h3>
-<p>现在窗口已经没有标题栏和菜单栏了，接着就会发现一个问题，就是窗口没办法拖动了。这不是什么大问题，因为官方也想到这问题了，所以在<a href="https://electronjs.org/docs/api/frameless-window" target="_blank" rel="noopener">无边框窗口文档</a>里给出了解决方案，就是给拖动区域增加 <code>-webkit-app-region: drag</code> 的 CSS 代码。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">style</span>=<span class="string">"-webkit-app-region: drag"</span>&gt;</span><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>现在窗口已经没有标题栏和菜单栏了，接着就会发现一个问题，就是窗口没办法拖动了。这不是什么大问题，因为官方也想到这问题了，所以在<a target="_blank" rel="noopener" href="https://electronjs.org/docs/api/frameless-window">无边框窗口文档</a>里给出了解决方案，就是给拖动区域增加 <code>-webkit-app-region: drag</code> 的 CSS 代码。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">style</span>=<span class="string">&quot;-webkit-app-region: drag&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>需要注意的是，如果在拖动区域里有按钮等需要点击的元素，需要增加 <code>-webkit-app-region: no-drag</code> 设置，否则会无法点击。</p>
 <h3 id="手动实现窗口拖动"><a class="header-anchor" href="#手动实现窗口拖动"></a>手动实现窗口拖动</h3>
-<div class="note warning">
-            <p>2018-08-25 更新：</p><p>不建议在无边框窗口下使用下面的方法实现拖动效果，在特殊环境下，比如系统 DPI 不为 100% 时候，会导致窗口在拖动时，窗口的宽高会无限变大，建议还是使用官方提供的无边框窗口下的拖动方案。</p><p>我的测试环境为 2560*1440 的分辨率， DPI 为 125% 。</p><p>关于这个问题，我也找到两个相关的 Issus ：</p><ul><li><a href="https://github.com/electron/electron/issues/13086" target="_blank" rel="noopener">Windows 10 move browser window will trigger “resize” event</a></li><li><a href="https://github.com/electron/electron/issues/10862" target="_blank" rel="noopener">Per monitor DPI awareness causes issues with window positioning and sizing</a></li></ul>
-          </div>
+<div class="note warning"><p>2018-08-25 更新：</p>
+<p>不建议在无边框窗口下使用下面的方法实现拖动效果，在特殊环境下，比如系统 DPI 不为 100% 时候，会导致窗口在拖动时，窗口的宽高会无限变大，建议还是使用官方提供的无边框窗口下的拖动方案。</p>
+<p>我的测试环境为 2560*1440 的分辨率， DPI 为 125% 。</p>
+<p>关于这个问题，我也找到两个相关的 Issus ：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/electron/electron/issues/13086">Windows 10 move browser window will trigger “resize” event</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/electron/electron/issues/10862">Per monitor DPI awareness causes issues with window positioning and sizing</a></li>
+</ul>
+</div>
 <p>虽然官方已经提供了无边框窗口拖动的解决方案，但实际使用上会发现一个问题，就是在拖动区域右键，会弹出系统级别的菜单选项，这问题我查了相关资料也没找到屏蔽的办法，所以我就在考虑用 js 来手动实现窗口拖动的效果。</p>
 <p>解决办法其实和网页上拖动元素一样，只是在获取坐标和设置坐标上，需要通过 electron 来获取窗口坐标和设置窗口坐标，实现代码如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> currentWindow = <span class="built_in">require</span>(<span class="string">'electron'</span>).remote.getCurrentWindow();</span><br><span class="line">$(<span class="built_in">document</span>).on(<span class="string">'mousedown'</span>, <span class="string">'.app-drag'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    e = e.originalEvent || e;</span><br><span class="line">    <span class="keyword">var</span> $el = $(e.target);</span><br><span class="line">    <span class="keyword">var</span> canDrag = $el.closest(<span class="string">'.app-no-drag'</span>).length &lt;= <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (canDrag) &#123;</span><br><span class="line">        <span class="keyword">var</span> winPos = currentWindow.getPosition();</span><br><span class="line">        <span class="keyword">var</span> dX = e.screenX - winPos[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">var</span> dY = e.screenY - winPos[<span class="number">1</span>];</span><br><span class="line">        $(<span class="built_in">document</span>).on(<span class="string">'mousemove'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">            e = e.originalEvent || e;</span><br><span class="line">            <span class="keyword">var</span> _x = e.screenX - dX;</span><br><span class="line">            <span class="keyword">var</span> _y = e.screenY - dY;</span><br><span class="line">            currentWindow.setPosition(_x, _y);</span><br><span class="line">        &#125;);</span><br><span class="line">        $(<span class="built_in">document</span>).on(<span class="string">'mouseup'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">            $(<span class="keyword">this</span>).off(<span class="string">'mousemove'</span>).off(<span class="string">'mouseup'</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> currentWindow = <span class="built_in">require</span>(<span class="string">&#x27;electron&#x27;</span>).remote.getCurrentWindow();</span><br><span class="line">$(<span class="built_in">document</span>).on(<span class="string">&#x27;mousedown&#x27;</span>, <span class="string">&#x27;.app-drag&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    e = e.originalEvent || e;</span><br><span class="line">    <span class="keyword">var</span> $el = $(e.target);</span><br><span class="line">    <span class="keyword">var</span> canDrag = $el.closest(<span class="string">&#x27;.app-no-drag&#x27;</span>).length &lt;= <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (canDrag) &#123;</span><br><span class="line">        <span class="keyword">var</span> winPos = currentWindow.getPosition();</span><br><span class="line">        <span class="keyword">var</span> dX = e.screenX - winPos[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">var</span> dY = e.screenY - winPos[<span class="number">1</span>];</span><br><span class="line">        $(<span class="built_in">document</span>).on(<span class="string">&#x27;mousemove&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">            e = e.originalEvent || e;</span><br><span class="line">            <span class="keyword">var</span> _x = e.screenX - dX;</span><br><span class="line">            <span class="keyword">var</span> _y = e.screenY - dY;</span><br><span class="line">            currentWindow.setPosition(_x, _y);</span><br><span class="line">        &#125;);</span><br><span class="line">        $(<span class="built_in">document</span>).on(<span class="string">&#x27;mouseup&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">            $(<span class="built_in">this</span>).off(<span class="string">&#x27;mousemove&#x27;</span>).off(<span class="string">&#x27;mouseup&#x27;</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>这样只需要在需要给拖动区域设置 <code>.app-drag</code> ，非拖动区域设置 <code>.app-no-drag</code> 即可。</p>
 <p>这里我是用 jQuery 来实现的，如果在页面上引入 jQuery 会报错：<strong>Uncaught ReferenceError: $ is not defined</strong>，解决办法如下：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">if</span>(<span class="keyword">typeof</span> <span class="built_in">module</span> === <span class="string">'object'</span>)&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">window</span>.jQuery = <span class="built_in">window</span>.$ = <span class="built_in">module</span>.exports;</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">if</span>(<span class="keyword">typeof</span> <span class="built_in">module</span> === <span class="string">&#x27;object&#x27;</span>)&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">window</span>.jQuery = <span class="built_in">window</span>.$ = <span class="built_in">module</span>.exports;</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h2 id="进程间通信"><a class="header-anchor" href="#进程间通信"></a>进程间通信</h2>
 <p>因为安全限制， web 页面不能直接访问原生 GUI 资源，在 Electron 中也是一样，渲染进程如果想要进行原生的 GUI 操作，就比如和主进程进行通信，请求相应的操作。在 Electron 中提供了几种通信方式</p>
-<h3 id="ipcMain-和-ipcRenderer"><a class="header-anchor" href="#ipcMain-和-ipcRenderer"></a><a href="https://electronjs.org/docs/api/ipc-main" target="_blank" rel="noopener">ipcMain</a> 和 <a href="https://electronjs.org/docs/api/ipc-renderer" target="_blank" rel="noopener">ipcRenderer</a></h3>
+<h3 id="ipcMain-和-ipcRenderer"><a class="header-anchor" href="#ipcMain-和-ipcRenderer"></a><a target="_blank" rel="noopener" href="https://electronjs.org/docs/api/ipc-main">ipcMain</a> 和 <a target="_blank" rel="noopener" href="https://electronjs.org/docs/api/ipc-renderer">ipcRenderer</a></h3>
 <p>在渲染进程中使用 ipcRenderer 模块向主进程发送消息，主进程中使用 ipcMain 模块接收消息，进行操作，如果还需要反馈，则通知渲染进程，渲染进程根据接收的内容执行相应的操作：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 渲染进程中</span></span><br><span class="line"><span class="keyword">const</span> &#123;ipcRenderer&#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>);</span><br><span class="line">ipcRender.send(<span class="string">'somemsg'</span>, data);</span><br><span class="line">ipcRender.on(<span class="string">'replaymsg'</span>, (evt, otherData) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(otherData);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 主进程中</span></span><br><span class="line"><span class="keyword">const</span> &#123;ipcMain&#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>);</span><br><span class="line">ipcMain.on(<span class="string">'somemsg'</span>, (evt, data) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">    evt.sender.send(<span class="string">'replymsg'</span>, otherData);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h3 id="remote"><a class="header-anchor" href="#remote"></a><a href="https://electronjs.org/docs/api/remote" target="_blank" rel="noopener">remote</a></h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 渲染进程中</span></span><br><span class="line"><span class="keyword">const</span> &#123;ipcRenderer&#125; = <span class="built_in">require</span>(<span class="string">&#x27;electron&#x27;</span>);</span><br><span class="line">ipcRender.send(<span class="string">&#x27;somemsg&#x27;</span>, data);</span><br><span class="line">ipcRender.on(<span class="string">&#x27;replaymsg&#x27;</span>, <span class="function">(<span class="params">evt, otherData</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(otherData);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 主进程中</span></span><br><span class="line"><span class="keyword">const</span> &#123;ipcMain&#125; = <span class="built_in">require</span>(<span class="string">&#x27;electron&#x27;</span>);</span><br><span class="line">ipcMain.on(<span class="string">&#x27;somemsg&#x27;</span>, <span class="function">(<span class="params">evt, data</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">    evt.sender.send(<span class="string">&#x27;replymsg&#x27;</span>, otherData);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="remote"><a class="header-anchor" href="#remote"></a><a target="_blank" rel="noopener" href="https://electronjs.org/docs/api/remote">remote</a></h3>
 <p>remote 模块为渲染进程和主进程通信提供了一种简单方法，可以看到在上面手动实现拖动窗口的效果里，就用到了 remote 模块。</p>
-<h3 id="webContents"><a class="header-anchor" href="#webContents"></a><a href="https://electronjs.org/docs/api/web-contents" target="_blank" rel="noopener">webContents</a></h3>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 主进程中</span></span><br><span class="line">win.webContents.on(<span class="string">'did-finish-load'</span>, () =&gt; &#123;</span><br><span class="line">    win.webContents.send(<span class="string">'ping'</span>, <span class="string">'whoooooooh!'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 渲染进程中</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">'electron'</span>).ipcRenderer.on(<span class="string">'ping'</span>, (event, message) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(message);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="webContents"><a class="header-anchor" href="#webContents"></a><a target="_blank" rel="noopener" href="https://electronjs.org/docs/api/web-contents">webContents</a></h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 主进程中</span></span><br><span class="line">win.webContents.on(<span class="string">&#x27;did-finish-load&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    win.webContents.send(<span class="string">&#x27;ping&#x27;</span>, <span class="string">&#x27;whoooooooh!&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 渲染进程中</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;electron&#x27;</span>).ipcRenderer.on(<span class="string">&#x27;ping&#x27;</span>, <span class="function">(<span class="params">event, message</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(message);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <h3 id="渲染进程之间通信"><a class="header-anchor" href="#渲染进程之间通信"></a>渲染进程之间通信</h3>
-<p>如果对数据的实时性没有要求，只是渲染进程之间数据共享，<a href="https://electronjs.org/docs/faq#%E5%A6%82%E4%BD%95%E5%9C%A8%E4%B8%A4%E4%B8%AA%E7%BD%91%E9%A1%B5%E9%97%B4%E5%85%B1%E4%BA%AB%E6%95%B0%E6%8D%AE%EF%BC%9F" target="_blank" rel="noopener">官方建议</a>是使用浏览器中已经实现的 HTML5 API 。</p>
+<p>如果对数据的实时性没有要求，只是渲染进程之间数据共享，<a target="_blank" rel="noopener" href="https://electronjs.org/docs/faq#%E5%A6%82%E4%BD%95%E5%9C%A8%E4%B8%A4%E4%B8%AA%E7%BD%91%E9%A1%B5%E9%97%B4%E5%85%B1%E4%BA%AB%E6%95%B0%E6%8D%AE%EF%BC%9F">官方建议</a>是使用浏览器中已经实现的 HTML5 API 。</p>
 <p>但如果对数据实时性要求高，那就要结合上面的方法来实现：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 主进程中，将两个窗口的 id 分别发送到对方的渲染进程里</span></span><br><span class="line">mainWindow.webContents.on(<span class="string">'did-finish-load'</span>, () =&gt; &#123;</span><br><span class="line">    mainWindow.webContents.send(<span class="string">'getChild'</span>, &#123;</span><br><span class="line">        childId: childWindow.id</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">childWindow.webContents.on(<span class="string">'did-finish-load'</span>, () =&gt; &#123;</span><br><span class="line">    childWindow.webContents.send(<span class="string">'getMain'</span>, &#123;</span><br><span class="line">        mainId: mainWindow.id</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 渲染进程 mainWindow，通过 id 得到 childWindow 并发送一条消息</span></span><br><span class="line">ipcRenderer.on(<span class="string">'getChild'</span>, (event, arg) =&gt; &#123;</span><br><span class="line">    remote.BrowserWindow.fromId(arg.childId).webContents.send(<span class="string">'say'</span>, <span class="string">'Hello World!'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 渲染进程 childWindow，接收 mainWindow 的消息</span></span><br><span class="line">ipcRenderer.on(<span class="string">'say'</span>, (event, arg) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(arg); <span class="comment">// 输出：Hello World!</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 同理 childWindow 也可以通过 id 给 mainWindow 发送消息</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 主进程中，将两个窗口的 id 分别发送到对方的渲染进程里</span></span><br><span class="line">mainWindow.webContents.on(<span class="string">&#x27;did-finish-load&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    mainWindow.webContents.send(<span class="string">&#x27;getChild&#x27;</span>, &#123;</span><br><span class="line">        childId: childWindow.id</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">childWindow.webContents.on(<span class="string">&#x27;did-finish-load&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    childWindow.webContents.send(<span class="string">&#x27;getMain&#x27;</span>, &#123;</span><br><span class="line">        mainId: mainWindow.id</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 渲染进程 mainWindow，通过 id 得到 childWindow 并发送一条消息</span></span><br><span class="line">ipcRenderer.on(<span class="string">&#x27;getChild&#x27;</span>, <span class="function">(<span class="params">event, arg</span>) =&gt;</span> &#123;</span><br><span class="line">    remote.BrowserWindow.fromId(arg.childId).webContents.send(<span class="string">&#x27;say&#x27;</span>, <span class="string">&#x27;Hello World!&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 渲染进程 childWindow，接收 mainWindow 的消息</span></span><br><span class="line">ipcRenderer.on(<span class="string">&#x27;say&#x27;</span>, <span class="function">(<span class="params">event, arg</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(arg); <span class="comment">// 输出：Hello World!</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 同理 childWindow 也可以通过 id 给 mainWindow 发送消息</span></span><br></pre></td></tr></table></figure>
 <h2 id="总结"><a class="header-anchor" href="#总结"></a>总结</h2>
-<p>不明白的地方优先查看<a href="https://electronjs.org/docs" target="_blank" rel="noopener">官方文档</a>，因为官方文档太完整了，虽然部分还是英文的，没有翻译完整，但并不影响阅读，因为官方文档有很多例子，看代码就能理解，也可以下载官方的 <a href="https://github.com/electron/electron-api-demos" target="_blank" rel="noopener">electron-api-demos</a> 库，整理了部分 API 的实例，当然这个项目本身也是一个很好的 Electron 演示。</p>
+<p>不明白的地方优先查看<a target="_blank" rel="noopener" href="https://electronjs.org/docs">官方文档</a>，因为官方文档太完整了，虽然部分还是英文的，没有翻译完整，但并不影响阅读，因为官方文档有很多例子，看代码就能理解，也可以下载官方的 <a target="_blank" rel="noopener" href="https://github.com/electron/electron-api-demos">electron-api-demos</a> 库，整理了部分 API 的实例，当然这个项目本身也是一个很好的 Electron 演示。</p>
 <h2 id="参考"><a class="header-anchor" href="#参考"></a>参考</h2>
 <ul>
-<li><a href="https://juejin.im/entry/58869b3f8d6d810058d46135" target="_blank" rel="noopener">我眼中的 Electron</a></li>
-<li><a href="https://segmentfault.com/a/1190000011507250" target="_blank" rel="noopener">使用 Electron 在两个进程 (主进程和渲染进程) 之间进行通讯</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.im/entry/58869b3f8d6d810058d46135">我眼中的 Electron</a></li>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000011507250">使用 Electron 在两个进程 (主进程和渲染进程) 之间进行通讯</a></li>
 </ul>
 
     </div>
@@ -353,29 +475,26 @@
     
     
     
-        <div class="reward-container">
+
+    <footer class="post-footer">
+          <div class="reward-container">
   <div></div>
-  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
-    打赏
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
   </button>
-  <div id="qr" style="display: none;">
-      
-      <div style="display: inline-block;">
-        <img src="/reward-wechat.jpg" alt="Hooray 微信支付">
-        <p>微信支付</p>
+  <div class="post-reward">
+      <div>
+        <img src="/reward-wechat.jpg" alt="Hooray 微信">
+        <span>微信</span>
       </div>
-      
-      <div style="display: inline-block;">
+      <div>
         <img src="/reward-alipay.jpg" alt="Hooray 支付宝">
-        <p>支付宝</p>
+        <span>支付宝</span>
       </div>
 
   </div>
 </div>
 
-
-      <footer class="post-footer">
-          
           <div class="post-tags">
               <a href="/tags/electron/" rel="tag"><i class="fa fa-tag"></i> electron</a>
               <a href="/tags/%E6%97%A0%E8%BE%B9%E6%A1%86%E7%AA%97%E5%8F%A3/" rel="tag"><i class="fa fa-tag"></i> 无边框窗口</a>
@@ -392,29 +511,27 @@
     </div>
   </div>
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/posts/ed9dc49e/" rel="prev" title="docsify 全接触">
-      <i class="fa fa-chevron-left"></i> docsify 全接触
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/46704839/" rel="next" title="浅入浅出 Vue 动态组件">
-      浅入浅出 Vue 动态组件 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/ed9dc49e/" rel="prev" title="docsify 全接触">
+                  <i class="fa fa-chevron-left"></i> docsify 全接触
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/46704839/" rel="next" title="浅入浅出 Vue 动态组件">
+                  浅入浅出 Vue 动态组件 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
           </div>
-          
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
     <div class="comments" id="gitalk-container"></div>
 
 <script>
@@ -424,7 +541,7 @@
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -433,173 +550,104 @@
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#入门"><span class="nav-number">1.</span> <span class="nav-text">入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主进程和渲染进程"><span class="nav-number">2.</span> <span class="nav-text">主进程和渲染进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化窗口"><span class="nav-number">3.</span> <span class="nav-text">优化窗口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#无边框窗口"><span class="nav-number">3.1.</span> <span class="nav-text">无边框窗口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#窗口拖动"><span class="nav-number">3.2.</span> <span class="nav-text">窗口拖动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#手动实现窗口拖动"><span class="nav-number">3.3.</span> <span class="nav-text">手动实现窗口拖动</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程间通信"><span class="nav-number">4.</span> <span class="nav-text">进程间通信</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ipcMain-和-ipcRenderer"><span class="nav-number">4.1.</span> <span class="nav-text">ipcMain 和 ipcRenderer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#remote"><span class="nav-number">4.2.</span> <span class="nav-text">remote</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#webContents"><span class="nav-number">4.3.</span> <span class="nav-text">webContents</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#渲染进程之间通信"><span class="nav-number">4.4.</span> <span class="nav-text">渲染进程之间通信</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Hooray"
-      src="/avatar.jpg">
-  <p class="site-author-name" itemprop="name">Hooray</p>
-  <div class="site-description" itemprop="description"></div>
 </div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">46</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">7</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">113</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
-      </span>
-  </div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
 
-  <div class="links-of-blogroll motion-element">
-    <div class="links-of-blogroll-title">
-      <i class="fa fa-fw fa-link"></i>
-      Links
-    </div>
-    <ul class="links-of-blogroll-list">
-        <li class="links-of-blogroll-item">
-          <a href="http://hoorayos.com/" title="http:&#x2F;&#x2F;hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue项目模版</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/hooray/fantastic-admin" title="https:&#x2F;&#x2F;gitee.com&#x2F;hooray&#x2F;fantastic-admin" rel="noopener" target="_blank">Fantastic-admin - 中后台管理系统模版</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://hooray.github.io/vue-sku-form" title="https:&#x2F;&#x2F;hooray.github.io&#x2F;vue-sku-form">vue-sku-form - 电商 SKU 表单配置组件</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/vue-clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
-        </li>
-    </ul>
-  </div>
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
 
 <div class="copyright">
-  
   &copy; 2017 – 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Hooray</span>
-    <span class="post-meta-divider">|</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
     <span class="post-meta-item-icon">
-      <i class="fa fa-area-chart"></i>
+      <i class="fa fa-chart-line"></i>
     </span>
-      <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">139k</span>
-    <span class="post-meta-divider">|</span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">152k</span>
+  </span>
+  <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:07</span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:18</span>
+  </span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
-  </div>
-
-        
 <div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
       <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
+        <i class="user"></i>
       </span>
       <span class="site-uv" title="总访客量">
         <span id="busuanzi_value_site_uv"></span>
       </span>
     </span>
-    <span class="post-meta-divider">|</span>
     <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
       <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
+        <i class="eye"></i>
       </span>
       <span class="site-pv" title="总访问量">
         <span id="busuanzi_value_site_pv"></span>
       </span>
     </span>
 </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 22619,
+      el    : 'wpac-rating',
+      color : 'ff9800'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+<script src="/js/local-search.js"></script>
 
 
 
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
@@ -611,15 +659,15 @@
     }
 
     function addCount(Counter) {
-      var visitors = document.querySelector('.leancloud_visitors');
-      var url = decodeURI(visitors.id);
-      var title = visitors.dataset.flagTitle;
+      const visitors = document.querySelector('.leancloud_visitors');
+      const url = decodeURI(visitors.id);
+      const title = visitors.dataset.flagTitle;
 
       Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
         .then(response => response.json())
         .then(({ results }) => {
           if (results.length > 0) {
-            var counter = results[0];
+            const counter = results[0];
             leancloudSelector(url).innerText = counter.time + 1;
             Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
               .catch(error => {
@@ -642,8 +690,8 @@
     }
 
     function showTime(Counter) {
-      var visitors = document.querySelectorAll('.leancloud_visitors');
-      var entries = [...visitors].map(element => {
+      const visitors = document.querySelectorAll('.leancloud_visitors');
+      const entries = [...visitors].map(element => {
         return decodeURI(element.id);
       });
 
@@ -651,7 +699,7 @@
         .then(response => response.json())
         .then(({ results }) => {
           for (let url of entries) {
-            let target = results.find(item => item.url === url);
+            const target = results.find(item => item.url === url);
             leancloudSelector(url).innerText = target ? target.time : 0;
           }
         })
@@ -660,9 +708,9 @@
         });
     }
 
-    let { app_id, app_key, server_url } = {"enable":true,"app_id":"ODqTjpX8O5RTTQ9Ne0PQLrl6-gzGzoHsz","app_key":"yEmutbTLiTig6Kz3VLiocpgs","server_url":null,"security":false};
+    const { app_id, app_key, server_url } = {"enable":true,"app_id":"ODqTjpX8O5RTTQ9Ne0PQLrl6-gzGzoHsz","app_key":"yEmutbTLiTig6Kz3VLiocpgs","server_url":null,"security":false};
     function fetchData(api_server) {
-      var Counter = (method, url, data) => {
+      const Counter = (method, url, data) => {
         return fetch(`${api_server}/1.1${url}`, {
           method,
           headers: {
@@ -681,7 +729,7 @@
       }
     }
 
-    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+    const api_server = app_id.slice(-9) === '-MdYXbMMI' ? `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com` : server_url;
 
     if (api_server) {
       fetchData(api_server);
@@ -696,80 +744,12 @@
 </script>
 
 
-      </div>
-    </footer>
-  </div>
 
-  
-  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
-  <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-  <script src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js"></script>
-  <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.min.js"></script>
-  <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-  <script>
-  if (CONFIG.page.isPost) {
-    wpac_init = window.wpac_init || [];
-    wpac_init.push({
-      widget: 'Rating',
-      id    : 22619,
-      el    : 'wpac-rating',
-      color : 'ff9800'
-    });
-    (function() {
-      if ('WIDGETPACK_LOADED' in window) return;
-      WIDGETPACK_LOADED = true;
-      var mc = document.createElement('script');
-      mc.type = 'text/javascript';
-      mc.async = true;
-      mc.src = '//embed.widgetpack.com/widget.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
-    })();
-  }
-  </script>
-
-  
-<script src="/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
 
 <script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+NexT.utils.loadComments('#gitalk-container', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
     var gitalk = new Gitalk({
       clientID    : '165f4a18451139d1962f',
       clientSecret: 'd950ed9736a4364215fa554442d01f8e89dd92a8',

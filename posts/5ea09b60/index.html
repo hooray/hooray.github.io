@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 5.3.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -13,17 +15,16 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
+
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
   <link rel="stylesheet" href="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.css">
-  <link rel="stylesheet" href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css">
-  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
 
-<script id="hexo-configurations">
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"hooray.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"hooray.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.1.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-
-  <meta name="description" content="先简单介绍一下，vue-automation-admin 是一款开箱即用的 Vue 中后台管理系统模版。但是后台框架市面上已经有不少，为什么我还要重新造轮子呢？这就要从 vue-element-admin 说起了。">
+<meta name="description" content="先简单介绍一下，vue-automation-admin 是一款开箱即用的 Vue 中后台管理系统模版。但是后台框架市面上已经有不少，为什么我还要重新造轮子呢？这就要从 vue-element-admin 说起了。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vue-automation-admin 开发回顾">
 <meta property="og:url" content="https://hooray.github.io/posts/5ea09b60/index.html">
@@ -41,20 +42,21 @@
 <meta property="article:published_time" content="2020-07-16T01:19:26.000Z">
 <meta property="article:modified_time" content="2020-10-17T18:28:33.638Z">
 <meta property="article:author" content="Hooray">
-<meta property="article:tag" content="vue">
 <meta property="article:tag" content="vue-router">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="权限">
 <meta property="article:tag" content="vuex">
 <meta property="article:tag" content="后台框架">
 <meta property="article:tag" content="admin">
-<meta property="article:tag" content="权限">
 <meta property="article:tag" content="鉴权">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://s1.ax1x.com/2020/07/16/UBxPYV.png">
 
+
 <link rel="canonical" href="https://hooray.github.io/posts/5ea09b60/">
 
 
-<script id="page-configurations">
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -63,60 +65,68 @@
     lang   : 'zh-CN'
   };
 </script>
-
-  <title>vue-automation-admin 开发回顾 | ９９３５</title>
+<title>vue-automation-admin 开发回顾 | ９９３５</title>
   
-
-
-
 
 
 
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">９９３５</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">代码如诗</p>
   </div>
@@ -130,42 +140,41 @@
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-top">
 
-    <a href="/top/" rel="section"><i class="fa fa-fw fa-signal"></i>热门</a>
+    <a href="/top/" rel="section"><i class="fa fa-signal fa-fw"></i>热门</a>
 
   </li>
         <li class="menu-item menu-item-commonweal">
 
-    <a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -178,13 +187,12 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
+    <div class="popup search-popup"><div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
            placeholder="搜索..." spellcheck="false"
            type="search" class="search-input">
   </div>
@@ -192,9 +200,9 @@
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
 
@@ -202,6 +210,109 @@
   </div>
 
 </div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%B7%E5%9B%A0"><span class="nav-number">1.</span> <span class="nav-text">起因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E6%A1%86%E6%9E%B6%E9%80%89%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">技术框架选型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%83%E5%B1%80"><span class="nav-number">3.</span> <span class="nav-text">布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%A7%E8%BE%B9%E6%A0%8F%E5%AF%BC%E8%88%AA"><span class="nav-number">5.</span> <span class="nav-text">侧边栏导航</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E5%8C%85%E5%B1%91%E5%AF%BC%E8%88%AA"><span class="nav-number">6.</span> <span class="nav-text">面包屑导航</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%87%E6%B8%A1%E5%8A%A8%E6%95%88"><span class="nav-number">7.</span> <span class="nav-text">过渡动效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%83%E9%99%90"><span class="nav-number">8.</span> <span class="nav-text">权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E6%9D%9F"><span class="nav-number">9.</span> <span class="nav-text">结束</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hooray"
+      src="/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Hooray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">115</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-qq fa-fw"></i>QQ</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://gitee.com/hooray/fantastic-admin" title="https:&#x2F;&#x2F;gitee.com&#x2F;hooray&#x2F;fantastic-admin" rel="noopener" target="_blank">Fantastic-admin - 中后台管理系统模版</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue项目模版</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hooray.github.io/vue-sku-form" title="https:&#x2F;&#x2F;hooray.github.io&#x2F;vue-sku-form">vue-sku-form - 电商 SKU 表单配置组件</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/hooray/hoorayos" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;hoorayos" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/hooray/vue-clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
+        </li>
+    </ul>
+  </div>
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
     </header>
 
     
@@ -211,19 +322,22 @@
   </div>
   <div class="reading-progress-bar"></div>
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content post posts-expand">
-            
+    <div class="main-inner post posts-expand">
 
-    
+
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://hooray.github.io/posts/5ea09b60/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -240,54 +354,58 @@
           vue-automation-admin 开发回顾
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-07-16 09:19:26" itemprop="dateCreated datePublished" datetime="2020-07-16T09:19:26+08:00">2020-07-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-18 02:28:33" itemprop="dateModified" datetime="2020-10-18T02:28:33+08:00">2020-10-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue-%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index"><span itemprop="name">Vue 相关</span></a>
-                </span>
-            </span>
+      <time title="创建时间：2020-07-16 09:19:26" itemprop="dateCreated datePublished" datetime="2020-07-16T09:19:26+08:00">2020-07-16</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="fa fa-calendar-check-o"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-10-18 02:28:33" itemprop="dateModified" datetime="2020-10-18T02:28:33+08:00">2020-10-18</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Vue-%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index"><span itemprop="name">Vue 相关</span></a>
+        </span>
+    </span>
 
-          
-            <span id="/posts/5ea09b60/" class="post-meta-item leancloud_visitors" data-flag-title="vue-automation-admin 开发回顾" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>8.9k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>8 分钟</span>
-            </span>
+  
+    <span id="/posts/5ea09b60/" class="post-meta-item leancloud_visitors" data-flag-title="vue-automation-admin 开发回顾" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>9.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-clock-o"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>8 分钟</span>
+    </span>
+</div>
 
         </div>
       </header>
@@ -296,25 +414,23 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
-        <p>先简单介绍一下，<a href="https://gitee.com/eoner/vue-automation-admin" target="_blank" rel="noopener">vue-automation-admin</a> 是一款开箱即用的 Vue 中后台管理系统模版。但是后台框架市面上已经有不少，为什么我还要重新造轮子呢？这就要从 <a href="https://github.com/PanJiaChen/vue-element-admin" target="_blank" rel="noopener">vue-element-admin</a> 说起了。</p>
+        <p>先简单介绍一下，<a target="_blank" rel="noopener" href="https://gitee.com/eoner/vue-automation-admin">vue-automation-admin</a> 是一款开箱即用的 Vue 中后台管理系统模版。但是后台框架市面上已经有不少，为什么我还要重新造轮子呢？这就要从 <a target="_blank" rel="noopener" href="https://github.com/PanJiaChen/vue-element-admin">vue-element-admin</a> 说起了。</p>
 <a id="more"></a>
 <h2 id="起因"><a class="header-anchor" href="#起因"></a>起因</h2>
-<p>我司其实一开始是使用 <a href="https://github.com/PanJiaChen/vue-element-admin" target="_blank" rel="noopener">vue-element-admin</a> 的，并且也做了很多定置化的修改，例如针对权限模块就做了定制，可参考之前整理的文章《<a href="/posts/6237952e/" title="重构 vue-element-admin 权限模块">重构 vue-element-admin 权限模块</a>》。</p>
-<p>但也有不好实现的功能，例如大部分后台都是左右两栏布局（左侧为侧边栏导航，右侧为详情内容），但在实际项目开发中，由于模块较多，会有顶部导航的需求，也就是将原先侧边栏导航里的模块进行归类，点击不同类目的头部导航，侧边栏导航的内容也会更新。这个需求我虽然在练习的时候实现过（《<a href="/posts/a2b0b91e/" title="利用嵌套路由动态生成后台导航">利用嵌套路由动态生成后台导航</a>》），但尝试在 <a href="https://github.com/PanJiaChen/vue-element-admin" target="_blank" rel="noopener">vue-element-admin</a> 里实现时，还是遇到了很多头疼的问题，最终也不了了之。可能是当时对 <a href="https://github.com/PanJiaChen/vue-element-admin" target="_blank" rel="noopener">vue-element-admin</a> 的源码理解不够深吧。</p>
+<p>我司其实一开始是使用 <a target="_blank" rel="noopener" href="https://github.com/PanJiaChen/vue-element-admin">vue-element-admin</a> 的，并且也做了很多定置化的修改，例如针对权限模块就做了定制，可参考之前整理的文章《<a href="/posts/6237952e/" title="重构 vue-element-admin 权限模块">重构 vue-element-admin 权限模块</a>》。</p>
+<p>但也有不好实现的功能，例如大部分后台都是左右两栏布局（左侧为侧边栏导航，右侧为详情内容），但在实际项目开发中，由于模块较多，会有顶部导航的需求，也就是将原先侧边栏导航里的模块进行归类，点击不同类目的头部导航，侧边栏导航的内容也会更新。这个需求我虽然在练习的时候实现过（《<a href="/posts/a2b0b91e/" title="利用嵌套路由动态生成后台导航">利用嵌套路由动态生成后台导航</a>》），但尝试在 <a target="_blank" rel="noopener" href="https://github.com/PanJiaChen/vue-element-admin">vue-element-admin</a> 里实现时，还是遇到了很多头疼的问题，最终也不了了之。可能是当时对 <a target="_blank" rel="noopener" href="https://github.com/PanJiaChen/vue-element-admin">vue-element-admin</a> 的源码理解不够深吧。</p>
 <p>总之经历了这些后，终于决定开发一款后台管理框架，目标就两点：</p>
 <ol>
 <li>足够轻量级</li>
 <li>尽量配置化</li>
 </ol>
-<p>轻量级是学习了 <a href="https://github.com/PanJiaChen/vue-admin-template" target="_blank" rel="noopener">vue-admin-template</a> ，做为一个轻量级后台管理系统，只包含了必要功能。</p>
+<p>轻量级是学习了 <a target="_blank" rel="noopener" href="https://github.com/PanJiaChen/vue-admin-template">vue-admin-template</a> ，做为一个轻量级后台管理系统，只包含了必要功能。</p>
 <p>而我在开发的时候更加极致，甚至把侧边栏导航收起和响应式布局的功能都去掉了，因为发现这些功能几乎没有人使用，例如响应式布局就是个伪需求，从内部使用反馈来看，几乎没有人会考虑用其它终端使用后台，所以不管是手机还是平板，其实根本没必要做兼容，而且即便框架做了响应式处理，项目中使用到一些第三方组件也未必支持移动端。</p>
-<p>而配置化则是其它项目开发的经验总结，当一个东西要产品化的时候，就得考虑到很多使用场景，然后通过配置的形式做到快速切换，举个简单的例子， <a href="https://github.com/PanJiaChen/vue-admin-template" target="_blank" rel="noopener">vue-admin-template</a> 虽然提供了轻量级的后台，但它是不包含权限功能的，如果项目需要权限，则要拉取 <code>permission-control</code> 分支下的代码才行，这就导致代码有两份，一份是不带权限，一份是带权限的。如果项目开发原先是不需要权限的，后期需求调整，要增加权限，就很头疼。</p>
+<p>而配置化则是其它项目开发的经验总结，当一个东西要产品化的时候，就得考虑到很多使用场景，然后通过配置的形式做到快速切换，举个简单的例子， <a target="_blank" rel="noopener" href="https://github.com/PanJiaChen/vue-admin-template">vue-admin-template</a> 虽然提供了轻量级的后台，但它是不包含权限功能的，如果项目需要权限，则要拉取 <code>permission-control</code> 分支下的代码才行，这就导致代码有两份，一份是不带权限，一份是带权限的。如果项目开发原先是不需要权限的，后期需求调整，要增加权限，就很头疼。</p>
 <p>依据这两点目标，开发工作也就开始了。</p>
 <h2 id="技术框架选型"><a class="header-anchor" href="#技术框架选型"></a>技术框架选型</h2>
-<p>因为 <a href="https://gitee.com/eoner/vue-automation" target="_blank" rel="noopener">vue-automation</a> 在我司项目中大范围的使用，整体也较为成熟，所以新的这套后台框架也就自然而然地使用 <a href="https://gitee.com/eoner/vue-automation" target="_blank" rel="noopener">vue-automation</a> 做为基础，这样也能继承一些不错的特性。</p>
-<p>至于 UI 框架，其实没怎么做选择，更早之前就已经比较过两个相对比较成熟的 UI 框架，一个是 <a href="https://www.iviewui.com/" target="_blank" rel="noopener">ViewUI</a> ，一个是 <a href="https://element.eleme.cn/" target="_blank" rel="noopener">ElementUI</a> ，考虑到开发人员对 <a href="https://element.eleme.cn/" target="_blank" rel="noopener">ElementUI</a> 比较熟悉，所以这次也就没更换。</p>
+<p>因为 <a target="_blank" rel="noopener" href="https://gitee.com/eoner/vue-automation">vue-automation</a> 在我司项目中大范围的使用，整体也较为成熟，所以新的这套后台框架也就自然而然地使用 <a target="_blank" rel="noopener" href="https://gitee.com/eoner/vue-automation">vue-automation</a> 做为基础，这样也能继承一些不错的特性。</p>
+<p>至于 UI 框架，其实没怎么做选择，更早之前就已经比较过两个相对比较成熟的 UI 框架，一个是 <a target="_blank" rel="noopener" href="https://www.iviewui.com/">ViewUI</a> ，一个是 <a target="_blank" rel="noopener" href="https://element.eleme.cn/">ElementUI</a> ，考虑到开发人员对 <a target="_blank" rel="noopener" href="https://element.eleme.cn/">ElementUI</a> 比较熟悉，所以这次也就没更换。</p>
 <p>确定下来后，就是动手写代码了。</p>
 <blockquote>
 <p>因为这篇文章是开发回顾，所以接下来你可能会看到针对某个功能点，我反复重构，或者修改代码的情况，这其实也是我对功能点实现方式上的思考。</p>
@@ -327,11 +443,11 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    <span class="comment">// 是否显示头部</span></span><br><span class="line">    showHeader: <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>然后在 vuex 里引入该文件，这样就可以在全局获取到配置文件的信息了，可参考 <code>src/store/modules/global.js</code> 文件。</p>
 <p>接着到 <code>layout/</code> 目录下新建好页面，就可以编写我们布局页面的代码了，大致如下：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">header</span> <span class="attr">v-if</span>=<span class="string">"$store.state.global.showHeader"</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 头部 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"wrapper"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"sidebar-container"</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!-- 侧边栏 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"main-container"</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!-- 主内容 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">header</span> <span class="attr">v-if</span>=<span class="string">&quot;$store.state.global.showHeader&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 头部 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;wrapper&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;sidebar-container&quot;</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!-- 侧边栏 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;main-container&quot;</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!-- 主内容 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>布局上用 flex 进行布局，省心了不少，另外因为 <code>v-if</code> 的特性，不满足条件时，也就是当设置为不显示头部时，整个 <code>header</code> 标签都不会创建，搭配 css 的 <code>+</code> 选择器，轻松的实现了一份样式兼容两套布局。当然通过给 <code>.wrapper</code> 增加 class 也可以实现，只不过现在的方式会看着更加巧妙吧，哈哈~</p>
-<p>考虑到头部的高度和侧边栏的宽度可能需要根据设计稿进行调整，我新建了一个 scss 文件专门用来存放这些变量，参考 <code>src/assets/styles/resources/variables.scss</code> ，为什么不把这些配置也放在 <code>setting.js</code> 文件里，是因为本身这些变量也是和 css 有关，如果存放在 js 里，那就只能将数据通过标签的 style 属性，用 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Using_CSS_custom_properties" target="_blank" rel="noopener">css变量</a> 的形式注入进去，类似下面这样：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    <span class="comment">// 是否显示头部</span></span><br><span class="line">    showHeader: <span class="literal">false</span>,</span><br><span class="line">    <span class="comment">// 侧边栏宽度</span></span><br><span class="line">    sidebarWidth: <span class="string">'220px'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"sidebar-container"</span> <span class="attr">:style</span>=<span class="string">"`--g-sidebar-width: $&#123;$store.state.global.sidebarWidth&#125;;`"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 侧边栏 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>考虑到头部的高度和侧边栏的宽度可能需要根据设计稿进行调整，我新建了一个 scss 文件专门用来存放这些变量，参考 <code>src/assets/styles/resources/variables.scss</code> ，为什么不把这些配置也放在 <code>setting.js</code> 文件里，是因为本身这些变量也是和 css 有关，如果存放在 js 里，那就只能将数据通过标签的 style 属性，用 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Using_CSS_custom_properties">css变量</a> 的形式注入进去，类似下面这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    <span class="comment">// 是否显示头部</span></span><br><span class="line">    showHeader: <span class="literal">false</span>,</span><br><span class="line">    <span class="comment">// 侧边栏宽度</span></span><br><span class="line">    sidebarWidth: <span class="string">&#x27;220px&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;sidebar-container&quot;</span> <span class="attr">:style</span>=<span class="string">&quot;`--g-sidebar-width: $&#123;$store.state.global.sidebarWidth&#125;;`&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 侧边栏 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>说实话，有点麻烦，就没有考虑。</p>
 <p>现在两套布局基本可以自由切换了，然后我发现其实还有一种情况没考虑到，就是有的后台可能会要求展示宽度固定，然后居中显示，就像这样：</p>
 <p><img src="https://s1.ax1x.com/2020/07/16/UDmsjs.png" alt="固定宽度带头部导航"></p>
@@ -343,34 +459,34 @@
 <h2 id="主题"><a class="header-anchor" href="#主题"></a>主题</h2>
 <p>在 <code>variables.scss</code> 文件里还放了一些配色的变量，通过修改可以方便对界面配色进行调整。</p>
 <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 应用背景色</span></span><br><span class="line"><span class="variable">$g-app-bg</span>: <span class="number">#fff</span>;</span><br><span class="line"><span class="comment">// 主区域背景色</span></span><br><span class="line"><span class="variable">$g-main-bg</span>: <span class="number">#f5f7f9</span>;</span><br><span class="line"><span class="comment">// 头部背景色</span></span><br><span class="line"><span class="variable">$g-header-bg</span>: <span class="number">#736477</span>;</span><br><span class="line"><span class="comment">// 头部导航选中颜色</span></span><br><span class="line"><span class="variable">$g-header-nav-active-bg</span>: <span class="variable">$g-header-bg</span> + <span class="number">20</span>;</span><br><span class="line"><span class="comment">// 侧边栏背景色</span></span><br><span class="line"><span class="variable">$g-sidebar-bg</span>: <span class="number">#ddcdcd</span>;</span><br><span class="line"><span class="comment">// 侧边栏Logo区域背景色</span></span><br><span class="line"><span class="variable">$g-sidebar-title-bg</span>: <span class="variable">$g-header-bg</span>;</span><br><span class="line"><span class="comment">// 侧边栏菜单文字颜色</span></span><br><span class="line"><span class="variable">$g-sidebar-menu-color</span>: <span class="number">#89768f</span>;</span><br><span class="line"><span class="comment">// 侧边栏菜单文字选中颜色</span></span><br><span class="line"><span class="variable">$g-sidebar-menu-active-color</span>: <span class="variable">$g-sidebar-menu-color</span> - <span class="number">50</span>;</span><br><span class="line"><span class="comment">// 侧边栏菜单选中背景色</span></span><br><span class="line"><span class="variable">$g-sidebar-menu-active-bg</span>: <span class="number">#b5a5a5</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出给js使用</span></span><br><span class="line">:export &#123;</span><br><span class="line">    g_app_bg: <span class="variable">$g-app-bg</span>;</span><br><span class="line">    g_main_bg: <span class="variable">$g-main-bg</span>;</span><br><span class="line">    g_header_bg: <span class="variable">$g-header-bg</span>;</span><br><span class="line">    g_header_nav_active_bg: <span class="variable">$g-header-nav-active-bg</span>;</span><br><span class="line">    g_sidebar_bg: <span class="variable">$g-sidebar-bg</span>;</span><br><span class="line">    g_sidebar_title_bg: <span class="variable">$g-sidebar-title-bg</span>;</span><br><span class="line">    g_sidebar_menu_color: <span class="variable">$g-sidebar-menu-color</span>;</span><br><span class="line">    g_sidebar_menu_active_color: <span class="variable">$g-sidebar-menu-active-color</span>;</span><br><span class="line">    g_sidebar_menu_active_bg: <span class="variable">$g-sidebar-menu-active-bg</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里用到了 CSS Module 的 <a href="https://github.com/css-modules/icss#export" target="_blank" rel="noopener"><code>:export</code></a> 特性 ，可以导出一个 js 对象，相当于 ES6 的 <code>export</code> 。</p>
-<p>那为什么要将 scss 里的变量输出给 js 使用呢？这里主要是因为使用了 ElementUI 里的 <a href="https://element.eleme.cn/#/zh-CN/component/menu#menu-attribute" target="_blank" rel="noopener">NavMenu</a> 组件，它是通过属性设置的方式去改变组件的颜色，输出给 js 能更方便设置，类似这样：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-menu</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:background-color</span>=<span class="string">"variables.g_sidebar_bg"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:text-color</span>=<span class="string">"variables.g_sidebar_menu_color"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:active-text-color</span>=<span class="string">"variables.g_sidebar_menu_active_color"</span></span></span><br><span class="line"><span class="tag">&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">el-menu</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> variables <span class="keyword">from</span> <span class="string">'@/assets/styles/resources/variables.scss'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    computed: &#123;</span><br><span class="line">        variables() &#123;</span><br><span class="line">            <span class="keyword">return</span> variables</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里用到了 CSS Module 的 <a target="_blank" rel="noopener" href="https://github.com/css-modules/icss#export"><code>:export</code></a> 特性 ，可以导出一个 js 对象，相当于 ES6 的 <code>export</code> 。</p>
+<p>那为什么要将 scss 里的变量输出给 js 使用呢？这里主要是因为使用了 ElementUI 里的 <a target="_blank" rel="noopener" href="https://element.eleme.cn/#/zh-CN/component/menu#menu-attribute">NavMenu</a> 组件，它是通过属性设置的方式去改变组件的颜色，输出给 js 能更方便设置，类似这样：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-menu</span><br><span class="line">    :background-color=&quot;variables.g_sidebar_bg&quot;</span><br><span class="line">    :text-color=&quot;variables.g_sidebar_menu_color&quot;</span><br><span class="line">    :active-text-color=&quot;variables.g_sidebar_menu_active_color&quot;</span><br><span class="line">&gt;</span><br><span class="line"><span class="tag">&lt;/<span class="name">el-menu</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> variables <span class="keyword">from</span> <span class="string">&#x27;@/assets/styles/resources/variables.scss&#x27;</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    computed: &#123;</span><br><span class="line">        <span class="function"><span class="title">variables</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> variables</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="侧边栏导航"><a class="header-anchor" href="#侧边栏导航"></a>侧边栏导航</h2>
 <p>侧边栏导航是后台管理系统的核心，它是根据路由自动生成的，这样就无需开发者单独去配置，只要按照规则配置好路由，侧边栏导航也就生成好了。</p>
 <p>既然是根据路由生成的，那就看下路由文件吧，我把路由分成了三块，从 <code>src/router/index.js</code> 文件里可以看到分别是：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> constantRoutes = []</span><br><span class="line"><span class="keyword">let</span> asyncRoutes = []</span><br><span class="line"><span class="keyword">const</span> lastRoute = []</span><br></pre></td></tr></table></figure>
 <p>其中 <code>asyncRoutes</code> 里的路由就是用来生成侧边栏导航用的，我会将数据存放到 vuex 里。当然后面也会讲到， <code>asyncRoutes</code> 单独分出来也是方便做鉴权。</p>
-<p>因为路由是有层级的，对应的侧边栏导航也是有层级结构的，所以参考了下 <a href="https://element.eleme.cn/#/zh-CN/component/menu#menu-attribute" target="_blank" rel="noopener">NavMenu</a> 组件的结构，我在 <code>layout/</code> 目录下新建了一个 <code>sidebarItem.vue</code> 文件，其实是 <code>SidebarItem</code> 组件，它做的事情就是，当路由如果有子集路由的时候，则调用自身，如果没有则停止，有点像是一个递归函数。</p>
+<p>因为路由是有层级的，对应的侧边栏导航也是有层级结构的，所以参考了下 <a target="_blank" rel="noopener" href="https://element.eleme.cn/#/zh-CN/component/menu#menu-attribute">NavMenu</a> 组件的结构，我在 <code>layout/</code> 目录下新建了一个 <code>sidebarItem.vue</code> 文件，其实是 <code>SidebarItem</code> 组件，它做的事情就是，当路由如果有子集路由的时候，则调用自身，如果没有则停止，有点像是一个递归函数。</p>
 <p>这里要考虑到一点，有的路由其实是不需要在侧边栏导航里展示的，例如编辑页，这种需要在 url 上带上动态数值的，都不需要在侧边栏导航里展示，那要怎么实现呢？我的做法是在路由的 <code>meta</code> 对象里增加自定义的配置项，就像这样：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    path: <span class="string">'page'</span>,</span><br><span class="line">    component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'@/views/page'</span>),</span><br><span class="line">    meta: &#123;</span><br><span class="line">        title: <span class="string">'标题'</span>,</span><br><span class="line">        sidebar: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这样在递归创建侧边栏导航的时候，只要加个判断就可以。当然路由还有<a href="http://eoner.gitee.io/vue-automation-admin/#/router" target="_blank" rel="noopener">其它配置项</a>，这里就不一一介绍具体实现了，大家可以看代码理解，主要说下几个难点。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    path: <span class="string">&#x27;page&#x27;</span>,</span><br><span class="line">    component: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;@/views/page&#x27;</span>),</span><br><span class="line">    meta: &#123;</span><br><span class="line">        title: <span class="string">&#x27;标题&#x27;</span>,</span><br><span class="line">        sidebar: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样在递归创建侧边栏导航的时候，只要加个判断就可以。当然路由还有<a target="_blank" rel="noopener" href="http://eoner.gitee.io/vue-automation-admin/#/router">其它配置项</a>，这里就不一一介绍具体实现了，大家可以看代码理解，主要说下几个难点。</p>
 <p>第一个难点是，<strong>如何点击导航跳转页面</strong>。首先 <code>NavMenu</code> 组件是有提供 <code>router</code> 参数，开启后会将 <code>index</code> 参数做为 <code>path</code> 进行路由跳转，但因为路由是嵌套的，要拿到完整的 <code>path</code> ，必须拼上每一个父级的 <code>path</code> 才行。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    path: <span class="string">'/page'</span>,</span><br><span class="line">    component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'@/views/page'</span>),</span><br><span class="line">    children: [</span><br><span class="line">        &#123;</span><br><span class="line">            path: <span class="string">'page1'</span>,</span><br><span class="line">            component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'@/views/page1'</span>),</span><br><span class="line">            children: [</span><br><span class="line">                &#123;</span><br><span class="line">                    path: <span class="string">'page2'</span>,</span><br><span class="line">                    component: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'@/views/page2'</span>)</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    path: <span class="string">&#x27;/page&#x27;</span>,</span><br><span class="line">    component: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;@/views/page&#x27;</span>),</span><br><span class="line">    children: [</span><br><span class="line">        &#123;</span><br><span class="line">            path: <span class="string">&#x27;page1&#x27;</span>,</span><br><span class="line">            component: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;@/views/page1&#x27;</span>),</span><br><span class="line">            children: [</span><br><span class="line">                &#123;</span><br><span class="line">                    path: <span class="string">&#x27;page2&#x27;</span>,</span><br><span class="line">                    component: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;@/views/page2&#x27;</span>)</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>例如上面的例子，我要访问 page2 页面，直接拿到 <code>page2</code> 是不行的，必须拿到 <code>/page/page1/page2</code> 这样的地址才行。</p>
 <p>那要怎么拿到完整的地址呢？其实很简单，因为侧边栏导航是递归实现的，所以当有子集路由的时候，只要把当前的 <code>path</code> 做为一个 prop 传入到子集，我定义的参数名是 <code>base-path</code> ，子集里的路由拿到 <code>base-path</code> 再和子集自己的 <code>path</code> 合并一下，就是完整的路由了，如果还有子集路由，则把拼好的 <code>path</code> 当作 <code>base-path</code> 再传入子集即可，有点绕哈，多读几遍就能看懂了。</p>
 <p>上面的办法已经能解决问题了，但因为我还有个需求，就是希望可以在路由 <code>path</code> 属性上直接设置 http 外链地址，或者其它外链形式的地址，这样点击侧边栏导航的时候，不光可以进行路由跳转，也可以打开外链地址。</p>
 <p>我的解决办法的是在 <code>&lt;el-menu-item&gt;&lt;/el-menu-item&gt;</code> 外面增加一个 <code>&lt;component&gt;&lt;/component&gt;</code> 动态组件，然后关闭 <code>NavMenu</code> 组件自带路由跳转功能，通过动态组件来判断到底用什么组件展示。通过正则判断 <code>path</code> 如果是 http 开头的，则用 <code>a</code> 标签，否则就用 <code>router-link</code> ，就像这样：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">component</span> <span class="attr">v-bind</span>=<span class="string">"linkProps(path)"</span>&gt;</span><span class="tag">&lt;/<span class="name">component</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    methods: &#123;</span><br><span class="line">        isExternal(path) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="regexp">/^(https?:)/</span>.test(path)</span><br><span class="line">        &#125;,</span><br><span class="line">        linkProps(path) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.isExternal(path)) &#123;</span><br><span class="line">                <span class="keyword">return</span> &#123;</span><br><span class="line">                    is: <span class="string">'a'</span>,</span><br><span class="line">                    href: path,</span><br><span class="line">                    target: <span class="string">'_blank'</span>,</span><br><span class="line">                    rel: <span class="string">'noopener'</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                is: <span class="string">'router-link'</span>,</span><br><span class="line">                to: path</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>第二个难点是，<strong>如何复原侧边栏导航高亮并自动展开</strong>。因为页面一刷新，导航就恢复初始化状态了，在看了 <a href="https://element.eleme.cn/#/zh-CN/component/menu#menu-attribute" target="_blank" rel="noopener">NavMenu</a> 组件的文档后发现，使用 <code>default-active</code> 和 <code>index</code> 这两个属性可以实现导航默认激活指定项，因为 <code>index</code> 是唯一的。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">component</span> <span class="attr">v-bind</span>=<span class="string">&quot;linkProps(path)&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">component</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    methods: &#123;</span><br><span class="line">        <span class="function"><span class="title">isExternal</span>(<span class="params">path</span>)</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="regexp">/^(https?:)/</span>.test(path)</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="function"><span class="title">linkProps</span>(<span class="params">path</span>)</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">this</span>.isExternal(path)) &#123;</span><br><span class="line">                <span class="keyword">return</span> &#123;</span><br><span class="line">                    is: <span class="string">&#x27;a&#x27;</span>,</span><br><span class="line">                    href: path,</span><br><span class="line">                    target: <span class="string">&#x27;_blank&#x27;</span>,</span><br><span class="line">                    rel: <span class="string">&#x27;noopener&#x27;</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                is: <span class="string">&#x27;router-link&#x27;</span>,</span><br><span class="line">                to: path</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第二个难点是，<strong>如何复原侧边栏导航高亮并自动展开</strong>。因为页面一刷新，导航就恢复初始化状态了，在看了 <a target="_blank" rel="noopener" href="https://element.eleme.cn/#/zh-CN/component/menu#menu-attribute">NavMenu</a> 组件的文档后发现，使用 <code>default-active</code> 和 <code>index</code> 这两个属性可以实现导航默认激活指定项，因为 <code>index</code> 是唯一的。</p>
 <p>而具体要用什么做为 <code>index</code> 唯一字段呢？没错，就是上面组装好的完整 <code>path</code> 地址，而 <code>default-active</code> 直接获取 <code>$route.path</code> 就行。</p>
 <p>这个问题算是迎刃而解，原本我还在考虑通过路由的 <code>name</code> 做为 <code>index</code> 唯一字段，但最终还是觉得用 <code>path</code> 更好。</p>
 <h2 id="面包屑导航"><a class="header-anchor" href="#面包屑导航"></a>面包屑导航</h2>
 <p>面包屑导航核心实现其实 vue-router 已经帮我做好了，通过 <code>$route.matched</code> 可以拿到当前路由的所有嵌套路径片段的路由记录，然后根据具体情况，稍微对数据进行一些处理。</p>
 <p>例如拿到路由记录后我会先进行一次过滤，把没有标题的，不需要在面包屑导航展示的，都去除掉，对，和 <code>meta.sidebar</code> 一样， <code>meta.breadcrumb</code> 也是我自定义的一个属性，用于不需要在面包屑导航展示的配置项。其次面包屑导航的根路由应该是后台首页，也就是控制台页面，但在路由文件配置中，控制台和其它模块的路由是平级的，并不是一个嵌套的结构，所以我在路由记录第一条数据前手动插了一条进去。最终代码大致是这样子：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> matched = <span class="keyword">this</span>.$route.matched.filter(<span class="function"><span class="params">item</span> =&gt;</span> item.meta &amp;&amp; item.meta.title &amp;&amp; item.meta.breadcrumb !== <span class="literal">false</span>)</span><br><span class="line"><span class="keyword">if</span> (!(matched[<span class="number">0</span>].name == <span class="string">'dashboard'</span> &amp;&amp; matched[<span class="number">0</span>].path == <span class="string">'/dashboard'</span>)) &#123;</span><br><span class="line">    matched = [&#123; <span class="attr">path</span>: <span class="string">'/dashboard'</span>, <span class="attr">meta</span>: &#123; <span class="attr">title</span>: <span class="string">'控制台'</span> &#125;&#125;].concat(matched)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> matched</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> matched = <span class="built_in">this</span>.$route.matched.filter(<span class="function"><span class="params">item</span> =&gt;</span> item.meta &amp;&amp; item.meta.title &amp;&amp; item.meta.breadcrumb !== <span class="literal">false</span>)</span><br><span class="line"><span class="keyword">if</span> (!(matched[<span class="number">0</span>].name == <span class="string">&#x27;dashboard&#x27;</span> &amp;&amp; matched[<span class="number">0</span>].path == <span class="string">&#x27;/dashboard&#x27;</span>)) &#123;</span><br><span class="line">    matched = [&#123; <span class="attr">path</span>: <span class="string">&#x27;/dashboard&#x27;</span>, <span class="attr">meta</span>: &#123; <span class="attr">title</span>: <span class="string">&#x27;控制台&#x27;</span> &#125;&#125;].concat(matched)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> matched</span><br></pre></td></tr></table></figure>
 <h2 id="过渡动效"><a class="header-anchor" href="#过渡动效"></a>过渡动效</h2>
 <p>主要做了三处过渡的动效，分别是侧边栏导航、面包屑导航和主内容区，也都是用了 Vue 提供的 <code>&lt;transition&gt;&lt;/transition&gt;</code> 和 <code>&lt;transition-group&gt;&lt;/transition-group&gt;</code> 组件。</p>
 <p>如果你代码看的仔细，你会发现，侧边栏导航和面包屑导航的动画是用 <code>transform</code> 里的 <code>translateX()</code> 和 <code>translateY()</code> 实现的，唯独主内容区动画是通过 <code>margin-left</code> 实现的，这是因为 <code>transform</code> 会导致子元素里的 <code>position: fixed;</code> 失效，而我在后面开发系统组件的时候，其中有个组件需要固定在窗口底部，所有就没有用 <code>transform</code> 去实现动画效果。</p>
@@ -395,43 +511,40 @@
 <p><img src="https://s1.ax1x.com/2020/07/16/UronBV.png" alt=""></p>
 <h2 id="结束"><a class="header-anchor" href="#结束"></a>结束</h2>
 <p>到此为止，后台框架的核心功能都已全部实现了，剩下还有一些内置的组件以及使用的小技巧，就不在这展开了，如果有兴趣，可以访问代码仓库，把代码拉取到本地，你能体验到更详尽的演示。</p>
-<p><a href="https://gitee.com/eoner/vue-automation-admin" target="_blank" rel="noopener"><img src="https://gitee.com/eoner/vue-automation-admin/widgets/widget_card.svg?colors=4183c4,ffffff,ffffff,e3e9ed,666666,9b9b9b" alt="浙江易网科技股份有限公司/vue-automation-admin"></a></p>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/eoner/vue-automation-admin"><img src="https://gitee.com/eoner/vue-automation-admin/widgets/widget_card.svg?colors=4183c4,ffffff,ffffff,e3e9ed,666666,9b9b9b" alt="浙江易网科技股份有限公司/vue-automation-admin"></a></p>
 
     </div>
 
     
     
     
-        <div class="reward-container">
+
+    <footer class="post-footer">
+          <div class="reward-container">
   <div></div>
-  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
-    打赏
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
   </button>
-  <div id="qr" style="display: none;">
-      
-      <div style="display: inline-block;">
-        <img src="/reward-wechat.jpg" alt="Hooray 微信支付">
-        <p>微信支付</p>
+  <div class="post-reward">
+      <div>
+        <img src="/reward-wechat.jpg" alt="Hooray 微信">
+        <span>微信</span>
       </div>
-      
-      <div style="display: inline-block;">
+      <div>
         <img src="/reward-alipay.jpg" alt="Hooray 支付宝">
-        <p>支付宝</p>
+        <span>支付宝</span>
       </div>
 
   </div>
 </div>
 
-
-      <footer class="post-footer">
-          
           <div class="post-tags">
-              <a href="/tags/vue/" rel="tag"><i class="fa fa-tag"></i> vue</a>
               <a href="/tags/vue-router/" rel="tag"><i class="fa fa-tag"></i> vue-router</a>
+              <a href="/tags/vue/" rel="tag"><i class="fa fa-tag"></i> vue</a>
+              <a href="/tags/%E6%9D%83%E9%99%90/" rel="tag"><i class="fa fa-tag"></i> 权限</a>
               <a href="/tags/vuex/" rel="tag"><i class="fa fa-tag"></i> vuex</a>
               <a href="/tags/%E5%90%8E%E5%8F%B0%E6%A1%86%E6%9E%B6/" rel="tag"><i class="fa fa-tag"></i> 后台框架</a>
               <a href="/tags/admin/" rel="tag"><i class="fa fa-tag"></i> admin</a>
-              <a href="/tags/%E6%9D%83%E9%99%90/" rel="tag"><i class="fa fa-tag"></i> 权限</a>
               <a href="/tags/%E9%89%B4%E6%9D%83/" rel="tag"><i class="fa fa-tag"></i> 鉴权</a>
           </div>
 
@@ -442,29 +555,27 @@
     </div>
   </div>
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/posts/98d75e09/" rel="prev" title="内部接口开发文档的技术点汇总">
-      <i class="fa fa-chevron-left"></i> 内部接口开发文档的技术点汇总
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/b7ab07d3/" rel="next" title="用 VuePress 开发组件库文档踩坑总结">
-      用 VuePress 开发组件库文档踩坑总结 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/98d75e09/" rel="prev" title="内部接口开发文档的技术点汇总">
+                  <i class="fa fa-chevron-left"></i> 内部接口开发文档的技术点汇总
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/b7ab07d3/" rel="next" title="用 VuePress 开发组件库文档踩坑总结">
+                  用 VuePress 开发组件库文档踩坑总结 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
           </div>
-          
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
     <div class="comments" id="gitalk-container"></div>
 
 <script>
@@ -474,7 +585,7 @@
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -483,173 +594,104 @@
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#起因"><span class="nav-number">1.</span> <span class="nav-text">起因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#技术框架选型"><span class="nav-number">2.</span> <span class="nav-text">技术框架选型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#布局"><span class="nav-number">3.</span> <span class="nav-text">布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主题"><span class="nav-number">4.</span> <span class="nav-text">主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#侧边栏导航"><span class="nav-number">5.</span> <span class="nav-text">侧边栏导航</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面包屑导航"><span class="nav-number">6.</span> <span class="nav-text">面包屑导航</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过渡动效"><span class="nav-number">7.</span> <span class="nav-text">过渡动效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#权限"><span class="nav-number">8.</span> <span class="nav-text">权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结束"><span class="nav-number">9.</span> <span class="nav-text">结束</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Hooray"
-      src="/avatar.jpg">
-  <p class="site-author-name" itemprop="name">Hooray</p>
-  <div class="site-description" itemprop="description"></div>
 </div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">46</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">7</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">113</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
-      </span>
-  </div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
 
-  <div class="links-of-blogroll motion-element">
-    <div class="links-of-blogroll-title">
-      <i class="fa fa-fw fa-link"></i>
-      Links
-    </div>
-    <ul class="links-of-blogroll-list">
-        <li class="links-of-blogroll-item">
-          <a href="http://hoorayos.com/" title="http:&#x2F;&#x2F;hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue项目模版</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/hooray/fantastic-admin" title="https:&#x2F;&#x2F;gitee.com&#x2F;hooray&#x2F;fantastic-admin" rel="noopener" target="_blank">Fantastic-admin - 中后台管理系统模版</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://hooray.github.io/vue-sku-form" title="https:&#x2F;&#x2F;hooray.github.io&#x2F;vue-sku-form">vue-sku-form - 电商 SKU 表单配置组件</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/vue-clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
-        </li>
-    </ul>
-  </div>
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
 
 <div class="copyright">
-  
   &copy; 2017 – 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Hooray</span>
-    <span class="post-meta-divider">|</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
     <span class="post-meta-item-icon">
-      <i class="fa fa-area-chart"></i>
+      <i class="fa fa-chart-line"></i>
     </span>
-      <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">139k</span>
-    <span class="post-meta-divider">|</span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">152k</span>
+  </span>
+  <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:07</span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:18</span>
+  </span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
-  </div>
-
-        
 <div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
       <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
+        <i class="user"></i>
       </span>
       <span class="site-uv" title="总访客量">
         <span id="busuanzi_value_site_uv"></span>
       </span>
     </span>
-    <span class="post-meta-divider">|</span>
     <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
       <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
+        <i class="eye"></i>
       </span>
       <span class="site-pv" title="总访问量">
         <span id="busuanzi_value_site_pv"></span>
       </span>
     </span>
 </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 22619,
+      el    : 'wpac-rating',
+      color : 'ff9800'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+<script src="/js/local-search.js"></script>
 
 
 
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
@@ -661,15 +703,15 @@
     }
 
     function addCount(Counter) {
-      var visitors = document.querySelector('.leancloud_visitors');
-      var url = decodeURI(visitors.id);
-      var title = visitors.dataset.flagTitle;
+      const visitors = document.querySelector('.leancloud_visitors');
+      const url = decodeURI(visitors.id);
+      const title = visitors.dataset.flagTitle;
 
       Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
         .then(response => response.json())
         .then(({ results }) => {
           if (results.length > 0) {
-            var counter = results[0];
+            const counter = results[0];
             leancloudSelector(url).innerText = counter.time + 1;
             Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
               .catch(error => {
@@ -692,8 +734,8 @@
     }
 
     function showTime(Counter) {
-      var visitors = document.querySelectorAll('.leancloud_visitors');
-      var entries = [...visitors].map(element => {
+      const visitors = document.querySelectorAll('.leancloud_visitors');
+      const entries = [...visitors].map(element => {
         return decodeURI(element.id);
       });
 
@@ -701,7 +743,7 @@
         .then(response => response.json())
         .then(({ results }) => {
           for (let url of entries) {
-            let target = results.find(item => item.url === url);
+            const target = results.find(item => item.url === url);
             leancloudSelector(url).innerText = target ? target.time : 0;
           }
         })
@@ -710,9 +752,9 @@
         });
     }
 
-    let { app_id, app_key, server_url } = {"enable":true,"app_id":"ODqTjpX8O5RTTQ9Ne0PQLrl6-gzGzoHsz","app_key":"yEmutbTLiTig6Kz3VLiocpgs","server_url":null,"security":false};
+    const { app_id, app_key, server_url } = {"enable":true,"app_id":"ODqTjpX8O5RTTQ9Ne0PQLrl6-gzGzoHsz","app_key":"yEmutbTLiTig6Kz3VLiocpgs","server_url":null,"security":false};
     function fetchData(api_server) {
-      var Counter = (method, url, data) => {
+      const Counter = (method, url, data) => {
         return fetch(`${api_server}/1.1${url}`, {
           method,
           headers: {
@@ -731,7 +773,7 @@
       }
     }
 
-    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+    const api_server = app_id.slice(-9) === '-MdYXbMMI' ? `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com` : server_url;
 
     if (api_server) {
       fetchData(api_server);
@@ -746,80 +788,12 @@
 </script>
 
 
-      </div>
-    </footer>
-  </div>
 
-  
-  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
-  <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-  <script src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js"></script>
-  <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.min.js"></script>
-  <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-  <script>
-  if (CONFIG.page.isPost) {
-    wpac_init = window.wpac_init || [];
-    wpac_init.push({
-      widget: 'Rating',
-      id    : 22619,
-      el    : 'wpac-rating',
-      color : 'ff9800'
-    });
-    (function() {
-      if ('WIDGETPACK_LOADED' in window) return;
-      WIDGETPACK_LOADED = true;
-      var mc = document.createElement('script');
-      mc.type = 'text/javascript';
-      mc.async = true;
-      mc.src = '//embed.widgetpack.com/widget.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
-    })();
-  }
-  </script>
-
-  
-<script src="/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
 
 <script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+NexT.utils.loadComments('#gitalk-container', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
     var gitalk = new Gitalk({
       clientID    : '165f4a18451139d1962f',
       clientSecret: 'd950ed9736a4364215fa554442d01f8e89dd92a8',

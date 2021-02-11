@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 5.3.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -13,17 +15,16 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
+
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
   <link rel="stylesheet" href="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.css">
-  <link rel="stylesheet" href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css">
-  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
 
-<script id="hexo-configurations">
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"hooray.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"hooray.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.1.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-
-  <meta name="description" content="说来惭愧，对于 Flex 的了解都是碰到需求时，然后临时百度找现成的，一直没系统的学习过 Flex ，趁周末没什么事，抽了几小时学习并整理了这篇入门文档，方便自己以后快速查阅。">
+<meta name="description" content="说来惭愧，对于 Flex 的了解都是碰到需求时，然后临时百度找现成的，一直没系统的学习过 Flex ，趁周末没什么事，抽了几小时学习并整理了这篇入门文档，方便自己以后快速查阅。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CSS3 Flex 布局入门">
 <meta property="og:url" content="https://hooray.github.io/posts/6d2f7931/index.html">
@@ -41,10 +42,11 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://i.loli.net/2018/07/02/5b3a1953d6df1.png">
 
+
 <link rel="canonical" href="https://hooray.github.io/posts/6d2f7931/">
 
 
-<script id="page-configurations">
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -53,60 +55,68 @@
     lang   : 'zh-CN'
   };
 </script>
-
-  <title>CSS3 Flex 布局入门 | ９９３５</title>
+<title>CSS3 Flex 布局入门 | ９９３５</title>
   
-
-
-
 
 
 
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">９９３５</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">代码如诗</p>
   </div>
@@ -120,42 +130,41 @@
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-top">
 
-    <a href="/top/" rel="section"><i class="fa fa-fw fa-signal"></i>热门</a>
+    <a href="/top/" rel="section"><i class="fa fa-signal fa-fw"></i>热门</a>
 
   </li>
         <li class="menu-item menu-item-commonweal">
 
-    <a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -168,13 +177,12 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
+    <div class="popup search-popup"><div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
            placeholder="搜索..." spellcheck="false"
            type="search" class="search-input">
   </div>
@@ -182,9 +190,9 @@
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
 
@@ -192,6 +200,109 @@
   </div>
 
 </div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">容器的属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-flex-direction"><span class="nav-number">2.1.</span> <span class="nav-text">1. flex-direction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-flex-wrap"><span class="nav-number">2.2.</span> <span class="nav-text">2. flex-wrap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-align-items"><span class="nav-number">2.3.</span> <span class="nav-text">3. align-items</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-justify-content"><span class="nav-number">2.4.</span> <span class="nav-text">4. justify-content</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-align-content"><span class="nav-number">2.5.</span> <span class="nav-text">5. align-content</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-flex-flow"><span class="nav-number">2.6.</span> <span class="nav-text">6. flex-flow</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="nav-number">3.</span> <span class="nav-text">项目的属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-align-self"><span class="nav-number">3.1.</span> <span class="nav-text">1. align-self</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-flex-grow"><span class="nav-number">3.2.</span> <span class="nav-text">2. flex-grow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-flex-shrink"><span class="nav-number">3.3.</span> <span class="nav-text">3. flex-shrink</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-flex-basis"><span class="nav-number">3.4.</span> <span class="nav-text">4. flex-basis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-order"><span class="nav-number">3.5.</span> <span class="nav-text">5. order</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-flex"><span class="nav-number">3.6.</span> <span class="nav-text">6. flex</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%BC%E5%AE%B9%E6%80%A7"><span class="nav-number">4.</span> <span class="nav-text">兼容性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hooray"
+      src="/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Hooray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">115</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-qq fa-fw"></i>QQ</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://gitee.com/hooray/fantastic-admin" title="https:&#x2F;&#x2F;gitee.com&#x2F;hooray&#x2F;fantastic-admin" rel="noopener" target="_blank">Fantastic-admin - 中后台管理系统模版</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue项目模版</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hooray.github.io/vue-sku-form" title="https:&#x2F;&#x2F;hooray.github.io&#x2F;vue-sku-form">vue-sku-form - 电商 SKU 表单配置组件</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/hooray/hoorayos" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;hoorayos" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/hooray/vue-clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
+        </li>
+    </ul>
+  </div>
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
     </header>
 
     
@@ -201,19 +312,22 @@
   </div>
   <div class="reading-progress-bar"></div>
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content post posts-expand">
-            
+    <div class="main-inner post posts-expand">
 
-    
+
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://hooray.github.io/posts/6d2f7931/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -230,54 +344,58 @@
           CSS3 Flex 布局入门
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2018-07-02 20:52:45" itemprop="dateCreated datePublished" datetime="2018-07-02T20:52:45+08:00">2018-07-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-08 21:55:25" itemprop="dateModified" datetime="2019-10-08T21:55:25+08:00">2019-10-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web-%E7%BB%BC%E5%90%88/" itemprop="url" rel="index"><span itemprop="name">Web 综合</span></a>
-                </span>
-            </span>
+      <time title="创建时间：2018-07-02 20:52:45" itemprop="dateCreated datePublished" datetime="2018-07-02T20:52:45+08:00">2018-07-02</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="fa fa-calendar-check-o"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2019-10-08 21:55:25" itemprop="dateModified" datetime="2019-10-08T21:55:25+08:00">2019-10-08</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Web-%E7%BB%BC%E5%90%88/" itemprop="url" rel="index"><span itemprop="name">Web 综合</span></a>
+        </span>
+    </span>
 
-          
-            <span id="/posts/6d2f7931/" class="post-meta-item leancloud_visitors" data-flag-title="CSS3 Flex 布局入门" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.9k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
+  
+    <span id="/posts/6d2f7931/" class="post-meta-item leancloud_visitors" data-flag-title="CSS3 Flex 布局入门" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-clock-o"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
 
         </div>
       </header>
@@ -286,20 +404,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
         <p>说来惭愧，对于 Flex 的了解都是碰到需求时，然后临时百度找现成的，一直没系统的学习过 Flex ，趁周末没什么事，抽了几小时学习并整理了这篇入门文档，方便自己以后快速查阅。</p>
 <a id="more"></a>
-<div class="note warning">
-            <p>考虑移动端分辨率的情况，本文提供 CodePen 的演示，建议在 PC 端进行查看。</p>
-          </div>
+<div class="note warning"><p>考虑移动端分辨率的情况，本文提供 CodePen 的演示，建议在 PC 端进行查看。</p>
+</div>
 <h2 id="基本概念"><a class="header-anchor" href="#基本概念"></a>基本概念</h2>
 <p>Flex 全称 Flexible Box ，意思就是“灵活的盒子”，也就是给盒模型提供最大的灵活性，我们也可以称它为“弹性布局”。</p>
 <p>我们可以给任何一个容器指定为 Flex 布局，就像这样：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span>&#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 行内元素也可以使用 Flex 布局 */</span></span><br><span class="line"><span class="selector-class">.box</span>&#123;</span><br><span class="line">    <span class="attribute">display</span>: inline-flex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<div class="note info">
-            <p>设为 Flex 布局以后，子元素的 <code>float</code> 、 <code>clear</code> 和 <code>vertical-align</code> 属性将失效。</p>
-          </div>
+<div class="note info"><p>设为 Flex 布局以后，子元素的 <code>float</code> 、 <code>clear</code> 和 <code>vertical-align</code> 属性将失效。</p>
+</div>
 <p>我们一般把采用 Flex 布局的元素称为 Flex 容器（Flex container），它的所有子元素成为 Flex 项目（Flex item）。容器默认存在两根轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）。主轴的开始位置（与边框的交叉点）叫做 main start ，结束位置叫做 main end ；交叉轴的开始位置叫做 cross start ，结束位置叫做 cross end 。项目默认沿主轴排列，单个项目占据的主轴空间叫做 main size ，占据的交叉轴空间叫做 cross size 。</p>
 <p>上面一大堆基本概念描述的比较晦涩难懂，不如下面一张图来得清晰明了。</p>
 <p><img src="https://i.loli.net/2018/07/02/5b3a1953d6df1.png" alt=""></p>
@@ -314,7 +428,7 @@
 <li><strong>column-reverse</strong>：主轴为垂直方向，开始位置在下边（从下到上）</li>
 </ul>
 <p>具体可参考下面的演示：</p>
-<iframe height='352' scrolling='no' title='flex-direction' src='//codepen.io/hooray/embed/XYOwjw/?height=352&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/hooray/pen/XYOwjw/' target="_blank" rel="noopener">flex-direction</a> by 胡睿 (<a href='https://codepen.io/hooray' target="_blank" rel="noopener">@hooray</a>) on <a href='https://codepen.io' target="_blank" rel="noopener">CodePen</a>.
+<iframe height='352' scrolling='no' title='flex-direction' src='//codepen.io/hooray/embed/XYOwjw/?height=352&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a target="_blank" rel="noopener" href='https://codepen.io/hooray/pen/XYOwjw/'>flex-direction</a> by 胡睿 (<a target="_blank" rel="noopener" href='https://codepen.io/hooray'>@hooray</a>) on <a target="_blank" rel="noopener" href='https://codepen.io'>CodePen</a>.
 </iframe>
 <h3 id="2-flex-wrap"><a class="header-anchor" href="#2-flex-wrap"></a>2. flex-wrap</h3>
 <p>flex-wrap 属性决定是否换行，或者如何换行，有 3 个可选值：</p>
@@ -324,7 +438,7 @@
 <li><strong>wrap-reverse</strong>：换行，第一行在最下方</li>
 </ul>
 <p>具体可参考下面的演示：</p>
-<iframe height='352' scrolling='no' title='flex-wrap' src='//codepen.io/hooray/embed/oyVvNg/?height=352&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/hooray/pen/oyVvNg/' target="_blank" rel="noopener">flex-wrap</a> by 胡睿 (<a href='https://codepen.io/hooray' target="_blank" rel="noopener">@hooray</a>) on <a href='https://codepen.io' target="_blank" rel="noopener">CodePen</a>.
+<iframe height='352' scrolling='no' title='flex-wrap' src='//codepen.io/hooray/embed/oyVvNg/?height=352&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a target="_blank" rel="noopener" href='https://codepen.io/hooray/pen/oyVvNg/'>flex-wrap</a> by 胡睿 (<a target="_blank" rel="noopener" href='https://codepen.io/hooray'>@hooray</a>) on <a target="_blank" rel="noopener" href='https://codepen.io'>CodePen</a>.
 </iframe>
 <h3 id="3-align-items"><a class="header-anchor" href="#3-align-items"></a>3. align-items</h3>
 <p>align-items 属性决定项目在交叉轴上如何对齐，有 5 个可选值：</p>
@@ -336,7 +450,7 @@
 <li><strong>stretch</strong>（默认值）：如果项目未设置高度或设为 auto ，将撑满整个容器的高度</li>
 </ul>
 <p>具体可参考下面的演示：</p>
-<iframe height='422' scrolling='no' title='align-items' src='//codepen.io/hooray/embed/xzBWGO/?height=422&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/hooray/pen/xzBWGO/' target="_blank" rel="noopener">align-items</a> by 胡睿 (<a href='https://codepen.io/hooray' target="_blank" rel="noopener">@hooray</a>) on <a href='https://codepen.io' target="_blank" rel="noopener">CodePen</a>.
+<iframe height='422' scrolling='no' title='align-items' src='//codepen.io/hooray/embed/xzBWGO/?height=422&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a target="_blank" rel="noopener" href='https://codepen.io/hooray/pen/xzBWGO/'>align-items</a> by 胡睿 (<a target="_blank" rel="noopener" href='https://codepen.io/hooray'>@hooray</a>) on <a target="_blank" rel="noopener" href='https://codepen.io'>CodePen</a>.
 </iframe>
 <h3 id="4-justify-content"><a class="header-anchor" href="#4-justify-content"></a>4. justify-content</h3>
 <p>justify-content 属性决定项目在主轴上的对齐方式，有 5 个可选值：</p>
@@ -348,7 +462,7 @@
 <li><strong>space-around</strong>：项目两侧间隔相等，也就是项目之间间隔比项目与两侧间隔大一倍</li>
 </ul>
 <p>具体可参考下面的演示：</p>
-<iframe height='352' scrolling='no' title='justify-content' src='//codepen.io/hooray/embed/jKJWqV/?height=352&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/hooray/pen/jKJWqV/' target="_blank" rel="noopener">justify-content</a> by 胡睿 (<a href='https://codepen.io/hooray' target="_blank" rel="noopener">@hooray</a>) on <a href='https://codepen.io' target="_blank" rel="noopener">CodePen</a>.
+<iframe height='352' scrolling='no' title='justify-content' src='//codepen.io/hooray/embed/jKJWqV/?height=352&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a target="_blank" rel="noopener" href='https://codepen.io/hooray/pen/jKJWqV/'>justify-content</a> by 胡睿 (<a target="_blank" rel="noopener" href='https://codepen.io/hooray'>@hooray</a>) on <a target="_blank" rel="noopener" href='https://codepen.io'>CodePen</a>.
 </iframe>
 <h3 id="5-align-content"><a class="header-anchor" href="#5-align-content"></a>5. align-content</h3>
 <p>align-content 属性决定了当有多根轴线时如何对齐（如果只有一根轴线则不起作用），有 6 个可选值：</p>
@@ -361,7 +475,7 @@
 <li><strong>stretch</strong>（默认值）：轴线占满整个交叉轴</li>
 </ul>
 <p>具体可参考下面的演示：</p>
-<iframe height='570' scrolling='no' title='align-content' src='//codepen.io/hooray/embed/rKRdJL/?height=570&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/hooray/pen/rKRdJL/' target="_blank" rel="noopener">align-content</a> by 胡睿 (<a href='https://codepen.io/hooray' target="_blank" rel="noopener">@hooray</a>) on <a href='https://codepen.io' target="_blank" rel="noopener">CodePen</a>.
+<iframe height='570' scrolling='no' title='align-content' src='//codepen.io/hooray/embed/rKRdJL/?height=570&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a target="_blank" rel="noopener" href='https://codepen.io/hooray/pen/rKRdJL/'>align-content</a> by 胡睿 (<a target="_blank" rel="noopener" href='https://codepen.io/hooray'>@hooray</a>) on <a target="_blank" rel="noopener" href='https://codepen.io'>CodePen</a>.
 </iframe>
 <h3 id="6-flex-flow"><a class="header-anchor" href="#6-flex-flow"></a>6. flex-flow</h3>
 <p>flex-flow 属性是 flex-direction 属性和 flex-wrap 属性的简写形式，默认值分是 <code>row nowrap</code> ，语法如下：</p>
@@ -379,39 +493,39 @@
 <li><strong>stretch</strong>：如果项目未设置高度或设为 auto ，将撑满整个容器的高度</li>
 </ul>
 <p>具体可参考下面的演示：</p>
-<iframe height='422' scrolling='no' title='align-self' src='//codepen.io/hooray/embed/WymJvQ/?height=422&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/hooray/pen/WymJvQ/' target="_blank" rel="noopener">align-self</a> by 胡睿 (<a href='https://codepen.io/hooray' target="_blank" rel="noopener">@hooray</a>) on <a href='https://codepen.io' target="_blank" rel="noopener">CodePen</a>.
+<iframe height='422' scrolling='no' title='align-self' src='//codepen.io/hooray/embed/WymJvQ/?height=422&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a target="_blank" rel="noopener" href='https://codepen.io/hooray/pen/WymJvQ/'>align-self</a> by 胡睿 (<a target="_blank" rel="noopener" href='https://codepen.io/hooray'>@hooray</a>) on <a target="_blank" rel="noopener" href='https://codepen.io'>CodePen</a>.
 </iframe>
 <h3 id="2-flex-grow"><a class="header-anchor" href="#2-flex-grow"></a>2. flex-grow</h3>
 <p>flex-grow 属性定义了项目的放大比例，默认为 0 （负值对该属性无效），如果存在剩余空间，也不放大。</p>
 <p>具体可参考下面的演示：</p>
-<iframe height='365' scrolling='no' title='flex-grow' src='//codepen.io/hooray/embed/BVbxrj/?height=365&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/hooray/pen/BVbxrj/' target="_blank" rel="noopener">flex-grow</a> by 胡睿 (<a href='https://codepen.io/hooray' target="_blank" rel="noopener">@hooray</a>) on <a href='https://codepen.io' target="_blank" rel="noopener">CodePen</a>.
+<iframe height='365' scrolling='no' title='flex-grow' src='//codepen.io/hooray/embed/BVbxrj/?height=365&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a target="_blank" rel="noopener" href='https://codepen.io/hooray/pen/BVbxrj/'>flex-grow</a> by 胡睿 (<a target="_blank" rel="noopener" href='https://codepen.io/hooray'>@hooray</a>) on <a target="_blank" rel="noopener" href='https://codepen.io'>CodePen</a>.
 </iframe>
 <h3 id="3-flex-shrink"><a class="header-anchor" href="#3-flex-shrink"></a>3. flex-shrink</h3>
 <p>flex-shrink 属性定义了项目的缩小比例，默认为 1 （负值对该属性无效），如果空间不足，该项目将缩小。</p>
 <p>具体可参考下面的演示：</p>
-<iframe height='365' scrolling='no' title='flex-shrink' src='//codepen.io/hooray/embed/WymKbL/?height=365&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/hooray/pen/WymKbL/' target="_blank" rel="noopener">flex-shrink</a> by 胡睿 (<a href='https://codepen.io/hooray' target="_blank" rel="noopener">@hooray</a>) on <a href='https://codepen.io' target="_blank" rel="noopener">CodePen</a>.
+<iframe height='365' scrolling='no' title='flex-shrink' src='//codepen.io/hooray/embed/WymKbL/?height=365&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a target="_blank" rel="noopener" href='https://codepen.io/hooray/pen/WymKbL/'>flex-shrink</a> by 胡睿 (<a target="_blank" rel="noopener" href='https://codepen.io/hooray'>@hooray</a>) on <a target="_blank" rel="noopener" href='https://codepen.io'>CodePen</a>.
 </iframe>
 <h3 id="4-flex-basis"><a class="header-anchor" href="#4-flex-basis"></a>4. flex-basis</h3>
 <p>flex-basis 属性定义了在分配多余空间之前，项目占据主轴空间（main size）的大小。浏览器根据这个属性，计算主轴是否有多余空间。默认为 auto ，即项目的本来大小。</p>
 <p>具体可参考下面的演示：</p>
-<iframe height='365' scrolling='no' title='flex-basis' src='//codepen.io/hooray/embed/VdRBzy/?height=365&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/hooray/pen/VdRBzy/' target="_blank" rel="noopener">flex-basis</a> by 胡睿 (<a href='https://codepen.io/hooray' target="_blank" rel="noopener">@hooray</a>) on <a href='https://codepen.io' target="_blank" rel="noopener">CodePen</a>.
+<iframe height='365' scrolling='no' title='flex-basis' src='//codepen.io/hooray/embed/VdRBzy/?height=365&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a target="_blank" rel="noopener" href='https://codepen.io/hooray/pen/VdRBzy/'>flex-basis</a> by 胡睿 (<a target="_blank" rel="noopener" href='https://codepen.io/hooray'>@hooray</a>) on <a target="_blank" rel="noopener" href='https://codepen.io'>CodePen</a>.
 </iframe>
 <h3 id="5-order"><a class="header-anchor" href="#5-order"></a>5. order</h3>
 <p>order 属性定义项目的排列顺序，数值越小，排越靠前，默认为 0 。</p>
 <p>具体可参考下面的演示：</p>
-<iframe height='365' scrolling='no' title='order' src='//codepen.io/hooray/embed/LraBrO/?height=365&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/hooray/pen/LraBrO/' target="_blank" rel="noopener">order</a> by 胡睿 (<a href='https://codepen.io/hooray' target="_blank" rel="noopener">@hooray</a>) on <a href='https://codepen.io' target="_blank" rel="noopener">CodePen</a>.
+<iframe height='365' scrolling='no' title='order' src='//codepen.io/hooray/embed/LraBrO/?height=365&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a target="_blank" rel="noopener" href='https://codepen.io/hooray/pen/LraBrO/'>order</a> by 胡睿 (<a target="_blank" rel="noopener" href='https://codepen.io/hooray'>@hooray</a>) on <a target="_blank" rel="noopener" href='https://codepen.io'>CodePen</a>.
 </iframe>
 <h3 id="6-flex"><a class="header-anchor" href="#6-flex"></a>6. flex</h3>
 <p>flex属性是 flex-grow 属性， flex-shrink 属性和 flex-basis 属性的简写，默认为 <code>0 1 auto</code> ，后两个属性可选，语法如下：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span>&#123;</span><br><span class="line">    <span class="attribute">flex</span>: none | auto | [ &lt;flex-grow&gt; &lt;flex-shrink&gt;? || &lt;flex-basis&gt; ];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="兼容性"><a class="header-anchor" href="#兼容性"></a>兼容性</h2>
-<p>在 <a href="https://caniuse.com/" target="_blank" rel="noopener">Can I Use</a> 网站可以准确的查看到 Flex 的兼容性，如下图：</p>
+<p>在 <a target="_blank" rel="noopener" href="https://caniuse.com/">Can I Use</a> 网站可以准确的查看到 Flex 的兼容性，如下图：</p>
 <p><img src="https://i.loli.net/2018/07/03/5b3b13e5061c8.png" alt=""></p>
 <p>可以看出各大浏览器对 Flex 的支持比较全面，是个可以放心使用的属性。</p>
 <h2 id="参考"><a class="header-anchor" href="#参考"></a>参考</h2>
 <ul>
-<li><a href="https://www.toobler.com/css-flexbox-an-exploration/" target="_blank" rel="noopener">CSS Flexbox – An Exploration</a></li>
-<li><a href="https://www.cnblogs.com/sxz2008/p/6635196.html" target="_blank" rel="noopener">CSS3 Flex布局（伸缩布局盒模型）学习</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.toobler.com/css-flexbox-an-exploration/">CSS Flexbox – An Exploration</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/sxz2008/p/6635196.html">CSS3 Flex布局（伸缩布局盒模型）学习</a></li>
 </ul>
 
     </div>
@@ -419,29 +533,26 @@
     
     
     
-        <div class="reward-container">
+
+    <footer class="post-footer">
+          <div class="reward-container">
   <div></div>
-  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
-    打赏
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
   </button>
-  <div id="qr" style="display: none;">
-      
-      <div style="display: inline-block;">
-        <img src="/reward-wechat.jpg" alt="Hooray 微信支付">
-        <p>微信支付</p>
+  <div class="post-reward">
+      <div>
+        <img src="/reward-wechat.jpg" alt="Hooray 微信">
+        <span>微信</span>
       </div>
-      
-      <div style="display: inline-block;">
+      <div>
         <img src="/reward-alipay.jpg" alt="Hooray 支付宝">
-        <p>支付宝</p>
+        <span>支付宝</span>
       </div>
 
   </div>
 </div>
 
-
-      <footer class="post-footer">
-          
           <div class="post-tags">
               <a href="/tags/flex/" rel="tag"><i class="fa fa-tag"></i> flex</a>
               <a href="/tags/flex%E5%B8%83%E5%B1%80/" rel="tag"><i class="fa fa-tag"></i> flex布局</a>
@@ -455,29 +566,27 @@
     </div>
   </div>
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/posts/92a3b5b7/" rel="prev" title="响应式设计如何统一展示不同比例尺寸的图片">
-      <i class="fa fa-chevron-left"></i> 响应式设计如何统一展示不同比例尺寸的图片
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/72a9e44f/" rel="next" title="响应式设计通过 padding 实现固定比例展示图片">
-      响应式设计通过 padding 实现固定比例展示图片 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/92a3b5b7/" rel="prev" title="响应式设计如何统一展示不同比例尺寸的图片">
+                  <i class="fa fa-chevron-left"></i> 响应式设计如何统一展示不同比例尺寸的图片
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/72a9e44f/" rel="next" title="响应式设计通过 padding 实现固定比例展示图片">
+                  响应式设计通过 padding 实现固定比例展示图片 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
           </div>
-          
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
     <div class="comments" id="gitalk-container"></div>
 
 <script>
@@ -487,7 +596,7 @@
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -496,173 +605,104 @@
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-number">1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容器的属性"><span class="nav-number">2.</span> <span class="nav-text">容器的属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-flex-direction"><span class="nav-number">2.1.</span> <span class="nav-text">1. flex-direction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-flex-wrap"><span class="nav-number">2.2.</span> <span class="nav-text">2. flex-wrap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-align-items"><span class="nav-number">2.3.</span> <span class="nav-text">3. align-items</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-justify-content"><span class="nav-number">2.4.</span> <span class="nav-text">4. justify-content</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-align-content"><span class="nav-number">2.5.</span> <span class="nav-text">5. align-content</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-flex-flow"><span class="nav-number">2.6.</span> <span class="nav-text">6. flex-flow</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目的属性"><span class="nav-number">3.</span> <span class="nav-text">项目的属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-align-self"><span class="nav-number">3.1.</span> <span class="nav-text">1. align-self</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-flex-grow"><span class="nav-number">3.2.</span> <span class="nav-text">2. flex-grow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-flex-shrink"><span class="nav-number">3.3.</span> <span class="nav-text">3. flex-shrink</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-flex-basis"><span class="nav-number">3.4.</span> <span class="nav-text">4. flex-basis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-order"><span class="nav-number">3.5.</span> <span class="nav-text">5. order</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-flex"><span class="nav-number">3.6.</span> <span class="nav-text">6. flex</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#兼容性"><span class="nav-number">4.</span> <span class="nav-text">兼容性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Hooray"
-      src="/avatar.jpg">
-  <p class="site-author-name" itemprop="name">Hooray</p>
-  <div class="site-description" itemprop="description"></div>
 </div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">46</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">7</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">113</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
-      </span>
-  </div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
 
-  <div class="links-of-blogroll motion-element">
-    <div class="links-of-blogroll-title">
-      <i class="fa fa-fw fa-link"></i>
-      Links
-    </div>
-    <ul class="links-of-blogroll-list">
-        <li class="links-of-blogroll-item">
-          <a href="http://hoorayos.com/" title="http:&#x2F;&#x2F;hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue项目模版</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/hooray/fantastic-admin" title="https:&#x2F;&#x2F;gitee.com&#x2F;hooray&#x2F;fantastic-admin" rel="noopener" target="_blank">Fantastic-admin - 中后台管理系统模版</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://hooray.github.io/vue-sku-form" title="https:&#x2F;&#x2F;hooray.github.io&#x2F;vue-sku-form">vue-sku-form - 电商 SKU 表单配置组件</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/vue-clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
-        </li>
-    </ul>
-  </div>
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
 
 <div class="copyright">
-  
   &copy; 2017 – 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Hooray</span>
-    <span class="post-meta-divider">|</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
     <span class="post-meta-item-icon">
-      <i class="fa fa-area-chart"></i>
+      <i class="fa fa-chart-line"></i>
     </span>
-      <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">139k</span>
-    <span class="post-meta-divider">|</span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">152k</span>
+  </span>
+  <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:07</span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:18</span>
+  </span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
-  </div>
-
-        
 <div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
       <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
+        <i class="user"></i>
       </span>
       <span class="site-uv" title="总访客量">
         <span id="busuanzi_value_site_uv"></span>
       </span>
     </span>
-    <span class="post-meta-divider">|</span>
     <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
       <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
+        <i class="eye"></i>
       </span>
       <span class="site-pv" title="总访问量">
         <span id="busuanzi_value_site_pv"></span>
       </span>
     </span>
 </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 22619,
+      el    : 'wpac-rating',
+      color : 'ff9800'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+<script src="/js/local-search.js"></script>
 
 
 
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
@@ -674,15 +714,15 @@
     }
 
     function addCount(Counter) {
-      var visitors = document.querySelector('.leancloud_visitors');
-      var url = decodeURI(visitors.id);
-      var title = visitors.dataset.flagTitle;
+      const visitors = document.querySelector('.leancloud_visitors');
+      const url = decodeURI(visitors.id);
+      const title = visitors.dataset.flagTitle;
 
       Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
         .then(response => response.json())
         .then(({ results }) => {
           if (results.length > 0) {
-            var counter = results[0];
+            const counter = results[0];
             leancloudSelector(url).innerText = counter.time + 1;
             Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
               .catch(error => {
@@ -705,8 +745,8 @@
     }
 
     function showTime(Counter) {
-      var visitors = document.querySelectorAll('.leancloud_visitors');
-      var entries = [...visitors].map(element => {
+      const visitors = document.querySelectorAll('.leancloud_visitors');
+      const entries = [...visitors].map(element => {
         return decodeURI(element.id);
       });
 
@@ -714,7 +754,7 @@
         .then(response => response.json())
         .then(({ results }) => {
           for (let url of entries) {
-            let target = results.find(item => item.url === url);
+            const target = results.find(item => item.url === url);
             leancloudSelector(url).innerText = target ? target.time : 0;
           }
         })
@@ -723,9 +763,9 @@
         });
     }
 
-    let { app_id, app_key, server_url } = {"enable":true,"app_id":"ODqTjpX8O5RTTQ9Ne0PQLrl6-gzGzoHsz","app_key":"yEmutbTLiTig6Kz3VLiocpgs","server_url":null,"security":false};
+    const { app_id, app_key, server_url } = {"enable":true,"app_id":"ODqTjpX8O5RTTQ9Ne0PQLrl6-gzGzoHsz","app_key":"yEmutbTLiTig6Kz3VLiocpgs","server_url":null,"security":false};
     function fetchData(api_server) {
-      var Counter = (method, url, data) => {
+      const Counter = (method, url, data) => {
         return fetch(`${api_server}/1.1${url}`, {
           method,
           headers: {
@@ -744,7 +784,7 @@
       }
     }
 
-    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+    const api_server = app_id.slice(-9) === '-MdYXbMMI' ? `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com` : server_url;
 
     if (api_server) {
       fetchData(api_server);
@@ -759,80 +799,12 @@
 </script>
 
 
-      </div>
-    </footer>
-  </div>
 
-  
-  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
-  <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-  <script src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js"></script>
-  <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.min.js"></script>
-  <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-  <script>
-  if (CONFIG.page.isPost) {
-    wpac_init = window.wpac_init || [];
-    wpac_init.push({
-      widget: 'Rating',
-      id    : 22619,
-      el    : 'wpac-rating',
-      color : 'ff9800'
-    });
-    (function() {
-      if ('WIDGETPACK_LOADED' in window) return;
-      WIDGETPACK_LOADED = true;
-      var mc = document.createElement('script');
-      mc.type = 'text/javascript';
-      mc.async = true;
-      mc.src = '//embed.widgetpack.com/widget.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
-    })();
-  }
-  </script>
-
-  
-<script src="/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
 
 <script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+NexT.utils.loadComments('#gitalk-container', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
     var gitalk = new Gitalk({
       clientID    : '165f4a18451139d1962f',
       clientSecret: 'd950ed9736a4364215fa554442d01f8e89dd92a8',

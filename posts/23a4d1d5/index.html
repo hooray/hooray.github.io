@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 5.3.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -13,17 +15,16 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
+
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
   <link rel="stylesheet" href="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.css">
-  <link rel="stylesheet" href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css">
-  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
 
-<script id="hexo-configurations">
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"hooray.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"hooray.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.1.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-
-  <meta name="description" content="还记得上次桌面大升级是因为搬了新住处，租了个大房间，所以就买了新桌子，新椅子，给显示器也弄了个支架。 但这一次桌面升级并不是一开始就计划好的，最初的想法只是想在公司里给笔记本外接台显示器，方便开发和调试，但结果这个淘宝一打开啊，人就不受控制了，什么都想更新，再加上一直被「遇见喜欢的人已经很难了，遇见喜欢的东西就买吧」「早买早享受，晚买享折扣」这样的鸡汤洗脑，不买真的有点对不起自己，于是一场无预谋">
+<meta name="description" content="还记得上次桌面大升级是因为搬了新住处，租了个大房间，所以就买了新桌子，新椅子，给显示器也弄了个支架。 但这一次桌面升级并不是一开始就计划好的，最初的想法只是想在公司里给笔记本外接台显示器，方便开发和调试，但结果这个淘宝一打开啊，人就不受控制了，什么都想更新，再加上一直被「遇见喜欢的人已经很难了，遇见喜欢的东西就买吧」「早买早享受，晚买享折扣」这样的鸡汤洗脑，不买真的有点对不起自己，于是一场无预谋">
 <meta property="og:type" content="article">
 <meta property="og:title" content="桌面大升级">
 <meta property="og:url" content="https://hooray.github.io/posts/23a4d1d5/index.html">
@@ -91,10 +92,11 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://i.loli.net/2018/03/18/5aad3ee8cbeb1.png">
 
+
 <link rel="canonical" href="https://hooray.github.io/posts/23a4d1d5/">
 
 
-<script id="page-configurations">
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -103,60 +105,68 @@
     lang   : 'zh-CN'
   };
 </script>
-
-  <title>桌面大升级 | ９９３５</title>
+<title>桌面大升级 | ９９３５</title>
   
-
-
-
 
 
 
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">９９３５</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">代码如诗</p>
   </div>
@@ -170,42 +180,41 @@
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-top">
 
-    <a href="/top/" rel="section"><i class="fa fa-fw fa-signal"></i>热门</a>
+    <a href="/top/" rel="section"><i class="fa fa-signal fa-fw"></i>热门</a>
 
   </li>
         <li class="menu-item menu-item-commonweal">
 
-    <a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -218,13 +227,12 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
+    <div class="popup search-popup"><div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
            placeholder="搜索..." spellcheck="false"
            type="search" class="search-input">
   </div>
@@ -232,9 +240,9 @@
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
 
@@ -242,6 +250,109 @@
   </div>
 
 </div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%94%E8%AE%B0%E6%9C%AC"><span class="nav-number">1.</span> <span class="nav-text">笔记本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">显示器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%AE%E7%9B%98"><span class="nav-number">3.</span> <span class="nav-text">键盘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%BC%A0%E6%A0%87"><span class="nav-number">4.</span> <span class="nav-text">鼠标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9F%B3%E7%AE%B1"><span class="nav-number">5.</span> <span class="nav-text">音箱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%94%E8%AE%B0%E6%9C%AC%E6%94%AF%E6%9E%B6"><span class="nav-number">6.</span> <span class="nav-text">笔记本支架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E5%99%A8%E6%94%AF%E6%9E%B6"><span class="nav-number">7.</span> <span class="nav-text">显示器支架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%8B%E6%9C%BA%E6%94%AF%E6%9E%B6"><span class="nav-number">8.</span> <span class="nav-text">手机支架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%B5%E8%84%91%E6%A1%8C"><span class="nav-number">9.</span> <span class="nav-text">电脑桌</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%B5%E8%84%91%E6%A4%85"><span class="nav-number">10.</span> <span class="nav-text">电脑椅</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E5%AE%83"><span class="nav-number">11.</span> <span class="nav-text">其它</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">12.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">13.</span> <span class="nav-text">参考</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hooray"
+      src="/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Hooray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">115</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-qq fa-fw"></i>QQ</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://gitee.com/hooray/fantastic-admin" title="https:&#x2F;&#x2F;gitee.com&#x2F;hooray&#x2F;fantastic-admin" rel="noopener" target="_blank">Fantastic-admin - 中后台管理系统模版</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue项目模版</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hooray.github.io/vue-sku-form" title="https:&#x2F;&#x2F;hooray.github.io&#x2F;vue-sku-form">vue-sku-form - 电商 SKU 表单配置组件</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/hooray/hoorayos" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;hoorayos" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/hooray/vue-clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
+        </li>
+    </ul>
+  </div>
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
     </header>
 
     
@@ -251,19 +362,22 @@
   </div>
   <div class="reading-progress-bar"></div>
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content post posts-expand">
-            
+    <div class="main-inner post posts-expand">
 
-    
+
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://hooray.github.io/posts/23a4d1d5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -280,54 +394,58 @@
           桌面大升级
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2018-03-18 01:11:01" itemprop="dateCreated datePublished" datetime="2018-03-18T01:11:01+08:00">2018-03-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-08 21:55:25" itemprop="dateModified" datetime="2019-10-08T21:55:25+08:00">2019-10-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%85%B6%E5%AE%83/" itemprop="url" rel="index"><span itemprop="name">其它</span></a>
-                </span>
-            </span>
+      <time title="创建时间：2018-03-18 01:11:01" itemprop="dateCreated datePublished" datetime="2018-03-18T01:11:01+08:00">2018-03-18</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="fa fa-calendar-check-o"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2019-10-08 21:55:25" itemprop="dateModified" datetime="2019-10-08T21:55:25+08:00">2019-10-08</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%85%B6%E5%AE%83/" itemprop="url" rel="index"><span itemprop="name">其它</span></a>
+        </span>
+    </span>
 
-          
-            <span id="/posts/23a4d1d5/" class="post-meta-item leancloud_visitors" data-flag-title="桌面大升级" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>6.3k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
-            </span>
+  
+    <span id="/posts/23a4d1d5/" class="post-meta-item leancloud_visitors" data-flag-title="桌面大升级" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>6.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-clock-o"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
 
         </div>
       </header>
@@ -336,8 +454,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
         <p><img src="https://i.loli.net/2018/03/18/5aad3ee8cbeb1.png" alt=""></p>
 <p>还记得上次桌面大升级是因为搬了新住处，租了个大房间，所以就买了新桌子，新椅子，给显示器也弄了个支架。</p>
 <p>但这一次桌面升级并不是一开始就计划好的，最初的想法只是想在公司里给笔记本外接台显示器，方便开发和调试，但结果这个淘宝一打开啊，人就不受控制了，什么都想更新，再加上一直被「遇见喜欢的人已经很难了，遇见喜欢的东西就买吧」「早买早享受，晚买享折扣」这样的鸡汤洗脑，不买真的有点对不起自己，于是一场无预谋无计划的买买买一触即发。</p>
@@ -348,19 +464,18 @@
 </blockquote>
 <h2 id="笔记本"><a class="header-anchor" href="#笔记本"></a>笔记本</h2>
 <p><strong>Surface Book 增强版</strong><br>
-购买链接：<a href="https://www.microsoftstore.com.cn/" target="_blank" rel="noopener">https://www.microsoftstore.com.cn/</a> <code>微软官网</code><br>
+购买链接：<a target="_blank" rel="noopener" href="https://www.microsoftstore.com.cn/">https://www.microsoftstore.com.cn/</a> <code>微软官网</code><br>
 消费金额：18799.00</p>
 <p><img src="https://i.loli.net/2018/03/18/5aad5a3baed90.png" alt=""></p>
 <p>笔记本严格来说不算外设，但既然是分享自己的桌面，那电脑才是最主要的。</p>
 <p>我的上一台电脑是戴尔的 XPS 15 2012款，在服役了 5 年后，做开发依旧坚挺，当然主要得益于那块三星的 SSD 硬盘，记得 12 年那会，同款三星 512G 的 SSD 硬盘，淘宝上卖到 5k+ ，那时候我这台笔记本的价格也就 2w 不到。</p>
 <p>那为什么会换成现在的 Surface Book 呢？腻了嘛，那会的轻薄本，过了 5 年再看，也不轻薄了，加上中间送修了几次，D 面的后盖都已经被拆得严重破损了，再加上好巧不巧，那会微软发布了 Surface Book 增强版，之前就很好奇微软所谓的<strong>笔记本的终极形态</strong>是什么样的，既然发布新款了，干脆趁此机会，把电脑就换了。</p>
 <p>配置上我买的是次顶配，配置和顶配几乎一样，只是硬盘是 512G ，顶配是 1T 。根据上台电脑的使用情况来选择， 512G 足够我用了。至于为什么要买顶配，没想太多，就想一步到位了，希望能继续用 5 年。</p>
-<div class="note info">
-            <p>这里我有一个购买微软产品的小技巧，你可以上淘宝购买一个教育邮箱，大概 5 块钱左右，然后去微软的<a href="https://www.microsoftstore.com.cn/student?Icid=StoreNavi_EDU" target="_blank" rel="noopener">教育优惠</a>里用刚买的邮箱认证一下你的账号，成功以后就可以享受 9 折优惠了。像我买 Surface Book 的时候，就省了 2k 多。</p>
-          </div>
+<div class="note info"><p>这里我有一个购买微软产品的小技巧，你可以上淘宝购买一个教育邮箱，大概 5 块钱左右，然后去微软的<a target="_blank" rel="noopener" href="https://www.microsoftstore.com.cn/student?Icid=StoreNavi_EDU">教育优惠</a>里用刚买的邮箱认证一下你的账号，成功以后就可以享受 9 折优惠了。像我买 Surface Book 的时候，就省了 2k 多。</p>
+</div>
 <h2 id="显示器"><a class="header-anchor" href="#显示器"></a>显示器</h2>
 <p><strong>戴尔 U2718Q</strong><br>
-购买链接：<a href="https://s.click.taobao.com/yfNk7Tw" target="_blank" rel="noopener">https://s.click.taobao.com/yfNk7Tw</a> <code>可领30元优惠券</code><br>
+购买链接：<a target="_blank" rel="noopener" href="https://s.click.taobao.com/yfNk7Tw">https://s.click.taobao.com/yfNk7Tw</a> <code>可领30元优惠券</code><br>
 消费金额：4369.00</p>
 <p><img src="https://i.loli.net/2018/03/15/5aa963e0dff31.png" alt=""></p>
 <p>显示器一开始想的是，公司里放一台 24 寸，显示效果一般般就可以了， TN 屏都行。但转念一想，这消费体验太不痛快，档次越来越低了。于是开始思考，不如给家里的显示器进行升级，然后把现在用的拿到公司去用，一举两得。</p>
@@ -399,12 +514,11 @@
 <p><img src="https://i.loli.net/2018/03/12/5aa579922889f.png" alt=""></p>
 <p>可以省去我再买一个音箱的钱，但查了很多资料，也问了一些人的建议，最后还是选择了 U2718Q 这款，毕竟还是颜值高，价格也相差不多。</p>
 <p><img src="https://i.loli.net/2018/03/15/5aa9641f86361.png" alt=""></p>
-<div class="note info">
-            <p>如果你想买一款外设，有明确的硬性参数指标的情况下，我强烈推荐上京东进行选款，虽然京东有着「二手东」的名号，但它的商品属性分类还是极其清晰准确的，淘宝虽然也有，但准确度不高。当然，最后选好买哪款显示器，我还是选择回淘宝上买，因为比价比下来，淘宝还是比京东便宜一些。</p>
-          </div>
+<div class="note info"><p>如果你想买一款外设，有明确的硬性参数指标的情况下，我强烈推荐上京东进行选款，虽然京东有着「二手东」的名号，但它的商品属性分类还是极其清晰准确的，淘宝虽然也有，但准确度不高。当然，最后选好买哪款显示器，我还是选择回淘宝上买，因为比价比下来，淘宝还是比京东便宜一些。</p>
+</div>
 <h2 id="键盘"><a class="header-anchor" href="#键盘"></a>键盘</h2>
 <p><strong>普拉姆 84 蓝牙双模 静电容键盘</strong><br>
-购买链接：<a href="https://s.click.taobao.com/pMGkETw" target="_blank" rel="noopener">https://s.click.taobao.com/pMGkETw</a> <code>可领20元优惠券</code><br>
+购买链接：<a target="_blank" rel="noopener" href="https://s.click.taobao.com/pMGkETw">https://s.click.taobao.com/pMGkETw</a> <code>可领20元优惠券</code><br>
 消费金额：625.00</p>
 <p><img src="https://i.loli.net/2018/03/18/5aae1b22ad241.png" alt=""></p>
 <p>几年前入过机械键盘的坑，加上清楚自己的需求，所以在买键盘上并没有费太大力。</p>
@@ -438,12 +552,11 @@
 <p>至于普拉姆这款静电容键盘，是因为以前用过 HHKB 和 RealForce 键盘，对静电容的手感有好感，但由于 HHKB 的键位实在无法适应， RealForce 又太大了，所以没继续使用。但这次看到国产品牌普拉姆出了静电容，而且正好对上我的刚需，所以也列入了备选列表里。</p>
 <p>两款键盘其实都很喜欢，我甚至一度有想法干脆买都买了，一个放公司，一个放家里，但最终选择了静电容这款，原因是 Minila 的蓝牙切换操作比较反人类（虽然我基本也就连接电脑一台设备），必须要关闭上一个蓝牙接收，才能链接第二个，想到我的电脑以后肯定是连接着蓝牙鼠标，蓝牙音箱，蓝牙……</p>
 <p>而普拉姆的蓝牙切换就超级方便，直接通过 Fn 快捷键就可以方便切换，而且最重要的是，价格便宜啊。</p>
-<div class="note info">
-            <p>通过买显示器和键盘，我大概得出两个适用于我自己的结论——当选不出哪个更好的时候，买贵的；当都想要的时候，买便宜的。</p>
-          </div>
+<div class="note info"><p>通过买显示器和键盘，我大概得出两个适用于我自己的结论——当选不出哪个更好的时候，买贵的；当都想要的时候，买便宜的。</p>
+</div>
 <h2 id="鼠标"><a class="header-anchor" href="#鼠标"></a>鼠标</h2>
 <p><strong>罗技 MX Master 2s</strong><br>
-购买链接：<a href="https://s.click.taobao.com/b0mgETw" target="_blank" rel="noopener">https://s.click.taobao.com/b0mgETw</a> <code>可领30元优惠券</code><br>
+购买链接：<a target="_blank" rel="noopener" href="https://s.click.taobao.com/b0mgETw">https://s.click.taobao.com/b0mgETw</a> <code>可领30元优惠券</code><br>
 消费金额：569.00</p>
 <p><img src="https://i.loli.net/2018/03/15/5aa974292e81c.png" alt=""></p>
 <p>我之前很长一段时间，不管家里还是公司，都在使用雷蛇的炼狱蝰蛇鼠标，因为大小刚好贴合手，而且侧边有 2 个按键，网页浏览的时候方便快速前进和后退，这次升级也是优先去看了雷蛇的蓝牙鼠标。</p>
@@ -454,7 +567,7 @@
 <p>当然真正让我下定决定购买主要还是它的「无极滚轮」模式，以前听都没听过，根据知友的描述是，滚轮居然可以滚动 20 多秒，简直不可思议。其次还有侧边的横向滚轮也是我以前没体验过的，虽然应用场景比较少，我能想到的就是在看 Excel 的时候会派上用场。最后加上蓝牙可以快速切换，买！</p>
 <h2 id="音箱"><a class="header-anchor" href="#音箱"></a>音箱</h2>
 <p><strong>JBL Charge 3</strong><br>
-购买链接：<a href="https://s.click.taobao.com/qBb18Tw" target="_blank" rel="noopener">https://s.click.taobao.com/qBb18Tw</a><br>
+购买链接：<a target="_blank" rel="noopener" href="https://s.click.taobao.com/qBb18Tw">https://s.click.taobao.com/qBb18Tw</a><br>
 消费金额：839.00</p>
 <p>俗话说“万元以下听个响”，在买音箱这点上，我是完全奔着颜值去买的，一点没看中内在，只要能出声就行。于是上淘宝搜罗了一圈，加上收藏夹里存着的，大概罗列了一下几个参考：</p>
 <table>
@@ -527,7 +640,7 @@
 <p><img src="https://i.loli.net/2018/03/15/5aaa75fdc5599.png" alt=""></p>
 <h2 id="笔记本支架"><a class="header-anchor" href="#笔记本支架"></a>笔记本支架</h2>
 <p><strong>苹果笔记本支架</strong><br>
-购买链接：<a href="https://s.click.taobao.com/NyD10Tw" target="_blank" rel="noopener">https://s.click.taobao.com/NyD10Tw</a><br>
+购买链接：<a target="_blank" rel="noopener" href="https://s.click.taobao.com/NyD10Tw">https://s.click.taobao.com/NyD10Tw</a><br>
 消费金额：119.00</p>
 <p><img src="https://i.loli.net/2018/03/18/5aad457a4ccc3.png" alt=""></p>
 <p>在选购笔记本支架上，我可以说是最舍得“花钱”的了，因为别的都是网上看，网上对比，而这个我直接买了三款相对入眼的产品，实际上手体验了一番。</p>
@@ -536,7 +649,7 @@
 <p><img src="https://i.loli.net/2018/03/18/5aad4a3d9016f.png" alt=""></p>
 <h2 id="显示器支架"><a class="header-anchor" href="#显示器支架"></a>显示器支架</h2>
 <p><strong>乐歌 D5 显示器支架</strong><br>
-购买链接：<a href="https://s.click.taobao.com/hpqx7Tw" target="_blank" rel="noopener">https://s.click.taobao.com/hpqx7Tw</a> <code>可领5元优惠券</code><br>
+购买链接：<a target="_blank" rel="noopener" href="https://s.click.taobao.com/hpqx7Tw">https://s.click.taobao.com/hpqx7Tw</a> <code>可领5元优惠券</code><br>
 消费金额：194.00</p>
 <p><img src="https://i.loli.net/2018/03/18/5aad5b8e46073.png" alt=""></p>
 <p>显示器支架绝对是个好东西，如果你有两台甚至更多显示器，简直是大幅减轻桌面空间的压力，让桌面可以摆放下更多的东西。</p>
@@ -544,14 +657,14 @@
 <p>这是一张我桌面升级前的老图，当时是因为想能把显示器放置在电脑上方，靠显示器自带的臂架显然不行，所以就只能买一个支架来实现，买了之后觉得买值了。</p>
 <h2 id="手机支架"><a class="header-anchor" href="#手机支架"></a>手机支架</h2>
 <p>iQunix Hima 铝合金手机充电底座支架<br>
-购买链接：<a href="https://s.click.taobao.com/XsD18Tw" target="_blank" rel="noopener">https://s.click.taobao.com/XsD18Tw</a> <code>可领5元优惠券</code><br>
+购买链接：<a target="_blank" rel="noopener" href="https://s.click.taobao.com/XsD18Tw">https://s.click.taobao.com/XsD18Tw</a> <code>可领5元优惠券</code><br>
 消费金额：163.00</p>
 <p>这个宝贝无需介绍太多，第一眼看到的时候，我就喜欢上了，我希望你们第一眼看到也能喜欢上，如果不能，那就多看几眼吧。它有两种颜色，银色和黑色，为了和手机更搭，我买的是黑色的。</p>
 <p><img src="https://i.loli.net/2018/03/14/5aa9457a03b63.png" alt=""></p>
 <p><img src="https://i.loli.net/2018/03/15/5aa9743d7eb70.png" alt=""></p>
 <h2 id="电脑桌"><a class="header-anchor" href="#电脑桌"></a>电脑桌</h2>
 <p><strong>宜家贝肯特底架</strong><br>
-购买链接：<a href="https://s.click.taobao.com/M9a08Tw" target="_blank" rel="noopener">https://s.click.taobao.com/M9a08Tw</a><br>
+购买链接：<a target="_blank" rel="noopener" href="https://s.click.taobao.com/M9a08Tw">https://s.click.taobao.com/M9a08Tw</a><br>
 消费金额：430.00</p>
 <p><strong>老榆木桌板定制</strong><br>
 消费金额：580.00</p>
@@ -562,16 +675,16 @@
 <p>其实一开始是想买升降桌的，感觉很酷，而且可以站立办公，不过考虑到使用环境还是在家里，没事也不会经常折腾桌子，而且感觉升降桌会很重，万一搬家将会是个麻烦事。最终事实也证明我的顾虑是正确的，光这老榆木的桌板从一楼背上四楼我都累成狗了，升降桌，呵呵，还好没买。</p>
 <h2 id="电脑椅"><a class="header-anchor" href="#电脑椅"></a>电脑椅</h2>
 <p><strong>AutoFull傲风 电竞椅</strong><br>
-购买链接：<a href="https://s.click.taobao.com/8YbxzSw" target="_blank" rel="noopener">https://s.click.taobao.com/8YbxzSw</a> <code>可领50元优惠券</code><br>
+购买链接：<a target="_blank" rel="noopener" href="https://s.click.taobao.com/8YbxzSw">https://s.click.taobao.com/8YbxzSw</a> <code>可领50元优惠券</code><br>
 消费金额：799.00</p>
 <p><img src="https://i.loli.net/2018/03/18/5aad5e351bba6.jpg" alt=""></p>
 <p>买椅子的时候其实就只有一个要求，就是底部带滑轮，颜值尚可就行就（因为颜值心仪的价格上 5 位数了），所以这款椅子差不多就是在淘宝按销量排序随便搜的一款，整体感受只能说一般。</p>
 <h2 id="其它"><a class="header-anchor" href="#其它"></a>其它</h2>
 <p><strong>公牛机柜插座 PDU 专用电源</strong><br>
-购买链接：<a href="https://s.click.taobao.com/ZPuv7Tw" target="_blank" rel="noopener">https://s.click.taobao.com/ZPuv7Tw</a><br>
+购买链接：<a target="_blank" rel="noopener" href="https://s.click.taobao.com/ZPuv7Tw">https://s.click.taobao.com/ZPuv7Tw</a><br>
 消费金额：134.00</p>
 <p><strong>12 档 24 口机柜理线架 2 个</strong><br>
-购买链接：<a href="https://s.click.taobao.com/VEav7Tw" target="_blank" rel="noopener">https://s.click.taobao.com/VEav7Tw</a><br>
+购买链接：<a target="_blank" rel="noopener" href="https://s.click.taobao.com/VEav7Tw">https://s.click.taobao.com/VEav7Tw</a><br>
 消费金额：40.00</p>
 <p>想要桌面看上去清爽干净，除了更换蓝牙设备外，理线/埋线也是一门学问，而我之所以在购买桌子的时候选择定制一块木板，目的就是准备把电源和大部分数据/电源线都隐藏在桌底，桌面上看不到，自然就显得干净了。</p>
 <p><img src="https://i.loli.net/2018/03/15/5aa95383521cf.png" alt=""></p>
@@ -590,12 +703,12 @@
 <p><img src="https://i.loli.net/2018/03/15/5aa95ecbb5803.jpg" alt=""></p>
 <p><img src="https://i.loli.net/2018/03/15/5aa95eccb7e10.jpg" alt=""></p>
 <p><strong>几度灰 清水混凝土笔筒</strong><br>
-购买链接：<a href="https://s.click.taobao.com/2xnq7Tw" target="_blank" rel="noopener">https://s.click.taobao.com/2xnq7Tw</a><br>
+购买链接：<a target="_blank" rel="noopener" href="https://s.click.taobao.com/2xnq7Tw">https://s.click.taobao.com/2xnq7Tw</a><br>
 消费金额：75.00</p>
 <p><img src="https://i.loli.net/2018/03/15/5aa9607f931dc.png" alt=""></p>
 <p>因为 Surface Pen 的使用率极低，所以专门买了个笔筒放它。</p>
 <p><strong>桌面收纳盒</strong><br>
-购买链接：<a href="https://s.click.taobao.com/ULOq7Tw" target="_blank" rel="noopener">https://s.click.taobao.com/ULOq7Tw</a><br>
+购买链接：<a target="_blank" rel="noopener" href="https://s.click.taobao.com/ULOq7Tw">https://s.click.taobao.com/ULOq7Tw</a><br>
 消费金额：47.00</p>
 <p><img src="https://i.loli.net/2018/03/15/5aa9616b95a90.png" alt=""></p>
 <p>没有找到特别心仪的，这款也只是在淘宝众多丑陋的收纳盒里相对颜值勉强在线的，先买来用着起，毕竟桌面乱七八糟的东西太多了，急需一个收纳盒进行统一管理。</p>
@@ -624,10 +737,10 @@
 <p><img src="https://i.loli.net/2018/03/18/5aad42b63ca20.png" alt=""></p>
 <h2 id="参考"><a class="header-anchor" href="#参考"></a>参考</h2>
 <ul>
-<li><a href="https://www.bilibili.com/video/av7883199/" target="_blank" rel="noopener">Type-C 主题桌面:「小辛的未来桌面」</a></li>
-<li><a href="https://www.bilibili.com/video/av6870080/" target="_blank" rel="noopener">「ZEALER|LIVE」王自如桌面 2.0</a></li>
-<li><a href="https://test.smzdm.com/pingce/p/38436/" target="_blank" rel="noopener">价格略高，但堪称完美的办公鼠标 罗技 MX master 2S</a></li>
-<li><a href="https://wenku.baidu.com/view/290b016284868762cbaed559.html" target="_blank" rel="noopener">Filco Minila air 蓝牙无线机械键盘说明书</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av7883199/">Type-C 主题桌面:「小辛的未来桌面」</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av6870080/">「ZEALER|LIVE」王自如桌面 2.0</a></li>
+<li><a target="_blank" rel="noopener" href="https://test.smzdm.com/pingce/p/38436/">价格略高，但堪称完美的办公鼠标 罗技 MX master 2S</a></li>
+<li><a target="_blank" rel="noopener" href="https://wenku.baidu.com/view/290b016284868762cbaed559.html">Filco Minila air 蓝牙无线机械键盘说明书</a></li>
 </ul>
 
     </div>
@@ -635,29 +748,26 @@
     
     
     
-        <div class="reward-container">
+
+    <footer class="post-footer">
+          <div class="reward-container">
   <div></div>
-  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
-    打赏
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
   </button>
-  <div id="qr" style="display: none;">
-      
-      <div style="display: inline-block;">
-        <img src="/reward-wechat.jpg" alt="Hooray 微信支付">
-        <p>微信支付</p>
+  <div class="post-reward">
+      <div>
+        <img src="/reward-wechat.jpg" alt="Hooray 微信">
+        <span>微信</span>
       </div>
-      
-      <div style="display: inline-block;">
+      <div>
         <img src="/reward-alipay.jpg" alt="Hooray 支付宝">
-        <p>支付宝</p>
+        <span>支付宝</span>
       </div>
 
   </div>
 </div>
 
-
-      <footer class="post-footer">
-          
           <div class="post-tags">
               <a href="/tags/%E6%98%BE%E7%A4%BA%E5%99%A8/" rel="tag"><i class="fa fa-tag"></i> 显示器</a>
               <a href="/tags/%E9%94%AE%E7%9B%98/" rel="tag"><i class="fa fa-tag"></i> 键盘</a>
@@ -673,29 +783,27 @@
     </div>
   </div>
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/posts/5f8cb75e/" rel="prev" title="gulp-file-include 踩坑">
-      <i class="fa fa-chevron-left"></i> gulp-file-include 踩坑
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/20a4f60/" rel="next" title="移动端 H5 页面前进后退经验汇总">
-      移动端 H5 页面前进后退经验汇总 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/5f8cb75e/" rel="prev" title="gulp-file-include 踩坑">
+                  <i class="fa fa-chevron-left"></i> gulp-file-include 踩坑
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/20a4f60/" rel="next" title="移动端 H5 页面前进后退经验汇总">
+                  移动端 H5 页面前进后退经验汇总 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
           </div>
-          
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
     <div class="comments" id="gitalk-container"></div>
 
 <script>
@@ -705,7 +813,7 @@
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -714,173 +822,104 @@
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#笔记本"><span class="nav-number">1.</span> <span class="nav-text">笔记本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示器"><span class="nav-number">2.</span> <span class="nav-text">显示器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#键盘"><span class="nav-number">3.</span> <span class="nav-text">键盘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#鼠标"><span class="nav-number">4.</span> <span class="nav-text">鼠标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#音箱"><span class="nav-number">5.</span> <span class="nav-text">音箱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#笔记本支架"><span class="nav-number">6.</span> <span class="nav-text">笔记本支架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示器支架"><span class="nav-number">7.</span> <span class="nav-text">显示器支架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#手机支架"><span class="nav-number">8.</span> <span class="nav-text">手机支架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#电脑桌"><span class="nav-number">9.</span> <span class="nav-text">电脑桌</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#电脑椅"><span class="nav-number">10.</span> <span class="nav-text">电脑椅</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其它"><span class="nav-number">11.</span> <span class="nav-text">其它</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">12.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">13.</span> <span class="nav-text">参考</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Hooray"
-      src="/avatar.jpg">
-  <p class="site-author-name" itemprop="name">Hooray</p>
-  <div class="site-description" itemprop="description"></div>
 </div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">46</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">7</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">113</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
-      </span>
-  </div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
 
-  <div class="links-of-blogroll motion-element">
-    <div class="links-of-blogroll-title">
-      <i class="fa fa-fw fa-link"></i>
-      Links
-    </div>
-    <ul class="links-of-blogroll-list">
-        <li class="links-of-blogroll-item">
-          <a href="http://hoorayos.com/" title="http:&#x2F;&#x2F;hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue项目模版</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/hooray/fantastic-admin" title="https:&#x2F;&#x2F;gitee.com&#x2F;hooray&#x2F;fantastic-admin" rel="noopener" target="_blank">Fantastic-admin - 中后台管理系统模版</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://hooray.github.io/vue-sku-form" title="https:&#x2F;&#x2F;hooray.github.io&#x2F;vue-sku-form">vue-sku-form - 电商 SKU 表单配置组件</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/vue-clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
-        </li>
-    </ul>
-  </div>
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
 
 <div class="copyright">
-  
   &copy; 2017 – 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Hooray</span>
-    <span class="post-meta-divider">|</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
     <span class="post-meta-item-icon">
-      <i class="fa fa-area-chart"></i>
+      <i class="fa fa-chart-line"></i>
     </span>
-      <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">139k</span>
-    <span class="post-meta-divider">|</span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">152k</span>
+  </span>
+  <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:07</span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:18</span>
+  </span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
-  </div>
-
-        
 <div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
       <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
+        <i class="user"></i>
       </span>
       <span class="site-uv" title="总访客量">
         <span id="busuanzi_value_site_uv"></span>
       </span>
     </span>
-    <span class="post-meta-divider">|</span>
     <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
       <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
+        <i class="eye"></i>
       </span>
       <span class="site-pv" title="总访问量">
         <span id="busuanzi_value_site_pv"></span>
       </span>
     </span>
 </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 22619,
+      el    : 'wpac-rating',
+      color : 'ff9800'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+<script src="/js/local-search.js"></script>
 
 
 
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
@@ -892,15 +931,15 @@
     }
 
     function addCount(Counter) {
-      var visitors = document.querySelector('.leancloud_visitors');
-      var url = decodeURI(visitors.id);
-      var title = visitors.dataset.flagTitle;
+      const visitors = document.querySelector('.leancloud_visitors');
+      const url = decodeURI(visitors.id);
+      const title = visitors.dataset.flagTitle;
 
       Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
         .then(response => response.json())
         .then(({ results }) => {
           if (results.length > 0) {
-            var counter = results[0];
+            const counter = results[0];
             leancloudSelector(url).innerText = counter.time + 1;
             Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
               .catch(error => {
@@ -923,8 +962,8 @@
     }
 
     function showTime(Counter) {
-      var visitors = document.querySelectorAll('.leancloud_visitors');
-      var entries = [...visitors].map(element => {
+      const visitors = document.querySelectorAll('.leancloud_visitors');
+      const entries = [...visitors].map(element => {
         return decodeURI(element.id);
       });
 
@@ -932,7 +971,7 @@
         .then(response => response.json())
         .then(({ results }) => {
           for (let url of entries) {
-            let target = results.find(item => item.url === url);
+            const target = results.find(item => item.url === url);
             leancloudSelector(url).innerText = target ? target.time : 0;
           }
         })
@@ -941,9 +980,9 @@
         });
     }
 
-    let { app_id, app_key, server_url } = {"enable":true,"app_id":"ODqTjpX8O5RTTQ9Ne0PQLrl6-gzGzoHsz","app_key":"yEmutbTLiTig6Kz3VLiocpgs","server_url":null,"security":false};
+    const { app_id, app_key, server_url } = {"enable":true,"app_id":"ODqTjpX8O5RTTQ9Ne0PQLrl6-gzGzoHsz","app_key":"yEmutbTLiTig6Kz3VLiocpgs","server_url":null,"security":false};
     function fetchData(api_server) {
-      var Counter = (method, url, data) => {
+      const Counter = (method, url, data) => {
         return fetch(`${api_server}/1.1${url}`, {
           method,
           headers: {
@@ -962,7 +1001,7 @@
       }
     }
 
-    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+    const api_server = app_id.slice(-9) === '-MdYXbMMI' ? `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com` : server_url;
 
     if (api_server) {
       fetchData(api_server);
@@ -977,80 +1016,12 @@
 </script>
 
 
-      </div>
-    </footer>
-  </div>
 
-  
-  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
-  <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-  <script src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js"></script>
-  <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.min.js"></script>
-  <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-  <script>
-  if (CONFIG.page.isPost) {
-    wpac_init = window.wpac_init || [];
-    wpac_init.push({
-      widget: 'Rating',
-      id    : 22619,
-      el    : 'wpac-rating',
-      color : 'ff9800'
-    });
-    (function() {
-      if ('WIDGETPACK_LOADED' in window) return;
-      WIDGETPACK_LOADED = true;
-      var mc = document.createElement('script');
-      mc.type = 'text/javascript';
-      mc.async = true;
-      mc.src = '//embed.widgetpack.com/widget.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
-    })();
-  }
-  </script>
-
-  
-<script src="/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
 
 <script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+NexT.utils.loadComments('#gitalk-container', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
     var gitalk = new Gitalk({
       clientID    : '165f4a18451139d1962f',
       clientSecret: 'd950ed9736a4364215fa554442d01f8e89dd92a8',

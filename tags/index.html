@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 5.3.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -13,17 +15,16 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
+
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
   <link rel="stylesheet" href="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.css">
-  <link rel="stylesheet" href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css">
-  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
 
-<script id="hexo-configurations">
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"hooray.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"hooray.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.1.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-
-  <meta property="og:type" content="website">
+<meta property="og:type" content="website">
 <meta property="og:title" content="９９３５">
 <meta property="og:url" content="https://hooray.github.io/tags/index.html">
 <meta property="og:site_name" content="９９３５">
@@ -31,27 +32,14 @@
 <meta property="article:published_time" content="2019-10-08T13:55:25.876Z">
 <meta property="article:modified_time" content="2019-10-08T13:55:25.876Z">
 <meta property="article:author" content="Hooray">
-<meta property="article:tag" content="web">
-<meta property="article:tag" content=" 前端">
-<meta property="article:tag" content=" web前端">
-<meta property="article:tag" content=" html">
-<meta property="article:tag" content=" html5">
-<meta property="article:tag" content=" css">
-<meta property="article:tag" content=" css3">
-<meta property="article:tag" content=" js">
-<meta property="article:tag" content=" javascript">
-<meta property="article:tag" content=" vue">
-<meta property="article:tag" content=" 技术">
-<meta property="article:tag" content=" 程序员">
-<meta property="article:tag" content=" hooray">
-<meta property="article:tag" content=" 代码小睿">
-<meta property="article:tag" content=" 胡尐睿丶">
+<meta property="article:tag" content="web, 前端, web前端, html, html5, css, css3, js, javascript, vue, 技术, 程序员, hooray, 代码小睿, 胡尐睿丶">
 <meta name="twitter:card" content="summary">
+
 
 <link rel="canonical" href="https://hooray.github.io/tags/">
 
 
-<script id="page-configurations">
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -60,61 +48,69 @@
     lang   : 'zh-CN'
   };
 </script>
-
-  <title>标签 | ９９３５
+<title>标签 | ９９３５
 </title>
   
 
 
 
-
-
-
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">９９３５</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">代码如诗</p>
   </div>
@@ -128,42 +124,41 @@
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-top">
 
-    <a href="/top/" rel="section"><i class="fa fa-fw fa-signal"></i>热门</a>
+    <a href="/top/" rel="section"><i class="fa fa-signal fa-fw"></i>热门</a>
 
   </li>
         <li class="menu-item menu-item-commonweal">
 
-    <a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -176,13 +171,12 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
+    <div class="popup search-popup"><div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
            placeholder="搜索..." spellcheck="false"
            type="search" class="search-input">
   </div>
@@ -190,9 +184,9 @@
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
 
@@ -200,105 +194,18 @@
   </div>
 
 </div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-  <div class="reading-progress-bar"></div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-  
-  
-
-          <div class="content page posts-expand">
-            
-
-    
-    
-    
-    <div class="post-block" lang="zh-CN">
-      <header class="post-header">
-
-<h1 class="post-title" itemprop="name headline">
-</h1>
-
-<div class="post-meta">
-  
-
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-              目前共计 113 个标签
-            </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/emit/" style="font-size: 12px; color: #ccc">$emit</a> <a href="/tags/Atom/" style="font-size: 12px; color: #ccc">Atom</a> <a href="/tags/ESLint/" style="font-size: 12px; color: #ccc">ESLint</a> <a href="/tags/ElementUI/" style="font-size: 12px; color: #ccc">ElementUI</a> <a href="/tags/Fantastic-admin/" style="font-size: 12px; color: #ccc">Fantastic-admin</a> <a href="/tags/Gulp/" style="font-size: 21px; color: #6f6f6f">Gulp</a> <a href="/tags/H5/" style="font-size: 12px; color: #ccc">H5</a> <a href="/tags/Hexo/" style="font-size: 12px; color: #ccc">Hexo</a> <a href="/tags/NexT/" style="font-size: 12px; color: #ccc">NexT</a> <a href="/tags/SKU/" style="font-size: 12px; color: #ccc">SKU</a> <a href="/tags/Shadowsocks/" style="font-size: 16.5px; color: #9d9d9d">Shadowsocks</a> <a href="/tags/Vue/" style="font-size: 30px; color: #111">Vue</a> <a href="/tags/VuePress/" style="font-size: 12px; color: #ccc">VuePress</a> <a href="/tags/Vue%E5%8A%A8%E6%80%81%E7%BB%84%E4%BB%B6/" style="font-size: 12px; color: #ccc">Vue动态组件</a> <a href="/tags/Vue%E7%BB%84%E4%BB%B6/" style="font-size: 21px; color: #6f6f6f">Vue组件</a> <a href="/tags/Vultr/" style="font-size: 12px; color: #ccc">Vultr</a> <a href="/tags/WeUI/" style="font-size: 12px; color: #ccc">WeUI</a> <a href="/tags/admin/" style="font-size: 12px; color: #ccc">admin</a> <a href="/tags/api/" style="font-size: 12px; color: #ccc">api</a> <a href="/tags/app/" style="font-size: 12px; color: #ccc">app</a> <a href="/tags/axios/" style="font-size: 12px; color: #ccc">axios</a> <a href="/tags/body%E6%A0%B7%E5%BC%8F/" style="font-size: 12px; color: #ccc">body样式</a> <a href="/tags/css3/" style="font-size: 16.5px; color: #9d9d9d">css3</a> <a href="/tags/docsify/" style="font-size: 16.5px; color: #9d9d9d">docsify</a> <a href="/tags/electron/" style="font-size: 16.5px; color: #9d9d9d">electron</a> <a href="/tags/element-ui/" style="font-size: 12px; color: #ccc">element-ui</a> <a href="/tags/flex/" style="font-size: 12px; color: #ccc">flex</a> <a href="/tags/flex%E5%B8%83%E5%B1%80/" style="font-size: 12px; color: #ccc">flex布局</a> <a href="/tags/git/" style="font-size: 16.5px; color: #9d9d9d">git</a> <a href="/tags/gulp-automation/" style="font-size: 16.5px; color: #9d9d9d">gulp-automation</a> <a href="/tags/hbuilder/" style="font-size: 16.5px; color: #9d9d9d">hbuilder</a> <a href="/tags/history/" style="font-size: 12px; color: #ccc">history</a> <a href="/tags/jQuery/" style="font-size: 12px; color: #ccc">jQuery</a> <a href="/tags/keep-alive/" style="font-size: 12px; color: #ccc">keep-alive</a> <a href="/tags/menu/" style="font-size: 12px; color: #ccc">menu</a> <a href="/tags/menuitem/" style="font-size: 12px; color: #ccc">menuitem</a> <a href="/tags/npm/" style="font-size: 12px; color: #ccc">npm</a> <a href="/tags/router/" style="font-size: 12px; color: #ccc">router</a> <a href="/tags/sessionStorage/" style="font-size: 12px; color: #ccc">sessionStorage</a> <a href="/tags/sprite/" style="font-size: 12px; color: #ccc">sprite</a> <a href="/tags/sync-settings/" style="font-size: 12px; color: #ccc">sync-settings</a> <a href="/tags/transform/" style="font-size: 12px; color: #ccc">transform</a> <a href="/tags/transition/" style="font-size: 12px; color: #ccc">transition</a> <a href="/tags/tray/" style="font-size: 12px; color: #ccc">tray</a> <a href="/tags/vue/" style="font-size: 25.5px; color: #404040">vue</a> <a href="/tags/vue-cli/" style="font-size: 12px; color: #ccc">vue cli</a> <a href="/tags/vue-cli/" style="font-size: 12px; color: #ccc">vue-cli</a> <a href="/tags/vue-element-admin/" style="font-size: 12px; color: #ccc">vue-element-admin</a> <a href="/tags/vue-router/" style="font-size: 21px; color: #6f6f6f">vue-router</a> <a href="/tags/vuex/" style="font-size: 12px; color: #ccc">vuex</a> <a href="/tags/vue%E7%BB%84%E4%BB%B6/" style="font-size: 12px; color: #ccc">vue组件</a> <a href="/tags/webapp/" style="font-size: 12px; color: #ccc">webapp</a> <a href="/tags/webpack/" style="font-size: 16.5px; color: #9d9d9d">webpack</a> <a href="/tags/webpack-spritesmith/" style="font-size: 12px; color: #ccc">webpack-spritesmith</a> <a href="/tags/%E4%B8%BB%E8%BF%9B%E7%A8%8B/" style="font-size: 12px; color: #ccc">主进程</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E6%A3%80%E6%B5%8B/" style="font-size: 12px; color: #ccc">代码检测</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC/" style="font-size: 12px; color: #ccc">代码风格</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E9%AB%98%E4%BA%AE/" style="font-size: 12px; color: #ccc">代码高亮</a> <a href="/tags/%E4%BC%A0%E9%80%92%E5%AF%B9%E8%B1%A1/" style="font-size: 12px; color: #ccc">传递对象</a> <a href="/tags/%E5%85%A8%E5%B1%80%E7%BB%84%E4%BB%B6/" style="font-size: 12px; color: #ccc">全局组件</a> <a href="/tags/%E5%88%86%E9%A1%B5/" style="font-size: 12px; color: #ccc">分页</a> <a href="/tags/%E5%8A%A8%E6%95%88/" style="font-size: 12px; color: #ccc">动效</a> <a href="/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 12px; color: #ccc">动画</a> <a href="/tags/%E5%8F%91%E5%B8%83/" style="font-size: 12px; color: #ccc">发布</a> <a href="/tags/%E5%90%8E%E5%8F%B0/" style="font-size: 16.5px; color: #9d9d9d">后台</a> <a href="/tags/%E5%90%8E%E5%8F%B0%E6%A1%86%E6%9E%B6/" style="font-size: 12px; color: #ccc">后台框架</a> <a href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F%E8%AE%BE%E8%AE%A1/" style="font-size: 16.5px; color: #9d9d9d">响应式设计</a> <a href="/tags/%E5%A4%87%E4%BB%BD/" style="font-size: 12px; color: #ccc">备份</a> <a href="/tags/%E5%A4%9A%E6%80%81/" style="font-size: 12px; color: #ccc">多态</a> <a href="/tags/%E5%AF%BC%E8%88%AA/" style="font-size: 12px; color: #ccc">导航</a> <a href="/tags/%E5%B0%81%E8%A3%85/" style="font-size: 12px; color: #ccc">封装</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 12px; color: #ccc">小程序</a> <a href="/tags/%E5%B9%B4%E7%BB%88%E5%B0%8F%E7%BB%93/" style="font-size: 12px; color: #ccc">年终小结</a> <a href="/tags/%E6%89%93%E5%8C%85/" style="font-size: 16.5px; color: #9d9d9d">打包</a> <a href="/tags/%E6%8E%A5%E5%8F%A3/" style="font-size: 12px; color: #ccc">接口</a> <a href="/tags/%E6%96%87%E6%A1%A3/" style="font-size: 12px; color: #ccc">文档</a> <a href="/tags/%E6%97%A0%E8%BE%B9%E6%A1%86%E7%AA%97%E5%8F%A3/" style="font-size: 12px; color: #ccc">无边框窗口</a> <a href="/tags/%E6%98%BE%E7%A4%BA%E5%99%A8/" style="font-size: 12px; color: #ccc">显示器</a> <a href="/tags/%E6%9D%83%E9%99%90/" style="font-size: 16.5px; color: #9d9d9d">权限</a> <a href="/tags/%E6%B3%A8%E5%86%8C/" style="font-size: 12px; color: #ccc">注册</a> <a href="/tags/%E6%B8%B2%E6%9F%93%E8%BF%9B%E7%A8%8B/" style="font-size: 12px; color: #ccc">渲染进程</a> <a href="/tags/%E6%BB%9A%E5%8A%A8%E5%8A%A0%E8%BD%BD/" style="font-size: 12px; color: #ccc">滚动加载</a> <a href="/tags/%E7%83%AD%E6%9B%B4%E6%96%B0/" style="font-size: 12px; color: #ccc">热更新</a> <a href="/tags/%E7%94%B5%E5%95%86/" style="font-size: 12px; color: #ccc">电商</a> <a href="/tags/%E7%94%B5%E8%84%91%E6%A1%8C/" style="font-size: 12px; color: #ccc">电脑桌</a> <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" style="font-size: 16.5px; color: #9d9d9d">科学上网</a> <a href="/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/" style="font-size: 12px; color: #ccc">移动端</a> <a href="/tags/%E7%AA%97%E5%8F%A3%E6%8B%96%E5%8A%A8/" style="font-size: 12px; color: #ccc">窗口拖动</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 12px; color: #ccc">算法</a> <a href="/tags/%E7%B2%BE%E7%81%B5%E5%9B%BE/" style="font-size: 12px; color: #ccc">精灵图</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%89%98%E7%9B%98/" style="font-size: 12px; color: #ccc">系统托盘</a> <a href="/tags/%E7%BB%84%E4%BB%B6/" style="font-size: 21px; color: #6f6f6f">组件</a> <a href="/tags/%E7%BD%91%E4%BB%B6/" style="font-size: 12px; color: #ccc">网件</a> <a href="/tags/%E7%BF%BB%E5%A2%99/" style="font-size: 16.5px; color: #9d9d9d">翻墙</a> <a href="/tags/%E8%84%9A%E6%89%8B%E6%9E%B6/" style="font-size: 12px; color: #ccc">脚手架</a> <a href="/tags/%E8%87%AA%E5%8A%A8/" style="font-size: 12px; color: #ccc">自动</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E4%BF%AE%E5%A4%8D/" style="font-size: 12px; color: #ccc">自动修复</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 21px; color: #6f6f6f">自动化</a> <a href="/tags/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8F%82%E6%95%B0/" style="font-size: 12px; color: #ccc">自定义参数</a> <a href="/tags/%E8%8F%9C%E5%8D%95/" style="font-size: 12px; color: #ccc">菜单</a> <a href="/tags/%E8%A7%92%E8%89%B2/" style="font-size: 12px; color: #ccc">角色</a> <a href="/tags/%E8%B7%AF%E7%94%B1/" style="font-size: 12px; color: #ccc">路由</a> <a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 12px; color: #ccc">路由器</a> <a href="/tags/%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1/" style="font-size: 12px; color: #ccc">进程通信</a> <a href="/tags/%E9%80%9A%E8%AE%AF%E5%BD%95/" style="font-size: 12px; color: #ccc">通讯录</a> <a href="/tags/%E9%89%B4%E6%9D%83/" style="font-size: 12px; color: #ccc">鉴权</a> <a href="/tags/%E9%94%AE%E7%9B%98/" style="font-size: 12px; color: #ccc">键盘</a> <a href="/tags/%E9%9B%AA%E7%A2%A7%E5%9B%BE/" style="font-size: 12px; color: #ccc">雪碧图</a> <a href="/tags/%E9%9F%B3%E7%AE%B1/" style="font-size: 12px; color: #ccc">音箱</a> <a href="/tags/%E9%A1%B5%E9%9D%A2%E5%88%B7%E6%96%B0/" style="font-size: 12px; color: #ccc">页面刷新</a> <a href="/tags/%E9%A1%B5%E9%9D%A2%E7%BC%93%E5%AD%98/" style="font-size: 12px; color: #ccc">页面缓存</a> <a href="/tags/%E9%A1%B5%E9%9D%A2%E8%B7%B3%E8%BD%AC/" style="font-size: 16.5px; color: #9d9d9d">页面跳转</a> <a href="/tags/%E9%BC%A0%E6%A0%87/" style="font-size: 12px; color: #ccc">鼠标</a>
-            </div>
-          </div>
         
-      </div>
-      
-      
-      
-    </div>
-    
-
-    
-    
-    
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
   
   <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
   </div>
 
   <aside class="sidebar">
-    <div class="sidebar-inner">
 
-      <ul class="sidebar-nav motion-element">
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
         </li>
@@ -307,24 +214,25 @@
         </li>
       </ul>
 
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-      </div>
-      <!--/noindex-->
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+        </section>
+        <!--/noindex-->
 
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Hooray"
       src="/avatar.jpg">
   <p class="site-author-name" itemprop="name">Hooray</p>
   <div class="site-description" itemprop="description"></div>
 </div>
-<div class="site-state-wrap motion-element">
+<div class="site-state-wrap site-overview-item animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-count">47</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -337,41 +245,40 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">113</span>
+        <span class="site-state-item-count">115</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author motion-element">
+  <div class="links-of-author site-overview-item animated">
       <span class="links-of-author-item">
-        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-qq fa-fw"></i>QQ</a>
       </span>
   </div>
 
 
-  <div class="links-of-blogroll motion-element">
-    <div class="links-of-blogroll-title">
-      <i class="fa fa-fw fa-link"></i>
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
       Links
     </div>
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
-          <a href="http://hoorayos.com/" title="http:&#x2F;&#x2F;hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
+          <a href="https://gitee.com/hooray/fantastic-admin" title="https:&#x2F;&#x2F;gitee.com&#x2F;hooray&#x2F;fantastic-admin" rel="noopener" target="_blank">Fantastic-admin - 中后台管理系统模版</a>
         </li>
         <li class="links-of-blogroll-item">
           <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue项目模版</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/hooray/fantastic-admin" title="https:&#x2F;&#x2F;gitee.com&#x2F;hooray&#x2F;fantastic-admin" rel="noopener" target="_blank">Fantastic-admin - 中后台管理系统模版</a>
+          <a href="https://hooray.github.io/vue-sku-form" title="https:&#x2F;&#x2F;hooray.github.io&#x2F;vue-sku-form">vue-sku-form - 电商 SKU 表单配置组件</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/hooray/hoorayos" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;hoorayos" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
         </li>
         <li class="links-of-blogroll-item">
           <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://hooray.github.io/vue-sku-form" title="https:&#x2F;&#x2F;hooray.github.io&#x2F;vue-sku-form">vue-sku-form - 电商 SKU 表单配置组件</a>
         </li>
         <li class="links-of-blogroll-item">
           <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
@@ -382,70 +289,181 @@
     </ul>
   </div>
 
+        </section>
       </div>
-
     </div>
   </aside>
-  <div id="sidebar-dimmer"></div>
+  <div class="sidebar-dimmer"></div>
 
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner page posts-expand">
+  
+  
+
+
+    
+    
+    
+    <div class="post-block" lang="zh-CN"><header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">
+</h1>
+
+<div class="post-meta-container">
+</div>
+
+</header>
+
+      
+      
+      <div class="post-body"><div class="tag-cloud">
+  <div class="tag-cloud-title">
+    目前共计 115 个标签
+  </div>
+  <div class="tag-cloud-tags">
+    <a href="/tags/emit/" style="font-size: 12px;" class="tag-cloud-0">$emit</a> <a href="/tags/Atom/" style="font-size: 12px;" class="tag-cloud-0">Atom</a> <a href="/tags/ESLint/" style="font-size: 12px;" class="tag-cloud-0">ESLint</a> <a href="/tags/ElementUI/" style="font-size: 12px;" class="tag-cloud-0">ElementUI</a> <a href="/tags/Fantastic-admin/" style="font-size: 12px;" class="tag-cloud-0">Fantastic-admin</a> <a href="/tags/Gulp/" style="font-size: 19.2px;" class="tag-cloud-4">Gulp</a> <a href="/tags/H5/" style="font-size: 12px;" class="tag-cloud-0">H5</a> <a href="/tags/Hexo/" style="font-size: 12px;" class="tag-cloud-0">Hexo</a> <a href="/tags/NexT/" style="font-size: 12px;" class="tag-cloud-0">NexT</a> <a href="/tags/SKU/" style="font-size: 12px;" class="tag-cloud-0">SKU</a> <a href="/tags/Shadowsocks/" style="font-size: 15.6px;" class="tag-cloud-2">Shadowsocks</a> <a href="/tags/Vue/" style="font-size: 30px;" class="tag-cloud-10">Vue</a> <a href="/tags/VuePress/" style="font-size: 12px;" class="tag-cloud-0">VuePress</a> <a href="/tags/Vue%E5%8A%A8%E6%80%81%E7%BB%84%E4%BB%B6/" style="font-size: 12px;" class="tag-cloud-0">Vue动态组件</a> <a href="/tags/Vue%E7%BB%84%E4%BB%B6/" style="font-size: 19.2px;" class="tag-cloud-4">Vue组件</a> <a href="/tags/Vultr/" style="font-size: 12px;" class="tag-cloud-0">Vultr</a> <a href="/tags/WeUI/" style="font-size: 12px;" class="tag-cloud-0">WeUI</a> <a href="/tags/admin/" style="font-size: 12px;" class="tag-cloud-0">admin</a> <a href="/tags/api/" style="font-size: 12px;" class="tag-cloud-0">api</a> <a href="/tags/app/" style="font-size: 12px;" class="tag-cloud-0">app</a> <a href="/tags/axios/" style="font-size: 12px;" class="tag-cloud-0">axios</a> <a href="/tags/body%E6%A0%B7%E5%BC%8F/" style="font-size: 12px;" class="tag-cloud-0">body样式</a> <a href="/tags/css3/" style="font-size: 15.6px;" class="tag-cloud-2">css3</a> <a href="/tags/docsify/" style="font-size: 15.6px;" class="tag-cloud-2">docsify</a> <a href="/tags/electron/" style="font-size: 15.6px;" class="tag-cloud-2">electron</a> <a href="/tags/element-ui/" style="font-size: 12px;" class="tag-cloud-0">element-ui</a> <a href="/tags/flex/" style="font-size: 12px;" class="tag-cloud-0">flex</a> <a href="/tags/flex%E5%B8%83%E5%B1%80/" style="font-size: 12px;" class="tag-cloud-0">flex布局</a> <a href="/tags/git/" style="font-size: 15.6px;" class="tag-cloud-2">git</a> <a href="/tags/gulp-automation/" style="font-size: 15.6px;" class="tag-cloud-2">gulp-automation</a> <a href="/tags/hbuilder/" style="font-size: 15.6px;" class="tag-cloud-2">hbuilder</a> <a href="/tags/history/" style="font-size: 12px;" class="tag-cloud-0">history</a> <a href="/tags/jQuery/" style="font-size: 12px;" class="tag-cloud-0">jQuery</a> <a href="/tags/keep-alive/" style="font-size: 12px;" class="tag-cloud-0">keep-alive</a> <a href="/tags/menu/" style="font-size: 12px;" class="tag-cloud-0">menu</a> <a href="/tags/menuitem/" style="font-size: 12px;" class="tag-cloud-0">menuitem</a> <a href="/tags/npm/" style="font-size: 12px;" class="tag-cloud-0">npm</a> <a href="/tags/router/" style="font-size: 12px;" class="tag-cloud-0">router</a> <a href="/tags/sessionStorage/" style="font-size: 12px;" class="tag-cloud-0">sessionStorage</a> <a href="/tags/sprite/" style="font-size: 12px;" class="tag-cloud-0">sprite</a> <a href="/tags/sync-settings/" style="font-size: 12px;" class="tag-cloud-0">sync-settings</a> <a href="/tags/transform/" style="font-size: 12px;" class="tag-cloud-0">transform</a> <a href="/tags/transition/" style="font-size: 12px;" class="tag-cloud-0">transition</a> <a href="/tags/tray/" style="font-size: 12px;" class="tag-cloud-0">tray</a> <a href="/tags/vue/" style="font-size: 26.4px;" class="tag-cloud-8">vue</a> <a href="/tags/vue-cli/" style="font-size: 12px;" class="tag-cloud-0">vue cli</a> <a href="/tags/vue-cli/" style="font-size: 12px;" class="tag-cloud-0">vue-cli</a> <a href="/tags/vue-element-admin/" style="font-size: 12px;" class="tag-cloud-0">vue-element-admin</a> <a href="/tags/vue-router/" style="font-size: 22.8px;" class="tag-cloud-6">vue-router</a> <a href="/tags/vuex/" style="font-size: 12px;" class="tag-cloud-0">vuex</a> <a href="/tags/vue%E7%BB%84%E4%BB%B6/" style="font-size: 12px;" class="tag-cloud-0">vue组件</a> <a href="/tags/webapp/" style="font-size: 12px;" class="tag-cloud-0">webapp</a> <a href="/tags/webpack/" style="font-size: 15.6px;" class="tag-cloud-2">webpack</a> <a href="/tags/webpack-spritesmith/" style="font-size: 12px;" class="tag-cloud-0">webpack-spritesmith</a> <a href="/tags/%E4%B8%BB%E8%BF%9B%E7%A8%8B/" style="font-size: 12px;" class="tag-cloud-0">主进程</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E6%A3%80%E6%B5%8B/" style="font-size: 12px;" class="tag-cloud-0">代码检测</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC/" style="font-size: 12px;" class="tag-cloud-0">代码风格</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E9%AB%98%E4%BA%AE/" style="font-size: 12px;" class="tag-cloud-0">代码高亮</a> <a href="/tags/%E4%BC%A0%E9%80%92%E5%AF%B9%E8%B1%A1/" style="font-size: 12px;" class="tag-cloud-0">传递对象</a> <a href="/tags/%E5%85%A8%E5%B1%80%E7%BB%84%E4%BB%B6/" style="font-size: 12px;" class="tag-cloud-0">全局组件</a> <a href="/tags/%E5%88%86%E9%A1%B5/" style="font-size: 12px;" class="tag-cloud-0">分页</a> <a href="/tags/%E5%8A%A8%E6%95%88/" style="font-size: 12px;" class="tag-cloud-0">动效</a> <a href="/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 12px;" class="tag-cloud-0">动画</a> <a href="/tags/%E5%8F%91%E5%B8%83/" style="font-size: 12px;" class="tag-cloud-0">发布</a> <a href="/tags/%E5%90%8E%E5%8F%B0/" style="font-size: 15.6px;" class="tag-cloud-2">后台</a> <a href="/tags/%E5%90%8E%E5%8F%B0%E6%A1%86%E6%9E%B6/" style="font-size: 12px;" class="tag-cloud-0">后台框架</a> <a href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F%E8%AE%BE%E8%AE%A1/" style="font-size: 15.6px;" class="tag-cloud-2">响应式设计</a> <a href="/tags/%E5%A4%87%E4%BB%BD/" style="font-size: 12px;" class="tag-cloud-0">备份</a> <a href="/tags/%E5%A4%9A%E6%80%81/" style="font-size: 12px;" class="tag-cloud-0">多态</a> <a href="/tags/%E5%A4%9A%E7%BA%A7%E8%B7%AF%E7%94%B1%E7%BC%93%E5%AD%98/" style="font-size: 12px;" class="tag-cloud-0">多级路由缓存</a> <a href="/tags/%E5%AF%BC%E8%88%AA/" style="font-size: 12px;" class="tag-cloud-0">导航</a> <a href="/tags/%E5%B0%81%E8%A3%85/" style="font-size: 12px;" class="tag-cloud-0">封装</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 12px;" class="tag-cloud-0">小程序</a> <a href="/tags/%E5%B9%B4%E7%BB%88%E5%B0%8F%E7%BB%93/" style="font-size: 12px;" class="tag-cloud-0">年终小结</a> <a href="/tags/%E6%89%93%E5%8C%85/" style="font-size: 15.6px;" class="tag-cloud-2">打包</a> <a href="/tags/%E6%8E%A5%E5%8F%A3/" style="font-size: 12px;" class="tag-cloud-0">接口</a> <a href="/tags/%E6%96%87%E6%A1%A3/" style="font-size: 12px;" class="tag-cloud-0">文档</a> <a href="/tags/%E6%97%A0%E8%BE%B9%E6%A1%86%E7%AA%97%E5%8F%A3/" style="font-size: 12px;" class="tag-cloud-0">无边框窗口</a> <a href="/tags/%E6%98%BE%E7%A4%BA%E5%99%A8/" style="font-size: 12px;" class="tag-cloud-0">显示器</a> <a href="/tags/%E6%9D%83%E9%99%90/" style="font-size: 15.6px;" class="tag-cloud-2">权限</a> <a href="/tags/%E6%B3%A8%E5%86%8C/" style="font-size: 12px;" class="tag-cloud-0">注册</a> <a href="/tags/%E6%B8%B2%E6%9F%93%E8%BF%9B%E7%A8%8B/" style="font-size: 12px;" class="tag-cloud-0">渲染进程</a> <a href="/tags/%E6%BB%9A%E5%8A%A8%E5%8A%A0%E8%BD%BD/" style="font-size: 12px;" class="tag-cloud-0">滚动加载</a> <a href="/tags/%E7%83%AD%E6%9B%B4%E6%96%B0/" style="font-size: 12px;" class="tag-cloud-0">热更新</a> <a href="/tags/%E7%94%B5%E5%95%86/" style="font-size: 12px;" class="tag-cloud-0">电商</a> <a href="/tags/%E7%94%B5%E8%84%91%E6%A1%8C/" style="font-size: 12px;" class="tag-cloud-0">电脑桌</a> <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" style="font-size: 15.6px;" class="tag-cloud-2">科学上网</a> <a href="/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/" style="font-size: 12px;" class="tag-cloud-0">移动端</a> <a href="/tags/%E7%AA%97%E5%8F%A3%E6%8B%96%E5%8A%A8/" style="font-size: 12px;" class="tag-cloud-0">窗口拖动</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 12px;" class="tag-cloud-0">算法</a> <a href="/tags/%E7%B2%BE%E7%81%B5%E5%9B%BE/" style="font-size: 12px;" class="tag-cloud-0">精灵图</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%89%98%E7%9B%98/" style="font-size: 12px;" class="tag-cloud-0">系统托盘</a> <a href="/tags/%E7%BB%84%E4%BB%B6/" style="font-size: 19.2px;" class="tag-cloud-4">组件</a> <a href="/tags/%E7%BC%93%E5%AD%98/" style="font-size: 12px;" class="tag-cloud-0">缓存</a> <a href="/tags/%E7%BD%91%E4%BB%B6/" style="font-size: 12px;" class="tag-cloud-0">网件</a> <a href="/tags/%E7%BF%BB%E5%A2%99/" style="font-size: 15.6px;" class="tag-cloud-2">翻墙</a> <a href="/tags/%E8%84%9A%E6%89%8B%E6%9E%B6/" style="font-size: 12px;" class="tag-cloud-0">脚手架</a> <a href="/tags/%E8%87%AA%E5%8A%A8/" style="font-size: 12px;" class="tag-cloud-0">自动</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E4%BF%AE%E5%A4%8D/" style="font-size: 12px;" class="tag-cloud-0">自动修复</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 19.2px;" class="tag-cloud-4">自动化</a> <a href="/tags/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8F%82%E6%95%B0/" style="font-size: 12px;" class="tag-cloud-0">自定义参数</a> <a href="/tags/%E8%8F%9C%E5%8D%95/" style="font-size: 12px;" class="tag-cloud-0">菜单</a> <a href="/tags/%E8%A7%92%E8%89%B2/" style="font-size: 12px;" class="tag-cloud-0">角色</a> <a href="/tags/%E8%B7%AF%E7%94%B1/" style="font-size: 15.6px;" class="tag-cloud-2">路由</a> <a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 12px;" class="tag-cloud-0">路由器</a> <a href="/tags/%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1/" style="font-size: 12px;" class="tag-cloud-0">进程通信</a> <a href="/tags/%E9%80%9A%E8%AE%AF%E5%BD%95/" style="font-size: 12px;" class="tag-cloud-0">通讯录</a> <a href="/tags/%E9%89%B4%E6%9D%83/" style="font-size: 12px;" class="tag-cloud-0">鉴权</a> <a href="/tags/%E9%94%AE%E7%9B%98/" style="font-size: 12px;" class="tag-cloud-0">键盘</a> <a href="/tags/%E9%9B%AA%E7%A2%A7%E5%9B%BE/" style="font-size: 12px;" class="tag-cloud-0">雪碧图</a> <a href="/tags/%E9%9F%B3%E7%AE%B1/" style="font-size: 12px;" class="tag-cloud-0">音箱</a> <a href="/tags/%E9%A1%B5%E9%9D%A2%E5%88%B7%E6%96%B0/" style="font-size: 12px;" class="tag-cloud-0">页面刷新</a> <a href="/tags/%E9%A1%B5%E9%9D%A2%E7%BC%93%E5%AD%98/" style="font-size: 12px;" class="tag-cloud-0">页面缓存</a> <a href="/tags/%E9%A1%B5%E9%9D%A2%E8%B7%B3%E8%BD%AC/" style="font-size: 15.6px;" class="tag-cloud-2">页面跳转</a> <a href="/tags/%E9%BC%A0%E6%A0%87/" style="font-size: 12px;" class="tag-cloud-0">鼠标</a>
+  </div>
+</div>
 
       </div>
-    </main>
+      
+      
+      
+    </div>
 
-    <footer class="footer">
-      <div class="footer-inner">
-        
+    
+    
 
-        
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
 
 <div class="copyright">
-  
   &copy; 2017 – 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Hooray</span>
-    <span class="post-meta-divider">|</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
     <span class="post-meta-item-icon">
-      <i class="fa fa-area-chart"></i>
+      <i class="fa fa-chart-line"></i>
     </span>
-      <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">139k</span>
-    <span class="post-meta-divider">|</span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">152k</span>
+  </span>
+  <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:07</span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:18</span>
+  </span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
-  </div>
-
-        
 <div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
       <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
+        <i class="user"></i>
       </span>
       <span class="site-uv" title="总访客量">
         <span id="busuanzi_value_site_uv"></span>
       </span>
     </span>
-    <span class="post-meta-divider">|</span>
     <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
       <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
+        <i class="eye"></i>
       </span>
       <span class="site-pv" title="总访问量">
         <span id="busuanzi_value_site_pv"></span>
       </span>
     </span>
 </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 22619,
+      el    : 'wpac-rating',
+      color : 'ff9800'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+<script src="/js/local-search.js"></script>
 
 
 
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
@@ -457,15 +475,15 @@
     }
 
     function addCount(Counter) {
-      var visitors = document.querySelector('.leancloud_visitors');
-      var url = decodeURI(visitors.id);
-      var title = visitors.dataset.flagTitle;
+      const visitors = document.querySelector('.leancloud_visitors');
+      const url = decodeURI(visitors.id);
+      const title = visitors.dataset.flagTitle;
 
       Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
         .then(response => response.json())
         .then(({ results }) => {
           if (results.length > 0) {
-            var counter = results[0];
+            const counter = results[0];
             leancloudSelector(url).innerText = counter.time + 1;
             Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
               .catch(error => {
@@ -488,8 +506,8 @@
     }
 
     function showTime(Counter) {
-      var visitors = document.querySelectorAll('.leancloud_visitors');
-      var entries = [...visitors].map(element => {
+      const visitors = document.querySelectorAll('.leancloud_visitors');
+      const entries = [...visitors].map(element => {
         return decodeURI(element.id);
       });
 
@@ -497,7 +515,7 @@
         .then(response => response.json())
         .then(({ results }) => {
           for (let url of entries) {
-            let target = results.find(item => item.url === url);
+            const target = results.find(item => item.url === url);
             leancloudSelector(url).innerText = target ? target.time : 0;
           }
         })
@@ -506,9 +524,9 @@
         });
     }
 
-    let { app_id, app_key, server_url } = {"enable":true,"app_id":"ODqTjpX8O5RTTQ9Ne0PQLrl6-gzGzoHsz","app_key":"yEmutbTLiTig6Kz3VLiocpgs","server_url":null,"security":false};
+    const { app_id, app_key, server_url } = {"enable":true,"app_id":"ODqTjpX8O5RTTQ9Ne0PQLrl6-gzGzoHsz","app_key":"yEmutbTLiTig6Kz3VLiocpgs","server_url":null,"security":false};
     function fetchData(api_server) {
-      var Counter = (method, url, data) => {
+      const Counter = (method, url, data) => {
         return fetch(`${api_server}/1.1${url}`, {
           method,
           headers: {
@@ -527,7 +545,7 @@
       }
     }
 
-    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+    const api_server = app_id.slice(-9) === '-MdYXbMMI' ? `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com` : server_url;
 
     if (api_server) {
       fetchData(api_server);
@@ -542,74 +560,6 @@
 </script>
 
 
-      </div>
-    </footer>
-  </div>
-
-  
-  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
-  <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-  <script src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js"></script>
-  <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.min.js"></script>
-  <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-  <script>
-  if (CONFIG.page.isPost) {
-    wpac_init = window.wpac_init || [];
-    wpac_init.push({
-      widget: 'Rating',
-      id    : 22619,
-      el    : 'wpac-rating',
-      color : 'ff9800'
-    });
-    (function() {
-      if ('WIDGETPACK_LOADED' in window) return;
-      WIDGETPACK_LOADED = true;
-      var mc = document.createElement('script');
-      mc.type = 'text/javascript';
-      mc.async = true;
-      mc.src = '//embed.widgetpack.com/widget.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
-    })();
-  }
-  </script>
-
-  
-<script src="/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
 
 
 </body>

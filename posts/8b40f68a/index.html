@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 5.3.0">
+
+
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -13,17 +15,16 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
+
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
   <link rel="stylesheet" href="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.css">
-  <link rel="stylesheet" href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css">
-  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
 
-<script id="hexo-configurations">
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"hooray.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"hooray.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.1.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-
-  <meta name="description" content="首先申明，我是极其反对那种“牛逼的大神用记事本也能写代码”的论调。我们写代码是为了创造有价值的东西，而不是单纯为了炫技。 那在开发的过程中，如何提高我们的编码效率和能力才是最主要的，我经常会看到一些新人即便用了很好的工具，但效率还是很慢，不会装插件，不熟悉快捷键。 俗话说 工欲善其事，必先利其器 ，今天就趁春节假期最后一天，整理了一下我的开发工具以及一些使用心得，希望能对大家有所帮助。">
+<meta name="description" content="首先申明，我是极其反对那种“牛逼的大神用记事本也能写代码”的论调。我们写代码是为了创造有价值的东西，而不是单纯为了炫技。 那在开发的过程中，如何提高我们的编码效率和能力才是最主要的，我经常会看到一些新人即便用了很好的工具，但效率还是很慢，不会装插件，不熟悉快捷键。 俗话说 工欲善其事，必先利其器 ，今天就趁春节假期最后一天，整理了一下我的开发工具以及一些使用心得，希望能对大家有所帮助。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="我的个人前端开发工具整理">
 <meta property="og:url" content="https://hooray.github.io/posts/8b40f68a/index.html">
@@ -33,27 +34,14 @@
 <meta property="article:published_time" content="2018-02-21T16:24:40.000Z">
 <meta property="article:modified_time" content="2019-10-08T13:55:25.872Z">
 <meta property="article:author" content="Hooray">
-<meta property="article:tag" content="web">
-<meta property="article:tag" content=" 前端">
-<meta property="article:tag" content=" web前端">
-<meta property="article:tag" content=" html">
-<meta property="article:tag" content=" html5">
-<meta property="article:tag" content=" css">
-<meta property="article:tag" content=" css3">
-<meta property="article:tag" content=" js">
-<meta property="article:tag" content=" javascript">
-<meta property="article:tag" content=" vue">
-<meta property="article:tag" content=" 技术">
-<meta property="article:tag" content=" 程序员">
-<meta property="article:tag" content=" hooray">
-<meta property="article:tag" content=" 代码小睿">
-<meta property="article:tag" content=" 胡尐睿丶">
+<meta property="article:tag" content="web, 前端, web前端, html, html5, css, css3, js, javascript, vue, 技术, 程序员, hooray, 代码小睿, 胡尐睿丶">
 <meta name="twitter:card" content="summary">
+
 
 <link rel="canonical" href="https://hooray.github.io/posts/8b40f68a/">
 
 
-<script id="page-configurations">
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -62,60 +50,68 @@
     lang   : 'zh-CN'
   };
 </script>
-
-  <title>我的个人前端开发工具整理 | ９９３５</title>
+<title>我的个人前端开发工具整理 | ９９３５</title>
   
-
-
-
 
 
 
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">９９３５</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">代码如诗</p>
   </div>
@@ -129,42 +125,41 @@
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-top">
 
-    <a href="/top/" rel="section"><i class="fa fa-fw fa-signal"></i>热门</a>
+    <a href="/top/" rel="section"><i class="fa fa-signal fa-fw"></i>热门</a>
 
   </li>
         <li class="menu-item menu-item-commonweal">
 
-    <a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -177,13 +172,12 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
+    <div class="popup search-popup"><div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
            placeholder="搜索..." spellcheck="false"
            type="search" class="search-input">
   </div>
@@ -191,9 +185,9 @@
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
 
@@ -201,6 +195,109 @@
   </div>
 
 </div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%BE%91%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">编辑器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Atom"><span class="nav-number">1.1.</span> <span class="nav-text">Atom</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HBuilder"><span class="nav-number">1.2.</span> <span class="nav-text">HBuilder</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GIT-%E7%AE%A1%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">GIT 管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sourcetree"><span class="nav-number">2.1.</span> <span class="nav-text">Sourcetree</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chrome"><span class="nav-number">3.</span> <span class="nav-text">Chrome</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E5%AE%83"><span class="nav-number">4.</span> <span class="nav-text">其它</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Postman"><span class="nav-number">4.1.</span> <span class="nav-text">Postman</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Snipaste"><span class="nav-number">4.2.</span> <span class="nav-text">Snipaste</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BootCDN"><span class="nav-number">4.3.</span> <span class="nav-text">BootCDN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Iconfont-%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E7%9F%A2%E9%87%8F%E5%9B%BE%E6%A0%87%E5%BA%93"><span class="nav-number">4.4.</span> <span class="nav-text">Iconfont - 阿里巴巴矢量图标库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Slides"><span class="nav-number">4.5.</span> <span class="nav-text">Slides</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%90%8E"><span class="nav-number">5.</span> <span class="nav-text">最后</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hooray"
+      src="/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Hooray</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">115</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-qq fa-fw"></i>QQ</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://gitee.com/hooray/fantastic-admin" title="https:&#x2F;&#x2F;gitee.com&#x2F;hooray&#x2F;fantastic-admin" rel="noopener" target="_blank">Fantastic-admin - 中后台管理系统模版</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue项目模版</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hooray.github.io/vue-sku-form" title="https:&#x2F;&#x2F;hooray.github.io&#x2F;vue-sku-form">vue-sku-form - 电商 SKU 表单配置组件</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/hooray/hoorayos" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;hoorayos" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/hooray/vue-clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
+        </li>
+    </ul>
+  </div>
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
     </header>
 
     
@@ -210,19 +307,22 @@
   </div>
   <div class="reading-progress-bar"></div>
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content post posts-expand">
-            
+    <div class="main-inner post posts-expand">
 
-    
+
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://hooray.github.io/posts/8b40f68a/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -239,54 +339,58 @@
           我的个人前端开发工具整理
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2018-02-22 00:24:40" itemprop="dateCreated datePublished" datetime="2018-02-22T00:24:40+08:00">2018-02-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-08 21:55:25" itemprop="dateModified" datetime="2019-10-08T21:55:25+08:00">2019-10-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">开发工具</span></a>
-                </span>
-            </span>
+      <time title="创建时间：2018-02-22 00:24:40" itemprop="dateCreated datePublished" datetime="2018-02-22T00:24:40+08:00">2018-02-22</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="fa fa-calendar-check-o"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2019-10-08 21:55:25" itemprop="dateModified" datetime="2019-10-08T21:55:25+08:00">2019-10-08</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">开发工具</span></a>
+        </span>
+    </span>
 
-          
-            <span id="/posts/8b40f68a/" class="post-meta-item leancloud_visitors" data-flag-title="我的个人前端开发工具整理" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.4k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
+  
+    <span id="/posts/8b40f68a/" class="post-meta-item leancloud_visitors" data-flag-title="我的个人前端开发工具整理" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-clock-o"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
 
         </div>
       </header>
@@ -295,120 +399,118 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
         <p>首先申明，我是极其反对那种“牛逼的大神用记事本也能写代码”的论调。我们写代码是为了创造有价值的东西，而不是单纯为了炫技。</p>
 <p>那在开发的过程中，如何提高我们的编码效率和能力才是最主要的，我经常会看到一些新人即便用了很好的工具，但效率还是很慢，不会装插件，不熟悉快捷键。</p>
 <p>俗话说 <em>工欲善其事，必先利其器</em> ，今天就趁春节假期最后一天，整理了一下我的开发工具以及一些使用心得，希望能对大家有所帮助。</p>
 <a id="more"></a>
 <h2 id="编辑器"><a class="header-anchor" href="#编辑器"></a>编辑器</h2>
-<h3 id="Atom"><a class="header-anchor" href="#Atom"></a><a href="https://atom.io/" target="_blank" rel="noopener">Atom</a></h3>
-<p>我的最爱，我最早是使用 DreamWeaver 的，后来脱离 PHP 专职做前端开发后，也就告别了 DW ，中途使用过 <a href="http://www.sublimetext.com/" target="_blank" rel="noopener">Sublime Text</a> ，但其安装扩展的方式太不友好，就放弃了，后面也用过 <a href="https://code.visualstudio.com/" target="_blank" rel="noopener">VS code</a> ，感觉和 Atom 不相上下，优势在于打开大文件极快，但插件感觉没 Atom 完善，所以目前还是以 Atom 为主。</p>
+<h3 id="Atom"><a class="header-anchor" href="#Atom"></a><a target="_blank" rel="noopener" href="https://atom.io/">Atom</a></h3>
+<p>我的最爱，我最早是使用 DreamWeaver 的，后来脱离 PHP 专职做前端开发后，也就告别了 DW ，中途使用过 <a target="_blank" rel="noopener" href="http://www.sublimetext.com/">Sublime Text</a> ，但其安装扩展的方式太不友好，就放弃了，后面也用过 <a target="_blank" rel="noopener" href="https://code.visualstudio.com/">VS code</a> ，感觉和 Atom 不相上下，优势在于打开大文件极快，但插件感觉没 Atom 完善，所以目前还是以 Atom 为主。</p>
 <p>既然用了 Atom ，一定要了解两方面：<strong>快捷键</strong>和<strong>扩展</strong>。</p>
-<p>前者不用说了，任何工具我认为都应该去了解它的快捷键，关于 Atom 的快捷键可以看这篇文章《<a href="https://www.iplaysoft.com/item/atom-shortcuts" target="_blank" rel="noopener">Atom 编辑器快捷键列表汇总整理</a>》，并不用牢记所有快捷键，我会先大致浏览并实际操作一遍，然后回忆下开发中可能会遇到的情况，争对性的记住部分快捷键。</p>
+<p>前者不用说了，任何工具我认为都应该去了解它的快捷键，关于 Atom 的快捷键可以看这篇文章《<a target="_blank" rel="noopener" href="https://www.iplaysoft.com/item/atom-shortcuts">Atom 编辑器快捷键列表汇总整理</a>》，并不用牢记所有快捷键，我会先大致浏览并实际操作一遍，然后回忆下开发中可能会遇到的情况，争对性的记住部分快捷键。</p>
 <p>扩展，这个才是 Atom 的灵魂，如果没有这些开发者贡献的插件，Atom 也就算个高级记事本。</p>
 <p>以下是我用到的扩展汇总：</p>
 <ul>
 <li>通用
 <ul>
-<li><a href="https://atom.io/packages/simplified-chinese-menu" target="_blank" rel="noopener">simplified-chinese-menu</a> 中文语言包</li>
-<li><a href="https://atom.io/packages/sync-settings" target="_blank" rel="noopener">sync-settings</a> 备份利器，重装电脑后最头疼的就是软件的配置，这个扩展能帮助你轻松还原开发环境，我特地整理过一篇使用教程《<a href="http://www.cnblogs.com/hooray/p/5885211.html" target="_blank" rel="noopener">Atom 备份神器 —— Sync Settings</a>》</li>
-<li><a href="https://atom.io/packages/platformio-ide-terminal" target="_blank" rel="noopener">platformio-ide-terminal</a> 终端工具</li>
-<li><a href="https://atom.io/packages/file-icons" target="_blank" rel="noopener">file-icons</a> 文件图标</li>
-<li><a href="https://atom.io/packages/project-manager" target="_blank" rel="noopener">project-manager</a> 项目管理工具，Atom 本身不具备项目的概念，所以这个插件超级实用，开发过程中可以方便切换项目</li>
-<li><a href="https://atom.io/packages/minimap" target="_blank" rel="noopener">minimap</a> 代码全局预览，可代替滚动条，以下是相关的一些插件，比如在
+<li><a target="_blank" rel="noopener" href="https://atom.io/packages/simplified-chinese-menu">simplified-chinese-menu</a> 中文语言包</li>
+<li><a target="_blank" rel="noopener" href="https://atom.io/packages/sync-settings">sync-settings</a> 备份利器，重装电脑后最头疼的就是软件的配置，这个扩展能帮助你轻松还原开发环境，我特地整理过一篇使用教程《<a target="_blank" rel="noopener" href="http://www.cnblogs.com/hooray/p/5885211.html">Atom 备份神器 —— Sync Settings</a>》</li>
+<li><a target="_blank" rel="noopener" href="https://atom.io/packages/platformio-ide-terminal">platformio-ide-terminal</a> 终端工具</li>
+<li><a target="_blank" rel="noopener" href="https://atom.io/packages/file-icons">file-icons</a> 文件图标</li>
+<li><a target="_blank" rel="noopener" href="https://atom.io/packages/project-manager">project-manager</a> 项目管理工具，Atom 本身不具备项目的概念，所以这个插件超级实用，开发过程中可以方便切换项目</li>
+<li><a target="_blank" rel="noopener" href="https://atom.io/packages/minimap">minimap</a> 代码全局预览，可代替滚动条，以下是相关的一些插件，比如在
 <ul>
-<li><a href="https://atom.io/packages/minimap-cursorline" target="_blank" rel="noopener">minimap-cursorline</a></li>
-<li><a href="https://atom.io/packages/minimap-find-and-replace" target="_blank" rel="noopener">minimap-find-and-replace</a></li>
-<li><a href="https://atom.io/packages/minimap-highlight-selected" target="_blank" rel="noopener">minimap-highlight-selected</a></li>
-<li><a href="https://atom.io/packages/minimap-linter" target="_blank" rel="noopener">minimap-linter</a></li>
-<li><a href="https://atom.io/packages/minimap-pigments" target="_blank" rel="noopener">minimap-pigments</a></li>
+<li><a target="_blank" rel="noopener" href="https://atom.io/packages/minimap-cursorline">minimap-cursorline</a></li>
+<li><a target="_blank" rel="noopener" href="https://atom.io/packages/minimap-find-and-replace">minimap-find-and-replace</a></li>
+<li><a target="_blank" rel="noopener" href="https://atom.io/packages/minimap-highlight-selected">minimap-highlight-selected</a></li>
+<li><a target="_blank" rel="noopener" href="https://atom.io/packages/minimap-linter">minimap-linter</a></li>
+<li><a target="_blank" rel="noopener" href="https://atom.io/packages/minimap-pigments">minimap-pigments</a></li>
 </ul>
 </li>
-<li><a href="https://atom.io/packages/docblockr" target="_blank" rel="noopener">docblockr</a> 写注释用</li>
-<li><a href="https://atom.io/packages/highlight-column" target="_blank" rel="noopener">highlight-column</a> 高亮当前列</li>
-<li><a href="https://atom.io/packages/highlight-selected" target="_blank" rel="noopener">highlight-selected</a> 高亮选中</li>
-<li><a href="https://atom.io/packages/pigments" target="_blank" rel="noopener">pigments</a> 在代码中显示颜色</li>
-<li><a href="https://atom.io/packages/pdf-view" target="_blank" rel="noopener">pdf-view</a> PDF 文件预览</li>
+<li><a target="_blank" rel="noopener" href="https://atom.io/packages/docblockr">docblockr</a> 写注释用</li>
+<li><a target="_blank" rel="noopener" href="https://atom.io/packages/highlight-column">highlight-column</a> 高亮当前列</li>
+<li><a target="_blank" rel="noopener" href="https://atom.io/packages/highlight-selected">highlight-selected</a> 高亮选中</li>
+<li><a target="_blank" rel="noopener" href="https://atom.io/packages/pigments">pigments</a> 在代码中显示颜色</li>
+<li><a target="_blank" rel="noopener" href="https://atom.io/packages/pdf-view">pdf-view</a> PDF 文件预览</li>
 <li>markdown 相关
 <ul>
-<li><a href="https://atom.io/packages/markdown-writer" target="_blank" rel="noopener">markdown-writer</a></li>
-<li><a href="https://atom.io/packages/markdown-preview-enhanced" target="_blank" rel="noopener">markdown-preview-enhanced</a> markdown 多功能组件，可同步预览，可导出 PDF 、HTML、图片，自带图片上传</li>
-<li><a href="https://atom.io/packages/markdown-toc" target="_blank" rel="noopener">markdown-toc</a> 生成目录</li>
+<li><a target="_blank" rel="noopener" href="https://atom.io/packages/markdown-writer">markdown-writer</a></li>
+<li><a target="_blank" rel="noopener" href="https://atom.io/packages/markdown-preview-enhanced">markdown-preview-enhanced</a> markdown 多功能组件，可同步预览，可导出 PDF 、HTML、图片，自带图片上传</li>
+<li><a target="_blank" rel="noopener" href="https://atom.io/packages/markdown-toc">markdown-toc</a> 生成目录</li>
 </ul>
 </li>
-<li><a href="https://atom.io/packages/tool-bar" target="_blank" rel="noopener">tool-bar</a> 自定义工具栏
+<li><a target="_blank" rel="noopener" href="https://atom.io/packages/tool-bar">tool-bar</a> 自定义工具栏
 <ul>
-<li><a href="https://atom.io/packages/tool-bar-markdown-writer" target="_blank" rel="noopener">tool-bar-markdown-writer</a> 配合 markdown-writer 使用</li>
+<li><a target="_blank" rel="noopener" href="https://atom.io/packages/tool-bar-markdown-writer">tool-bar-markdown-writer</a> 配合 markdown-writer 使用</li>
 </ul>
 </li>
-<li><a href="https://atom.io/packages/tree-view-autoresize" target="_blank" rel="noopener">tree-view-autoresize</a></li>
-<li><a href="https://atom.io/packages/multi-cursor" target="_blank" rel="noopener">multi-cursor</a></li>
+<li><a target="_blank" rel="noopener" href="https://atom.io/packages/tree-view-autoresize">tree-view-autoresize</a></li>
+<li><a target="_blank" rel="noopener" href="https://atom.io/packages/multi-cursor">multi-cursor</a></li>
 </ul>
 </li>
 <li>前端
 <ul>
-<li><a href="https://atom.io/packages/emmet" target="_blank" rel="noopener">emmet</a> 快速编写 HTML 、CSS，这个插件 Atom 现在已经内置了，建议大家好好去了解下语法</li>
-<li><a href="https://atom.io/packages/color-picker" target="_blank" rel="noopener">color-picker</a> 取色器</li>
-<li><a href="https://atom.io/packages/linter" target="_blank" rel="noopener">linter</a> 代码错误检查
+<li><a target="_blank" rel="noopener" href="https://atom.io/packages/emmet">emmet</a> 快速编写 HTML 、CSS，这个插件 Atom 现在已经内置了，建议大家好好去了解下语法</li>
+<li><a target="_blank" rel="noopener" href="https://atom.io/packages/color-picker">color-picker</a> 取色器</li>
+<li><a target="_blank" rel="noopener" href="https://atom.io/packages/linter">linter</a> 代码错误检查
 <ul>
-<li><a href="https://atom.io/packages/linter-htmlhint" target="_blank" rel="noopener">linter-htmlhint</a></li>
-<li><a href="https://atom.io/packages/linter-jshint" target="_blank" rel="noopener">linter-jshint</a></li>
-<li><a href="https://atom.io/packages/linter-ui-default" target="_blank" rel="noopener">linter-ui-default</a></li>
+<li><a target="_blank" rel="noopener" href="https://atom.io/packages/linter-htmlhint">linter-htmlhint</a></li>
+<li><a target="_blank" rel="noopener" href="https://atom.io/packages/linter-jshint">linter-jshint</a></li>
+<li><a target="_blank" rel="noopener" href="https://atom.io/packages/linter-ui-default">linter-ui-default</a></li>
 </ul>
 </li>
 <li>autocomplete
 <ul>
-<li><a href="https://atom.io/packages/autoclose-html" target="_blank" rel="noopener">autoclose-html</a> 补全 HTML 闭合标签</li>
-<li><a href="https://atom.io/packages/autocomplete-paths" target="_blank" rel="noopener">autocomplete-paths</a> 补全路径</li>
+<li><a target="_blank" rel="noopener" href="https://atom.io/packages/autoclose-html">autoclose-html</a> 补全 HTML 闭合标签</li>
+<li><a target="_blank" rel="noopener" href="https://atom.io/packages/autocomplete-paths">autocomplete-paths</a> 补全路径</li>
 </ul>
 </li>
 </ul>
 </li>
 <li>GIT
 <ul>
-<li><a href="https://atom.io/packages/merge-conflicts" target="_blank" rel="noopener">merge-conflicts</a> 代码冲突需要合并的时候会用到</li>
-<li><a href="https://atom.io/packages/tree-view-git-status" target="_blank" rel="noopener">tree-view-git-status</a></li>
+<li><a target="_blank" rel="noopener" href="https://atom.io/packages/merge-conflicts">merge-conflicts</a> 代码冲突需要合并的时候会用到</li>
+<li><a target="_blank" rel="noopener" href="https://atom.io/packages/tree-view-git-status">tree-view-git-status</a></li>
 </ul>
 </li>
 </ul>
-<h3 id="HBuilder"><a class="header-anchor" href="#HBuilder"></a><a href="http://www.dcloud.io/" target="_blank" rel="noopener">HBuilder</a></h3>
+<h3 id="HBuilder"><a class="header-anchor" href="#HBuilder"></a><a target="_blank" rel="noopener" href="http://www.dcloud.io/">HBuilder</a></h3>
 <p>我并不用 HBuilder 写代码，主要还是用它来打包 H5 APP 用，因为对这块研究不深，加上 HBuilder 傻瓜式的操作，所以目前还保留在电脑上。</p>
 <h2 id="GIT-管理"><a class="header-anchor" href="#GIT-管理"></a>GIT 管理</h2>
-<h3 id="Sourcetree"><a class="header-anchor" href="#Sourcetree"></a><a href="https://www.sourcetreeapp.com/" target="_blank" rel="noopener">Sourcetree</a></h3>
+<h3 id="Sourcetree"><a class="header-anchor" href="#Sourcetree"></a><a target="_blank" rel="noopener" href="https://www.sourcetreeapp.com/">Sourcetree</a></h3>
 <p>我基本很少在终端里敲 git 命令，一直以来都是用可视化界面的软件，早期是使用 TortoiseGit ，后来是因为 Sourcetree 界面更直观，并且内置了 git-flow 工作流，所以就义无反顾的丢弃了 TortoiseGit 了。</p>
 <h2 id="Chrome"><a class="header-anchor" href="#Chrome"></a>Chrome</h2>
 <p>前端开发用 Chrome 可以说是必须的，不要和我提 Firefox ，我只在测试兼容性的时候才会想起它。</p>
-<p>用 Chrome 有一部分原因是因为它的扩展，不过在介绍我的常用扩展前，先介绍一款 Chrome 的增强插件：<a href="https://shuax.com/portfolio/greenchrome/" target="_blank" rel="noopener">GreenChrome</a> ，我主要是看中它实现了双击关闭标签页的功能。</p>
+<p>用 Chrome 有一部分原因是因为它的扩展，不过在介绍我的常用扩展前，先介绍一款 Chrome 的增强插件：<a target="_blank" rel="noopener" href="https://shuax.com/portfolio/greenchrome/">GreenChrome</a> ，我主要是看中它实现了双击关闭标签页的功能。</p>
 <p>以下是我的常用扩展：</p>
 <ul>
-<li><a href="https://chrome.google.com/webstore/detail/adblock-plus/cfhdojbkjhnklbpkdaibdccddilifddb" target="_blank" rel="noopener">Adblock Plus</a></li>
-<li><a href="https://chrome.google.com/webstore/detail/anything-to-qrcode/calkaljlpglgogjfcidhlmmlgjnpmnmf" target="_blank" rel="noopener">Anything to QRcode</a> 把网址转为二维码</li>
-<li><a href="https://chrome.google.com/webstore/detail/cato/icphdcfpompgbdikholnedfeidemgobg" target="_blank" rel="noopener">Cato</a> 我主要是用来搜索收藏夹，但它的功能很强大，可以看这篇文章《<a href="https://www.appinn.com/cato-cliffordfajardo/" target="_blank" rel="noopener">Cato – 开源「命令行式」浏览器启动器</a>》</li>
-<li><a href="https://chrome.google.com/webstore/detail/editthiscookie/fngmhnnpilhplaeedifhccceomclgfbg" target="_blank" rel="noopener">EditThisCookie</a> cookie 管理器</li>
-<li><a href="https://chrome.google.com/webstore/detail/octotree/bkhaagjahfmjljalopjnoealnfndnagc?hl=en-US" target="_blank" rel="noopener">Octotree</a> 用于 Github 的文档树插件</li>
-<li><a href="https://chrome.google.com/webstore/detail/gitcodetree/inaaldjpdbkaodlmdcplgpoibohcmmlj" target="_blank" rel="noopener">GitCodeTree</a> 用于码云的文档树插件</li>
-<li><a href="https://chrome.google.com/webstore/detail/github-helper/bnpgnjajoaimdcjjmfjegpjmbmbplobm" target="_blank" rel="noopener">GitHub Helper</a></li>
-<li><a href="https://chrome.google.com/webstore/detail/github-hovercard/mmoahbbnojgkclgceahhakhnccimnplk" target="_blank" rel="noopener">GitHub Hovercard</a></li>
-<li><a href="https://chrome.google.com/webstore/detail/google-translate/aapbdbdomjkkjkaonfhkkikfgjllcleb" target="_blank" rel="noopener">Google 翻译</a></li>
-<li><a href="https://chrome.google.com/webstore/detail/html5-storage-manager-all/giompennnhheakjcnobejbnjgbbkmdnd" target="_blank" rel="noopener">HTML5存储管理器多合一</a></li>
-<li><a href="https://chrome.google.com/webstore/detail/jquery-audit/dhhnpbajdcgdmbbcoakfhmfgmemlncjg/" target="_blank" rel="noopener">jQuery Audit</a> 用于插件某个 DOM 上的事件和 data 信息</li>
-<li><a href="https://chrome.google.com/webstore/detail/json-viewer/gbmdgpbipfallnflgajpaliibnhdgobh" target="_blank" rel="noopener">JSON Viewer</a></li>
-<li><a href="https://chrome.google.com/webstore/detail/last-tab/nggjcpipkefkgldicofgmealjndjnhba" target="_blank" rel="noopener">Last Tab</a> chrome 在关闭最后一个标签后会自动关闭 chrome ，这个插件就是保证始终有一个锁定的空白标签，拯救了 <code>Ctrl + W</code> 党</li>
-<li><a href="https://chrome.google.com/webstore/detail/user-agent-switcher-for-c/djflhoibgkdhkhhcedjiklpkjnoahfmg" target="_blank" rel="noopener">User-Agent Switcher for Chrome</a> 模拟 UA 用</li>
-<li><a href="https://chrome.google.com/webstore/detail/take-webpage-screenshots/mcbpblocgmgfnpjjppndjkmgjaogfceg" target="_blank" rel="noopener">捕捉网页截图</a> 在需要截取整个页面的时候会用到</li>
-<li><a href="https://chrome.google.com/webstore/detail/recover-closed-tab/kmnmkpgmneeokldcmfcgjppgpcfecoed" target="_blank" rel="noopener">恢复关闭的标签页</a></li>
+<li><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/adblock-plus/cfhdojbkjhnklbpkdaibdccddilifddb">Adblock Plus</a></li>
+<li><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/anything-to-qrcode/calkaljlpglgogjfcidhlmmlgjnpmnmf">Anything to QRcode</a> 把网址转为二维码</li>
+<li><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/cato/icphdcfpompgbdikholnedfeidemgobg">Cato</a> 我主要是用来搜索收藏夹，但它的功能很强大，可以看这篇文章《<a target="_blank" rel="noopener" href="https://www.appinn.com/cato-cliffordfajardo/">Cato – 开源「命令行式」浏览器启动器</a>》</li>
+<li><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/editthiscookie/fngmhnnpilhplaeedifhccceomclgfbg">EditThisCookie</a> cookie 管理器</li>
+<li><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/octotree/bkhaagjahfmjljalopjnoealnfndnagc?hl=en-US">Octotree</a> 用于 Github 的文档树插件</li>
+<li><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/gitcodetree/inaaldjpdbkaodlmdcplgpoibohcmmlj">GitCodeTree</a> 用于码云的文档树插件</li>
+<li><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/github-helper/bnpgnjajoaimdcjjmfjegpjmbmbplobm">GitHub Helper</a></li>
+<li><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/github-hovercard/mmoahbbnojgkclgceahhakhnccimnplk">GitHub Hovercard</a></li>
+<li><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/google-translate/aapbdbdomjkkjkaonfhkkikfgjllcleb">Google 翻译</a></li>
+<li><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/html5-storage-manager-all/giompennnhheakjcnobejbnjgbbkmdnd">HTML5存储管理器多合一</a></li>
+<li><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/jquery-audit/dhhnpbajdcgdmbbcoakfhmfgmemlncjg/">jQuery Audit</a> 用于插件某个 DOM 上的事件和 data 信息</li>
+<li><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/json-viewer/gbmdgpbipfallnflgajpaliibnhdgobh">JSON Viewer</a></li>
+<li><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/last-tab/nggjcpipkefkgldicofgmealjndjnhba">Last Tab</a> chrome 在关闭最后一个标签后会自动关闭 chrome ，这个插件就是保证始终有一个锁定的空白标签，拯救了 <code>Ctrl + W</code> 党</li>
+<li><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/user-agent-switcher-for-c/djflhoibgkdhkhhcedjiklpkjnoahfmg">User-Agent Switcher for Chrome</a> 模拟 UA 用</li>
+<li><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/take-webpage-screenshots/mcbpblocgmgfnpjjppndjkmgjaogfceg">捕捉网页截图</a> 在需要截取整个页面的时候会用到</li>
+<li><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/recover-closed-tab/kmnmkpgmneeokldcmfcgjppgpcfecoed">恢复关闭的标签页</a></li>
 </ul>
 <h2 id="其它"><a class="header-anchor" href="#其它"></a>其它</h2>
-<h3 id="Postman"><a class="header-anchor" href="#Postman"></a><a href="https://www.getpostman.com/" target="_blank" rel="noopener">Postman</a></h3>
+<h3 id="Postman"><a class="header-anchor" href="#Postman"></a><a target="_blank" rel="noopener" href="https://www.getpostman.com/">Postman</a></h3>
 <p>接口调试工具。</p>
-<h3 id="Snipaste"><a class="header-anchor" href="#Snipaste"></a><a href="https://zh.snipaste.com/" target="_blank" rel="noopener">Snipaste</a></h3>
+<h3 id="Snipaste"><a class="header-anchor" href="#Snipaste"></a><a target="_blank" rel="noopener" href="https://zh.snipaste.com/">Snipaste</a></h3>
 <p>一款很出色的截图软件，而且是国人开发的，我用了之后就把 QQ 、微信自带的截图快捷键给屏蔽掉了。</p>
-<h3 id="BootCDN"><a class="header-anchor" href="#BootCDN"></a><a href="http://www.bootcdn.cn/" target="_blank" rel="noopener">BootCDN</a></h3>
+<h3 id="BootCDN"><a class="header-anchor" href="#BootCDN"></a><a target="_blank" rel="noopener" href="http://www.bootcdn.cn/">BootCDN</a></h3>
 <p>稳定、快速、免费的前端开源项目 CDN 加速服务。</p>
-<h3 id="Iconfont-阿里巴巴矢量图标库"><a class="header-anchor" href="#Iconfont-阿里巴巴矢量图标库"></a><a href="http://www.iconfont.cn/" target="_blank" rel="noopener">Iconfont - 阿里巴巴矢量图标库</a></h3>
+<h3 id="Iconfont-阿里巴巴矢量图标库"><a class="header-anchor" href="#Iconfont-阿里巴巴矢量图标库"></a><a target="_blank" rel="noopener" href="http://www.iconfont.cn/">Iconfont - 阿里巴巴矢量图标库</a></h3>
 <p>据我了解，我司设计师找图标也是在 Iconfont 上找的，所以干脆就和设计师商量，设计师找的图标都添加到一个仓库里，前端开发直接生成 css 就行，减轻切图的工作。</p>
-<h3 id="Slides"><a class="header-anchor" href="#Slides"></a><a href="https://slides.com/" target="_blank" rel="noopener">Slides</a></h3>
+<h3 id="Slides"><a class="header-anchor" href="#Slides"></a><a target="_blank" rel="noopener" href="https://slides.com/">Slides</a></h3>
 <p>适合技术人员做分享的在线幻灯片，够简单，没有太多复杂的功能。</p>
 <h2 id="最后"><a class="header-anchor" href="#最后"></a>最后</h2>
 <p>因为总有新工具出来，所以此文会不定期更新，当然文章里推荐的工具都很主观，都是我的个人使用感受，如果有更好的也欢迎交流。</p>
@@ -418,28 +520,26 @@
     
     
     
-        <div class="reward-container">
+
+    <footer class="post-footer">
+          <div class="reward-container">
   <div></div>
-  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
-    打赏
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
   </button>
-  <div id="qr" style="display: none;">
-      
-      <div style="display: inline-block;">
-        <img src="/reward-wechat.jpg" alt="Hooray 微信支付">
-        <p>微信支付</p>
+  <div class="post-reward">
+      <div>
+        <img src="/reward-wechat.jpg" alt="Hooray 微信">
+        <span>微信</span>
       </div>
-      
-      <div style="display: inline-block;">
+      <div>
         <img src="/reward-alipay.jpg" alt="Hooray 支付宝">
-        <p>支付宝</p>
+        <span>支付宝</span>
       </div>
 
   </div>
 </div>
 
-
-      <footer class="post-footer">
 
         
   <div class="post-widgets">
@@ -448,29 +548,27 @@
     </div>
   </div>
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/posts/8b2bd6f8/" rel="prev" title="电商平台商品 SKU 组合查询算法实现">
-      <i class="fa fa-chevron-left"></i> 电商平台商品 SKU 组合查询算法实现
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/5f8cb75e/" rel="next" title="gulp-file-include 踩坑">
-      gulp-file-include 踩坑 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/8b2bd6f8/" rel="prev" title="电商平台商品 SKU 组合查询算法实现">
+                  <i class="fa fa-chevron-left"></i> 电商平台商品 SKU 组合查询算法实现
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/5f8cb75e/" rel="next" title="gulp-file-include 踩坑">
+                  gulp-file-include 踩坑 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
           </div>
-          
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
     <div class="comments" id="gitalk-container"></div>
 
 <script>
@@ -480,7 +578,7 @@
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -489,173 +587,104 @@
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#编辑器"><span class="nav-number">1.</span> <span class="nav-text">编辑器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Atom"><span class="nav-number">1.1.</span> <span class="nav-text">Atom</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HBuilder"><span class="nav-number">1.2.</span> <span class="nav-text">HBuilder</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GIT-管理"><span class="nav-number">2.</span> <span class="nav-text">GIT 管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sourcetree"><span class="nav-number">2.1.</span> <span class="nav-text">Sourcetree</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chrome"><span class="nav-number">3.</span> <span class="nav-text">Chrome</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其它"><span class="nav-number">4.</span> <span class="nav-text">其它</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Postman"><span class="nav-number">4.1.</span> <span class="nav-text">Postman</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Snipaste"><span class="nav-number">4.2.</span> <span class="nav-text">Snipaste</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BootCDN"><span class="nav-number">4.3.</span> <span class="nav-text">BootCDN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Iconfont-阿里巴巴矢量图标库"><span class="nav-number">4.4.</span> <span class="nav-text">Iconfont - 阿里巴巴矢量图标库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Slides"><span class="nav-number">4.5.</span> <span class="nav-text">Slides</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后"><span class="nav-number">5.</span> <span class="nav-text">最后</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Hooray"
-      src="/avatar.jpg">
-  <p class="site-author-name" itemprop="name">Hooray</p>
-  <div class="site-description" itemprop="description"></div>
 </div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">46</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">7</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">113</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/hooray" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hooray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;304327508&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
-      </span>
-  </div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
 
-  <div class="links-of-blogroll motion-element">
-    <div class="links-of-blogroll-title">
-      <i class="fa fa-fw fa-link"></i>
-      Links
-    </div>
-    <ul class="links-of-blogroll-list">
-        <li class="links-of-blogroll-item">
-          <a href="http://hoorayos.com/" title="http:&#x2F;&#x2F;hoorayos.com" rel="noopener" target="_blank">HoorayOS - Web桌面应用框架</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/vue-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;vue-automation" rel="noopener" target="_blank">vue-automation - Vue项目模版</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/hooray/fantastic-admin" title="https:&#x2F;&#x2F;gitee.com&#x2F;hooray&#x2F;fantastic-admin" rel="noopener" target="_blank">Fantastic-admin - 中后台管理系统模版</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://gitee.com/eoner/gulp-automation" title="https:&#x2F;&#x2F;gitee.com&#x2F;eoner&#x2F;gulp-automation" rel="noopener" target="_blank">gulp-automation - 前端自动化工作流</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://hooray.github.io/vue-sku-form" title="https:&#x2F;&#x2F;hooray.github.io&#x2F;vue-sku-form">vue-sku-form - 电商 SKU 表单配置组件</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;clicaptcha" rel="noopener" target="_blank">clicaptcha - 中文点击验证码 ( jQuery版 )</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://github.com/hooray/vue-clicaptcha" title="https:&#x2F;&#x2F;github.com&#x2F;hooray&#x2F;vue-clicaptcha" rel="noopener" target="_blank">vue-clicaptcha - 中文点击验证码 ( Vue版 )</a>
-        </li>
-    </ul>
-  </div>
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
 
 <div class="copyright">
-  
   &copy; 2017 – 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Hooray</span>
-    <span class="post-meta-divider">|</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
     <span class="post-meta-item-icon">
-      <i class="fa fa-area-chart"></i>
+      <i class="fa fa-chart-line"></i>
     </span>
-      <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">139k</span>
-    <span class="post-meta-divider">|</span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">152k</span>
+  </span>
+  <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:07</span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:18</span>
+  </span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
-  </div>
-
-        
 <div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
       <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
+        <i class="user"></i>
       </span>
       <span class="site-uv" title="总访客量">
         <span id="busuanzi_value_site_uv"></span>
       </span>
     </span>
-    <span class="post-meta-divider">|</span>
     <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
       <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
+        <i class="eye"></i>
       </span>
       <span class="site-pv" title="总访问量">
         <span id="busuanzi_value_site_pv"></span>
       </span>
     </span>
 </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 22619,
+      el    : 'wpac-rating',
+      color : 'ff9800'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+<script src="/js/local-search.js"></script>
 
 
 
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
@@ -667,15 +696,15 @@
     }
 
     function addCount(Counter) {
-      var visitors = document.querySelector('.leancloud_visitors');
-      var url = decodeURI(visitors.id);
-      var title = visitors.dataset.flagTitle;
+      const visitors = document.querySelector('.leancloud_visitors');
+      const url = decodeURI(visitors.id);
+      const title = visitors.dataset.flagTitle;
 
       Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
         .then(response => response.json())
         .then(({ results }) => {
           if (results.length > 0) {
-            var counter = results[0];
+            const counter = results[0];
             leancloudSelector(url).innerText = counter.time + 1;
             Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
               .catch(error => {
@@ -698,8 +727,8 @@
     }
 
     function showTime(Counter) {
-      var visitors = document.querySelectorAll('.leancloud_visitors');
-      var entries = [...visitors].map(element => {
+      const visitors = document.querySelectorAll('.leancloud_visitors');
+      const entries = [...visitors].map(element => {
         return decodeURI(element.id);
       });
 
@@ -707,7 +736,7 @@
         .then(response => response.json())
         .then(({ results }) => {
           for (let url of entries) {
-            let target = results.find(item => item.url === url);
+            const target = results.find(item => item.url === url);
             leancloudSelector(url).innerText = target ? target.time : 0;
           }
         })
@@ -716,9 +745,9 @@
         });
     }
 
-    let { app_id, app_key, server_url } = {"enable":true,"app_id":"ODqTjpX8O5RTTQ9Ne0PQLrl6-gzGzoHsz","app_key":"yEmutbTLiTig6Kz3VLiocpgs","server_url":null,"security":false};
+    const { app_id, app_key, server_url } = {"enable":true,"app_id":"ODqTjpX8O5RTTQ9Ne0PQLrl6-gzGzoHsz","app_key":"yEmutbTLiTig6Kz3VLiocpgs","server_url":null,"security":false};
     function fetchData(api_server) {
-      var Counter = (method, url, data) => {
+      const Counter = (method, url, data) => {
         return fetch(`${api_server}/1.1${url}`, {
           method,
           headers: {
@@ -737,7 +766,7 @@
       }
     }
 
-    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+    const api_server = app_id.slice(-9) === '-MdYXbMMI' ? `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com` : server_url;
 
     if (api_server) {
       fetchData(api_server);
@@ -752,80 +781,12 @@
 </script>
 
 
-      </div>
-    </footer>
-  </div>
 
-  
-  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
-  <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-  <script src="//cdn.bootcss.com/fancybox/3.2.5/jquery.fancybox.min.js"></script>
-  <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.min.js"></script>
-  <script src="//cdn.bootcss.com/velocity/1.5.2/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-  <script>
-  if (CONFIG.page.isPost) {
-    wpac_init = window.wpac_init || [];
-    wpac_init.push({
-      widget: 'Rating',
-      id    : 22619,
-      el    : 'wpac-rating',
-      color : 'ff9800'
-    });
-    (function() {
-      if ('WIDGETPACK_LOADED' in window) return;
-      WIDGETPACK_LOADED = true;
-      var mc = document.createElement('script');
-      mc.type = 'text/javascript';
-      mc.async = true;
-      mc.src = '//embed.widgetpack.com/widget.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
-    })();
-  }
-  </script>
-
-  
-<script src="/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
 
 <script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+NexT.utils.loadComments('#gitalk-container', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
     var gitalk = new Gitalk({
       clientID    : '165f4a18451139d1962f',
       clientSecret: 'd950ed9736a4364215fa554442d01f8e89dd92a8',
